@@ -1,1 +1,1 @@
-# semesterprojekt-World-Of-Zool
+# Semesterprojekt-World-Of-Zool
