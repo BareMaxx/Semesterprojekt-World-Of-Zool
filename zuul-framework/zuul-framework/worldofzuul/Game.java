@@ -67,45 +67,57 @@ public class Game
         CommandWord commandWord = command.getCommandWord();
 
         switch(commandWord) {
-            case CommandWord.HELP:
+            case HELP:
                 printHelp();
                 break;
-            case CommandWord.GO:
+
+            case GO:
                 goRoom(command);
                 break;
-            case CommandWord.QUIT:
+
+            case QUIT:
                 wantToQuit = quit(command);
                 break;
-            case CommandWord.AGE:
+
+            case AGE:
                 //System.out.println("You are " + player.getAge() + " years old.");
                 break;
-            case CommandWord.READ:
+
+            case READ:
                 //player.readBook();
                 System.out.println("You read the book");
                 break;
-            case CommandWord.INVENTORY:
+
+            case INVENTORY:
                 //player.printInventory();
                 break;
-            case CommandWord.MONEY:
+
+            case MONEY:
                 //System.out.println("You have " + player.getMoney() + " gold");
                 break;
-            case CommandWord.TAKE:
+
+            case TAKE:
                 break;
-            case CommandWord.WORK:
+
+            case WORK:
                 break;
-            case CommandWord.USE:
+
+            case USE:
                 break;
-            case CommandWord.BUY:
+
+            case BUY:
                 //buyItem(command);
                 break;
-            case CommandWord.LOOK:
+
+            case LOOK:
                 break;
-            case CommandWord.SIT:
+
+            case SIT:
                 break;
+
             default:
                 System.out.println("I don't know what you mean...");
                 return false;
-                break;
         }
         return wantToQuit;
     }
