@@ -4,8 +4,6 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
-
     public Game() 
     {
         createRooms();
@@ -68,53 +66,47 @@ public class Game
 
         CommandWord commandWord = command.getCommandWord();
 
-        if(commandWord == CommandWord.UNKNOWN) {
-            System.out.println("I don't know what you mean...");
-            return false;
+        switch(commandWord) {
+            case CommandWord.HELP:
+                printHelp();
+                break;
+            case CommandWord.GO:
+                goRoom(command);
+                break;
+            case CommandWord.QUIT:
+                wantToQuit = quit(command);
+                break;
+            case CommandWord.AGE:
+                //System.out.println("You are " + player.getAge() + " years old.");
+                break;
+            case CommandWord.READ:
+                //player.readBook();
+                System.out.println("You read the book");
+                break;
+            case CommandWord.INVENTORY:
+                //player.printInventory();
+                break;
+            case CommandWord.MONEY:
+                //System.out.println("You have " + player.getMoney() + " gold");
+                break;
+            case CommandWord.TAKE:
+                break;
+            case CommandWord.WORK:
+                break;
+            case CommandWord.USE:
+                break;
+            case CommandWord.BUY:
+                //buyItem(command);
+                break;
+            case CommandWord.LOOK:
+                break;
+            case CommandWord.SIT:
+                break;
+            default:
+                System.out.println("I don't know what you mean...");
+                return false;
+                break;
         }
-
-        if (commandWord == CommandWord.HELP) {
-            printHelp();
-        }
-        else if (commandWord == CommandWord.GO) {
-            goRoom(command);
-        }
-        else if (commandWord == CommandWord.QUIT) {
-            wantToQuit = quit(command);
-        }
-        /*
-        else if (commandWord == CommandWord.AGE) {
-            //System.out.println("You are " + player.getAge() + " years old.");
-        }
-        else if (commandWord == CommandWord.TAKE) {
-
-        }
-        else if (commandWord == CommandWord.READ) {
-
-        }
-        else if (commandWord == CommandWord.WORK) {
-
-        }
-        else if (commandWord == CommandWord.USE) {
-
-        }
-        else if (commandWord == CommandWord.BUY) {
-
-        }
-        else if (commandWord == CommandWord.INVENTORY) {
-
-        }
-        else if (commandWord == CommandWord.LOOK) {
-
-        }
-        else if (commandWord == CommandWord.MONEY) {
-            System.out.println("You have " + player.getMoney() + " gold");
-        }
-        else if (commandWord == CommandWord.SIT) {
-
-        }
-        */
-
         return wantToQuit;
     }
 
