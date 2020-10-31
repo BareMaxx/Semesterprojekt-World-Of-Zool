@@ -82,6 +82,39 @@ public class Game
         else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         }
+        /*
+        else if (commandWord == CommandWord.AGE) {
+            //System.out.println("You are " + player.getAge() + " years old.");
+        }
+        else if (commandWord == CommandWord.TAKE) {
+
+        }
+        else if (commandWord == CommandWord.READ) {
+
+        }
+        else if (commandWord == CommandWord.WORK) {
+
+        }
+        else if (commandWord == CommandWord.USE) {
+
+        }
+        else if (commandWord == CommandWord.BUY) {
+
+        }
+        else if (commandWord == CommandWord.INVENTORY) {
+
+        }
+        else if (commandWord == CommandWord.LOOK) {
+
+        }
+        else if (commandWord == CommandWord.MONEY) {
+            System.out.println("You have " + player.getMoney() + " gold");
+        }
+        else if (commandWord == CommandWord.SIT) {
+
+        }
+        */
+
         return wantToQuit;
     }
 
