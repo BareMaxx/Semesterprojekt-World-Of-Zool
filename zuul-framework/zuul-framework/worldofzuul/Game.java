@@ -12,11 +12,8 @@ public class Game
         new InitGame(p1);
     }
 
-
-
     public void play() 
     {
-
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
@@ -45,7 +42,7 @@ public class Game
                 break;
 
             case AGE:
-                //System.out.println("You are " + player.getAge() + " years old.");
+                System.out.println("You are " + p1.getAge() + " years old.");
                 break;
 
             case READ:
