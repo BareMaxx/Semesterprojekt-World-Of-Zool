@@ -55,7 +55,7 @@ public class Game
                 break;
 
             case MONEY:
-                //System.out.println("You have " + player.getMoney() + " gold");
+                System.out.println("You have " + p1.getMoney() + " gold");
                 break;
 
             case TAKE:
