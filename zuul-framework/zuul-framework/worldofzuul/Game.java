@@ -4,12 +4,12 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+
     public Game() 
     {
         createRooms();
         parser = new Parser();
     }
-
 
     private void createRooms()
     {
