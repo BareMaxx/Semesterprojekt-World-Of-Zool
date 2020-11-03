@@ -1,7 +1,6 @@
 package worldofzuul;
 
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class Parser 
 {
@@ -33,6 +32,11 @@ public class Parser
         }
 
         return new Command(commands.getCommandWord(word1), word2);
+    }
+
+    public String getWord(){
+        System.out.print("> ");
+        return reader.nextLine();
     }
 
     public void showCommands()
