@@ -14,7 +14,7 @@ public class Game
 
     public void play(){};
 
-    private boolean processCommand(Command command) 
+    public boolean processCommand(Command command)
     {
         boolean wantToQuit = false;
 
@@ -35,11 +35,6 @@ public class Game
 
             case AGE:
                 System.out.println("You are " + p1.getAge() + " years old.");
-                break;
-
-            case READ:
-                //Can't be accessed from super class?
-                Child.readBook();
                 break;
 
             case INVENTORY:

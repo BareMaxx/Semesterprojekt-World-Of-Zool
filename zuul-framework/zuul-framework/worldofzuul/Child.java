@@ -21,6 +21,10 @@ public class Child extends Game {
                 System.out.println("You are a child but will now grow to an adult to showcase how the code should work");
                 p1.setStage("adult");
                 break;
+            case READ:
+                //Can't be accessed from super class?
+                readBook();
+                break;
             default:
                 super.processCommand(command);
         }
