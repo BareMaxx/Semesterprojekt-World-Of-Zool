@@ -2,25 +2,19 @@ package worldofzuul;
 
 public class Key extends Item{
 
-    public int price;
-    //private Room keyType;
+    public final int price;
+    private final String keyType;   // keyType is effectively a room name
 
-    //Key(int price, Room keyType)
-    Key(int price)
+    Key(int price, String keyType)
     {
         super();
         this.price = price;
-        //this.keyType = keyType;
+        this.keyType = keyType;
     }
 
-    /*
-
-    If the key is not just a generic key that can open a given door,
-    it should have a type so that it knows which door it can unlock
-
-    public boolean canUnlock(Room room)
+    public boolean canUnlock(String roomName)
     {
-        if (this.keyType == room)
+        if (this.keyType == roomName)
         {
             return true;
         }
@@ -28,6 +22,4 @@ public class Key extends Item{
             return false;
         }
     }
-
-     */
 }
