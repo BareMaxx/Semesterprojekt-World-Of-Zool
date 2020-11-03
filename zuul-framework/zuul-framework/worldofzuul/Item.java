@@ -20,6 +20,8 @@ public class Item {
     public String getType() {
         return type;
     }
+    //Make price an attribute in this superclass instead of the subclasses
+    //In this way, we do not need multiple getPrice()
     public int getPrice() {
         return -1;
     }
