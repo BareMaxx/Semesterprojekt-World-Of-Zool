@@ -9,9 +9,4 @@ public class Item {
     {
         this.ID = IDCounter++;
     }
-
-    public int getPrice() {
-        return -1;
-    }
-    public int getKnowledgePoints() {return -1;}
 }
