@@ -46,8 +46,8 @@ public class Game
                 break;
 
             case READ:
-                //player.readBook();
-                System.out.println("You read the book");
+                Child.readBook();
+
                 break;
 
             case INVENTORY:

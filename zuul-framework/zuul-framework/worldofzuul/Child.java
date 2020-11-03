@@ -16,7 +16,7 @@ public class Child extends Game {
     //Todo: Player inventory should be of Item type and not String
     //TODO: Book should have a getKnowledgePoints method
     //TODO: Player needs knowledgePoints attribute, and mutator and accessor methods
-    public void readBook() {
+    public static  void readBook() {
         List<Item> inventory = super.getPlayer().getInventory();
         boolean hasBook = false;
         for (int i = 0; i < inventory.size(); i++) {
@@ -26,6 +26,7 @@ public class Child extends Game {
                 int bookKnowledgePoints = item.getKnowledgePoints();
                 super.getPlayer().incKnowledgePoints(bookKnowledgePoints);
                 super.getPlayer().removeInventoryItem(item);
+                System.out.println("You read a book that gave you " + bookKnowledgePoints + " knowledge points");
                 break;
             }
         }
