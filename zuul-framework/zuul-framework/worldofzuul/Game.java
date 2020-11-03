@@ -69,13 +69,14 @@ public class Game
         }
     }
 
-    private boolean quit(Command command) 
+    private boolean quit(Command command)
     {
         if(command.hasSecondWord()) {
             System.out.println("Quit what?");
             return false;
         }
         else {
+            p1.setAlive(false);
             return true;
         }
     }
