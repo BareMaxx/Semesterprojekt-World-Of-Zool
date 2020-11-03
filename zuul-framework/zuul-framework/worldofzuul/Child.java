@@ -20,6 +20,7 @@ public class Child extends Game {
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
             case MONEY:
+                System.out.println("You have " + super.getPlayer().getMoney() + " gold");
                 System.out.println("You are a child but will now grow to an adult to showcase how the code should work");
                 super.getPlayer().setStage("adult");
                 break;

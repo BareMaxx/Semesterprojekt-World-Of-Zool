@@ -26,7 +26,7 @@ public class Game
             case QUIT -> wantToQuit = quit(command);
             case AGE -> System.out.println("You are " + p1.getAge() + " years old.");
             case INVENTORY -> {//TODO: Player printInventory method
-                //player.inventoryPrinter();
+                p1.inventoryPrinter();
             }
             case MONEY -> System.out.println("You have " + p1.getMoney() + " gold");
             case TAKE -> {}
