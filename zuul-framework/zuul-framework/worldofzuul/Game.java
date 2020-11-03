@@ -123,4 +123,8 @@ public class Game
             return true;
         }
     }
+
+    public Player getPlayer() {
+        return p1;
+    }
 }
