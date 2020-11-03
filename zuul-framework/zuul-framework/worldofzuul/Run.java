@@ -7,11 +7,11 @@ public class Run {
     Adult a = new Adult(p1, parser);
     Old o = new Old(p1, parser);
 
-    Run(){
+    Run() {
         new InitGame(p1, parser);
 
-        while (p1.getAlive()){
-            switch (p1.getStage()){
+        while (p1.getAlive()) {
+            switch (p1.getStage()) {
                 case "child" -> c.play();
                 case "adult" -> a.play();
                 case "old" -> o.play();
