@@ -46,11 +46,12 @@ public class Game
                 break;
 
             case READ:
+                //Can't be accessed from super class?
                 Child.readBook();
-
                 break;
 
             case INVENTORY:
+                //TODO: Player printInventory method
                 //player.printInventory();
                 break;
 
