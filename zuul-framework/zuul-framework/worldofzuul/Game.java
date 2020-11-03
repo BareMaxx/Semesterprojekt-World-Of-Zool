@@ -12,7 +12,7 @@ public class Game
         //new InitGame(p1);
     }
 
-    public void play(){};
+    public void play(){}
 
     public boolean processCommand(Command command)
     {
