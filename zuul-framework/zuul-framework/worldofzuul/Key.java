@@ -7,15 +7,14 @@ public class Key extends Item{
 
     Key(int price, String keyType)
     {
-        super();
+        super("key", "key");
         this.price = price;
         this.keyType = keyType;
-        this.type = "key";
     }
 
     public boolean canUnlock(String roomName)
     {
-        if (this.keyType == roomName)
+        if (this.keyType.equals(roomName))
         {
             return true;
         }

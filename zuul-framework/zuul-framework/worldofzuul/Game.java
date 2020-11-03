@@ -12,7 +12,7 @@ public class Game
         //new InitGame(p1);
     }
 
-    public void play(){};
+    public void play(){}
 
     public boolean processCommand(Command command)
     {
@@ -25,14 +25,12 @@ public class Game
             case GO -> goRoom(command);
             case QUIT -> wantToQuit = quit(command);
             case AGE -> System.out.println("You are " + p1.getAge() + " years old.");
-            case INVENTORY -> {//TODO: Player printInventory method
-                p1.inventoryPrinter();
-            }
+            case INVENTORY -> p1.inventoryPrinter();
             case MONEY -> System.out.println("You have " + p1.getMoney() + " gold");
             case TAKE -> {}
             case WORK -> {}
             case USE -> {}
-            case BUY -> {buy(command);}
+            case BUY -> buy(command);
             case LOOK -> look();
             case SIT -> {}
             default -> System.out.println("I don't know what you mean...");

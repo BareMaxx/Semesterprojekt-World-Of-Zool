@@ -7,11 +7,9 @@ public class Book extends Item{
 
     Book(String name, int price, int knowledgePoints)
     {
-        super();
+        super(name, "book");
         this.price = price;
         this.knowledgePoints = knowledgePoints;
-        this.name = name;
-        this.type = "book";
     }
 
     @Override
@@ -19,7 +17,6 @@ public class Book extends Item{
         return price;
     }
 
-    @Override
     public int getKnowledgePoints() {
         return knowledgePoints;
     }
