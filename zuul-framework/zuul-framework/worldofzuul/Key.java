@@ -14,12 +14,6 @@ public class Key extends Item{
 
     public boolean canUnlock(String roomName)
     {
-        if (this.keyType == roomName)
-        {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return (this.keyType.equals(roomName));
     }
 }
