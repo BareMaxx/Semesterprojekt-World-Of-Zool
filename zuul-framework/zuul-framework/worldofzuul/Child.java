@@ -1,8 +1,6 @@
 package worldofzuul;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 
 //TODO: readBook method der sætter spillerens knowledge points ud fra bogen
 //TODO: work method -> inc money
@@ -16,7 +14,9 @@ public class Child extends Game {
     //Todo: Player inventory should be of Item type and not String
     //TODO: Book should have a getKnowledgePoints method
     //TODO: Player needs knowledgePoints attribute, and mutator and accessor methods
-    public static  void readBook() {
+
+    public void readBook() {
+        Item book = new Book(100, 35);
         List<Item> inventory = super.getPlayer().getInventory();
         boolean hasBook = false;
         for (int i = 0; i < inventory.size(); i++) {

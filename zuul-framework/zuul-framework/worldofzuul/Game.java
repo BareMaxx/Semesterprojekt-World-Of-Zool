@@ -52,7 +52,7 @@ public class Game
 
             case INVENTORY:
                 //TODO: Player printInventory method
-                //player.printInventory();
+                //player.inventoryPrinter();
                 break;
 
             case MONEY:
