@@ -5,14 +5,17 @@ import java.util.List;
 //TODO: readBook method der sætter spillerens knowledge points ud fra bogen
 //TODO: work method -> inc money
 public class Child extends Game {
+
     public Child(Player p1, Parser parser) {
         super(p1, parser);
     }
+
     public void play(){
         parser = new Parser();
         Command command = parser.getCommand();
         processCommand(command);
     }
+
     public boolean processCommand(Command command){
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
@@ -21,7 +24,6 @@ public class Child extends Game {
                 super.getPlayer().setStage("adult");
                 break;
             case READ:
-                //Can't be accessed from super class?
                 readBook();
                 break;
             default:
@@ -32,11 +34,9 @@ public class Child extends Game {
 
     //TODO: Player inventory removeItem method
     //Todo: Player inventory should be of Item type and not String
-    //TODO: Book should have a getKnowledgePoints method
     //TODO: Player needs knowledgePoints attribute, and mutator and accessor methods
 
     public void readBook() {
-        Item book = new Book(100, 35);
         List<Item> inventory = super.getPlayer().getInventory();
         boolean hasBook = false;
         for (int i = 0; i < inventory.size(); i++) {
