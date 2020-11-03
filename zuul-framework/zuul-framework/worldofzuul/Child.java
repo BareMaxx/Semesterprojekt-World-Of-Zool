@@ -5,9 +5,8 @@ import java.util.List;
 //TODO: readBook method der sætter spillerens knowledge points ud fra bogen
 //TODO: work method -> inc money
 public class Child extends Game {
-
-    public Child(Player p1) {
-        super(p1);
+    public Child(Player p1, Parser parser) {
+        super(p1, parser);
     }
     public void play(){
         parser = new Parser();
@@ -19,7 +18,7 @@ public class Child extends Game {
         switch(commandWord) {
             case MONEY:
                 System.out.println("You are a child but will now grow to an adult to showcase how the code should work");
-                p1.setStage("adult");
+                super.getPlayer().setStage("adult");
                 break;
             case READ:
                 //Can't be accessed from super class?
@@ -45,7 +44,7 @@ public class Child extends Game {
             if (item instanceof Book) {
                 hasBook = true;
                 int bookKnowledgePoints = item.getKnowledgePoints();
-                super.getPlayer().incKnowledgePoints(bookKnowledgePoints);
+                //super.getPlayer().incKnowledgePoints(bookKnowledgePoints);
                 super.getPlayer().removeInventoryItem(item);
                 System.out.println("You read a book that gave you " + bookKnowledgePoints + " knowledge points");
                 break;

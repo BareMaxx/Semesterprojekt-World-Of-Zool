@@ -1,8 +1,8 @@
 package worldofzuul;
 //TODO: work method -> inc money
 public class Old extends Game {
-    public Old() {
-        //super();
+    public Old(Player p1, Parser parser) {
+        super(p1, parser);
     }
 
 }

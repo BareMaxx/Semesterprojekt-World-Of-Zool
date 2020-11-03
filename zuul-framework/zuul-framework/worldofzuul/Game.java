@@ -2,12 +2,12 @@ package worldofzuul;
 
 public class Game 
 {
-    private Parser parser;
+    protected Parser parser;
     private Player p1;
 
-    public Game(Player p1)
+    public Game(Player p1, Parser parser)
     {
-        parser = new Parser();
+        this.parser = new Parser();
         this.p1 = p1;
         //new InitGame(p1);
     }

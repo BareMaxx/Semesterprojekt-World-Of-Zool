@@ -52,7 +52,7 @@ public class Player {
         }
         else {
             for (Item i : inventory) {
-                System.out.println("\t" + i.name);
+                System.out.println("\t" + i.getName());
             }
         }
     }
