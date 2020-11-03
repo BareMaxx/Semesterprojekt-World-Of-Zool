@@ -26,18 +26,45 @@ public class Game
             case QUIT -> wantToQuit = quit(command);
             case AGE -> System.out.println("You are " + p1.getAge() + " years old.");
             case INVENTORY -> {//TODO: Player printInventory method
-                //player.inventoryPrinter();
+                p1.inventoryPrinter();
             }
             case MONEY -> System.out.println("You have " + p1.getMoney() + " gold");
             case TAKE -> {}
             case WORK -> {}
             case USE -> {}
-            case BUY -> {}
-            case LOOK -> {}
+            case BUY -> {buy(command);}
+            case LOOK -> look();
             case SIT -> {}
             default -> System.out.println("I don't know what you mean...");
         }
         return wantToQuit;
+    }
+
+    private void buy(Command command){
+        if(p1.getCurrentRoom().getName().equals("Shop")){
+            if(!command.hasSecondWord()) {
+                System.out.println("Buy what?");
+                return;
+            }
+
+            String s = command.getSecondWord();
+
+
+            Item i = p1.getCurrentRoom().getItem(s);
+            if(i != null){
+                if(p1.getMoney()>=i.getPrice()){
+                    p1.addInventoryItem(i);
+                    p1.getCurrentRoom().removeItem(i);
+                    p1.decMoney(i.getPrice());
+                }
+            }
+            else
+                System.out.println("There is no " + s + " in the shop");
+        }
+    }
+
+    private void look(){
+        p1.getCurrentRoom().printStock();
     }
 
     private void printHelp() 

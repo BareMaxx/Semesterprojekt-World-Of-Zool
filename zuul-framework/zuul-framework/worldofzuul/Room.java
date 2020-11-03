@@ -1,5 +1,7 @@
 package worldofzuul;
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
 
@@ -9,15 +11,43 @@ public class Room
     private String name;
     private String description;
     private HashMap<String, Room> exits;
+    private ArrayList<Item> stock;
 
     public Room(String name, String description)
     {
         this.setName(name);
         this.description = description;
         exits = new HashMap<String, Room>();
+        stock = new ArrayList<>();
     }
 
-    public void setExit(String direction, Room neighbor) 
+    public void setItem(Item i){
+        stock.add(i);
+    }
+
+    public Item getItem(String name){
+        for (Item i : stock){
+            if(name.equals(i.getName())){
+                return i;
+            }
+        }
+        System.out.println("Item not in room");
+        return null;
+    }
+    public void removeItem(Item i){
+        stock.remove(i);
+    }
+    public void printStock(){
+        System.out.println("These objects are for sale:");
+        if(stock.isEmpty())
+            System.out.println("\tnothing");
+        else{
+            for(Item i : stock){
+                System.out.println("\t" + i.getName() + "\t|\t" + i.getPrice() + " gold");
+            }
+        }
+    }
+    public void setExit(String direction, Room neighbor)
     {
         exits.put(direction, neighbor);
     }

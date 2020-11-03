@@ -16,10 +16,12 @@ public class Child extends Game {
     public boolean processCommand(Command command){
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
+            /*
             case MONEY:
                 System.out.println("You are a child but will now grow to an adult to showcase how the code should work");
                 super.getPlayer().setStage("adult");
                 break;
+                */
             case READ:
                 //Can't be accessed from super class?
                 readBook();
@@ -36,7 +38,7 @@ public class Child extends Game {
     //TODO: Player needs knowledgePoints attribute, and mutator and accessor methods
 
     public void readBook() {
-        Item book = new Book(100, 35);
+        //Item book = new Book(100, 35);
         List<Item> inventory = super.getPlayer().getInventory();
         boolean hasBook = false;
         for (int i = 0; i < inventory.size(); i++) {
@@ -53,5 +55,6 @@ public class Child extends Game {
         if (!hasBook) {
             System.out.println("You do not have a book in your inventory");
         }
+
     }
 }

@@ -4,7 +4,8 @@ public class Item {
 
     public int ID;
     private static int IDCounter;
-    private String name;
+    String name;
+    String type;
 
     Item()
     {

@@ -10,6 +10,7 @@ public class Key extends Item{
         super();
         this.price = price;
         this.keyType = keyType;
+        this.type = "key";
     }
 
     public boolean canUnlock(String roomName)
