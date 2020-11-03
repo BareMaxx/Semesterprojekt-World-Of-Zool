@@ -6,8 +6,29 @@ import java.util.List;
 //TODO: work method -> inc money
 public class Child extends Game {
 
-    public Child() {
-        //super();
+    public Child(Player p1) {
+        super(p1);
+    }
+    public void play(){
+        parser = new Parser();
+        Command command = parser.getCommand();
+        processCommand(command);
+    }
+    public boolean processCommand(Command command){
+        CommandWord commandWord = command.getCommandWord();
+        switch(commandWord) {
+            case MONEY:
+                System.out.println("You are a child but will now grow to an adult to showcase how the code should work");
+                p1.setStage("adult");
+                break;
+            case READ:
+                //Can't be accessed from super class?
+                readBook();
+                break;
+            default:
+                super.processCommand(command);
+        }
+        return true;
     }
 
     //TODO: Player inventory removeItem method

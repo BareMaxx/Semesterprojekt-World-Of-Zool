@@ -12,10 +12,12 @@ public class Book extends Item{
         this.knowledgePoints = knowledgePoints;
     }
 
+    @Override
     public int getPrice() {
         return price;
     }
 
+    @Override
     public int getKnowledgePoints() {
         return knowledgePoints;
     }

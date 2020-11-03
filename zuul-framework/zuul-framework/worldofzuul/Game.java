@@ -4,25 +4,17 @@ public class Game
 {
     private Parser parser;
     private Player p1;
-        
-    public Game()
+
+    public Game(Player p1)
     {
         parser = new Parser();
-        p1 = new Player();
-        new InitGame(p1);
+        this.p1 = p1;
+        //new InitGame(p1);
     }
 
-    public void play() 
-    {
-        boolean finished = false;
-        while (! finished) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
-        }
-        System.out.println("Thank you for playing.  Good bye.");
-    }
+    public void play(){};
 
-    private boolean processCommand(Command command) 
+    public boolean processCommand(Command command)
     {
         boolean wantToQuit = false;
 
@@ -33,7 +25,6 @@ public class Game
             case GO -> goRoom(command);
             case QUIT -> wantToQuit = quit(command);
             case AGE -> System.out.println("You are " + p1.getAge() + " years old.");
-            case READ -> Child.readBook();
             case INVENTORY -> {//TODO: Player printInventory method
                 //player.inventoryPrinter();
             }
