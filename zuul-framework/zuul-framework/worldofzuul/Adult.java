@@ -5,4 +5,18 @@ public class Adult extends Game {
     public Adult(Player p1, Parser parser) {
         super(p1, parser);
     }
+
+    public void play() {
+        parser = new Parser();
+        Command command = parser.getCommand();
+        processCommand(command);
+    }
+
+    public void processCommand(Command command) {
+        CommandWord commandWord = command.getCommandWord();
+        switch(commandWord) {
+            case WORK -> System.out.println("Working, yes");
+            default -> super.processCommand(command);
+        }
+    }
 }
