@@ -39,7 +39,7 @@ public class Player {
         inventory.add(s);
     }
 
-    public ArrayList<String> getInventory() {
+    public ArrayList<Item> getInventory() {
         return inventory;
     }
     public int getMoney(){

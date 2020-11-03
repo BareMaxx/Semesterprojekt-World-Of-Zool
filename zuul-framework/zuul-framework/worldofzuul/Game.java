@@ -29,58 +29,22 @@ public class Game
         CommandWord commandWord = command.getCommandWord();
 
         switch(commandWord) {
-            case HELP:
-                printHelp();
-                break;
-
-            case GO:
-                goRoom(command);
-                break;
-
-            case QUIT:
-                wantToQuit = quit(command);
-                break;
-
-            case AGE:
-                System.out.println("You are " + p1.getAge() + " years old.");
-                break;
-
-            case READ:
-                //Can't be accessed from super class?
-                Child.readBook();
-                break;
-
-            case INVENTORY:
-                //TODO: Player printInventory method
+            case HELP -> printHelp();
+            case GO -> goRoom(command);
+            case QUIT -> wantToQuit = quit(command);
+            case AGE -> System.out.println("You are " + p1.getAge() + " years old.");
+            case READ -> Child.readBook();
+            case INVENTORY -> {//TODO: Player printInventory method
                 //player.inventoryPrinter();
-                break;
-
-            case MONEY:
-                System.out.println("You have " + p1.getMoney() + " gold");
-                break;
-
-            case TAKE:
-                break;
-
-            case WORK:
-                break;
-
-            case USE:
-                break;
-
-            case BUY:
-                //buyItem(command);
-                break;
-
-            case LOOK:
-                break;
-
-            case SIT:
-                break;
-
-            default:
-                System.out.println("I don't know what you mean...");
-                return false;
+            }
+            case MONEY -> System.out.println("You have " + p1.getMoney() + " gold");
+            case TAKE -> {}
+            case WORK -> {}
+            case USE -> {}
+            case BUY -> {}
+            case LOOK -> {}
+            case SIT -> {}
+            default -> System.out.println("I don't know what you mean...");
         }
         return wantToQuit;
     }
