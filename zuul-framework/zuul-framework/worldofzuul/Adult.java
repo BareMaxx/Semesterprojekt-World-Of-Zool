@@ -15,7 +15,7 @@ public class Adult extends Game {
     public boolean processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
-            case WORK -> System.out.println("Working, yes");
+            case WORK -> super.work(5);
             default -> super.processCommand(command);
         }
         return true;

@@ -19,12 +19,9 @@ public class Child extends Game {
     public boolean processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
-            case MONEY -> {
-                System.out.println("You have " + super.getPlayer().getMoney() + " gold");
-                System.out.println("You are a child but will now grow to an adult to showcase how the code should work");
-                super.getPlayer().setStage("adult");
-            }
+            case MONEY -> System.out.println("You have " + super.getPlayer().getMoney() + " gold");
             case READ -> readBook();
+            case WORK -> super.work(10);
             default -> super.processCommand(command);
         }
         return true;
@@ -35,6 +32,15 @@ public class Child extends Game {
     //TODO: Player needs knowledgePoints attribute, and mutator and accessor methods
 
     public void readBook() {
+        if(!super.getPlayer().getCurrentRoom().getName().equals("School")){
+            System.out.println("You have to be at school to read");
+            return;
+        }
+        if(!super.getPlayer().getCurrentRoom().isSitting()){
+            System.out.println("You have to sit down to read");
+            return;
+        }
+
         List<Item> inventory = super.getPlayer().getInventory();
         boolean hasBook = false;
         for (int i = 0; i < inventory.size(); i++) {
@@ -42,7 +48,7 @@ public class Child extends Game {
             if (item instanceof Book) {
                 hasBook = true;
                 int bookKnowledgePoints = ((Book)item).getKnowledgePoints();
-                //super.getPlayer().incKnowledgePoints(bookKnowledgePoints);
+                super.getPlayer().incKnowledge(bookKnowledgePoints);
                 super.getPlayer().removeInventoryItem(item);
                 System.out.println("You read a book that gave you " + bookKnowledgePoints + " knowledge points");
                 break;
