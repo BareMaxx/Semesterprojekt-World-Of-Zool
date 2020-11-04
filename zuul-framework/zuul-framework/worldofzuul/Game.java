@@ -26,7 +26,7 @@ public class Game {
             case WORK -> {}
             case USE -> {}
             case BUY -> {}
-            case LOOK -> {}
+            case LOOK -> look(command);
             case SIT -> {}
             default -> System.out.println("I don't know what you mean...");
         }
@@ -38,6 +38,26 @@ public class Game {
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
+    }
+    
+    private void look(Command command) {
+        if (command.hasSecondWord()) {
+            System.out.println("You can't focus on anything in particular");
+        } else {
+            System.out.println("You take a closer look at your surroundings\nYou notice:");
+            ArrayList<Item> items = getPlayer().currentRoom.items;
+            ArrayList<Item> objects = getPlayer().currentRoom.objects;
+            if (items.isEmpty() && objects.isEmpty()) {
+                System.out.println("\tnothing");
+            } else {
+                for (Item i : items) {
+                    System.out.println("\t" + i.getName());
+                }
+                for (Item o : objects) {
+                    System.out.println("\t" + o.getName());
+                }
+            }
+        }
     }
 
     private void goRoom(Command command) {
