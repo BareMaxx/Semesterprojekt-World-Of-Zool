@@ -5,7 +5,7 @@ public enum CommandWord
     GO("go"), QUIT("quit"), HELP("help"), UNKNOWN("?"),
     TAKE("take"), LOOK("look"), INVENTORY("inventory"),
     MONEY("money"), SIT("sit"), WORK("work"), READ("read"),
-    BUY("buy"), USE("use"), AGE("age");
+    BUY("buy"), USE("use"), AGE("age"), TURNS("turn");
     
     private String commandString;
     

@@ -5,9 +5,8 @@ import java.util.List;
 //TODO: readBook method der sætter spillerens knowledge points ud fra bogen
 //TODO: work method -> inc money
 public class Child extends Game {
-
     public Child(Player p1, Parser parser) {
-        super(p1, parser);
+        super(p1, parser, 60);
     }
 
     public void play() {
@@ -24,9 +23,11 @@ public class Child extends Game {
                 System.out.println("You are a child but will now grow to an adult to showcase how the code should work");
                 super.getPlayer().setStage("adult");
             }
-            case READ -> readBook();
+            case READ -> {readBook(); super.turns.decTurns(10);}
             default -> super.processCommand(command);
         }
+        super.turns.decTurns();
+        super.checkTurns();
         return true;
     }
 

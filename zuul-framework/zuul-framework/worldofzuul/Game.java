@@ -4,11 +4,13 @@ public class Game
 {
     protected Parser parser;
     private Player p1;
+    protected Turns turns;
 
-    public Game(Player p1, Parser parser)
+    public Game(Player p1, Parser parser, int turns)
     {
         this.parser = new Parser();
         this.p1 = p1;
+        this.turns = new Turns(turns);
         //new InitGame(p1);
     }
 
@@ -22,7 +24,7 @@ public class Game
 
         switch(commandWord) {
             case HELP -> printHelp();
-            case GO -> goRoom(command);
+            case GO -> {goRoom(command);}
             case QUIT -> wantToQuit = quit(command);
             case AGE -> System.out.println("You are " + p1.getAge() + " years old.");
             case INVENTORY -> p1.inventoryPrinter();
@@ -33,8 +35,11 @@ public class Game
             case BUY -> buy(command);
             case LOOK -> look();
             case SIT -> {}
+            case TURNS -> System.out.println("You have " + turns.getTurns() + " turns left");
             default -> System.out.println("I don't know what you mean...");
         }
+        turns.decTurns();
+        checkTurns();
         return wantToQuit;
     }
 
@@ -108,5 +113,14 @@ public class Game
 
     public Player getPlayer() {
         return p1;
+    }
+
+    public void checkTurns() {
+        if(p1.getStage().equals("child") && turns.getTurns() <= 0) {
+            p1.setStage("adult");
+            System.out.println("yes");
+        } else if(p1.getStage().equals("adult") && turns.getTurns() <= 0) {
+            p1.setStage("old");
+        }
     }
 }
