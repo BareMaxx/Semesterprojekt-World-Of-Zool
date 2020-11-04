@@ -29,13 +29,41 @@ public class Game
             case MONEY -> System.out.println("You have " + p1.getMoney() + " gold");
             case TAKE -> {}
             case WORK -> {}
-            case USE -> {}
+            case USE -> use(command);
             case BUY -> buy(command);
             case LOOK -> look();
             case SIT -> {}
             default -> System.out.println("I don't know what you mean...");
         }
         return wantToQuit;
+    }
+
+    private void use(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Use what?");
+        }
+        String item = command.getSecondWord();
+
+        if (p1.getInventory().isEmpty()) {
+            System.out.println("You have no items to use.");
+        }
+        else {
+            for (Item i: p1.getInventory()) {
+                switch (i.getName()) {
+                    case "book" -> {
+                        System.out.println("You can't use a book, read it instead");
+                        //alternatively, using a book is the same as reading it
+                    }
+                    case "key" -> {
+                        // figure out if thee key should be used from a neighbouring room
+                        // or some kind of between-room purgatory. In the former case,
+                        // I'll need the hashmap of neighbouring rooms to be available
+                        // to this class, so I can see if the key matches a neighbouring room.
+                    }
+
+                }
+            }
+        }
     }
 
     private void buy(Command command){
@@ -87,6 +115,9 @@ public class Game
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
+        }
+        else if (nextRoom.isLocked()) {
+            System.out.println("This door is locked.");
         }
         else {
             p1.setCurrentRoom(nextRoom);

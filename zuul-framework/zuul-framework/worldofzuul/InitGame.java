@@ -31,12 +31,12 @@ public class InitGame {
     private void createRooms(Player p1) {
         Room home, work, shop, school, hospital, outside;
 
-        outside = new Room("Outside", "outside");
-        home = new Room("Home", "at home");
-        work = new Room("Work", "at work");
-        shop = new Room("Shop","in a shop");
-        school = new Room("School", "at school");
-        hospital = new Room("Hospital","in a hospital");
+        outside = new Room("Outside", "outside", false);
+        home = new Room("Home", "at home", false);
+        work = new Room("Work", "at work", true);
+        shop = new Room("Shop","in a shop", false);
+        school = new Room("School", "at school", false);
+        hospital = new Room("Hospital","in a hospital", false);
 
         outside.setExit("home", home);
         outside.setExit("work", work);
