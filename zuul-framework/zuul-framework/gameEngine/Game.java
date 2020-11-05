@@ -17,13 +17,13 @@ public class Game {
     protected final String SHOP_NAME = "shop";
     
     protected Parser parser;
-    private Player p1;
+    private Player player;
     protected Turns turns;
 
     // Super constructor. Amount of turns decided by derived class
-    public Game(Player p1, Parser parser, int turns) {
+    public Game(Player player, Parser parser, int turns) {
         this.parser = new Parser();
-        this.p1 = p1;
+        this.player = player;
         this.turns = new Turns(turns);
     }
 
@@ -40,9 +40,9 @@ public class Game {
             case HELP -> printHelp();
             case GO -> goRoom(command);
             case QUIT -> wantToQuit = quit(command);
-            case AGE -> System.out.println("You are " + p1.getAge() + " years old.");
-            case INVENTORY -> p1.inventoryPrinter();
-            case MONEY -> System.out.println("You have " + p1.getMoney() + " gold");
+            case AGE -> System.out.println("You are " + player.getAge() + " years old.");
+            case INVENTORY -> player.inventoryPrinter();
+            case MONEY -> System.out.println("You have " + player.getMoney() + " gold");
             case TAKE -> turns.decTurns();
             //case WORK -> {}
             case USE -> {use(command); turns.decTurns();}
@@ -59,61 +59,63 @@ public class Game {
         return wantToQuit;
     }
 
-    public void work(int econStage){
-        if(!p1.getCurrentRoom().getName().equals("work")){
+    public void work(int econStage) {
+        if (!player.getCurrentRoom().getName().equals("work")) {
             System.out.println("You can't work here");
             return;
         }
-        if(!p1.getCurrentRoom().isSitting()){
+        if (!player.getCurrentRoom().isSitting()) {
             System.out.println("You have to sit down");
             return;
         }
 
         //todo turns? age?
         //todo event accident
-        int i = p1.getCountry().getMoney() * p1.getGender().getMoneyMulti() *
-                p1.getFamilyEconomy().getMoneyMulti()/ econStage;
-        p1.incMoney(i);
+        int i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
+                player.getFamilyEconomy().getMoneyMulti() / econStage;
+        player.incMoney(i);
         System.out.println("You made " + i);
     }
-    private void sleep(){
-        if(!p1.getCurrentRoom().getName().equals("home")){
+    
+    private void sleep() {
+        if (!player.getCurrentRoom().getName().equals("home")) {
             System.out.println("You have to be at home to sleep");
             return;
         }
-        if(!p1.getCurrentRoom().isSitting()){
+        if (!player.getCurrentRoom().isSitting()) {
             System.out.println("You have to be sitting to sleep");
             return;
         }
-        switch (p1.getStage()){
+        switch (player.getStage()) {
             case "child" -> {
-                p1.setStage("adult");
+                player.setStage("adult");
                 System.out.println("You are now an adult");
             }
             case "adult" -> {
-                p1.setStage("old");
+                player.setStage("old");
                 System.out.println("You are now old");
             }
             case "old" -> {
-                p1.setAlive(false);
+                player.setAlive(false);
                 System.out.println("You are dead");
             }
         }
     }
-    private void sit(){
-        if(p1.getCurrentRoom().isSitting())
+    
+    private void sit() {
+        if (player.getCurrentRoom().isSitting())
             System.out.println("You are already sitting");
         else {
-            p1.getCurrentRoom().setSitting(true);
+            player.getCurrentRoom().setSitting(true);
             System.out.println("You sat down");
         }
     }
 
-    private void stand(){
-        if(!p1.getCurrentRoom().isSitting())
+    private void stand() {
+        if (!player.getCurrentRoom().isSitting())
             System.out.println("You are already standing");
-        else{
-            p1.getCurrentRoom().setSitting(false);
+        else {
+            player.getCurrentRoom().setSitting(false);
             System.out.println("You stood up");
         }
     }
@@ -121,26 +123,24 @@ public class Game {
     private void use(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Use what?");
-        }
-
-        else {
+        } else {
             String item = command.getSecondWord();
 
-            for (Item i: p1.getInventory()) {
+            for (Item i: player.getInventory()) {
                 if (i.getName().equals(item)) {
                     if  (i instanceof Book) {
                         System.out.println("You can't use a book, read it instead.");
                         //alternatively, using a book is the same as reading it
                         }
                     else if (i instanceof Key) {
-                        Room room = p1.getCurrentRoom().getExit(((Key)i).getKeyType());
+                        Room room = player.getCurrentRoom().getExit(((Key)i).getKeyType());
 
                         if (room == null) {
                             System.out.println("You can't use that here.");
                         }
                         else if (room.isLocked()){
                             room.unlock((Key)i);
-                            //p1.removeInventoryItem(i);
+                            //player.removeInventoryItem(i);
                             //todo fix this so key gets removed
                         }
                         else {
@@ -154,15 +154,14 @@ public class Game {
             }
         }
 
-        if (p1.getInventory().isEmpty()) {
+        if (player.getInventory().isEmpty()) {
             System.out.println("You have no items to use.");
         }
     }
 
-
     // Buy an item if you're in the "Shop" room
     private void buy(Command command) {
-        if (p1.getCurrentRoom().getName().equals(SHOP_NAME)) {
+        if (player.getCurrentRoom().getName().equals(SHOP_NAME)) {
             if (!command.hasSecondWord()) {
                 System.out.println("Buy what?");
                 return;
@@ -170,16 +169,16 @@ public class Game {
 
             String s = command.getSecondWord();
 
-            PurchasableItem i = p1.getCurrentRoom().getItem(s);
+            PurchasableItem i = player.getCurrentRoom().getItem(s);
             if (i != null) {
-                if (p1.getMoney() >= i.getPrice()) {
-                    p1.addInventoryItem(i);
-                    p1.getCurrentRoom().removeItem(i);
-                    p1.decMoney(i.getPrice());
+                if (player.getMoney() >= i.getPrice()) {
+                    player.addInventoryItem(i);
+                    player.getCurrentRoom().removeItem(i);
+                    player.decMoney(i.getPrice());
                     turns.decTurns();
 
                     System.out.println("You bought " + s);
-                    p1.decMoney(((PurchasableItem)i).getPrice());
+                    player.decMoney(((PurchasableItem)i).getPrice());
                 }
             }
             else
@@ -189,8 +188,8 @@ public class Game {
 
     // Look at shoplist or look at items in the current room
     private void look(Command command) {
-        if (p1.getCurrentRoom().getName().equals(SHOP_NAME)) {
-            p1.getCurrentRoom().printStock();
+        if (player.getCurrentRoom().getName().equals(SHOP_NAME)) {
+            player.getCurrentRoom().printStock();
         } else {
             if (command.hasSecondWord()) {
                 System.out.println("You can't focus on anything in particular");
@@ -212,8 +211,7 @@ public class Game {
         }
     }
 
-    private void printHelp()
-    {
+    private void printHelp() {
         System.out.println("Life is long and difficult");
         System.out.println("Too bad");
         System.out.println();
@@ -221,21 +219,20 @@ public class Game {
         parser.showCommands();
     }
 
-    private void goRoom(Command command)
-    {
-        if(p1.getCurrentRoom().isSitting()){
+    private void goRoom(Command command) {
+        if (player.getCurrentRoom().isSitting()) {
             System.out.println("You have to stand up first");
             return;
         }
 
-        if(!command.hasSecondWord()) {
+        if (!command.hasSecondWord()) {
             System.out.println("Go where?");
             return;
         }
 
         String direction = command.getSecondWord();
 
-        Room nextRoom = p1.getCurrentRoom().getExit(direction);
+        Room nextRoom = player.getCurrentRoom().getExit(direction);
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
@@ -244,8 +241,8 @@ public class Game {
             System.out.println("This door is locked.");
         }
         else {
-            p1.setCurrentRoom(nextRoom);
-            System.out.println(p1.getCurrentRoom().getLongDescription());
+            player.setCurrentRoom(nextRoom);
+            System.out.println(player.getCurrentRoom().getLongDescription());
             turns.decTurns();
         }
     }
@@ -256,20 +253,20 @@ public class Game {
             return false;
         }
         else {
-            p1.setAlive(false);
+            player.setAlive(false);
             return true;
         }
     }
 
     public Player getPlayer() {
-        return p1;
+        return player;
     }
 
     public void checkTurns() {
-        if (p1.getStage().equals("child") && turns.getTurns() <= 0) {
-            p1.setStage("adult");
-        } else if (p1.getStage().equals("adult") && turns.getTurns() <= 0) {
-            p1.setStage("old");
+        if (player.getStage().equals("child") && turns.getTurns() <= 0) {
+            player.setStage("adult");
+        } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
+            player.setStage("old");
         }
     }
 }
