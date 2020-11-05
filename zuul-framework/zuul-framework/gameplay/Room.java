@@ -2,6 +2,7 @@ package gameplay;
 
 import item.Item;
 import item.PurchasableItem;
+import item.Key;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -12,9 +13,10 @@ public class Room {
     private String name;
     private String description;
     private HashMap<String, Room> exits;
-    private ArrayList<Item> stock;
+    private ArrayList<PurchasableItem> stock;
+    private boolean locked;
 
-    public Room(String name, String description)
+    public Room(String name, String description, boolean locked)
     {
         this.setName(name);
         this.description = description;

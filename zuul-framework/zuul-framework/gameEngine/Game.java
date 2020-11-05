@@ -6,16 +6,16 @@ import commands.Parser;
 import gameplay.Room;
 import gameplay.Turns;
 import item.Item;
-import item.Book;
-import item.Key;
 import item.PurchasableItem;
+import item.Key;
+import item.Book;
 import player.Player;
 
 import java.util.ArrayList;
 
 public class Game {
     protected final String SHOP_NAME = "Shop";
-    
+
     protected Parser parser;
     private Player p1;
     protected Turns turns;
@@ -46,7 +46,7 @@ public class Game {
             case TAKE -> turns.decTurns();
             case WORK -> /*TODO: needs amount*/ turns.decTurns();
             case USE -> {use(command); turns.decTurns();}
-            case BUY -> buy(command);
+            case BUY -> {buy(command); turns.decTurns();}
             case LOOK -> look(command);
             case SIT -> turns.decTurns();
             case TURNS -> System.out.println("You have " + turns.getTurns() + " turns left");
@@ -130,8 +130,9 @@ public class Game {
             if (command.hasSecondWord()) {
                 System.out.println("You can't focus on anything in particular");
             } else {
+                /*
                 System.out.println("You take a closer look at your surroundings\nYou notice:");
-                /*ArrayList<Item> items = getPlayer().getCurrentRoom().items;
+                ArrayList<Item> items = getPlayer().getCurrentRoom().items;
                 ArrayList<Item> objects = getPlayer().getCurrentRoom().objects;
                 if (items.isEmpty() && objects.isEmpty()) {
                     System.out.println("\tnothing");
@@ -142,7 +143,9 @@ public class Game {
                     for (Item o : objects) {
                         System.out.println("\t" + o.getName());
                     }
-                }*/
+                }
+
+                 */
             }
         }
     }
