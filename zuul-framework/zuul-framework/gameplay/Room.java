@@ -1,7 +1,7 @@
 package gameplay;
 
 import item.Item;
-import item.purchasableItem;
+import item.PurchasableItem;
 
 import java.util.ArrayList;
 import java.util.Set;
