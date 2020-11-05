@@ -12,12 +12,13 @@ public class Room
     private String description;
     private HashMap<String, Room> exits;
     private ArrayList<Item> stock;
-    private Boolean locked;
+    private boolean locked;
 
     public Room(String name, String description, Boolean locked)
     {
         this.setName(name);
         this.description = description;
+        this.locked = locked;
         exits = new HashMap<String, Room>();
         stock = new ArrayList<>();
     }
@@ -90,8 +91,11 @@ public class Room
 
     public void unlock(Key key)
     {
-        if (key.canUnlock(this.getName())) {this.locked = false;}
-        else { System.out.println("You can't do that here"); }
+        if (key.canUnlock(this.getName())) {
+            this.locked = false;
+            System.out.println(this.getName() + " has been unlocked.");
+        }
+        else { System.out.println("You can't do that here."); }
     }
 }
 

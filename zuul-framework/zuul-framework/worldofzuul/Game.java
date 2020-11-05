@@ -42,25 +42,39 @@ public class Game
         if (!command.hasSecondWord()) {
             System.out.println("Use what?");
         }
-        String item = command.getSecondWord();
 
         if (p1.getInventory().isEmpty()) {
             System.out.println("You have no items to use.");
         }
-        else {
-            for (Item i: p1.getInventory()) {
-                switch (i.getName()) {
-                    case "book" -> {
-                        System.out.println("You can't use a book, read it instead");
-                        //alternatively, using a book is the same as reading it
-                    }
-                    case "key" -> {
-                        // figure out if thee key should be used from a neighbouring room
-                        // or some kind of between-room purgatory. In the former case,
-                        // I'll need the hashmap of neighbouring rooms to be available
-                        // to this class, so I can see if the key matches a neighbouring room.
-                    }
 
+        else {
+            String item = command.getSecondWord();
+
+            for (Item i: p1.getInventory()) {
+                if (i.getName().equals(item)) {
+                    switch (i.getType()) {
+                        case "book" -> {
+                            System.out.println("You can't use a book, read it instead.");
+                            //alternatively, using a book is the same as reading it
+                        }
+                        case "key" -> {
+                            Room room = p1.getCurrentRoom().getExit(((Key)i).getKeyType());
+
+                            if (room == null) {
+                                System.out.println("You can't use that here.");
+                            }
+                            else if (room.isLocked()){
+                                room.unlock((Key)i);
+                            }
+                            else {
+                                System.out.println("This room is not locked. How did you get that key?");
+                            }
+                        }
+
+                    }
+                }
+                else {
+                    System.out.println("You have no item of that name.");
                 }
             }
         }
