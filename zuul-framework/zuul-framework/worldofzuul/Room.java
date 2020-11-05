@@ -14,7 +14,7 @@ public class Room
     private ArrayList<Item> stock;
     private boolean locked;
 
-    public Room(String name, String description, Boolean locked)
+    public Room(String name, String description, boolean locked)
     {
         this.setName(name);
         this.description = description;
@@ -93,7 +93,7 @@ public class Room
     {
         if (key.canUnlock(this.getName())) {
             this.locked = false;
-            System.out.println(this.getName() + " has been unlocked.");
+            System.out.println("You have unlocked " + this.getName());
         }
         else { System.out.println("You can't do that here."); }
     }

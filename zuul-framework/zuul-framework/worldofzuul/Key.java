@@ -5,9 +5,9 @@ public class Key extends Item{
     public final int price;
     private final String keyType;   // keyType is effectively a room name
 
-    Key(int price, String keyType)
+    Key(String name, int price, String keyType)
     {
-        super();
+        super(name, "key");
         this.price = price;
         this.keyType = keyType;
     }

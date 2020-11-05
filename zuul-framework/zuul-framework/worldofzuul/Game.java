@@ -43,10 +43,6 @@ public class Game
             System.out.println("Use what?");
         }
 
-        if (p1.getInventory().isEmpty()) {
-            System.out.println("You have no items to use.");
-        }
-
         else {
             String item = command.getSecondWord();
 
@@ -65,6 +61,8 @@ public class Game
                             }
                             else if (room.isLocked()){
                                 room.unlock((Key)i);
+                                //p1.removeInventoryItem(i);
+                                //todo fix this so key gets removed
                             }
                             else {
                                 System.out.println("This room is not locked. How did you get that key?");
@@ -78,10 +76,14 @@ public class Game
                 }
             }
         }
+
+        if (p1.getInventory().isEmpty()) {
+            System.out.println("You have no items to use.");
+        }
     }
 
     private void buy(Command command){
-        if(p1.getCurrentRoom().getName().equals("Shop")){
+        if(p1.getCurrentRoom().getName().equals("shop")){
             if(!command.hasSecondWord()) {
                 System.out.println("Buy what?");
                 return;
