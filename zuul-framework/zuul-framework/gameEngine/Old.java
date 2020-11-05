@@ -1,4 +1,8 @@
-package worldofzuul;
+package gameEngine;
+
+import commands.Parser;
+import player.Player;
+
 //TODO: work method -> inc money
 public class Old extends Game {
     public Old(Player p1, Parser parser) {

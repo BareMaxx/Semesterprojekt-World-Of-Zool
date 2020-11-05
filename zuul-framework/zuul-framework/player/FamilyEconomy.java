@@ -1,4 +1,4 @@
-package worldofzuul;
+package player;
 
 public enum FamilyEconomy {
     RICH(10),

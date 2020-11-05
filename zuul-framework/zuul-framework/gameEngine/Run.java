@@ -1,4 +1,7 @@
-package worldofzuul;
+package gameEngine;
+
+import commands.Parser;
+import player.Player;
 
 public class Run {
     private Parser parser = new Parser();

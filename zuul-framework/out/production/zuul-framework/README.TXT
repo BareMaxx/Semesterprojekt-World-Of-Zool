@@ -11,7 +11,7 @@ Third edition
    Pearson Education, 2006
    
 
-This project is a simple framework for an adventure game. 
+This project is a simple framework for an adventure gameEngine.
 In this version,
 it has a few rooms and the ability for a player to walk between these rooms.
 
@@ -22,7 +22,7 @@ To start this application, create an instance of class "Game" and call its
 
 
 This project was written to illustrate the use of enums to support
-language independence of the game logic.
+language independence of the gameEngine logic.
 
 
 Read chapter 7 of the book to get a detailed description of the project.

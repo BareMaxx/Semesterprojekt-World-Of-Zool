@@ -1,4 +1,10 @@
-package worldofzuul;
+package gameEngine;
+
+import commands.Command;
+import commands.CommandWord;
+import commands.Parser;
+import player.Player;
+
 //TODO: readBook method der sætter spillerens knowledge points ud fra bogen
 //TODO: work method -> inc money
 public class Adult extends Game {

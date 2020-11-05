@@ -1,4 +1,4 @@
-package worldofzuul;
+package player;
 
 public enum Gender {
     MALE(10,7),
