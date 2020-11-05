@@ -2,6 +2,8 @@ package gameEngine;
 
 import commands.Parser;
 import player.Player;
+import commands.Command;
+import commands.CommandWord;
 
 //TODO: work method -> inc money
 public class Old extends Game {
