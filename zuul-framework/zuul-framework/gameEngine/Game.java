@@ -48,7 +48,6 @@ public class Game {
             case USE -> {use(command); turns.decTurns();}
             case BUY -> {buy(command); turns.decTurns();}
             case LOOK -> look(command);
-            case SIT -> turns.decTurns();
             case TURNS -> System.out.println("You have " + turns.getTurns() + " turns left");
             case SIT -> {sit(); turns.decTurns();}
             case STAND -> {stand(); turns.decTurns();}
@@ -61,7 +60,7 @@ public class Game {
     }
 
     public void work(int econStage){
-        if(!p1.getCurrentRoom().getName().equals("Work")){
+        if(!p1.getCurrentRoom().getName().equals("work")){
             System.out.println("You can't work here");
             return;
         }
@@ -78,7 +77,7 @@ public class Game {
         System.out.println("You made " + i);
     }
     private void sleep(){
-        if(!p1.getCurrentRoom().getName().equals("Home")){
+        if(!p1.getCurrentRoom().getName().equals("home")){
             System.out.println("You have to be at home to sleep");
             return;
         }

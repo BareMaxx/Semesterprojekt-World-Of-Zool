@@ -38,7 +38,7 @@ public class Child extends Game {
 
     // Read the first book in your inventory, if any
     public void readBook() {
-        if(!super.getPlayer().getCurrentRoom().getName().equals("School")){
+        if(!super.getPlayer().getCurrentRoom().getName().equals("school")){
             System.out.println("You have to be at school to read");
             return;
         }
