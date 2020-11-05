@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 public class Room 
 {
+    private boolean sitting;
     private String name;
     private String description;
     private HashMap<String, Room> exits;
@@ -19,6 +20,13 @@ public class Room
         this.description = description;
         exits = new HashMap<String, Room>();
         stock = new ArrayList<>();
+        this.sitting = false;
+    }
+
+    public void setSitting(boolean b){sitting = b;}
+
+    public boolean isSitting() {
+        return sitting;
     }
 
     public void setItem(Item i){
