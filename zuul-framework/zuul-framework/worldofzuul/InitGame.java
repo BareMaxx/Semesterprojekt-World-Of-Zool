@@ -40,7 +40,7 @@ public class InitGame {
 
         outside.setExit("home", home);
         outside.setExit("work", work);
-        outside.setExit("shop", school);
+        outside.setExit("shop", shop);
         outside.setExit("hospital", hospital);
         outside.setExit("school", school);
 
@@ -49,6 +49,14 @@ public class InitGame {
         shop.setExit("outside", outside);
         hospital.setExit("outside", outside);
         school.setExit("outside", outside);
+
+        Book b1 = new Book("Algorithms",10,100);
+        Book b2 = new Book("Math",20,200);
+        Book b3 = new Book("sql",30,300);
+
+        shop.setItem(b1);
+        shop.setItem(b2);
+        shop.setItem(b3);
 
         p1.setCurrentRoom(home);
     }

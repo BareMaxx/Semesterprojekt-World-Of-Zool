@@ -14,6 +14,7 @@ public class Player {
     private String stage;
     private boolean alive = true;
     private int score = 0;
+    private int knowledge = 0;
     private Room currentRoom;
 
     public Country getCountry() {
@@ -40,7 +41,6 @@ public class Player {
     public void addInventoryItem(Item s){
         inventory.add(s);
     }
-
     public void removeInventoryItem(Item i){inventory.remove(i);}
     public ArrayList<Item> getInventory() {
         return inventory;
@@ -100,6 +100,10 @@ public class Player {
     }
     public void setAlive(boolean b) {
         alive = b;
+    }
+
+    public void incKnowledge(int i){
+        knowledge = knowledge +i;
     }
 
     public Room getCurrentRoom() {

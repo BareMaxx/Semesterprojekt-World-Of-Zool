@@ -1,5 +1,7 @@
 package worldofzuul;
 
+import java.util.ArrayList;
+
 public class Game 
 {
     protected Parser parser;
@@ -12,7 +14,7 @@ public class Game
         //new InitGame(p1);
     }
 
-    public void play(){};
+    public void play(){}
 
     public boolean processCommand(Command command)
     {
@@ -25,19 +27,44 @@ public class Game
             case GO -> goRoom(command);
             case QUIT -> wantToQuit = quit(command);
             case AGE -> System.out.println("You are " + p1.getAge() + " years old.");
-            case INVENTORY -> {//TODO: Player printInventory method
-                //player.inventoryPrinter();
-            }
+            case INVENTORY -> p1.inventoryPrinter();
             case MONEY -> System.out.println("You have " + p1.getMoney() + " gold");
             case TAKE -> {}
             case WORK -> {}
             case USE -> {}
-            case BUY -> {}
-            case LOOK -> {}
+            case BUY -> buy(command);
+            case LOOK -> look(command);
             case SIT -> {}
             default -> System.out.println("I don't know what you mean...");
         }
         return wantToQuit;
+    }
+
+    private void buy(Command command){
+        if(p1.getCurrentRoom().getName().equals("Shop")){
+            if(!command.hasSecondWord()) {
+                System.out.println("Buy what?");
+                return;
+            }
+
+            String s = command.getSecondWord();
+
+
+            Item i = p1.getCurrentRoom().getItem(s);
+            if(i != null){
+                if(p1.getMoney()>=i.getPrice()){
+                    p1.addInventoryItem(i);
+                    p1.getCurrentRoom().removeItem(i);
+                    p1.decMoney(i.getPrice());
+                }
+            }
+            else
+                System.out.println("There is no " + s + " in the shop");
+        }
+    }
+
+    private void look(){
+        p1.getCurrentRoom().printStock();
     }
 
     private void printHelp() 
@@ -47,6 +74,26 @@ public class Game
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
+    }
+    
+    private void look(Command command) {
+        if (command.hasSecondWord()) {
+            System.out.println("You can't focus on anything in particular");
+        } else {
+            System.out.println("You take a closer look at your surroundings\nYou notice:");
+            ArrayList<Item> items = getPlayer().getCurrentRoom().items;
+            ArrayList<Item> objects = getPlayer().getCurrentRoom().objects;
+            if (items.isEmpty() && objects.isEmpty()) {
+                System.out.println("\tnothing");
+            } else {
+                for (Item i : items) {
+                    System.out.println("\t" + i.getName());
+                }
+                for (Item o : objects) {
+                    System.out.println("\t" + o.getName());
+                }
+            }
+        }
     }
 
     private void goRoom(Command command) 

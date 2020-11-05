@@ -18,16 +18,10 @@ public class RandomEngine {
           //successPercentage should be an integer between 0 and 100.
 
           if (probabilityOfSuccess < 0 || probabilityOfSuccess > 100) {
-               System.out.println("Error: invalid input");
+               System.out.println("Error: invalid probability input");
                return false;
           }
 
-          if (getRandom(0, 100) < probabilityOfSuccess) {
-               return true;
-          }
-          else {
-               return false;
-          }
-
+          return (getRandom(0, 100) < probabilityOfSuccess);
      }
 }
