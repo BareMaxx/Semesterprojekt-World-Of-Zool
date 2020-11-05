@@ -6,9 +6,9 @@ public class Item {
     private static int IDCounter;
     protected String name;
 
-    Item(String name) {
+    Item() {
         this.ID = IDCounter++;
-        this.name = name;
+        this.name = "Item";
     }
 
     public String getName() {
