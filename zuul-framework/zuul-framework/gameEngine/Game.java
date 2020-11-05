@@ -87,8 +87,8 @@ public class Game {
                 System.out.println("You can't focus on anything in particular");
             } else {
                 System.out.println("You take a closer look at your surroundings\nYou notice:");
-                ArrayList<Item> items = getPlayer().currentRoom.items;
-                ArrayList<Item> objects = getPlayer().currentRoom.objects;
+                /*ArrayList<Item> items = getPlayer().getCurrentRoom().items;
+                ArrayList<Item> objects = getPlayer().getCurrentRoom().objects;
                 if (items.isEmpty() && objects.isEmpty()) {
                     System.out.println("\tnothing");
                 } else {
@@ -98,7 +98,7 @@ public class Game {
                     for (Item o : objects) {
                         System.out.println("\t" + o.getName());
                     }
-                }
+                }*/
             }
         }
     }
