@@ -14,11 +14,13 @@ public class Room
     private String description;
     private HashMap<String, Room> exits;
     private ArrayList<Item> stock;
+    private boolean locked;
 
-    public Room(String name, String description)
+    public Room(String name, String description, boolean locked)
     {
         this.setName(name);
         this.description = description;
+        this.locked = locked;
         exits = new HashMap<String, Room>();
         stock = new ArrayList<>();
     }
@@ -85,6 +87,17 @@ public class Room
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isLocked() {return this.locked;}
+
+    public void unlock(Key key)
+    {
+        if (key.canUnlock(this.getName())) {
+            this.locked = false;
+            System.out.println("You have unlocked " + this.getName());
+        }
+        else { System.out.println("You can't do that here."); }
     }
 }
 

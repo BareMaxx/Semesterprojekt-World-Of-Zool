@@ -40,7 +40,7 @@ public class Game
             case MONEY -> System.out.println("You have " + p1.getMoney() + " gold");
             case TAKE -> turns.decTurns();
             case WORK -> /*TODO: needs amount*/ turns.decTurns();
-            case USE -> turns.decTurns();
+            case USE -> {use(command); turns.decTurns();}
             case BUY -> {buy(command); turns.decTurns();}
             case LOOK -> look();
             case SIT -> turns.decTurns();
@@ -51,8 +51,49 @@ public class Game
         return wantToQuit;
     }
 
+    private void use(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Use what?");
+        }
+
+        else {
+            String item = command.getSecondWord();
+
+            for (Item i: p1.getInventory()) {
+                if (i.getName().equals(item)) {
+                    if  (i instanceof Book) {
+                        System.out.println("You can't use a book, read it instead.");
+                        //alternatively, using a book is the same as reading it
+                        }
+                    else if (i instanceof Key) {
+                        Room room = p1.getCurrentRoom().getExit(((Key)i).getKeyType());
+
+                        if (room == null) {
+                            System.out.println("You can't use that here.");
+                        }
+                        else if (room.isLocked()){
+                            room.unlock((Key)i);
+                            //p1.removeInventoryItem(i);
+                            //todo fix this so key gets removed
+                        }
+                        else {
+                            System.out.println("This room is not locked. How did you get that key?");
+                        }
+                    }
+                }
+                else {
+                    System.out.println("You have no item of that name.");
+                }
+            }
+        }
+
+        if (p1.getInventory().isEmpty()) {
+            System.out.println("You have no items to use.");
+        }
+    }
+
     private void buy(Command command){
-        if(p1.getCurrentRoom().getName().equals("Shop")){
+        if(p1.getCurrentRoom().getName().equals("shop")){
             if(!command.hasSecondWord()) {
                 System.out.println("Buy what?");
                 return;
@@ -100,6 +141,9 @@ public class Game
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
+        }
+        else if (nextRoom.isLocked()) {
+            System.out.println("This door is locked.");
         }
         else {
             p1.setCurrentRoom(nextRoom);
