@@ -9,9 +9,10 @@ import item.Item;
 import item.PurchasableItem;
 import player.Player;
 
-public class Game
-{
-    protected const String SHOP_NAME = "Shop";
+import java.util.ArrayList;
+
+public class Game {
+    protected final String SHOP_NAME = "Shop";
     
     protected Parser parser;
     private Player p1;
@@ -63,7 +64,7 @@ public class Game
 
             String s = command.getSecondWord();
 
-            Item i = p1.getCurrentRoom().getItem(s);
+            PurchasableItem i = p1.getCurrentRoom().getItem(s);
             if (i != null) {
                 if (p1.getMoney() >= i.getPrice()) {
                     p1.addInventoryItem(i);

@@ -26,7 +26,7 @@ public class Room {
         stock.add(i);
     }
 
-    public PurchasableItem getItem(String name){
+    public PurchasableItem getItem(String name) {
         for (PurchasableItem i : stock) {
             if (name.equals(i.getName())) {
                 return i;
@@ -38,12 +38,12 @@ public class Room {
     public void removeItem(PurchasableItem i) {
         stock.remove(i);
     }
-    public void printStock(){
+    public void printStock() {
         System.out.println("These objects are for sale:");
-        if(stock.isEmpty())
+        if (stock.isEmpty()) {
             System.out.println("\tnothing");
-        else{
-            for(PurchasableItem i : stock){
+        } else {
+            for (PurchasableItem i : stock) {
                 System.out.println("\t" + i.getName() + "\t|\t" + i.getPrice() + " gold");
             }
         }
@@ -63,7 +63,7 @@ public class Room {
     private String getExitString() {
         String returnString = "Exits:";
         Set<String> keys = exits.keySet();
-        for(String exit : keys) {
+        for (String exit : keys) {
             returnString += " " + exit;
         }
         return returnString;
