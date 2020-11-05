@@ -10,7 +10,7 @@ public class Run {
     Adult a = new Adult(p1, parser);
     Old o = new Old(p1, parser);
 
-    Run() {
+    public Run() {
         new InitGame(p1, parser);
 
         while (p1.getAlive()) {
