@@ -45,7 +45,7 @@ public class Room
             System.out.println("\tnothing");
         else{
             for(Item i : stock){
-                System.out.println("\t" + i.getName() + "\t|\t" + i.getPrice() + " gold");
+                System.out.println("\t" + i.getName() + "\t|\t" + ((purchasableItem)i).getPrice() + " gold");
             }
         }
     }

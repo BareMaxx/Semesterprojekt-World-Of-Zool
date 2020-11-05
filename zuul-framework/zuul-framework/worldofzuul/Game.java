@@ -4,11 +4,13 @@ public class Game
 {
     protected Parser parser;
     private Player p1;
+    protected Turns turns;
 
-    public Game(Player p1, Parser parser)
+    public Game(Player p1, Parser parser, int turns)
     {
         this.parser = new Parser();
         this.p1 = p1;
+        this.turns = new Turns(turns);
         //new InitGame(p1);
     }
 
@@ -22,19 +24,21 @@ public class Game
 
         switch(commandWord) {
             case HELP -> printHelp();
-            case GO -> goRoom(command);
+            case GO -> {goRoom(command); turns.decTurns();}
             case QUIT -> wantToQuit = quit(command);
             case AGE -> System.out.println("You are " + p1.getAge() + " years old.");
             case INVENTORY -> p1.inventoryPrinter();
             case MONEY -> System.out.println("You have " + p1.getMoney() + " gold");
-            case TAKE -> {}
-            case WORK -> {}
+            case BUY -> {buy(command); turns.decTurns();}
+            case WORK -> /*TODO: needs amount*/ turns.decTurns();
+            case TAKE -> turns.decTurns();
             case USE -> use(command);
-            case BUY -> buy(command);
             case LOOK -> look();
-            case SIT -> {}
+            case SIT -> turns.decTurns();
+            case TURNS -> System.out.println("You have " + turns.getTurns() + " turns left");
             default -> System.out.println("I don't know what you mean...");
         }
+        checkTurns();
         return wantToQuit;
     }
 
@@ -91,10 +95,10 @@ public class Game
 
             Item i = p1.getCurrentRoom().getItem(s);
             if(i != null){
-                if(p1.getMoney()>=i.getPrice()){
+                if(p1.getMoney() >= ((purchasableItem)i).getPrice()){
                     p1.addInventoryItem(i);
                     p1.getCurrentRoom().removeItem(i);
-                    p1.decMoney(i.getPrice());
+                    p1.decMoney(((purchasableItem)i).getPrice());
                 }
             }
             else
@@ -152,5 +156,13 @@ public class Game
 
     public Player getPlayer() {
         return p1;
+    }
+
+    public void checkTurns() {
+        if(p1.getStage().equals("child") && turns.getTurns() <= 0) {
+            p1.setStage("adult");
+        } else if(p1.getStage().equals("adult") && turns.getTurns() <= 0) {
+            p1.setStage("old");
+        }
     }
 }
