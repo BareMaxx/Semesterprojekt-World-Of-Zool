@@ -118,7 +118,6 @@ public class Game
     public void checkTurns() {
         if(p1.getStage().equals("child") && turns.getTurns() <= 0) {
             p1.setStage("adult");
-            System.out.println("yes");
         } else if(p1.getStage().equals("adult") && turns.getTurns() <= 0) {
             p1.setStage("old");
         }
