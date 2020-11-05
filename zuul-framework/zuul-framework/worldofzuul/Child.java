@@ -26,7 +26,6 @@ public class Child extends Game {
             case READ -> {readBook(); super.turns.decTurns(10);}
             default -> super.processCommand(command);
         }
-        super.turns.decTurns();
         super.checkTurns();
         return true;
     }

@@ -24,21 +24,20 @@ public class Game
 
         switch(commandWord) {
             case HELP -> printHelp();
-            case GO -> {goRoom(command);}
+            case GO -> {goRoom(command); turns.decTurns();}
             case QUIT -> wantToQuit = quit(command);
             case AGE -> System.out.println("You are " + p1.getAge() + " years old.");
             case INVENTORY -> p1.inventoryPrinter();
             case MONEY -> System.out.println("You have " + p1.getMoney() + " gold");
-            case TAKE -> {}
-            case WORK -> {}
-            case USE -> {}
-            case BUY -> buy(command);
+            case TAKE -> turns.decTurns();
+            case WORK -> /*TODO: needs amount*/ turns.decTurns();
+            case USE -> turns.decTurns();
+            case BUY -> {buy(command); turns.decTurns();}
             case LOOK -> look();
-            case SIT -> {}
+            case SIT -> turns.decTurns();
             case TURNS -> System.out.println("You have " + turns.getTurns() + " turns left");
             default -> System.out.println("I don't know what you mean...");
         }
-        turns.decTurns();
         checkTurns();
         return wantToQuit;
     }
