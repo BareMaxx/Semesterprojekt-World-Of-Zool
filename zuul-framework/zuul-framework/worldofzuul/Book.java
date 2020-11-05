@@ -1,19 +1,14 @@
 package worldofzuul;
 
-public class Book extends Item{
+public class Book extends purchasableItem{
 
-    private final int price;
     private final int knowledgePoints;
 
     Book(String name, int price, int knowledgePoints)
     {
-        super(name, "book");
-        this.price = price;
+        super(price);
+        this.name = name;
         this.knowledgePoints = knowledgePoints;
-    }
-
-    public int getPrice() {
-        return price;
     }
 
     public int getKnowledgePoints() {

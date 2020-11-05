@@ -54,10 +54,10 @@ public class Game
 
             Item i = p1.getCurrentRoom().getItem(s);
             if(i != null){
-                if(p1.getMoney()>=i.getPrice()){
+                if(p1.getMoney() >= ((purchasableItem)i).getPrice()){
                     p1.addInventoryItem(i);
                     p1.getCurrentRoom().removeItem(i);
-                    p1.decMoney(i.getPrice());
+                    p1.decMoney(((purchasableItem)i).getPrice());
                 }
             }
             else
