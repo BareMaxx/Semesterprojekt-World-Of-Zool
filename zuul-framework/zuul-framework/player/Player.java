@@ -1,5 +1,8 @@
 
-package worldofzuul;
+package player;
+
+import item.Item;
+import gameplay.Room;
 
 import java.util.ArrayList;
 

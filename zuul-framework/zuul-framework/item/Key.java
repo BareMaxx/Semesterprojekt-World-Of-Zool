@@ -1,4 +1,4 @@
-package worldofzuul;
+package item;
 
 public class Key extends Item{
 

@@ -1,6 +1,15 @@
-package worldofzuul;
+package gameEngine;
 
-public class Game 
+import commands.Command;
+import commands.CommandWord;
+import commands.Parser;
+import gameplay.Room;
+import gameplay.Turns;
+import item.Item;
+import item.purchasableItem;
+import player.Player;
+
+public class Game
 {
     protected Parser parser;
     private Player p1;

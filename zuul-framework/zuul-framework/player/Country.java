@@ -1,4 +1,4 @@
-package worldofzuul;
+package player;
 
 public enum Country {
     VAKANNDA(53,50, 62),
