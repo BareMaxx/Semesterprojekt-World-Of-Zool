@@ -6,7 +6,8 @@ public class Item {
     private static int IDCounter;
     protected String name;
 
-    Item() {
+    Item()
+    {
         this.ID = IDCounter++;
         this.name = "Item";
     }

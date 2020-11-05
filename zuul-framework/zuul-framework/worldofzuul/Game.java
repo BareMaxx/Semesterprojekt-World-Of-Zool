@@ -29,10 +29,10 @@ public class Game
             case AGE -> System.out.println("You are " + p1.getAge() + " years old.");
             case INVENTORY -> p1.inventoryPrinter();
             case MONEY -> System.out.println("You have " + p1.getMoney() + " gold");
-            case BUY -> {buy(command); turns.decTurns();}
-            case WORK -> /*TODO: needs amount*/ turns.decTurns();
             case TAKE -> turns.decTurns();
-            case USE -> use(command);
+            case WORK -> /*TODO: needs amount*/ turns.decTurns();
+            case USE -> {use(command); turns.decTurns();}
+            case BUY -> {buy(command); turns.decTurns();}
             case LOOK -> look();
             case SIT -> turns.decTurns();
             case TURNS -> System.out.println("You have " + turns.getTurns() + " turns left");
