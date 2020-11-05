@@ -2,17 +2,17 @@ package worldofzuul;
 
 public class Game 
 {
-    private Parser parser;
+    protected Parser parser;
     private Player p1;
 
-    public Game(Player p1)
+    public Game(Player p1, Parser parser)
     {
-        parser = new Parser();
+        this.parser = new Parser();
         this.p1 = p1;
         //new InitGame(p1);
     }
 
-    public void play(){};
+    public void play(){}
 
     public boolean processCommand(Command command)
     {
@@ -25,19 +25,44 @@ public class Game
             case GO -> goRoom(command);
             case QUIT -> wantToQuit = quit(command);
             case AGE -> System.out.println("You are " + p1.getAge() + " years old.");
-            case INVENTORY -> {//TODO: Player printInventory method
-                //player.inventoryPrinter();
-            }
+            case INVENTORY -> p1.inventoryPrinter();
             case MONEY -> System.out.println("You have " + p1.getMoney() + " gold");
             case TAKE -> {}
             case WORK -> {}
             case USE -> {}
-            case BUY -> {}
-            case LOOK -> {}
+            case BUY -> buy(command);
+            case LOOK -> look();
             case SIT -> {}
             default -> System.out.println("I don't know what you mean...");
         }
         return wantToQuit;
+    }
+
+    private void buy(Command command){
+        if(p1.getCurrentRoom().getName().equals("Shop")){
+            if(!command.hasSecondWord()) {
+                System.out.println("Buy what?");
+                return;
+            }
+
+            String s = command.getSecondWord();
+
+
+            Item i = p1.getCurrentRoom().getItem(s);
+            if(i != null){
+                if(p1.getMoney()>=i.getPrice()){
+                    p1.addInventoryItem(i);
+                    p1.getCurrentRoom().removeItem(i);
+                    p1.decMoney(i.getPrice());
+                }
+            }
+            else
+                System.out.println("There is no " + s + " in the shop");
+        }
+    }
+
+    private void look(){
+        p1.getCurrentRoom().printStock();
     }
 
     private void printHelp() 
@@ -69,13 +94,14 @@ public class Game
         }
     }
 
-    private boolean quit(Command command) 
+    private boolean quit(Command command)
     {
         if(command.hasSecondWord()) {
             System.out.println("Quit what?");
             return false;
         }
         else {
+            p1.setAlive(false);
             return true;
         }
     }
