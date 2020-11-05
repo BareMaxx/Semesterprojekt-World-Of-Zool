@@ -48,27 +48,24 @@ public class Game
 
             for (Item i: p1.getInventory()) {
                 if (i.getName().equals(item)) {
-                    switch (i.getType()) {
-                        case "book" -> {
-                            System.out.println("You can't use a book, read it instead.");
-                            //alternatively, using a book is the same as reading it
+                    if  (i instanceof Book) {
+                        System.out.println("You can't use a book, read it instead.");
+                        //alternatively, using a book is the same as reading it
                         }
-                        case "key" -> {
-                            Room room = p1.getCurrentRoom().getExit(((Key)i).getKeyType());
+                    else if (i instanceof Key) {
+                        Room room = p1.getCurrentRoom().getExit(((Key)i).getKeyType());
 
-                            if (room == null) {
-                                System.out.println("You can't use that here.");
-                            }
-                            else if (room.isLocked()){
-                                room.unlock((Key)i);
-                                //p1.removeInventoryItem(i);
-                                //todo fix this so key gets removed
-                            }
-                            else {
-                                System.out.println("This room is not locked. How did you get that key?");
-                            }
+                        if (room == null) {
+                            System.out.println("You can't use that here.");
                         }
-
+                        else if (room.isLocked()){
+                            room.unlock((Key)i);
+                            //p1.removeInventoryItem(i);
+                            //todo fix this so key gets removed
+                        }
+                        else {
+                            System.out.println("This room is not locked. How did you get that key?");
+                        }
                     }
                 }
                 else {
