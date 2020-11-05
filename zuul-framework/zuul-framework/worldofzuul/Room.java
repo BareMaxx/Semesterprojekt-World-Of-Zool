@@ -11,30 +11,31 @@ public class Room
     private String name;
     private String description;
     private HashMap<String, Room> exits;
-    private ArrayList<Item> stock;
+    private ArrayList<PurchasableItem> stock;
+    private ArrayList<Item> items;
 
     public Room(String name, String description)
     {
         this.setName(name);
         this.description = description;
         exits = new HashMap<String, Room>();
-        stock = new ArrayList<>();
+        stock = new ArrayList<PurchasableItem>();
     }
 
-    public void setItem(Item i){
+    public void setItem(PurchasableItem i) {
         stock.add(i);
     }
 
-    public Item getItem(String name){
-        for (Item i : stock){
+    public PurchasableItem getItem(String name){
+        for (PurchasableItem i : stock){
             if(name.equals(i.getName())){
                 return i;
             }
         }
-        System.out.println("Item not in room");
+        System.out.println("Item not in shop");
         return null;
     }
-    public void removeItem(Item i){
+    public void removeItem(PurchasableItem i) {
         stock.remove(i);
     }
     public void printStock(){
@@ -42,8 +43,8 @@ public class Room
         if(stock.isEmpty())
             System.out.println("\tnothing");
         else{
-            for(Item i : stock){
-                System.out.println("\t" + i.getName() + "\t|\t" + ((purchasableItem)i).getPrice() + " gold");
+            for(PurchasableItem i : stock){
+                System.out.println("\t" + i.getName() + "\t|\t" + i.getPrice() + " gold");
             }
         }
     }
@@ -85,4 +86,3 @@ public class Room
         this.name = name;
     }
 }
-

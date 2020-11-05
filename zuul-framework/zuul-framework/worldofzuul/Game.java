@@ -55,10 +55,10 @@ public class Game  {
 
             Item i = p1.getCurrentRoom().getItem(s);
             if (i != null) {
-                if (p1.getMoney() >= ((PurchasableItem)i).getPrice()) {
+                if (p1.getMoney() >= i.getPrice()) {
                     p1.addInventoryItem(i);
                     p1.getCurrentRoom().removeItem(i);
-                    p1.decMoney(((PurchasableItem)i).getPrice());
+                    p1.decMoney(i.getPrice());
                     turns.decTurns();
                 }
             }
