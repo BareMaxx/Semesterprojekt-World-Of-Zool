@@ -7,7 +7,7 @@ public class Key extends Item{
     Key(int price, String keyType)
     {
         super();
-        this.name = "Key";
+        this.name = "Key to " + keyType;
         this.keyType = keyType;
     }
 
