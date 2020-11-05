@@ -4,10 +4,10 @@ public class Book extends purchasableItem{
 
     private final int knowledgePoints;
 
-    Book(int price, int knowledgePoints)
+    Book(String name, int price, int knowledgePoints)
     {
         super(price);
-        this.name = "Book";
+        this.name = name;
         this.knowledgePoints = knowledgePoints;
     }
 

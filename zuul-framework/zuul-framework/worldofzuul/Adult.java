@@ -3,7 +3,7 @@ package worldofzuul;
 //TODO: work method -> inc money
 public class Adult extends Game {
     public Adult(Player p1, Parser parser) {
-        super(p1, parser);
+        super(p1, parser, 200);
     }
 
     public void play() {
