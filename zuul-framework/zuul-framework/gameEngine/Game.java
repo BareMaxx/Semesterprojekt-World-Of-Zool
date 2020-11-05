@@ -6,7 +6,7 @@ import commands.Parser;
 import gameplay.Room;
 import gameplay.Turns;
 import item.Item;
-import item.purchasableItem;
+import item.PurchasableItem;
 import player.Player;
 
 public class Game

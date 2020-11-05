@@ -1,23 +1,21 @@
 package gameplay;
 
 import item.Item;
-import item.purchasableItem;
+import item.PurchasableItem;
 
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
 
 
-public class Room 
-{
+public class Room {
     private String name;
     private String description;
     private HashMap<String, Room> exits;
     private ArrayList<PurchasableItem> stock;
     private ArrayList<Item> items;
 
-    public Room(String name, String description)
-    {
+    public Room(String name, String description) {
         this.setName(name);
         this.description = description;
         exits = new HashMap<String, Room>();
@@ -29,8 +27,8 @@ public class Room
     }
 
     public PurchasableItem getItem(String name){
-        for (PurchasableItem i : stock){
-            if(name.equals(i.getName())){
+        for (PurchasableItem i : stock) {
+            if (name.equals(i.getName())) {
                 return i;
             }
         }
@@ -50,23 +48,19 @@ public class Room
             }
         }
     }
-    public void setExit(String direction, Room neighbor)
-    {
+    public void setExit(String direction, Room neighbor) {
         exits.put(direction, neighbor);
     }
 
-    public String getShortDescription()
-    {
+    public String getShortDescription() {
         return description;
     }
 
-    public String getLongDescription()
-    {
+    public String getLongDescription() {
         return "You are " + description + ".\n" + getExitString();
     }
 
-    private String getExitString()
-    {
+    private String getExitString() {
         String returnString = "Exits:";
         Set<String> keys = exits.keySet();
         for(String exit : keys) {
@@ -75,8 +69,7 @@ public class Room
         return returnString;
     }
 
-    public Room getExit(String direction) 
-    {
+    public Room getExit(String direction) {
         return exits.get(direction);
     }
 

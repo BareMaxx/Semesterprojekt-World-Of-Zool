@@ -1,11 +1,10 @@
 package item;
 
-public class PurchasableItem extends Item{
+public class PurchasableItem extends Item {
 
     private final int price;
 
-    PurchasableItem(int price)
-    {
+    PurchasableItem(int price) {
         this.price = price;
     }
 

@@ -1,6 +1,6 @@
 package item;
 
-public class Book extends purchasableItem{
+public class Book extends PurchasableItem {
 
     private final int knowledgePoints;
 
