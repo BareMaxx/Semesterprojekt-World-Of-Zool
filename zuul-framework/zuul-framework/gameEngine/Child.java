@@ -36,6 +36,7 @@ public class Child extends Game {
     //Todo: Player inventory should be of Item type and not String
     //TODO: Player needs knowledgePoints attribute, and mutator and accessor methods
 
+    // Read the first book in your inventory, if any
     public void readBook() {
         if(!super.getPlayer().getCurrentRoom().getName().equals("School")){
             System.out.println("You have to be at school to read");
