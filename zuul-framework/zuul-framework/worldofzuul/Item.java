@@ -7,10 +7,6 @@ public class Item {
     private String name;
     private String type;
 
-    Item()
-    {
-        this.ID = IDCounter++;
-    }
     Item(String name, String type) {
         this.ID = IDCounter++;
         this.name = name;
