@@ -1,4 +1,4 @@
-package worldofzuul;
+package gameplay;
 
 public class Turns {
     private int turns;

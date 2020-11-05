@@ -1,4 +1,11 @@
-package worldofzuul;
+package gameEngine;
+
+import commands.Command;
+import commands.CommandWord;
+import commands.Parser;
+import item.Book;
+import item.Item;
+import player.Player;
 
 import java.util.List;
 

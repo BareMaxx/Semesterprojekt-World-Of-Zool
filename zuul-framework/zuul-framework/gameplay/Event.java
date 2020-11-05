@@ -1,4 +1,6 @@
-package worldofzuul;
+package gameplay;
+
+import player.Player;
 
 public class Event {
 

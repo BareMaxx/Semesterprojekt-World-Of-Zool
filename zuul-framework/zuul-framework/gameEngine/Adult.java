@@ -1,8 +1,15 @@
-package worldofzuul;
+package gameEngine;
+
+import commands.Command;
+import commands.CommandWord;
+import commands.Parser;
+import player.Player;
+
+//TODO: readBook method der sætter spillerens knowledge points ud fra bogen
 //TODO: work method -> inc money
-public class Old extends Game {
-    public Old(Player p1, Parser parser) {
-        super(p1, parser, 20);
+public class Adult extends Game {
+    public Adult(Player p1, Parser parser) {
+        super(p1, parser, 200);
     }
 
     public void play() {
@@ -14,10 +21,9 @@ public class Old extends Game {
     public boolean processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
-            case WORK -> System.out.println("You are too old to work");
+            case WORK -> super.work(5);
             default -> super.processCommand(command);
         }
         return true;
     }
-
 }
