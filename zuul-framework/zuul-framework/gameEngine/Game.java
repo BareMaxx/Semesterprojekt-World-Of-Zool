@@ -6,13 +6,16 @@ import commands.Parser;
 import gameplay.Room;
 import gameplay.Turns;
 import item.Item;
+import item.Book;
+import item.Key;
 import item.PurchasableItem;
 import player.Player;
 
-public class Game
-{
-    protected const String SHOP_NAME = "Shop";
+import java.util.ArrayList;
 
+public class Game {
+    protected final String SHOP_NAME = "Shop";
+    
     protected Parser parser;
     private Player p1;
     protected Turns turns;
@@ -43,8 +46,8 @@ public class Game
             case TAKE -> turns.decTurns();
             case WORK -> /*TODO: needs amount*/ turns.decTurns();
             case USE -> {use(command); turns.decTurns();}
-            case BUY -> {buy(command); turns.decTurns();}
-            case LOOK -> look();
+            case BUY -> buy(command);
+            case LOOK -> look(command);
             case SIT -> turns.decTurns();
             case TURNS -> System.out.println("You have " + turns.getTurns() + " turns left");
             default -> System.out.println("I don't know what you mean...");
@@ -105,7 +108,7 @@ public class Game
 
             String s = command.getSecondWord();
 
-            Item i = p1.getCurrentRoom().getItem(s);
+            PurchasableItem i = p1.getCurrentRoom().getItem(s);
             if (i != null) {
                 if (p1.getMoney() >= i.getPrice()) {
                     p1.addInventoryItem(i);
@@ -128,8 +131,8 @@ public class Game
                 System.out.println("You can't focus on anything in particular");
             } else {
                 System.out.println("You take a closer look at your surroundings\nYou notice:");
-                ArrayList<Item> items = getPlayer().currentRoom.items;
-                ArrayList<Item> objects = getPlayer().currentRoom.objects;
+                /*ArrayList<Item> items = getPlayer().getCurrentRoom().items;
+                ArrayList<Item> objects = getPlayer().getCurrentRoom().objects;
                 if (items.isEmpty() && objects.isEmpty()) {
                     System.out.println("\tnothing");
                 } else {
@@ -139,7 +142,7 @@ public class Game
                     for (Item o : objects) {
                         System.out.println("\t" + o.getName());
                     }
-                }
+                }*/
             }
         }
     }
