@@ -4,7 +4,7 @@ import java.util.Random;
 public class RandomEngine {
      private Random randomEngine;
 
-     RandomEngine() {
+     public RandomEngine() {
           //Using current system time as seed for the random number generator
           randomEngine = new Random(System.currentTimeMillis());
      }
