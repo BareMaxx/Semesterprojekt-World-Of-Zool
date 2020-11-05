@@ -34,7 +34,7 @@ public class Game
             case USE -> turns.decTurns();
             case BUY -> {buy(command); turns.decTurns();}
             case LOOK -> look();
-            case SIT -> {sit() turns.decTurns();}
+            case SIT -> {sit(); turns.decTurns();}
             case UNKNOWN -> System.out.println("I don't know what you mean...");
             default -> System.out.println("You can't do that at the current stage");
         }
