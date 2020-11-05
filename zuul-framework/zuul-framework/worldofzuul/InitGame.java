@@ -31,7 +31,6 @@ public class InitGame {
     private void createRooms(Player p1) {
         Room home, work, shop, school, hospital, outside;
 
-        // changed all the names to lowercase to fit with exit names and keytype names.
         outside = new Room("outside", "outside", false);
         home = new Room("home", "at home", false);
         work = new Room("work", "at work", true);
@@ -58,10 +57,6 @@ public class InitGame {
         shop.setItem(b1);
         shop.setItem(b2);
         shop.setItem(b3);
-
-        //bought key to test unlocking doors, price is wonky bc I didn't override it in
-        //Key workKey = new Key("workKey", 500, "work");
-        //shop.setItem(workKey);
 
         p1.setCurrentRoom(home);
     }

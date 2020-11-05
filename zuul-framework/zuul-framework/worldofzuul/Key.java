@@ -7,7 +7,7 @@ public class Key extends Item{
 
     Key(String name, int price, String keyType)
     {
-        super(name, "key");
+        super(name);
         this.price = price;
         this.keyType = keyType;
     }
