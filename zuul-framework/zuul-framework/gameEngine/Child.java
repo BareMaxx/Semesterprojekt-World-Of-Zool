@@ -53,7 +53,7 @@ public class Child extends Game {
             Item item = inventory.get(i);
             if (item instanceof Book) {
                 hasBook = true;
-                int bookKnowledgePoints = ((Book)item).getKnowledgePoints();
+                int bookKnowledgePoints = ((Book)item).getKNOWLEDGEPOINTS();
                 super.getPlayer().incKnowledge(bookKnowledgePoints);
                 super.getPlayer().removeInventoryItem(item);
                 System.out.println("You read a book that gave you " + bookKnowledgePoints + " knowledge points");

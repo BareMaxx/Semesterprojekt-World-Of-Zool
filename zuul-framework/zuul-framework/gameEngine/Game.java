@@ -11,8 +11,6 @@ import item.Key;
 import item.Book;
 import player.Player;
 
-import java.util.ArrayList;
-
 public class Game {
     protected final String SHOP_NAME = "shop";
     
@@ -133,7 +131,7 @@ public class Game {
                         //alternatively, using a book is the same as reading it
                         }
                     else if (i instanceof Key) {
-                        Room room = player.getCurrentRoom().getExit(((Key)i).getKeyType());
+                        Room room = player.getCurrentRoom().getExit(((Key)i).getKEYTYPE());
 
                         if (room == null) {
                             System.out.println("You can't use that here.");

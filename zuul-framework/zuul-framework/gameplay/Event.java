@@ -6,21 +6,21 @@ public class Event {
 
     private String name;
     private String description;
-    private final int probabilityOfSuccess;   // (probability of the event being triggered)
+    private final int PROBABILITYOFSUCCESS;   // (probability of the event being triggered)
     private RandomEngine randomEngine;
     private Player player;
 
     Event(String name, int probabilityOfSuccess, Player player)
     {
         this.name = name;
-        this.probabilityOfSuccess = probabilityOfSuccess;
+        this.PROBABILITYOFSUCCESS = probabilityOfSuccess;
         randomEngine = new RandomEngine();
         this.player = player;
     }
 
     public void runEvent()
     {
-        if (randomEngine.getOutcome(probabilityOfSuccess))
+        if (randomEngine.getOutcome(PROBABILITYOFSUCCESS))
             this.player.setAlive(false);
     }
 
@@ -36,7 +36,7 @@ public class Event {
         this.description = description;
     }
 
-    public int getProbabilityOfSuccess() {
-        return probabilityOfSuccess;
+    public int getPROBABILITYOFSUCCESS() {
+        return PROBABILITYOFSUCCESS;
     }
 }

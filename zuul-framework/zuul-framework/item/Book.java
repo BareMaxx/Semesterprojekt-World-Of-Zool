@@ -2,15 +2,15 @@ package item;
 
 public class Book extends PurchasableItem {
 
-    private final int knowledgePoints;
+    private final int KNOWLEDGEPOINTS;
 
     public Book(String name, int price, int knowledgePoints) {
         super(price);
         this.name = name;
-        this.knowledgePoints = knowledgePoints;
+        this.KNOWLEDGEPOINTS = knowledgePoints;
     }
 
-    public int getKnowledgePoints() {
-        return knowledgePoints;
+    public int getKNOWLEDGEPOINTS() {
+        return KNOWLEDGEPOINTS;
     }
 }
