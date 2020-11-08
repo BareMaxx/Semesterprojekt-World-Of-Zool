@@ -40,8 +40,6 @@ public class Game {
             case AGE -> System.out.println("You are " + player.getAge() + " years old.");
             case INVENTORY -> player.inventoryPrinter();
             case MONEY -> System.out.println("You have " + player.getMoney() + " gold");
-            case TAKE -> turns.decTurns();
-            //case WORK -> {}
             case USE -> {use(command); turns.decTurns();}
             case BUY -> {buy(command); turns.decTurns();}
             case LOOK -> look(command);
