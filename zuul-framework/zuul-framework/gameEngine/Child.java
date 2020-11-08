@@ -26,15 +26,11 @@ public class Child extends Game {
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
             case MONEY -> System.out.println("You have " + super.getPlayer().getMoney() + " gold");
-            case READ -> {readBook(); super.turns.decTurns(10);}
+            case READ -> {readBook();}
             default -> super.processCommand(command);
         }
         return true;
     }
-
-    //TODO: Player inventory removeItem method
-    //Todo: Player inventory should be of Item type and not String
-    //TODO: Player needs knowledgePoints attribute, and mutator and accessor methods
 
     // Read the first book in your inventory, if any
     public void readBook() {
@@ -63,5 +59,6 @@ public class Child extends Game {
         if (!hasBook) {
             System.out.println("You do not have a book in your inventory");
         }
+        super.turns.decTurns(10);
     }
 }

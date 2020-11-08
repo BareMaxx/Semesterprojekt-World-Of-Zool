@@ -12,7 +12,7 @@ public class Player {
     private FamilyEconomy familyEconomy;
     private ArrayList<Item> inventory = new ArrayList<>();
     private int money = 0;
-    private int age = 0;
+    private int age = 1;
     private String occupation;
     private String stage;
     private boolean alive = true;

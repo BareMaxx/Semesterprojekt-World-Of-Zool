@@ -2,6 +2,7 @@ package gameplay;
 
 public class Turns {
     private int turns;
+    private int counter = 0;
 
     public Turns(int turns) {
         this.turns = turns;
@@ -20,6 +21,15 @@ public class Turns {
     }
 
     public void decTurns() {
-        this.turns--;
+        --this.turns;
+        incCounter();
+    }
+
+    public int getCounter() {
+        return this.counter;
+    }
+
+    private void incCounter() {
+        this.counter++;
     }
 }
