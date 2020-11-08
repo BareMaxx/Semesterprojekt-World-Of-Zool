@@ -132,6 +132,7 @@ public class Game {
         System.out.println("You made " + i);
         randomSickEvent(player.getSickChance() * 2);
         randomDmgEvent(player.getDmgChance() * 2);
+        turns.decTurns(10);
     }
     
     private void sleep() {
