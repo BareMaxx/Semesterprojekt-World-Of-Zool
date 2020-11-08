@@ -27,6 +27,7 @@ public class Child extends Game {
         switch(commandWord) {
             case MONEY -> System.out.println("You have " + super.getPlayer().getMoney() + " gold");
             case READ -> {readBook(); super.turns.decTurns(10);}
+            case WORK -> work(7);
             default -> super.processCommand(command);
         }
         return true;
@@ -38,12 +39,10 @@ public class Child extends Game {
 
     // Read the first book in your inventory, if any
     public void readBook() {
-        if(!super.getPlayer().getCurrentRoom().getName().equals("school")){
-            System.out.println("You have to be at school to read");
+        if(!inPlace("school"))
             return;
-        }
-        if(!super.getPlayer().getCurrentRoom().isSitting()){
-            System.out.println("You have to sit down to read");
+        if(getPlayer().getSickness()!=null){
+            System.out.println("You can't study while sick");
             return;
         }
 

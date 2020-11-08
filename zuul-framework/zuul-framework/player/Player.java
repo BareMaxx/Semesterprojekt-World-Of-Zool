@@ -1,6 +1,8 @@
 
 package player;
 
+import gameplay.Sickness;
+import gameplay.WorkDMG;
 import item.Item;
 import gameplay.Room;
 
@@ -19,6 +21,10 @@ public class Player {
     private int score = 0;
     private int knowledge = 0;
     private Room currentRoom;
+    private Sickness sickness = null;
+    private WorkDMG dmg = null;
+    private int sickChance = 0;
+    private int dmgChance = 0;
 
     public Country getCountry() {
         return country;
@@ -44,7 +50,9 @@ public class Player {
     public void addInventoryItem(Item s){
         inventory.add(s);
     }
-    public void removeInventoryItem(Item i){inventory.remove(i);}
+    public void removeInventoryItem(Item i){
+        inventory.remove(i);
+    }
     public ArrayList<Item> getInventory() {
         return inventory;
     }
@@ -115,4 +123,39 @@ public class Player {
     public void setCurrentRoom(Room r){
         currentRoom = r;
     }
+
+    public void setSickness(Sickness sickness) {
+        this.sickness = sickness;
+    }
+    public Sickness getSickness() {
+        return sickness;
+    }
+
+    public void setDmg(WorkDMG dmg) {
+        this.dmg = dmg;
+    }
+    public WorkDMG getDmg() {
+        return dmg;
+    }
+
+    public int getSickChance() {
+        return sickChance;
+    }
+    public void incSickChance(int i) {
+        sickChance = sickChance + i;
+    }
+    public void decSickChance(int i) {
+        sickChance = sickChance - i;
+    }
+
+    public int getDmgChance() {
+        return dmgChance;
+    }
+    public void incDmgChance(int i) {
+        dmgChance = dmgChance + i;
+    }
+    public void decDmgChance(int i) {
+        dmgChance = dmgChance - i;
+    }
+
 }

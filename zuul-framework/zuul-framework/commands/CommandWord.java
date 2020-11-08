@@ -6,7 +6,7 @@ public enum CommandWord
     TAKE("take"), LOOK("look"), INVENTORY("inventory"),
     MONEY("money"), SIT("sit"), WORK("work"), READ("read"),
     BUY("buy"), USE("use"), AGE("age"), TURNS("turns"), STAND("stand"),
-    SLEEP("sleep");
+    SLEEP("sleep"), HEAL("heal"), SICK("sick");
 
     private String commandString;
     

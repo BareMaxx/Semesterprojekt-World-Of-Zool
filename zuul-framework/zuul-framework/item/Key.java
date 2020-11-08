@@ -3,9 +3,10 @@ package item;
 public class Key extends Item {
     private final String KEYTYPE;   // keyType is effectively a room name
 
-    Key(int price, String keyType) {
+    public Key(int price, String keyType, String name) {
         super();
-        this.name = "Key to " + keyType;
+        //this.name = "Key to " + keyType;
+        this.name = name;
         this.KEYTYPE = keyType;
     }
 

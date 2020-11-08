@@ -103,5 +103,8 @@ public class Room
         }
         else { System.out.println("You can't do that here."); }
     }
+    public void lock(){
+        this.locked = true;
+    }
 }
 

@@ -10,5 +10,7 @@ public enum FamilyEconomy {
     FamilyEconomy(int moneyMulti){
         this.moneyMulti=moneyMulti;
     }
-    public int getMoneyMulti(){return moneyMulti;}
+    public int getMoneyMulti(){
+        return moneyMulti;
+    }
 }

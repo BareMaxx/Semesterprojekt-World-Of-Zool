@@ -4,12 +4,13 @@ import commands.Command;
 import commands.CommandWord;
 import commands.Parser;
 import gameplay.Room;
+import gameplay.Sickness;
 import gameplay.Turns;
-import item.Item;
-import item.PurchasableItem;
-import item.Key;
-import item.Book;
+import gameplay.WorkDMG;
+import item.*;
 import player.Player;
+
+import javax.sound.midi.Soundbank;
 
 public class Game {
     protected final String SHOP_NAME = "shop";
@@ -50,40 +51,97 @@ public class Game {
             case SIT -> {sit(); turns.decTurns();}
             case STAND -> {stand(); turns.decTurns();}
             case SLEEP -> sleep();
+            case HEAL -> heal();
+            case SICK -> sick();
             case UNKNOWN -> System.out.println("I don't know what you mean...");
             default -> System.out.println("You can't do that at the current stage");
         }
         checkTurns();
+        endTurn();
         return wantToQuit;
     }
 
-    public void work(int econStage) {
-        if (!player.getCurrentRoom().getName().equals("work")) {
-            System.out.println("You can't work here");
+    private void endTurn(){
+        if(player.getSickness()!=null) {
+            player.getSickness().decTurnLimit(1);
+            if(player.getSickness().getTurnLimit() == 0)
+                player.setAlive(false);
+        }
+    }
+
+    private void sick(){
+        if(player.getSickness()==null)
+            System.out.println("You are healthy");
+        else
+            System.out.println("You have been infected with " + player.getSickness().getName() + " you have " +
+                    (player.getSickness().getTurnLimit() - 1) + " turns to get to the hospital and pay " +
+                    player.getSickness().getPrice() + " gold to get healthy or you will die!");
+    }
+
+    private void heal(){
+        if(!inPlace("hospital"))
             return;
+        if(player.getSickness() != null){
+            if(player.getMoney()>=player.getSickness().getPrice()){
+                player.decMoney(player.getSickness().getPrice());
+                player.setSickness(null);
+                System.out.println("You have been healed");
+                player.getCurrentRoom().lock();
+            }
+            else
+                System.out.println("You don't have enough money to do that.");
+        }
+        else if (player.getDmg() != null){
+            if(player.getMoney()>=player.getDmg().getPrice()){
+                player.decMoney(player.getDmg().getPrice());
+                player.setDmg(null);
+                System.out.println("You have been healed");
+                player.getCurrentRoom().lock();
+            }
+            else
+                System.out.println("You don't have enough money to do that.");
+        }
+        else
+            System.out.println("There is nothing to do here. You are healthy. Leave!");
+    }
+
+    public boolean inPlace(String room){
+        if (!player.getCurrentRoom().getName().equals(room)) {
+            System.out.println("You have to be at " + room + " to do that");
+            return false;
         }
         if (!player.getCurrentRoom().isSitting()) {
             System.out.println("You have to sit down");
-            return;
+            return false;
         }
+        return true;
+    }
+
+    public void work(int econStage) {
+        if(!inPlace("work"))
+            return;
 
         //todo turns? age?
         //todo event accident
+        if(player.getSickness() != null){
+            System.out.println("You can't work while sick");
+            return;
+        }
+        if(player.getDmg() != null){
+            System.out.println("You can't work while injured");
+            return;
+        }
         int i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
                 player.getFamilyEconomy().getMoneyMulti() / econStage;
         player.incMoney(i);
         System.out.println("You made " + i);
+        randomSickEvent(player.getSickChance()*2);
+        randomDmgEvent(player.getDmgChance()*2);
     }
     
     private void sleep() {
-        if (!player.getCurrentRoom().getName().equals("home")) {
-            System.out.println("You have to be at home to sleep");
+        if(!inPlace("home"))
             return;
-        }
-        if (!player.getCurrentRoom().isSitting()) {
-            System.out.println("You have to be sitting to sleep");
-            return;
-        }
         switch (player.getStage()) {
             case "child" -> {
                 player.setStage("adult");
@@ -128,6 +186,7 @@ public class Game {
                 if (i.getName().equals(item)) {
                     if  (i instanceof Book) {
                         System.out.println("You can't use a book, read it instead.");
+                        return;
                         //alternatively, using a book is the same as reading it
                         }
                     else if (i instanceof Key) {
@@ -135,21 +194,42 @@ public class Game {
 
                         if (room == null) {
                             System.out.println("You can't use that here.");
+                            return;
                         }
                         else if (room.isLocked()){
                             room.unlock((Key)i);
+                            player.removeInventoryItem(i);
+                            return;
                             //player.removeInventoryItem(i);
                             //todo fix this so key gets removed
                         }
                         else {
                             System.out.println("This room is not locked. How did you get that key?");
+                            return;
+                        }
+                    }
+                    else if (i instanceof Protectors){
+                        switch (((Protectors) i).getUseCase()){
+                            case "sickness" -> {
+                                player.decSickChance(((Protectors) i).getModifier());
+                                player.removeInventoryItem(i);
+                                System.out.println("You are now less likely to get sick");
+                                return;
+                            }
+                            case "dmg" -> {
+                                player.decDmgChance(((Protectors) i).getModifier());
+                                player.removeInventoryItem(i);
+                                System.out.println("You are now less likely to get injured");
+                                return;
+                            }
                         }
                     }
                 }
-                else {
+                /*else {
                     System.out.println("You have no item of that name.");
-                }
+                }*/
             }
+            System.out.println("You have no item of that name.");
         }
 
         if (player.getInventory().isEmpty()) {
@@ -177,6 +257,7 @@ public class Game {
 
                     System.out.println("You bought " + s);
                     player.decMoney(((PurchasableItem)i).getPrice());
+                    randomSickEvent(player.getSickChance()*2);
                 }
             }
             else
@@ -188,7 +269,17 @@ public class Game {
     private void look(Command command) {
         if (player.getCurrentRoom().getName().equals(SHOP_NAME)) {
             player.getCurrentRoom().printStock();
-        } else {
+        }
+        else if (player.getCurrentRoom().getName().equals("hospital")) {
+            if(player.getSickness() != null)
+                System.out.println("You have " + player.getSickness().getName() + ", it will cost you " +
+                    player.getSickness().getPrice() + " to get healed. Type heal to get healed");
+            else if (player.getDmg() != null)
+                System.out.println("It will cost you " + player.getDmg().getPrice() + " to get healed. " +
+                        "Type heal to get healed");
+            else
+                System.out.println("There is nothing to do here. You are healthy. Leave!");
+        }else {
             if (command.hasSecondWord()) {
                 System.out.println("You can't focus on anything in particular");
             } else {
@@ -242,7 +333,19 @@ public class Game {
             player.setCurrentRoom(nextRoom);
             System.out.println(player.getCurrentRoom().getLongDescription());
             turns.decTurns();
+            randomSickEvent(player.getSickChance());
+            randomDmgEvent(player.getDmgChance());
         }
+    }
+    private void randomSickEvent(int probability){
+        Sickness s = new Sickness(probability, player);
+        if(s.name != null)
+            player.setSickness(s);
+    }
+    private void randomDmgEvent(int probability){
+        WorkDMG dmg = new WorkDMG(probability, player);
+        if(dmg.name != null)
+            player.setDmg(dmg);
     }
 
     private boolean quit(Command command) {
@@ -263,8 +366,10 @@ public class Game {
     public void checkTurns() {
         if (player.getStage().equals("child") && turns.getTurns() <= 0) {
             player.setStage("adult");
+            System.out.println("You grew up to be an adult");
         } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
             player.setStage("old");
+            System.out.println("You grew up to be old");
         }
     }
 }
