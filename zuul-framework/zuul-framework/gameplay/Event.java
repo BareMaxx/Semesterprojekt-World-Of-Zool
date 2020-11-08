@@ -4,24 +4,28 @@ import player.Player;
 
 public class Event {
 
-    private String name;
+    public String name = null;
     private String description;
-    private final int probabilityOfSuccess;   // (probability of the event being triggered)
-    private RandomEngine randomEngine;
-    private Player player;
+    private final int PROBABILITYOFSUCCESS;   // (probability of the event being triggered)
+    public RandomEngine randomEngine;
+    public Player player;
 
-    Event(String name, int probabilityOfSuccess, Player player)
+    //Event(String name, int probabilityOfSuccess, Player player)
+    Event(int probabilityOfSuccess, Player player)
     {
-        this.name = name;
-        this.probabilityOfSuccess = probabilityOfSuccess;
+        //this.name = name;
+        this.PROBABILITYOFSUCCESS = probabilityOfSuccess;
         randomEngine = new RandomEngine();
         this.player = player;
     }
 
-    public void runEvent()
+    //public void runEvent()
+    public boolean runEvent()
     {
-        if (randomEngine.getOutcome(probabilityOfSuccess))
-            this.player.setAlive(false);
+        if (randomEngine.getOutcome(PROBABILITYOFSUCCESS, 100))
+            //this.player.setAlive(false);
+            return true;
+        return false;
     }
 
     public String getName() {
@@ -36,7 +40,7 @@ public class Event {
         this.description = description;
     }
 
-    public int getProbabilityOfSuccess() {
-        return probabilityOfSuccess;
+    public int getPROBABILITYOFSUCCESS() {
+        return PROBABILITYOFSUCCESS;
     }
 }

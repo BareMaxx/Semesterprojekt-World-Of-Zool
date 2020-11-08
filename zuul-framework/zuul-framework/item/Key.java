@@ -3,13 +3,14 @@ package item;
 public class Key extends Item {
     private final String KEYTYPE;   // keyType is effectively a room name
 
-    Key(int price, String KEYTYPE) {
+    public Key(int price, String keyType, String name) {
         super();
-        this.name = "Key to " + KEYTYPE;
-        this.KEYTYPE = KEYTYPE;
+        //this.name = "Key to " + keyType;
+        this.name = name;
+        this.KEYTYPE = keyType;
     }
 
-    public String getKeyType() {return this.KEYTYPE;}
+    public String getKEYTYPE() {return this.KEYTYPE;}
     public boolean canUnlock(String roomName)
     {
         return (this.KEYTYPE.equals(roomName));

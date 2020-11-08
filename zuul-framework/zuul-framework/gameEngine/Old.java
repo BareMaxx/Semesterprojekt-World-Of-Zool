@@ -20,7 +20,7 @@ public class Old extends Game {
     public boolean processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
-            case WORK -> System.out.println("You are too old to work");
+            //case WORK -> System.out.println("You are too old to work");
             default -> super.processCommand(command);
         }
         return true;

@@ -26,20 +26,23 @@ public class Child extends Game {
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
             case MONEY -> System.out.println("You have " + super.getPlayer().getMoney() + " gold");
-            case READ -> {readBook();}
+            case READ -> {readBook(); super.turns.decTurns(10);}
+            case WORK -> work(7);
             default -> super.processCommand(command);
         }
         return true;
     }
 
+    //TODO: Player inventory removeItem method
+    //Todo: Player inventory should be of Item type and not String
+    //TODO: Player needs knowledgePoints attribute, and mutator and accessor methods
+
     // Read the first book in your inventory, if any
     public void readBook() {
-        if(!super.getPlayer().getCurrentRoom().getName().equals("school")){
-            System.out.println("You have to be at school to read");
+        if(!inPlace("school"))
             return;
-        }
-        if(!super.getPlayer().getCurrentRoom().isSitting()){
-            System.out.println("You have to sit down to read");
+        if(getPlayer().getSickness()!=null){
+            System.out.println("You can't study while sick");
             return;
         }
 
@@ -49,7 +52,7 @@ public class Child extends Game {
             Item item = inventory.get(i);
             if (item instanceof Book) {
                 hasBook = true;
-                int bookKnowledgePoints = ((Book)item).getKnowledgePoints();
+                int bookKnowledgePoints = ((Book)item).getKNOWLEDGEPOINTS();
                 super.getPlayer().incKnowledge(bookKnowledgePoints);
                 super.getPlayer().removeInventoryItem(item);
                 System.out.println("You read a book that gave you " + bookKnowledgePoints + " knowledge points");
@@ -59,6 +62,5 @@ public class Child extends Game {
         if (!hasBook) {
             System.out.println("You do not have a book in your inventory");
         }
-        super.turns.decTurns(10);
     }
 }
