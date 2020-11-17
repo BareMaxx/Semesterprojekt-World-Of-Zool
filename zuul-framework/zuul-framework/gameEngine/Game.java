@@ -133,6 +133,7 @@ public class Game {
         randomSickEvent(player.getSickChance() * 2);
         randomDmgEvent(player.getDmgChance() * 2);
         turns.decTurns(10);
+        checkTurns();
     }
     
     private void sleep() {
@@ -353,8 +354,22 @@ public class Game {
     public Player getPlayer() {
         return player;
     }
-
     public void checkTurns() {
+        if (player.getStage().equals("child")) {
+            System.out.println("yeet " + turns.getCounter());
+            if (turns.getTurns() <= 0) {
+                player.setStage("adult");
+            } else if (turns.getCounter() / 3 > 0) {
+                /*
+                    60 turns and 18 years -> 60 / 18 = 3.3, each 3 turns => inc age with four to be sure to reach 18 or above
+                */
+                int ageMultiplier = turns.getCounter() / 3;
+                System.out.println("yeet2 " + turns.getCounter());
+                player.incAge(ageMultiplier);
+                turns.setCounter();
+                System.out.println("bøsse counter" + turns.getCounter());
+            }
+        }
         if (player.getStage().equals("child") && turns.getTurns() <= 0) {
             player.setStage("adult");
             System.out.println("You grew up to be an adult");
@@ -363,4 +378,14 @@ public class Game {
             System.out.println("You grew up to be old");
         }
     }
+    /*
+    public void checkTurns() {
+        if (player.getStage().equals("child") && turns.getTurns() <= 0) {
+            player.setStage("adult");
+            System.out.println("You grew up to be an adult");
+        } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
+            player.setStage("old");
+            System.out.println("You grew up to be old");
+        }
+    }*/
 }

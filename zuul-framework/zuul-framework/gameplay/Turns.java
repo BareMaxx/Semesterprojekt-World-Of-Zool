@@ -18,6 +18,7 @@ public class Turns {
 
     public void decTurns(int turns) {
         this.turns -= turns;
+        incCounter(turns);
     }
 
     public void decTurns() {
@@ -31,5 +32,19 @@ public class Turns {
 
     private void incCounter() {
         this.counter++;
+    }
+    private void incCounter(int i) {this.counter += i;}
+
+    public void setCounter() {
+        int j = 3 * (this.counter / 3);
+        System.out.println("Counter: " + j);
+        if (j > 0) {
+            this.counter = this.counter - j;
+            System.out.println("Counter2: " + this.counter);
+        } else {
+            this.counter = 0;
+            System.out.println("Counter3: " + counter);
+        }
+
     }
 }
