@@ -1,5 +1,7 @@
 package item;
 
+import player.Player;
+
 public class Item {
 
     public int ID;
@@ -15,4 +17,6 @@ public class Item {
     public String getName() {
         return name;
     }
+
+    public void use(Player player) { }
 }

@@ -184,50 +184,9 @@ public class Game {
 
             for (Item i: player.getInventory()) {
                 if (i.getName().equals(item)) {
-                    if  (i instanceof Book) {
-                        System.out.println("You can't use a book, read it instead.");
-                        return;
-                        //alternatively, using a book is the same as reading it
-                        }
-                    else if (i instanceof Key) {
-                        Room room = player.getCurrentRoom().getExit(((Key)i).getKEYTYPE());
-
-                        if (room == null) {
-                            System.out.println("You can't use that here.");
-                            return;
-                        }
-                        else if (room.isLocked()){
-                            room.unlock((Key)i);
-                            player.removeInventoryItem(i);
-                            return;
-                            //player.removeInventoryItem(i);
-                            //todo fix this so key gets removed
-                        }
-                        else {
-                            System.out.println("This room is not locked. How did you get that key?");
-                            return;
-                        }
-                    }
-                    else if (i instanceof Protectors){
-                        switch (((Protectors) i).getUseCase()){
-                            case "sickness" -> {
-                                player.decSickChance(((Protectors) i).getModifier());
-                                player.removeInventoryItem(i);
-                                System.out.println("You are now less likely to get sick");
-                                return;
-                            }
-                            case "dmg" -> {
-                                player.decDmgChance(((Protectors) i).getModifier());
-                                player.removeInventoryItem(i);
-                                System.out.println("You are now less likely to get injured");
-                                return;
-                            }
-                        }
-                    }
+                    i.use(player);
+                    return;
                 }
-                /*else {
-                    System.out.println("You have no item of that name.");
-                }*/
             }
             System.out.println("You have no item of that name.");
         }

@@ -1,5 +1,7 @@
 package item;
 
+import player.Player;
+
 public class Book extends PurchasableItem {
 
     private final int KNOWLEDGEPOINTS;
@@ -12,5 +14,10 @@ public class Book extends PurchasableItem {
 
     public int getKNOWLEDGEPOINTS() {
         return KNOWLEDGEPOINTS;
+    }
+
+    @Override
+    public void use(Player player) {
+        System.out.println("You can't use a book, read it instead.");
     }
 }
