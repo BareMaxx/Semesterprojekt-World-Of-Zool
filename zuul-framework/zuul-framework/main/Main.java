@@ -7,23 +7,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Main {
 
     public static void main(String[] args) {
         /*
         Game game = new Game();
         game.play();
         */
-        //Run r = new Run();
+        Run r = new Run();
+        r.GameLoop();
 
-        launch(args);
-    }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/outside.fxml"));
-        primaryStage.setTitle("Outside");
-        primaryStage.setScene(new Scene(root, 1280 , 720));
-        primaryStage.show();
     }
 }
