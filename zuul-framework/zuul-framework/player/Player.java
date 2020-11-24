@@ -1,4 +1,3 @@
-
 package player;
 
 import gameplay.Sickness;

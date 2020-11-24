@@ -1,5 +1,7 @@
 package item;
 
+import player.Player;
+
 public class Protectors extends PurchasableItem {
     private final int modifier;
     private final String useCase;
@@ -17,5 +19,21 @@ public class Protectors extends PurchasableItem {
 
     public String getUseCase() {
         return useCase;
+    }
+
+    @Override
+    public void use(Player player) {
+        switch (getUseCase()) {
+            case "sickness" -> {
+                player.decSickChance(getModifier());
+                player.removeInventoryItem(this);
+                System.out.println("You are now less likely to get sick");
+            }
+            case "dmg" -> {
+                player.decDmgChance(getModifier());
+                player.removeInventoryItem(this);
+                System.out.println("You are now less likely to get injured");
+            }
+        }
     }
 }
