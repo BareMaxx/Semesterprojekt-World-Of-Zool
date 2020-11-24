@@ -42,7 +42,7 @@ public class Game {
             case AGE -> System.out.println("You are " + player.getAge() + " years old.");
             case INVENTORY -> player.inventoryPrinter();
             case MONEY -> System.out.println("You have " + player.getMoney() + " gold");
-            case TAKE -> turns.decTurns();
+            //case TAKE -> turns.decTurns();
             //case WORK -> {}
             case USE -> {use(command); turns.decTurns();}
             case BUY -> {buy(command); turns.decTurns();}
@@ -120,9 +120,6 @@ public class Game {
     public void work(int econStage) {
         if(!inPlace("work"))
             return;
-
-        //todo turns? age?
-        //todo event accident
         if(player.getSickness() != null){
             System.out.println("You can't work while sick");
             return;
@@ -137,11 +134,14 @@ public class Game {
         System.out.println("You made " + i);
         randomSickEvent(player.getSickChance()*2);
         randomDmgEvent(player.getDmgChance()*2);
+        turns.decTurns(10);
+        checkTurns();
     }
     
     private void sleep() {
         if(!inPlace("home"))
             return;
+        turns.decTurns(turns.getTurns());
         switch (player.getStage()) {
             case "child" -> {
                 player.setStage("adult");
@@ -184,9 +184,50 @@ public class Game {
 
             for (Item i: player.getInventory()) {
                 if (i.getName().equals(item)) {
-                    i.use(player);
-                    return;
+                    if  (i instanceof Book) {
+                        System.out.println("You can't use a book, read it instead.");
+                        return;
+                        //alternatively, using a book is the same as reading it
+                        }
+                    else if (i instanceof Key) {
+                        Room room = player.getCurrentRoom().getExit(((Key)i).getKEYTYPE());
+
+                        if (room == null) {
+                            System.out.println("You can't use that here.");
+                            return;
+                        }
+                        else if (room.isLocked()){
+                            room.unlock((Key)i);
+                            player.removeInventoryItem(i);
+                            return;
+                            //player.removeInventoryItem(i);
+                            //todo fix this so key gets removed
+                        }
+                        else {
+                            System.out.println("This room is not locked. How did you get that key?");
+                            return;
+                        }
+                    }
+                    else if (i instanceof Protectors){
+                        switch (((Protectors) i).getUseCase()){
+                            case "sickness" -> {
+                                player.decSickChance(((Protectors) i).getModifier());
+                                player.removeInventoryItem(i);
+                                System.out.println("You are now less likely to get sick");
+                                return;
+                            }
+                            case "dmg" -> {
+                                player.decDmgChance(((Protectors) i).getModifier());
+                                player.removeInventoryItem(i);
+                                System.out.println("You are now less likely to get injured");
+                                return;
+                            }
+                        }
+                    }
                 }
+                /*else {
+                    System.out.println("You have no item of that name.");
+                }*/
             }
             System.out.println("You have no item of that name.");
         }
@@ -323,12 +364,21 @@ public class Game {
     }
 
     public void checkTurns() {
-        if (player.getStage().equals("child") && turns.getTurns() <= 0) {
-            player.setStage("adult");
-            System.out.println("You grew up to be an adult");
-        } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
-            player.setStage("old");
-            System.out.println("You grew up to be old");
+        if (turns.getCounter() / 3 > 0) {
+            //60 turns => 21 years, when getting 1 year older every three turns
+            int ageMultiplier = turns.getCounter() / 3;
+            player.incAge(ageMultiplier);
+            if(turns.getTurns() != 0) {
+                turns.setCounter();
+            } else {
+                turns.setCounter(0);
+            }
+        } else {
+            if (player.getStage().equals("child") && turns.getTurns() <= 0) {
+                player.setStage("adult");
+            } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
+                player.setStage("old");
+            }
         }
     }
 }
