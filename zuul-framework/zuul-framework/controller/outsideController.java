@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 public class outsideController {
@@ -28,32 +29,12 @@ public class outsideController {
     private Text hospitalText;
 
     @FXML
+    void goRoom(MouseEvent event) {
+
+    }
+
+    @FXML
     void darkentext(MouseEvent event) {
-
-    }
-
-    @FXML
-    void goHome(MouseEvent event) {
-
-    }
-
-    @FXML
-    void goHospital(ContextMenuEvent event) {
-
-    }
-
-    @FXML
-    void goSchool(MouseEvent event) {
-
-    }
-
-    @FXML
-    void goShop(MouseEvent event) {
-
-    }
-
-    @FXML
-    void goWork(MouseEvent event) {
 
     }
 
