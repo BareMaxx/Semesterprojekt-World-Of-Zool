@@ -358,24 +358,17 @@ public class Game {
         if (turns.getCounter() / 3 > 0) {
             //60 turns => 21 years, when getting 1 year older every three turns
             int ageMultiplier = turns.getCounter() / 3;
-            System.out.println("Age multiplier; " + ageMultiplier);
             player.incAge(ageMultiplier);
-            System.out.println("Turns: " + turns.getTurns());
             if(turns.getTurns() != 0) {
-                System.out.print("test");
                 turns.setCounter();
             } else {
                 turns.setCounter(0);
             }
-            System.out.println("Counter2 " + turns.getCounter());
         } else {
             if (player.getStage().equals("child") && turns.getTurns() <= 0) {
                 player.setStage("adult");
             } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
-                System.out.println("test");
                 player.setStage("old");
-            } else {
-                System.out.println("Counter " + turns.getCounter());
             }
         }
     }
