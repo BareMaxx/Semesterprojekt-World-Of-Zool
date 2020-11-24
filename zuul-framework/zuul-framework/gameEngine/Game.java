@@ -10,6 +10,8 @@ import gameplay.WorkDMG;
 import item.*;
 import player.Player;
 
+import javax.sound.midi.Soundbank;
+
 public class Game {
     protected final String SHOP_NAME = "shop";
     
@@ -40,6 +42,8 @@ public class Game {
             case AGE -> System.out.println("You are " + player.getAge() + " years old.");
             case INVENTORY -> player.inventoryPrinter();
             case MONEY -> System.out.println("You have " + player.getMoney() + " gold");
+            //case TAKE -> turns.decTurns();
+            //case WORK -> {}
             case USE -> {use(command); turns.decTurns();}
             case BUY -> {buy(command); turns.decTurns();}
             case LOOK -> look(command);
@@ -58,7 +62,7 @@ public class Game {
     }
 
     private void endTurn(){
-        if(player.getSickness()!= null) {
+        if(player.getSickness()!=null) {
             player.getSickness().decTurnLimit(1);
             if(player.getSickness().getTurnLimit() == 0)
                 player.setAlive(false);
@@ -66,7 +70,7 @@ public class Game {
     }
 
     private void sick(){
-        if(player.getSickness() == null)
+        if(player.getSickness()==null)
             System.out.println("You are healthy");
         else
             System.out.println("You have been infected with " + player.getSickness().getName() + " you have " +
@@ -78,7 +82,7 @@ public class Game {
         if(!inPlace("hospital"))
             return;
         if(player.getSickness() != null){
-            if(player.getMoney() >= player.getSickness().getPrice()){
+            if(player.getMoney()>=player.getSickness().getPrice()){
                 player.decMoney(player.getSickness().getPrice());
                 player.setSickness(null);
                 System.out.println("You have been healed");
@@ -88,7 +92,7 @@ public class Game {
                 System.out.println("You don't have enough money to do that.");
         }
         else if (player.getDmg() != null){
-            if(player.getMoney() >= player.getDmg().getPrice()){
+            if(player.getMoney()>=player.getDmg().getPrice()){
                 player.decMoney(player.getDmg().getPrice());
                 player.setDmg(null);
                 System.out.println("You have been healed");
@@ -116,7 +120,6 @@ public class Game {
     public void work(int econStage) {
         if(!inPlace("work"))
             return;
-
         if(player.getSickness() != null){
             System.out.println("You can't work while sick");
             return;
@@ -129,8 +132,8 @@ public class Game {
                 player.getFamilyEconomy().getMoneyMulti() / econStage;
         player.incMoney(i);
         System.out.println("You made " + i);
-        randomSickEvent(player.getSickChance() * 2);
-        randomDmgEvent(player.getDmgChance() * 2);
+        randomSickEvent(player.getSickChance()*2);
+        randomDmgEvent(player.getDmgChance()*2);
         turns.decTurns(10);
         checkTurns();
     }
@@ -187,16 +190,18 @@ public class Game {
                         //alternatively, using a book is the same as reading it
                         }
                     else if (i instanceof Key) {
-                        Room room = player.getCurrentRoom().getExit(((Key) i).getKEYTYPE());
+                        Room room = player.getCurrentRoom().getExit(((Key)i).getKEYTYPE());
 
                         if (room == null) {
                             System.out.println("You can't use that here.");
                             return;
                         }
                         else if (room.isLocked()){
-                            room.unlock((Key) i);
+                            room.unlock((Key)i);
                             player.removeInventoryItem(i);
                             return;
+                            //player.removeInventoryItem(i);
+                            //todo fix this so key gets removed
                         }
                         else {
                             System.out.println("This room is not locked. How did you get that key?");
@@ -220,6 +225,9 @@ public class Game {
                         }
                     }
                 }
+                /*else {
+                    System.out.println("You have no item of that name.");
+                }*/
             }
             System.out.println("You have no item of that name.");
         }
@@ -248,8 +256,8 @@ public class Game {
                     turns.decTurns();
 
                     System.out.println("You bought " + s);
-                    player.decMoney((i).getPrice());
-                    randomSickEvent(player.getSickChance() * 2);
+                    player.decMoney(((PurchasableItem)i).getPrice());
+                    randomSickEvent(player.getSickChance()*2);
                 }
             }
             else
@@ -354,6 +362,7 @@ public class Game {
     public Player getPlayer() {
         return player;
     }
+
     public void checkTurns() {
         if (turns.getCounter() / 3 > 0) {
             //60 turns => 21 years, when getting 1 year older every three turns
@@ -372,14 +381,4 @@ public class Game {
             }
         }
     }
-    /*
-    public void checkTurns() {
-        if (player.getStage().equals("child") && turns.getTurns() <= 0) {
-            player.setStage("adult");
-            System.out.println("You grew up to be an adult");
-        } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
-            player.setStage("old");
-            System.out.println("You grew up to be old");
-        }
-    }*/
 }
