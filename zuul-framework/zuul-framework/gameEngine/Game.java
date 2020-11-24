@@ -117,7 +117,6 @@ public class Game {
         if(!inPlace("work"))
             return;
 
-        //todo turns? age?
         if(player.getSickness() != null){
             System.out.println("You can't work while sick");
             return;
@@ -139,6 +138,7 @@ public class Game {
     private void sleep() {
         if(!inPlace("home"))
             return;
+        turns.decTurns(turns.getTurns());
         switch (player.getStage()) {
             case "child" -> {
                 player.setStage("adult");
@@ -355,27 +355,28 @@ public class Game {
         return player;
     }
     public void checkTurns() {
-        if (player.getStage().equals("child")) {
-            System.out.println("yeet " + turns.getCounter());
-            if (turns.getTurns() <= 0) {
-                player.setStage("adult");
-            } else if (turns.getCounter() / 3 > 0) {
-                /*
-                    60 turns and 18 years -> 60 / 18 = 3.3, each 3 turns => inc age with four to be sure to reach 18 or above
-                */
-                int ageMultiplier = turns.getCounter() / 3;
-                System.out.println("yeet2 " + turns.getCounter());
-                player.incAge(ageMultiplier);
+        if (turns.getCounter() / 3 > 0) {
+            //60 turns => 21 years, when getting 1 year older every three turns
+            int ageMultiplier = turns.getCounter() / 3;
+            System.out.println("Age multiplier; " + ageMultiplier);
+            player.incAge(ageMultiplier);
+            System.out.println("Turns: " + turns.getTurns());
+            if(turns.getTurns() != 0) {
+                System.out.print("test");
                 turns.setCounter();
-                System.out.println("bøsse counter" + turns.getCounter());
+            } else {
+                turns.setCounter(0);
             }
-        }
-        if (player.getStage().equals("child") && turns.getTurns() <= 0) {
-            player.setStage("adult");
-            System.out.println("You grew up to be an adult");
-        } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
-            player.setStage("old");
-            System.out.println("You grew up to be old");
+            System.out.println("Counter2 " + turns.getCounter());
+        } else {
+            if (player.getStage().equals("child") && turns.getTurns() <= 0) {
+                player.setStage("adult");
+            } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
+                System.out.println("test");
+                player.setStage("old");
+            } else {
+                System.out.println("Counter " + turns.getCounter());
+            }
         }
     }
     /*
