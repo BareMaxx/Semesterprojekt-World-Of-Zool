@@ -11,8 +11,11 @@ import player.Player;
 
 public class Run extends Application {
 
+    public static final int WIDTH = 1280;
+    public static final int HEIGHT = 720;
+
     private Parser parser;
-    private Player p1;
+    private Player player;
     private Child c;
     private Adult a;
     private Old o;
@@ -21,10 +24,10 @@ public class Run extends Application {
 
     public Run() {
         parser = new Parser();
-        p1 = new Player();
-        c = new Child(p1, parser);
-        a = new Adult(p1, parser);
-        o = new Old(p1, parser);
+        player = new Player();
+        c = new Child(player, parser);
+        a = new Adult(player, parser);
+        o = new Old(player, parser);
     }
 
     public void launchMenu(){
@@ -34,15 +37,25 @@ public class Run extends Application {
     public void processCommand(String input) {
         Command command = parser.getCommand(input);
 
-        switch (p1.getStage()) {
+        switch (player.getStage()) {
             case "child" -> c.processCommand(command);
             case "adult" -> a.processCommand(command);
             case "old" -> o.processCommand(command);
         }
     }
 
+    public void changeScene(String fxmlFileName) throws Exception {
+        processCommand("go " + fxmlFileName);
+
+        String fxmlFile = "/fxml/" + fxmlFileName + ".fxml";
+
+        FXMLLoader root = new FXMLLoader(getClass().getResource(fxmlFile));
+
+        primaryStage.setScene(new Scene(root.load(), WIDTH , HEIGHT));
+    }
+
     public void initGame(String country){
-        new InitGame(p1, country);
+        new InitGame(player, country);
     }
 
     @Override
@@ -55,7 +68,7 @@ public class Run extends Application {
         root.setController(controller);
 
         primaryStage.setTitle("Outside");
-        primaryStage.setScene(new Scene(root.load(), 1280 , 720));
+        primaryStage.setScene(new Scene(root.load(), WIDTH , HEIGHT));
         primaryStage.show();
     }
 }

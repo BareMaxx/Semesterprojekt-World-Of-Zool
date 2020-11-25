@@ -55,12 +55,6 @@ public class GenericController {
 
     @FXML
     void changeScene(String fxmlFileName) throws Exception{
-        r.processCommand("go " + fxmlFileName);
-
-        String fxmlFile = ("/fxml/" + fxmlFileName + ".fxml");
-
-        FXMLLoader root = new FXMLLoader(getClass().getResource(fxmlFile));
-
-        primaryStage.setScene(new Scene(root.load(), 1280 , 720));
+        r.changeScene(fxmlFileName);
     }
 }
