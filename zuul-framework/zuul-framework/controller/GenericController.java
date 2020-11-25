@@ -1,19 +1,13 @@
 package controller;
 
-import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-import javafx.event.Event;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-import player.Player;
 
 import gameEngine.Run;
 
