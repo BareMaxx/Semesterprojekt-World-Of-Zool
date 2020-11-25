@@ -4,12 +4,14 @@ import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.event.Event;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import player.Player;
 
@@ -17,10 +19,16 @@ import gameEngine.Run;
 
 public class GenericController {
 
-    Run r;
+    protected static Run r;
+    protected static Stage primaryStage;
 
-    public GenericController(Run r){
+    public GenericController(Run r, Stage primaryStage){
         this.r = r;
+        this.primaryStage = primaryStage;
+    }
+
+    public GenericController(){
+
     }
 
     @FXML
@@ -47,9 +55,17 @@ public class GenericController {
     }
 
     @FXML
-    void changeScene(EventTarget event){
+    void goOutside(MouseEvent event) throws Exception{
+        changeScene("outside");
+    }
 
-        Text text = (Text)event;
-        Window window = text.getScene().getWindow();
+    @FXML
+    void changeScene(String fxmlFileName) throws Exception{
+
+        String fxmlFile = ("/fxml/" + fxmlFileName + ".fxml");
+
+        FXMLLoader root = new FXMLLoader(getClass().getResource(fxmlFile));
+
+        primaryStage.setScene(new Scene(root.load(), 1280 , 720));
     }
 }

@@ -53,7 +53,7 @@ public class Run extends Application {
 
         this.primaryStage = primaryStage;
 
-        StartmenuController controller = new StartmenuController(this);
+        StartmenuController controller = new StartmenuController(this, primaryStage);
         FXMLLoader root = new FXMLLoader(getClass().getResource("/fxml/startmenu.fxml"));
         root.setController(controller);
 

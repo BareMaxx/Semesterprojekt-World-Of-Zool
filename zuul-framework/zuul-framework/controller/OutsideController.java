@@ -9,7 +9,12 @@ import javafx.scene.text.Text;
 import gameEngine.Run;
 
 public class OutsideController extends GenericController {
-    public OutsideController(Run r){
-        super(r);
+    public OutsideController(){
+        super();
+    }
+
+    @FXML
+    void goHome(MouseEvent event) throws Exception{
+        changeScene("home");
     }
 }

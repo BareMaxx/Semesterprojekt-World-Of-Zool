@@ -18,7 +18,7 @@
             <Image url="@../png/dkSign.png" />
          </image>
       </ImageView>
-      <Text fx:id="homeText" fill="WHITE" layoutX="464.0" layoutY="229.0" onMouseClicked="#goRoom" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="Home" textAlignment="CENTER" wrappingWidth="339.68634033203125">
+      <Text fx:id="homeText" fill="WHITE" layoutX="464.0" layoutY="229.0" onMouseClicked="#goHome" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="Home" textAlignment="CENTER" wrappingWidth="339.68634033203125">
          <font>
             <Font size="36.0" />
          </font>
