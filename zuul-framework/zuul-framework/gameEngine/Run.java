@@ -12,10 +12,12 @@ import player.Player;
 public class Run extends Application {
 
     private Parser parser;
-    Player p1;
-    Child c;
-    Adult a;
-    Old o;
+    private Player p1;
+    private Child c;
+    private Adult a;
+    private Old o;
+
+    public Stage primaryStage;
 
     public Run() {
         parser = new Parser();
@@ -33,8 +35,6 @@ public class Run extends Application {
 
         new InitGame(p1, country);
 
-
-
         /*
         while (p1.getAlive()) {
             switch (p1.getStage()) {
@@ -50,6 +50,9 @@ public class Run extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        this.primaryStage = primaryStage;
+
         StartmenuController controller = new StartmenuController(this);
         FXMLLoader root = new FXMLLoader(getClass().getResource("/fxml/startmenu.fxml"));
         root.setController(controller);

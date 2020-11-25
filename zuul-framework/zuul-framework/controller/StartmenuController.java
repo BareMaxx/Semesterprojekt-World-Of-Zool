@@ -11,10 +11,8 @@ import gameEngine.Run;
 
 public class StartmenuController extends GenericController{
 
-    Run r;
-
     public StartmenuController(Run r){
-        this.r = r;
+        super(r);
     }
 
     @FXML
@@ -24,6 +22,7 @@ public class StartmenuController extends GenericController{
         String country = text.getText();
 
         r.initGame(country);
+        changeScene(event.getTarget());
     }
 
     @FXML
