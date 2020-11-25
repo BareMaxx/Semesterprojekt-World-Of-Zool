@@ -1,5 +1,7 @@
 package gameEngine;
 
+import commands.Command;
+import commands.CommandWord;
 import commands.Parser;
 import controller.StartmenuController;
 import javafx.application.Application;
@@ -8,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import player.Player;
+
+import java.util.Scanner;
 
 public class Run extends Application {
 
@@ -29,6 +33,16 @@ public class Run extends Application {
 
     public void launchMenu(){
         launch();
+    }
+
+    public void processCommand(String input) {
+        Command command = parser.getCommand(input);
+
+        switch (p1.getStage()) {
+            case "child" -> c.processCommand(command);
+            case "adult" -> a.processCommand(command);
+            case "old" -> o.processCommand(command);
+        }
     }
 
     public void initGame(String country){

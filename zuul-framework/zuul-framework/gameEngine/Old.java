@@ -11,12 +11,6 @@ public class Old extends Game {
         super(p1, parser, 20);
     }
 
-    public void play() {
-        parser = new Parser();
-        Command command = parser.getCommand();
-        processCommand(command);
-    }
-
     public boolean processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {

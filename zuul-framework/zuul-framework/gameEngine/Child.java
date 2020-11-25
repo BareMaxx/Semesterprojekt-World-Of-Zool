@@ -16,12 +16,6 @@ public class Child extends Game {
         super(p1, parser, 60);
     }
 
-    public void play() {
-        parser = new Parser();
-        Command command = parser.getCommand();
-        processCommand(command);
-    }
-
     public boolean processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
