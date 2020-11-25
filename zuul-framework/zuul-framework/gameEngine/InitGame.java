@@ -90,7 +90,7 @@ public class InitGame {
 
     public void setCountry(Player p1) {
         System.out.println("Please select a country \n" +
-                "Vakannda | WashingGeorge | Danheim");
+                    "Vakannda | WashingGeorge | Danheim");
 
         String s = parser.getWord().toUpperCase();
         boolean b = false;
