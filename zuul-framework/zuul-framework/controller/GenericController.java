@@ -61,6 +61,7 @@ public class GenericController {
 
     @FXML
     void changeScene(String fxmlFileName) throws Exception{
+
         r.processCommand("go " + fxmlFileName);
 
         String fxmlFile = ("/fxml/" + fxmlFileName + ".fxml");
