@@ -24,7 +24,7 @@ public class GenericController {
     }
 
     @FXML
-    void darkentext(MouseEvent event) {
+    void darkenText(MouseEvent event) {
 
         Text text = (Text)event.getTarget();
         text.setStroke(Color.WHITE);

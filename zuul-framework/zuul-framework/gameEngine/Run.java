@@ -1,6 +1,7 @@
 package gameEngine;
 
 import commands.Parser;
+import controller.StartmenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,13 +25,17 @@ public class Run extends Application {
         o = new Old(p1, parser);
     }
 
-    public void GameLoop(){
-
+    public void launchMenu(){
         launch();
+    }
+
+    public void initGame(String country){
+
+        new InitGame(p1, country);
+
+
 
         /*
-        new InitGame(p1, parser);
-
         while (p1.getAlive()) {
             switch (p1.getStage()) {
                 case "child" -> c.play();
@@ -45,9 +50,12 @@ public class Run extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/outside.fxml"));
+        StartmenuController controller = new StartmenuController(this);
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/fxml/startmenu.fxml"));
+        root.setController(controller);
+
         primaryStage.setTitle("Outside");
-        primaryStage.setScene(new Scene(root, 1280 , 720));
+        primaryStage.setScene(new Scene(root.load(), 1280 , 720));
         primaryStage.show();
     }
 }

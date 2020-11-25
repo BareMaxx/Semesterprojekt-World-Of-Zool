@@ -15,17 +15,16 @@ public class InitGame {
     private Parser parser;
     private RandomEngine ran = new RandomEngine();
 
-    InitGame(Player p1, Parser parser) {
-        this.parser = parser;
+    public InitGame(Player p1, String country) {
         createRooms(p1);
-        printWelcome(p1);
+        printWelcome(p1, country);
     }
 
-    private void printWelcome(Player p1) {
+    private void printWelcome(Player p1, String country) {
         System.out.println();
         System.out.println("welcome to real life bitch");
         System.out.println("real life sucks");
-        setCountry(p1);
+        setCountry(p1, country);
         setGender(p1);
         setEcon(p1);
         setMoney(p1);
@@ -88,24 +87,27 @@ public class InitGame {
         return false;
     }
 
-    public void setCountry(Player p1) {
+    public void setCountry(Player p1, String country) {
+        /*
         System.out.println("Please select a country \n" +
                     "Vakannda | WashingGeorge | Danheim");
 
-        String s = parser.getWord().toUpperCase();
+
+         */
         boolean b = false;
+        country = country.toUpperCase();
         for (Country c : Country.values()) {
-            if (c.toString().equals(s))
+            if (c.toString().equals(country))
                 b = true;
         }
         if (b) {
-            p1.setCountry(Country.valueOf(s));
+            p1.setCountry(Country.valueOf(country));
             p1.incSickChance(p1.getCountry().getEventChance());
             p1.incDmgChance(p1.getCountry().getEventChance());
         }
         else {
             System.out.println("Input invalid\n");
-            setCountry(p1);
+            setCountry(p1, country);
         }
     }
 
