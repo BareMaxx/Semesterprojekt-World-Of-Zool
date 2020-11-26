@@ -37,18 +37,17 @@ public class Child extends Game {
     public void readBook() {
         if(!inPlace("school"))
             return;
-        /*
+
         if(getPlayer().getSickness()!=null){
             System.out.println("You can't study while sick");
             return;
-        }*/
+        }
 
         List<Item> inventory = super.getPlayer().getInventory();
         boolean hasBook = false;
         for (int i = 0; i < inventory.size(); i++) {
             Item item = inventory.get(i);
             if (item instanceof Book) {
-                //TODO: Fix so book takes different amount of turns based on the knowledgePoints.
                 hasBook = true;
                 int bookKnowledgePoints = ((Book)item).getKNOWLEDGEPOINTS();
                 super.getPlayer().incKnowledge(bookKnowledgePoints);
