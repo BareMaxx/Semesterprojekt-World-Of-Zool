@@ -66,7 +66,7 @@ public class Run extends Application {
         resourceController.loadMenu();
     }
 
-    public Player getP1() {
+    public Player getPlayer() {
         return player;
     }
 }

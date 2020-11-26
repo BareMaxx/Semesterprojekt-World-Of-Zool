@@ -26,7 +26,7 @@ public class HomeController extends GenericController{
     @FXML
     public void initialize() {
 
-        Country country = Run.getRInstance().getP1().getCountry();
+        Country country = Run.getRInstance().getPlayer().getCountry();
         Image backgroundImage = new Image("/png/dkHome.png");
         Image doorImage = new Image("/png/dkDoor.png");
         Image bedImage = new Image("/png/dkBed.png");
