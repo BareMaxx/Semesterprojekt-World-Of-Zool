@@ -64,8 +64,8 @@ public class InitGame {
         school.setExit("outside", outside);
 
         Book b1 = new Book("Algorithms", p1.getCountry().getMoney() * 7, 150);
-        Book b2 = new Book("Math",p1.getCountry().getMoney() * 15,300);
-        Book b3 = new Book("sql",p1.getCountry().getMoney() * 27,600);
+        Book b2 = new Book("Math",p1.getCountry().getMoney() * 15, 300);
+        Book b3 = new Book("sql",p1.getCountry().getMoney() * 27, 600);
         Protectors mask = new Protectors("mask", 50, 2, "sickness");
         Protectors helmet = new Protectors("helmet", 50, 2, "dmg");
 
