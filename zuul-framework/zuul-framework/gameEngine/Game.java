@@ -202,8 +202,6 @@ public class Game {
                             room.unlock((Key)i);
                             player.removeInventoryItem(i);
                             return;
-                            //player.removeInventoryItem(i);
-                            //todo fix this so key gets removed
                         } else {
                             System.out.println("This room is not locked. How did you get that key?");
                             return;
