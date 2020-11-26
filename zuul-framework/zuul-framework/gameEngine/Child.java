@@ -41,11 +41,11 @@ public class Child extends Game {
     public void readBook() {
         if(!inPlace("school"))
             return;
-        /*
+
         if(getPlayer().getSickness()!=null){
             System.out.println("You can't study while sick");
             return;
-        }*/
+        }
 
         List<Item> inventory = super.getPlayer().getInventory();
         boolean hasBook = false;
