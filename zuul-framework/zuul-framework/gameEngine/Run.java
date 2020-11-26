@@ -2,6 +2,8 @@ package gameEngine;
 
 import commands.Command;
 import commands.Parser;
+import controller.GenericController;
+import controller.RessourceController;
 import controller.StartmenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,14 +21,24 @@ public class Run extends Application {
     private Adult a;
     private Old o;
 
-    public Stage primaryStage;
+    private static Run rInstance;
+    private static Stage primaryStage;
 
     public Run() {
+        rInstance = this;
         parser = new Parser();
         player = new Player();
         c = new Child(player);
         a = new Adult(player);
         o = new Old(player);
+    }
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public static Run getRInstance() {
+        return rInstance;
     }
 
     public void launchMenu(){
@@ -57,16 +69,14 @@ public class Run extends Application {
         new InitGame(player, country);
     }
 
+    // This function is called when an instance of the Run class is created.
+    // This is due to the fact that Run extends the JavaFX class Application.
+    // See JavaFX documentation for further explanation...
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
 
-        StartmenuController controller = new StartmenuController(this, primaryStage);
-        FXMLLoader root = new FXMLLoader(getClass().getResource("/fxml/startmenu.fxml"));
-        root.setController(controller);
-
-        primaryStage.setTitle("Outside");
-        primaryStage.setScene(new Scene(root.load(), WIDTH , HEIGHT));
-        primaryStage.show();
+        RessourceController ressourceController = new RessourceController();
+        ressourceController.loadRessources();
     }
 }

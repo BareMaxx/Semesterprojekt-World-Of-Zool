@@ -10,8 +10,8 @@ import javafx.stage.Stage;
 
 public class StartmenuController extends GenericController{
 
-    public StartmenuController(Run r, Stage primaryStage){
-        super(r, primaryStage);
+    public StartmenuController() throws Exception{
+        super();
     }
 
     @FXML
@@ -20,7 +20,7 @@ public class StartmenuController extends GenericController{
         Text text = (Text)event.getTarget();
         String country = text.getText();
 
-        r.initGame(country);
+        Run.getRInstance().initGame(country);
         changeScene("home");
     }
 

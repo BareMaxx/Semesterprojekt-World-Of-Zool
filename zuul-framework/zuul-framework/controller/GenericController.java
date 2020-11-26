@@ -1,36 +1,24 @@
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import gameEngine.Run;
 
 public class GenericController {
 
-    protected static Run r;
-    protected static Stage primaryStage;
-
-    public GenericController(Run r, Stage primaryStage){
-        this.r = r;
-        this.primaryStage = primaryStage;
-    }
-
-    public GenericController(){
-
+    public GenericController() throws Exception{
     }
 
     @FXML
     private ImageView backgroundImage;
 
     @FXML
-    void goRoom(MouseEvent event) {
-        System.out.print("Test\n");
+    public void displayStartmenu() throws Exception{
+        changeScene("startmenu");
     }
 
     @FXML
@@ -54,7 +42,26 @@ public class GenericController {
     }
 
     @FXML
-    void changeScene(String fxmlFileName) throws Exception{
-        r.changeScene(fxmlFileName);
+    void changeScene(String room) throws Exception{
+
+        // application layer
+        Run.getRInstance().processCommand("go " + room);
+
+        switch (room){
+            case "home" ->{
+                Run.getPrimaryStage().setScene(RessourceController.getHomeScene());
+                return;
+            }
+            case "outside" ->{
+                Run.getPrimaryStage().setScene(RessourceController.getOutsideScene());
+                return;
+            }
+            case "startmenu" ->{
+                Run.getPrimaryStage().setScene(RessourceController.getStartmenuScene());
+                return;
+            }
+        }
+
+        //RessourceController.primaryStage.show();
     }
 }
