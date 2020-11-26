@@ -10,8 +10,6 @@ import gameplay.WorkDMG;
 import item.*;
 import player.Player;
 
-import javax.sound.midi.Soundbank;
-
 public class Game {
     protected final String SHOP_NAME = "shop";
     

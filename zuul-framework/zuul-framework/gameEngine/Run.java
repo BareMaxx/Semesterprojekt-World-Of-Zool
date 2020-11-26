@@ -1,19 +1,15 @@
 package gameEngine;
 
 import commands.Command;
-import commands.CommandWord;
 import commands.Parser;
 import controller.GenericController;
 import controller.RessourceController;
 import controller.StartmenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import player.Player;
-
-import java.util.Scanner;
 
 public class Run extends Application {
 
@@ -58,7 +54,6 @@ public class Run extends Application {
     }
 
     public void initGame(String country){
-
         new InitGame(p1, country);
     }
 
