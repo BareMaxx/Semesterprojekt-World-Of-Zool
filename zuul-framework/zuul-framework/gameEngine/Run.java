@@ -2,12 +2,8 @@ package gameEngine;
 
 import commands.Command;
 import commands.Parser;
-import controller.GenericController;
-import controller.RessourceController;
-import controller.StartmenuController;
+import controller.ResourceController;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import player.Player;
 
@@ -55,16 +51,6 @@ public class Run extends Application {
         }
     }
 
-    public void changeScene(String fxmlFileName) throws Exception {
-        processCommand("go " + fxmlFileName);
-
-        String fxmlFile = "/fxml/" + fxmlFileName + ".fxml";
-
-        FXMLLoader root = new FXMLLoader(getClass().getResource(fxmlFile));
-
-        primaryStage.setScene(new Scene(root.load(), WIDTH , HEIGHT));
-    }
-
     public void initGame(String country) {
         new InitGame(player, country);
     }
@@ -76,7 +62,11 @@ public class Run extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
 
-        RessourceController ressourceController = new RessourceController();
-        ressourceController.loadRessources();
+        ResourceController resourceController = new ResourceController();
+        resourceController.loadMenu();
+    }
+
+    public Player getP1() {
+        return player;
     }
 }

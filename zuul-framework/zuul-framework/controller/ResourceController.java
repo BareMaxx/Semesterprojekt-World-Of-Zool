@@ -4,14 +4,15 @@ import gameEngine.Run;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
-public class RessourceController {
+public class ResourceController {
 
     private static Scene homeScene;
     private static Scene outsideScene;
     private static Scene startmenuScene;
+    private static ResourceController resourceControllerInstance;
 
-    public RessourceController(){
-
+    public ResourceController(){
+        resourceControllerInstance = this;
     }
 
     public static Scene getHomeScene() {
@@ -26,7 +27,24 @@ public class RessourceController {
         return startmenuScene;
     }
 
-    public void loadRessources() throws Exception{
+    public static ResourceController getResourceControllerInstance() {
+        return resourceControllerInstance;
+    }
+
+    public void loadMenu() throws Exception{
+
+        String fxmlFileStartmenu = ("/fxml/startmenu.fxml");
+        FXMLLoader startmenuRoot = new FXMLLoader(getClass().getResource(fxmlFileStartmenu));
+        StartmenuController startmenuController = new StartmenuController();
+        startmenuRoot.setController(startmenuController);
+        startmenuScene = new Scene(startmenuRoot.load(), 1280 , 720);
+
+        // set initial scene to menu scene
+        Run.getPrimaryStage().setScene(getStartmenuScene());
+        Run.getPrimaryStage().show();
+    }
+
+    public void loadRooms() throws Exception{
 
         String fxmlFileHome = ("/fxml/home.fxml");
         FXMLLoader homeRoot = new FXMLLoader(getClass().getResource(fxmlFileHome));
@@ -39,15 +57,5 @@ public class RessourceController {
         OutsideController outsidecontroller = new OutsideController();
         outsideRoot.setController(outsidecontroller);
         outsideScene = new Scene(outsideRoot.load(), 1280 , 720);
-
-        String fxmlFileStartmenu = ("/fxml/startmenu.fxml");
-        FXMLLoader startmenuRoot = new FXMLLoader(getClass().getResource(fxmlFileStartmenu));
-        StartmenuController startmenuController = new StartmenuController();
-        startmenuRoot.setController(startmenuController);
-        startmenuScene = new Scene(startmenuRoot.load(), 1280 , 720);
-
-        // set initial scene to menu scene
-        Run.getPrimaryStage().setScene(getStartmenuScene());
-        Run.getPrimaryStage().show();
     }
 }
