@@ -26,7 +26,7 @@ public class Child extends Game {
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
             case MONEY -> System.out.println("You have " + super.getPlayer().getMoney() + " gold");
-            case READ -> {readBook();}
+            case READ -> readBook();
             case WORK -> work(7);
             default -> super.processCommand(command);
         }
@@ -38,7 +38,7 @@ public class Child extends Game {
         if(!inPlace("school"))
             return;
 
-        if(getPlayer().getSickness()!=null){
+        if(getPlayer().getSickness() != null){
             System.out.println("You can't study while sick");
             return;
         }
