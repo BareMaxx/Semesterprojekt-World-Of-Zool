@@ -256,7 +256,6 @@ public class Game {
                     turns.decTurns();
 
                     System.out.println("You bought " + s);
-                    player.decMoney(((PurchasableItem)i).getPrice());
                     randomSickEvent(player.getSickChance()*2);
                 }
             }
