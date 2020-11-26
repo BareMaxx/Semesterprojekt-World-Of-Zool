@@ -37,7 +37,7 @@ public class Game {
             case MONEY -> System.out.println("You have " + player.getMoney() + " gold");
             case USE -> {use(command); turns.decTurns();}
             case BUY -> {buy(command); turns.decTurns();}
-            case LOOK -> look(command);
+            case LOOK -> look();
             case TURNS -> System.out.println("You have " + turns.getTurns() + " turns left");
             case SIT -> {sit(); turns.decTurns();}
             case STAND -> {stand(); turns.decTurns();}
@@ -215,7 +215,7 @@ public class Game {
     }
 
     // Look at shoplist or look at items in the current room
-    private void look(Command command) {
+    private void look() {
         if (player.getCurrentRoom().getName().equals(SHOP_NAME)) {
             player.getCurrentRoom().printStock();
         }

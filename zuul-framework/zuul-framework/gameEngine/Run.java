@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import player.Player;
 
 public class Run extends Application {
-
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 720;
 
@@ -54,13 +53,12 @@ public class Run extends Application {
         primaryStage.setScene(new Scene(root.load(), WIDTH , HEIGHT));
     }
 
-    public void initGame(String country){
+    public void initGame(String country) {
         new InitGame(player, country);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         this.primaryStage = primaryStage;
 
         StartmenuController controller = new StartmenuController(this, primaryStage);

@@ -23,7 +23,7 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <Text fx:id="schooltext" fill="WHITE" layoutX="508.0" layoutY="334.0" onMouseClicked="#goRoom" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="School" textAlignment="CENTER" wrappingWidth="339.68634033203125">
+      <Text fx:id="schooltext" fill="WHITE" layoutX="508.0" layoutY="334.0" onMouseClicked="#goSchool" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="School" textAlignment="CENTER" wrappingWidth="339.68634033203125">
          <font>
             <Font size="36.0" />
          </font>

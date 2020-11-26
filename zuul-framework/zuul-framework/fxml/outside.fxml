@@ -23,22 +23,22 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <Text fx:id="schooltext" fill="WHITE" layoutX="508.0" layoutY="334.0" onMouseClicked="#goRoom" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="School" textAlignment="CENTER" wrappingWidth="339.68634033203125">
+      <Text fx:id="schooltext" fill="WHITE" layoutX="508.0" layoutY="334.0" onMouseClicked="#goSchool" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="School" textAlignment="CENTER" wrappingWidth="339.68634033203125">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
-      <Text fx:id="workText" fill="WHITE" layoutX="420.0" layoutY="442.0" onMouseClicked="#goRoom" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="Work" textAlignment="CENTER" wrappingWidth="339.68634033203125">
+      <Text fx:id="workText" fill="WHITE" layoutX="420.0" layoutY="442.0" onMouseClicked="#goWork" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="Work" textAlignment="CENTER" wrappingWidth="339.68634033203125">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
-      <Text fx:id="shopText" fill="WHITE" layoutX="393.0" layoutY="551.0" onMouseClicked="#goRoom" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="Shop" textAlignment="CENTER" wrappingWidth="339.68634033203125">
+      <Text fx:id="shopText" fill="WHITE" layoutX="393.0" layoutY="551.0" onMouseClicked="#goShop" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="Shop" textAlignment="CENTER" wrappingWidth="339.68634033203125">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
-      <Text fx:id="hospitalText" fill="WHITE" layoutX="452.0" layoutY="655.0" onMouseClicked="#goRoom" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="Hospital" textAlignment="CENTER" wrappingWidth="339.68634033203125">
+      <Text fx:id="hospitalText" fill="WHITE" layoutX="452.0" layoutY="655.0" onMouseClicked="#goHospital" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="Hospital" textAlignment="CENTER" wrappingWidth="339.68634033203125">
          <font>
             <Font size="36.0" />
          </font>
