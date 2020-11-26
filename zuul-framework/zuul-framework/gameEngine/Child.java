@@ -9,8 +9,6 @@ import player.Player;
 
 import java.util.List;
 
-//TODO: readBook method der sætter spillerens knowledge points ud fra bogen
-//TODO: work method -> inc money
 public class Child extends Game {
     public Child(Player p1, Parser parser) {
         super(p1, parser, 60);
