@@ -80,9 +80,6 @@ public class Player {
     public int getAge() {
         return age;
     }
-    /*public void incAge(int i){
-        age = age + i;
-    }*/
     public void incAge(int i) {
         age = age + i;
     }

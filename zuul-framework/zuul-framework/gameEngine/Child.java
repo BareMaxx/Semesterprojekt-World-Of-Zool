@@ -2,7 +2,6 @@ package gameEngine;
 
 import commands.Command;
 import commands.CommandWord;
-import commands.Parser;
 import item.Book;
 import item.Item;
 import player.Player;
@@ -12,8 +11,10 @@ import java.util.List;
 //TODO: readBook method der sætter spillerens knowledge points ud fra bogen
 //TODO: work method -> inc money
 public class Child extends Game {
-    public Child(Player p1, Parser parser) {
-        super(p1, parser, 60);
+    protected final String SCHOOL_NAME = "school";
+
+    public Child(Player p1) {
+        super(p1, 60);
     }
 
     public void processCommand(Command command) {
@@ -32,13 +33,8 @@ public class Child extends Game {
 
     // Read the first book in your inventory, if any
     public void readBook() {
-        if(!inRoom("school"))
+        if (!inRoom(SCHOOL_NAME))
             return;
-        /*
-        if(getPlayer().getSickness()!=null){
-            System.out.println("You can't study while sick");
-            return;
-        }*/
 
         List<Item> inventory = super.getPlayer().getInventory();
         boolean hasBook = false;

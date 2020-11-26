@@ -25,9 +25,9 @@ public class Run extends Application {
     public Run() {
         parser = new Parser();
         player = new Player();
-        c = new Child(player, parser);
-        a = new Adult(player, parser);
-        o = new Old(player, parser);
+        c = new Child(player);
+        a = new Adult(player);
+        o = new Old(player);
     }
 
     public void launchMenu(){

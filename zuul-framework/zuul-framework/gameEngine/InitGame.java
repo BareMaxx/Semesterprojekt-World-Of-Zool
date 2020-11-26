@@ -1,7 +1,6 @@
 package gameEngine;
 
 import commands.CommandWord;
-import commands.Parser;
 import gameplay.RandomEngine;
 import item.Book;
 import item.Protectors;
@@ -12,7 +11,6 @@ import player.Player;
 import gameplay.Room;
 
 public class InitGame {
-    private Parser parser;
     private RandomEngine ran = new RandomEngine();
 
     public InitGame(Player p1, String country) {
@@ -20,31 +18,33 @@ public class InitGame {
         printWelcome(p1, country);
     }
 
-    private void printWelcome(Player p1, String country) {
+    private void printWelcome(Player player, String country) {
         System.out.println();
         System.out.println("welcome to real life bitch");
         System.out.println("real life sucks");
-        setCountry(p1, country);
-        setGender(p1);
-        setEcon(p1);
-        setMoney(p1);
-        System.out.println("You have been born as a " + p1.getFamilyEconomy().toString().toLowerCase() + " " +
-                p1.getGender().toString().toLowerCase() + " living in " + p1.getCountry().toString().toLowerCase());
-        p1.setStage("child");
-        if (childDeath(p1))
+
+        setCountry(player, country);
+        setGender(player);
+        setEcon(player);
+        setMoney(player);
+
+        System.out.println("You have been born as a " + player.getFamilyEconomy().toString().toLowerCase() + " " +
+                player.getGender().toString().toLowerCase() + " living in " + player.getCountry().toString().toLowerCase());
+        player.setStage("child");
+        if (childDeath(player))
             return;
-        System.out.println("Your start with " + p1.getMoney() + " gold.");
+
+        System.out.println("Your start with " + player.getMoney() + " gold.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-        System.out.println(p1.getCurrentRoom().getLongDescription());
+        System.out.println(player.getCurrentRoom().getLongDescription());
     }
 
-    private void createRooms(Player p1) {
+    private void createRooms(Player player) {
         Room home, work, shop, school, hospital, outside;
 
         outside = new Room("outside", "outside", false);
         home = new Room("home", "at home", false);
-        //work = new Room("work", "at work", true);
         work = new Room("work", "at work", false);
         shop = new Room("shop","in a shop", false);
         school = new Room("school", "at school", false);
@@ -74,11 +74,11 @@ public class InitGame {
         shop.setItem(mask);
         shop.setItem(helmet);
 
-        p1.setCurrentRoom(home);
+        player.setCurrentRoom(home);
     }
 
     public boolean childDeath(Player p1){
-        if(ran.getOutcome(p1.getCountry().getBirthMortal(), 1000)){
+        if (ran.getOutcome(p1.getCountry().getBirthMortal(), 1000)) {
             System.out.println("Sadly the game is already over, you died at birth. Every year " +
                     p1.getCountry().getBirthMortal() + " out of 1000 infants die at birth in " + p1.getCountry().toString().toLowerCase());
             p1.setAlive(false);
@@ -87,13 +87,7 @@ public class InitGame {
         return false;
     }
 
-    public void setCountry(Player p1, String country) {
-        /*
-        System.out.println("Please select a country \n" +
-                    "Vakannda | WashingGeorge | Danheim");
-
-
-         */
+    public void setCountry(Player player, String country) {
         boolean b = false;
         country = country.toUpperCase();
         for (Country c : Country.values()) {
@@ -101,24 +95,24 @@ public class InitGame {
                 b = true;
         }
         if (b) {
-            p1.setCountry(Country.valueOf(country));
-            p1.incSickChance(p1.getCountry().getEventChance());
-            p1.incDmgChance(p1.getCountry().getEventChance());
+            player.setCountry(Country.valueOf(country));
+            player.incSickChance(player.getCountry().getEventChance());
+            player.incDmgChance(player.getCountry().getEventChance());
         }
         else {
             System.out.println("Input invalid\n");
-            setCountry(p1, country);
+            //setCountry(p1, country); // Endless loop
         }
     }
 
-    public void setGender(Player p1) {
-        p1.setGender(Gender.values()[ran.getRandom(0, 1)]);
+    public void setGender(Player player) {
+        player.setGender(Gender.values()[ran.getRandom(0, 1)]);
     }
 
     public void setEcon(Player p1) {
-        if(ran.getOutcome(p1.getCountry().getPoor(), 100))
+        if (ran.getOutcome(p1.getCountry().getPoor(), 100))
             p1.setFamilyEconomy(FamilyEconomy.POOR);
-        else if(ran.getOutcome(p1.getCountry().getMiddleClass(), 100))
+        else if (ran.getOutcome(p1.getCountry().getMiddleClass(), 100))
             p1.setFamilyEconomy(FamilyEconomy.MIDDLECLASS);
         else
             p1.setFamilyEconomy(FamilyEconomy.RICH);

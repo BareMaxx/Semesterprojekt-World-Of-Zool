@@ -2,7 +2,6 @@ package gameEngine;
 
 import commands.Command;
 import commands.CommandWord;
-import commands.Parser;
 import gameplay.Room;
 import gameplay.Sickness;
 import gameplay.Turns;
@@ -15,14 +14,12 @@ public class Game {
     protected final String HOME_NAME = "home";
     protected final String HOSPITAL_NAME = "hospital";
     protected final String WORK_NAME = "work";
-    
-    protected Parser parser;
+
     private Player player;
     protected Turns turns;
 
     // Super constructor. Amount of turns decided by derived class
-    public Game(Player player, Parser parser, int turns) {
-        this.parser = new Parser();
+    public Game(Player player, int turns) {
         this.player = player;
         this.turns = new Turns(turns);
     }
@@ -71,7 +68,7 @@ public class Game {
                     player.getSickness().getPrice() + " gold to get healthy or you will die!");
     }
 
-    private void heal(){
+    private void heal() {
         if (!inRoom(HOSPITAL_NAME))
             return;
         if (player.getSickness() != null) {
@@ -239,7 +236,6 @@ public class Game {
         System.out.println("Too bad");
         System.out.println();
         System.out.println("Here's some commands");
-        parser.showCommands();
     }
 
     private void goRoom(Command command) {
@@ -261,7 +257,7 @@ public class Game {
             System.out.println("There is no door!");
         }
         else if (nextRoom.isLocked()) {
-            System.out.println("This door is locked.");
+            System.out.println("This door is locked. Use the appropriate key to unlock");
         }
         else {
             player.setCurrentRoom(nextRoom);
@@ -298,7 +294,7 @@ public class Game {
             //60 turns => 21 years, when getting 1 year older every three turns
             int ageMultiplier = turns.getCounter() / 3;
             player.incAge(ageMultiplier);
-            if(turns.getTurns() != 0) {
+            if (turns.getTurns() != 0) {
                 turns.setCounter();
             } else {
                 turns.setCounter(0);

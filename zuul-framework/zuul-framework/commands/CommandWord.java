@@ -1,7 +1,6 @@
 package commands;
 
-public enum CommandWord
-{
+public enum CommandWord {
     GO("go"), QUIT("quit"), HELP("help"), UNKNOWN("?"),
     LOOK("look"), INVENTORY("inventory"), MONEY("money"),
     SIT("sit"), WORK("work"), READ("read"), BUY("buy"),
