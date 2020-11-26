@@ -33,10 +33,6 @@ public class Child extends Game {
         return true;
     }
 
-    //TODO: Player inventory removeItem method
-    //Todo: Player inventory should be of Item type and not String
-    //TODO: Player needs knowledgePoints attribute, and mutator and accessor methods
-
     // Read the first book in your inventory, if any
     public void readBook() {
         if(!inPlace("school"))
@@ -52,6 +48,7 @@ public class Child extends Game {
         for (int i = 0; i < inventory.size(); i++) {
             Item item = inventory.get(i);
             if (item instanceof Book) {
+                //TODO: Fix so book takes different amount of turns based on the knowledgePoints.
                 hasBook = true;
                 int bookKnowledgePoints = ((Book)item).getKNOWLEDGEPOINTS();
                 super.getPlayer().incKnowledge(bookKnowledgePoints);
