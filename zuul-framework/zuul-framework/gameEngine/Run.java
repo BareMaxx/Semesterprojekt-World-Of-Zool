@@ -2,7 +2,7 @@ package gameEngine;
 
 import commands.Command;
 import commands.Parser;
-import controller.RessourceController;
+import controller.ResourceController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import player.Player;
@@ -61,8 +61,8 @@ public class Run extends Application {
 
         this.primaryStage = primaryStage;
 
-        RessourceController ressourceController = new RessourceController();
-        ressourceController.loadMenu();
+        ResourceController resourceController = new ResourceController();
+        resourceController.loadMenu();
     }
 
     public Player getP1() {

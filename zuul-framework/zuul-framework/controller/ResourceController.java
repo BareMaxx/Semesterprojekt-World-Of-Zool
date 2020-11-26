@@ -4,15 +4,15 @@ import gameEngine.Run;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
-public class RessourceController {
+public class ResourceController {
 
     private static Scene homeScene;
     private static Scene outsideScene;
     private static Scene startmenuScene;
-    private static RessourceController ressourceControllerInstance;
+    private static ResourceController resourceControllerInstance;
 
-    public RessourceController(){
-        ressourceControllerInstance = this;
+    public ResourceController(){
+        resourceControllerInstance = this;
     }
 
     public static Scene getHomeScene() {
@@ -27,8 +27,8 @@ public class RessourceController {
         return startmenuScene;
     }
 
-    public static RessourceController getRessourceControllerInstance() {
-        return ressourceControllerInstance;
+    public static ResourceController getResourceControllerInstance() {
+        return resourceControllerInstance;
     }
 
     public void loadMenu() throws Exception{

@@ -49,15 +49,15 @@ public class GenericController {
 
         switch (room){
             case "home" ->{
-                Run.getPrimaryStage().setScene(RessourceController.getHomeScene());
+                Run.getPrimaryStage().setScene(ResourceController.getHomeScene());
                 return;
             }
             case "outside" ->{
-                Run.getPrimaryStage().setScene(RessourceController.getOutsideScene());
+                Run.getPrimaryStage().setScene(ResourceController.getOutsideScene());
                 return;
             }
             case "startmenu" ->{
-                Run.getPrimaryStage().setScene(RessourceController.getStartmenuScene());
+                Run.getPrimaryStage().setScene(ResourceController.getStartmenuScene());
                 return;
             }
         }

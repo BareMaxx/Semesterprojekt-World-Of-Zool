@@ -1,14 +1,11 @@
 
 package controller;
 
-import gameEngine.InitGame;
 import javafx.fxml.FXML;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import gameEngine.Run;
-import javafx.stage.Stage;
 
 public class StartmenuController extends GenericController{
 
@@ -23,7 +20,7 @@ public class StartmenuController extends GenericController{
         String country = text.getText();
 
         Run.getRInstance().initGame(country);
-        RessourceController.getRessourceControllerInstance().loadRooms();
+        ResourceController.getResourceControllerInstance().loadRooms();
         changeScene("home");
     }
 
