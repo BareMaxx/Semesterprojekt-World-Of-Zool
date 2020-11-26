@@ -23,6 +23,7 @@ public class StartmenuController extends GenericController{
         String country = text.getText();
 
         Run.getRInstance().initGame(country);
+        RessourceController.getRessourceControllerInstance().loadRooms();
         changeScene("home");
     }
 

@@ -2,12 +2,8 @@ package gameEngine;
 
 import commands.Command;
 import commands.Parser;
-import controller.GenericController;
 import controller.RessourceController;
-import controller.StartmenuController;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import player.Player;
 
@@ -26,9 +22,9 @@ public class Run extends Application {
         rInstance = this;
         parser = new Parser();
         p1 = new Player();
-        c = new Child(p1, parser);
-        a = new Adult(p1, parser);
-        o = new Old(p1, parser);
+        c = new Child(getP1(), parser);
+        a = new Adult(getP1(), parser);
+        o = new Old(getP1(), parser);
     }
 
     public static Stage getPrimaryStage() {
@@ -46,7 +42,7 @@ public class Run extends Application {
     public void processCommand(String input) {
         Command command = parser.getCommand(input);
 
-        switch (p1.getStage()) {
+        switch (getP1().getStage()) {
             case "child" -> c.processCommand(command);
             case "adult" -> a.processCommand(command);
             case "old" -> o.processCommand(command);
@@ -54,7 +50,7 @@ public class Run extends Application {
     }
 
     public void initGame(String country){
-        new InitGame(p1, country);
+        new InitGame(getP1(), country);
     }
 
     // This function is called when an instance of the Run class is created.
@@ -66,6 +62,10 @@ public class Run extends Application {
         this.primaryStage = primaryStage;
 
         RessourceController ressourceController = new RessourceController();
-        ressourceController.loadRessources();
+        ressourceController.loadMenu();
+    }
+
+    public Player getP1() {
+        return p1;
     }
 }

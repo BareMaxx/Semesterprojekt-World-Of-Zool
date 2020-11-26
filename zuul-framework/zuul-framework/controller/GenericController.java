@@ -61,7 +61,5 @@ public class GenericController {
                 return;
             }
         }
-
-        //RessourceController.primaryStage.show();
     }
 }
