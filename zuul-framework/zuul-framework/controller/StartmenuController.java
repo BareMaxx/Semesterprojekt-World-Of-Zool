@@ -1,4 +1,3 @@
-
 package controller;
 
 import javafx.fxml.FXML;
@@ -6,14 +5,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import gameEngine.Run;
-import javafx.stage.Stage;
 
 public class StartmenuController extends GenericController{
-
-    public StartmenuController() throws Exception{
-        super();
-    }
-
     @FXML
     void startGame(MouseEvent event) throws Exception{
 

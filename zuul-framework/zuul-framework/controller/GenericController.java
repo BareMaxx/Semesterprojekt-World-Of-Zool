@@ -9,10 +9,6 @@ import javafx.scene.text.Text;
 import gameEngine.Run;
 
 public class GenericController {
-
-    public GenericController() throws Exception{
-    }
-
     @FXML
     private ImageView backgroundImage;
 

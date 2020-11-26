@@ -4,10 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 
 public class OutsideController extends GenericController {
-    public OutsideController() throws Exception{
-        super();
-    }
-
     @FXML
     void goHome(MouseEvent event) throws Exception{
         changeScene("home");

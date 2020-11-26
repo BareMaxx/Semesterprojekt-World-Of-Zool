@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class HomeController extends GenericController{
-
     @FXML
     private ImageView backgroundImage;
 

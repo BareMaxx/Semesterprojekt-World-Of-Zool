@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WorkController">
+   <children>
+      <ImageView fx:id="backgroundImage" fitHeight="720.0" fitWidth="1280.0" onMouseClicked="#goRoom" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/dkHome.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="doorImage" fitHeight="642.0" fitWidth="250.0" layoutX="176.0" layoutY="88.0" onMouseClicked="#goOutside" pickOnBounds="true" preserveRatio="true" rotate="-5.9">
+         <image>
+            <Image url="@../png/dkDoor.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="bedImage" fitHeight="250.0" layoutX="524.0" layoutY="360.0" onMouseClicked="#work" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/dkbed.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
