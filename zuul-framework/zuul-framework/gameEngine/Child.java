@@ -54,7 +54,6 @@ public class Child extends Game {
                 super.getPlayer().removeInventoryItem(item);
                 System.out.println("You read a book that gave you " + bookKnowledgePoints + " knowledge points");
                 super.turns.decTurns(bookKnowledgePoints / 50);
-                System.out.println(super.turns.getTurns());
                 super.checkTurns();
                 break;
             }
