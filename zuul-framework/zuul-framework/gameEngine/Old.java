@@ -11,13 +11,12 @@ public class Old extends Game {
         super(p1, parser, 20);
     }
 
-    public boolean processCommand(Command command) {
+    public void processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
             //case WORK -> System.out.println("You are too old to work");
             default -> super.processCommand(command);
         }
-        return true;
     }
 
 }

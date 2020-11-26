@@ -12,12 +12,11 @@ public class Adult extends Game {
         super(p1, parser, 100);
     }
 
-    public boolean processCommand(Command command) {
+    public void processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
             case WORK -> super.work(5);
             default -> super.processCommand(command);
         }
-        return true;
     }
 }

@@ -16,7 +16,7 @@ public class Child extends Game {
         super(p1, parser, 60);
     }
 
-    public boolean processCommand(Command command) {
+    public void processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
             case MONEY -> System.out.println("You have " + super.getPlayer().getMoney() + " gold");
@@ -24,7 +24,6 @@ public class Child extends Game {
             case WORK -> work(7);
             default -> super.processCommand(command);
         }
-        return true;
     }
 
     //TODO: Player inventory removeItem method
@@ -33,7 +32,7 @@ public class Child extends Game {
 
     // Read the first book in your inventory, if any
     public void readBook() {
-        if(!inPlace("school"))
+        if(!inRoom("school"))
             return;
         /*
         if(getPlayer().getSickness()!=null){
