@@ -1,42 +1,24 @@
 package controller;
 
-import javafx.event.EventTarget;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-import javafx.event.Event;
-import javafx.stage.Stage;
-import javafx.stage.Window;
-import player.Player;
 
 import gameEngine.Run;
 
 public class GenericController {
 
-    protected static Run r;
-    protected static Stage primaryStage;
-
-    public GenericController(Run r, Stage primaryStage){
-        this.r = r;
-        this.primaryStage = primaryStage;
-    }
-
-    public GenericController(){
-
+    public GenericController() throws Exception{
     }
 
     @FXML
     private ImageView backgroundImage;
 
     @FXML
-    void goRoom(MouseEvent event) {
-        System.out.print("Test\n");
+    public void displayStartmenu() throws Exception{
+        changeScene("startmenu");
     }
 
     @FXML
@@ -60,14 +42,26 @@ public class GenericController {
     }
 
     @FXML
-    void changeScene(String fxmlFileName) throws Exception{
+    void changeScene(String room) throws Exception{
 
-        r.processCommand("go " + fxmlFileName);
+        // application layer
+        Run.getRInstance().processCommand("go " + room);
 
-        String fxmlFile = ("/fxml/" + fxmlFileName + ".fxml");
+        switch (room){
+            case "home" ->{
+                Run.getPrimaryStage().setScene(RessourceController.getHomeScene());
+                return;
+            }
+            case "outside" ->{
+                Run.getPrimaryStage().setScene(RessourceController.getOutsideScene());
+                return;
+            }
+            case "startmenu" ->{
+                Run.getPrimaryStage().setScene(RessourceController.getStartmenuScene());
+                return;
+            }
+        }
 
-        FXMLLoader root = new FXMLLoader(getClass().getResource(fxmlFile));
-
-        primaryStage.setScene(new Scene(root.load(), 1280 , 720));
+        //RessourceController.primaryStage.show();
     }
 }

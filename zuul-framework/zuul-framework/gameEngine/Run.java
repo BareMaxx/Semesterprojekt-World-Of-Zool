@@ -3,6 +3,8 @@ package gameEngine;
 import commands.Command;
 import commands.CommandWord;
 import commands.Parser;
+import controller.GenericController;
+import controller.RessourceController;
 import controller.StartmenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,14 +23,24 @@ public class Run extends Application {
     private Adult a;
     private Old o;
 
-    public Stage primaryStage;
+    private static Run rInstance;
+    private static Stage primaryStage;
 
     public Run() {
+        rInstance = this;
         parser = new Parser();
         p1 = new Player();
         c = new Child(p1, parser);
         a = new Adult(p1, parser);
         o = new Old(p1, parser);
+    }
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public static Run getRInstance() {
+        return rInstance;
     }
 
     public void launchMenu(){
@@ -48,31 +60,17 @@ public class Run extends Application {
     public void initGame(String country){
 
         new InitGame(p1, country);
-
-        /*
-        while (p1.getAlive()) {
-            switch (p1.getStage()) {
-                case "child" -> c.play();
-                case "adult" -> a.play();
-                case "old" -> o.play();
-            }
-        }
-        System.out.println("Thank you for playing.  Good bye.");
-
-         */
     }
 
+    // This function is called when an instance of the Run class is created.
+    // This is due to the fact that Run extends the JavaFX class Application.
+    // See JavaFX documentation for further explanation...
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         this.primaryStage = primaryStage;
 
-        StartmenuController controller = new StartmenuController(this, primaryStage);
-        FXMLLoader root = new FXMLLoader(getClass().getResource("/fxml/startmenu.fxml"));
-        root.setController(controller);
-
-        primaryStage.setTitle("Outside");
-        primaryStage.setScene(new Scene(root.load(), 1280 , 720));
-        primaryStage.show();
+        RessourceController ressourceController = new RessourceController();
+        ressourceController.loadRessources();
     }
 }

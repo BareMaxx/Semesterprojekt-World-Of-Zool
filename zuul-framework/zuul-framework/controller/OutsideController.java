@@ -9,7 +9,7 @@ import javafx.scene.text.Text;
 import gameEngine.Run;
 
 public class OutsideController extends GenericController {
-    public OutsideController(){
+    public OutsideController() throws Exception{
         super();
     }
 

@@ -16,12 +16,13 @@ public class HomeController extends GenericController{
     private ImageView bedImage;
 
 
-    public HomeController(){
+    public HomeController() throws  Exception{
         super();
     }
 
     @FXML
     public void initialize() {
+
 
         Image image = new Image("/png/ugHome.png");
         backgroundImage.setImage(image);
