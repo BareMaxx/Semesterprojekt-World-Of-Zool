@@ -46,6 +46,27 @@ public class Player {
         familyEconomy = f;
     }
 
+    public void moveFamilyEconomy() {
+        switch (this.familyEconomy) {
+            case POOR -> {
+                if (this.knowledge >= 350) {
+                    setFamilyEconomy(FamilyEconomy.MIDDLECLASS);
+                }
+            } case MIDDLECLASS -> {
+                if (this.knowledge >= 900) {
+                    setFamilyEconomy(FamilyEconomy.RICH);
+                } else {
+                    setFamilyEconomy(FamilyEconomy.POOR);
+                }
+            } case RICH -> {
+                if (this.knowledge < 1050) {
+                    setFamilyEconomy(FamilyEconomy.MIDDLECLASS);
+                }
+            }
+        }
+        System.out.println("You are now in the " + this.familyEconomy.toString().toLowerCase() + " class");
+    }
+
     public void addInventoryItem(Item s){
         inventory.add(s);
     }

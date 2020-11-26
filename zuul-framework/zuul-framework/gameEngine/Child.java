@@ -23,7 +23,6 @@ public class Child extends Game {
     public boolean processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
-            case MONEY -> System.out.println("You have " + super.getPlayer().getMoney() + " gold");
             case READ -> readBook();
             case WORK -> work(7);
             default -> super.processCommand(command);

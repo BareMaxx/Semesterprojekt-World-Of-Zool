@@ -41,7 +41,7 @@ public class Game {
             case QUIT -> wantToQuit = quit(command);
             case AGE -> System.out.println("You are " + player.getAge() + " years old.");
             case INVENTORY -> player.inventoryPrinter();
-            case MONEY -> System.out.println("You have " + player.getMoney() + " gold");
+            case MONEY -> System.out.println("You have " + player.getMoney() + " gold  Economy: " + player.getFamilyEconomy().toString().toLowerCase());
             case USE -> {use(command); turns.decTurns();}
             case BUY -> {buy(command); turns.decTurns();}
             case LOOK -> look(command);
