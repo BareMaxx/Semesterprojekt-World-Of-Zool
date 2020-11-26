@@ -15,9 +15,9 @@ public enum Country {
 
     //Country (int birthMortal, int money, int avgAge, int[] familyEcon){
     Country (int birthMortal, int money, int avgAge, int poor, int middleClass, int rich, int eventChance){
-        this.birthMortal=birthMortal;
-        this.money=money;
-        this.avgAge=avgAge;
+        this.birthMortal = birthMortal;
+        this.money = money;
+        this.avgAge = avgAge;
         this.poor = poor;
         this.middleClass = middleClass;
         this.rich = rich;
