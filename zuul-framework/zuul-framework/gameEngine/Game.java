@@ -42,8 +42,6 @@ public class Game {
             case AGE -> System.out.println("You are " + player.getAge() + " years old.");
             case INVENTORY -> player.inventoryPrinter();
             case MONEY -> System.out.println("You have " + player.getMoney() + " gold");
-            //case TAKE -> turns.decTurns();
-            //case WORK -> {}
             case USE -> {use(command); turns.decTurns();}
             case BUY -> {buy(command); turns.decTurns();}
             case LOOK -> look(command);
@@ -223,9 +221,6 @@ public class Game {
                         }
                     }
                 }
-                /*else {
-                    System.out.println("You have no item of that name.");
-                }*/
             }
             System.out.println("You have no item of that name.");
         }
@@ -275,24 +270,6 @@ public class Game {
                         "Type heal to get healed");
             } else {
                 System.out.println("There is nothing to do here. You are healthy. Leave!");
-            }
-        } else {
-            if (command.hasSecondWord()) {
-                System.out.println("You can't focus on anything in particular");
-            } else {
-                System.out.println("You take a closer look at your surroundings\nYou notice:");
-                /*ArrayList<Item> items = getPlayer().getCurrentRoom().items;
-                ArrayList<Item> objects = getPlayer().getCurrentRoom().objects;
-                if (items.isEmpty() && objects.isEmpty()) {
-                    System.out.println("\tnothing");
-                } else {
-                    for (Item i : items) {
-                        System.out.println("\t" + i.getName());
-                    }
-                    for (Item o : objects) {
-                        System.out.println("\t" + o.getName());
-                    }
-                }*/
             }
         }
     }
