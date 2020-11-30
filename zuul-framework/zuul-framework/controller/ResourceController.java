@@ -11,9 +11,6 @@ public class ResourceController {
     private static Scene outsideScene;
     private static Scene startmenuScene;
 
-    // Constructor is private to prevent instantiation
-    private ResourceController(){}
-
     public static Scene getHomeScene() {
         return homeScene;
     }

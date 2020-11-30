@@ -13,11 +13,6 @@ public class GenericController {
     private ImageView backgroundImage;
 
     @FXML
-    public void displayStartmenu() throws Exception{
-        changeScene("startmenu");
-    }
-
-    @FXML
     void darkenText(MouseEvent event) {
 
         Text text = (Text)event.getTarget();
