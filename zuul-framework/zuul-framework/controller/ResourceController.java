@@ -3,17 +3,16 @@ package controller;
 import gameEngine.Run;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import java.util.*;
 
 public class ResourceController {
 
     private static Scene homeScene;
     private static Scene outsideScene;
     private static Scene startmenuScene;
-    private static ResourceController resourceControllerInstance;
 
-    public ResourceController(){
-        resourceControllerInstance = this;
-    }
+    // Constructor is private to prevent instantiation
+    private ResourceController(){}
 
     public static Scene getHomeScene() {
         return homeScene;
@@ -27,33 +26,25 @@ public class ResourceController {
         return startmenuScene;
     }
 
-    public static ResourceController getResourceControllerInstance() {
-        return resourceControllerInstance;
-    }
-
-    public void loadMenu() throws Exception{
+    public static void loadMenu() throws Exception{
 
         String fxmlFileStartmenu = ("/fxml/startmenu.fxml");
-        FXMLLoader startmenuRoot = new FXMLLoader(getClass().getResource(fxmlFileStartmenu));
+        FXMLLoader startmenuRoot = new FXMLLoader(ResourceController.class.getResource(fxmlFileStartmenu));
         StartmenuController startmenuController = new StartmenuController();
         startmenuRoot.setController(startmenuController);
         startmenuScene = new Scene(startmenuRoot.load(), 1280 , 720);
-
-        // set initial scene to menu scene
-        Run.getPrimaryStage().setScene(getStartmenuScene());
-        Run.getPrimaryStage().show();
     }
 
-    public void loadRooms() throws Exception{
+    public static void loadRooms() throws Exception{
 
         String fxmlFileHome = ("/fxml/home.fxml");
-        FXMLLoader homeRoot = new FXMLLoader(getClass().getResource(fxmlFileHome));
+        FXMLLoader homeRoot = new FXMLLoader(ResourceController.class.getResource(fxmlFileHome));
         HomeController homeController = new HomeController();
         homeRoot.setController(homeController);
         homeScene = new Scene(homeRoot.load(), 1280 , 720);
 
         String fxmlFileOutside = ("/fxml/outside.fxml");
-        FXMLLoader outsideRoot = new FXMLLoader(getClass().getResource(fxmlFileOutside));
+        FXMLLoader outsideRoot = new FXMLLoader(ResourceController.class.getResource(fxmlFileOutside));
         OutsideController outsidecontroller = new OutsideController();
         outsideRoot.setController(outsidecontroller);
         outsideScene = new Scene(outsideRoot.load(), 1280 , 720);
