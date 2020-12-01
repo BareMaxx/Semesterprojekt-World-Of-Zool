@@ -17,7 +17,6 @@ public class InitGame {
 
     InitGame(Player p1, Parser parser) {
         this.parser = parser;
-        createRooms(p1);
         printWelcome(p1);
     }
 
@@ -29,6 +28,7 @@ public class InitGame {
         setGender(p1);
         setEcon(p1);
         setMoney(p1);
+        createRooms(p1);
         System.out.println("You have been born as a " + p1.getFamilyEconomy().toString().toLowerCase() + " " +
                 p1.getGender().toString().toLowerCase() + " living in " + p1.getCountry().toString().toLowerCase());
         p1.setStage("child");
@@ -63,9 +63,9 @@ public class InitGame {
         hospital.setExit("outside", outside);
         school.setExit("outside", outside);
 
-        Book b1 = new Book("Algorithms",10,100);
-        Book b2 = new Book("Math",20,200);
-        Book b3 = new Book("sql",30,300);
+        Book b1 = new Book("Algorithms", p1.getCountry().getMoney() * 7, 150);
+        Book b2 = new Book("Math",p1.getCountry().getMoney() * 15, 300);
+        Book b3 = new Book("sql",p1.getCountry().getMoney() * 27, 600);
         Protectors mask = new Protectors("mask", 50, 2, "sickness");
         Protectors helmet = new Protectors("helmet", 50, 2, "dmg");
 
