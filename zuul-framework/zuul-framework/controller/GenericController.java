@@ -38,24 +38,15 @@ public class GenericController {
     }
 
     @FXML
-    void changeScene(String room) throws Exception{
-
+    void changeScene(String room) throws Exception {
         // application layer
         Run.getRInstance().processCommand("go " + room);
 
         switch (room){
-            case "home" ->{
-                Run.getPrimaryStage().setScene(ResourceController.getHomeScene());
-                return;
-            }
-            case "outside" ->{
-                Run.getPrimaryStage().setScene(ResourceController.getOutsideScene());
-                return;
-            }
-            case "startmenu" ->{
-                Run.getPrimaryStage().setScene(ResourceController.getStartmenuScene());
-                return;
-            }
+            case "home" -> Run.getPrimaryStage().setScene(ResourceController.getHomeScene());
+            case "outside" -> Run.getPrimaryStage().setScene(ResourceController.getOutsideScene());
+            case "shop" -> Run.getPrimaryStage().setScene(ResourceController.getShopScene());
+            case "startmenu" -> Run.getPrimaryStage().setScene(ResourceController.getStartmenuScene());
         }
     }
 }

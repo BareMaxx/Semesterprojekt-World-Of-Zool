@@ -47,6 +47,10 @@ public class Room {
         stock.remove(i);
     }
 
+    public ArrayList<PurchasableItem> getItems() {
+        return stock;
+    }
+
     public void printStock() {
         System.out.println("These objects are for sale:");
         if (stock.isEmpty()) {

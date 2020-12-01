@@ -3,20 +3,19 @@ package gameEngine;
 import commands.Command;
 import commands.Parser;
 import controller.ResourceController;
+import gameplay.Room;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import player.Player;
 
 public class Run extends Application {
-    public static final int WIDTH = 1280;
-    public static final int HEIGHT = 720;
-
     private Parser parser;
     private Player player;
     private Child c;
     private Adult a;
     private Old o;
 
+    private static Room shopRoom;
     private static Run rInstance;
     private static Stage primaryStage;
 
@@ -37,7 +36,11 @@ public class Run extends Application {
         return rInstance;
     }
 
-    public void launchMenu(){
+    public static Room getShopRoom() {
+        return shopRoom;
+    }
+
+    public void launchMenu() {
         launch();
     }
 
@@ -52,7 +55,9 @@ public class Run extends Application {
     }
 
     public void initGame(String country) {
-        new InitGame(player, country);
+        InitGame init = new InitGame(player, country);
+        shopRoom = init.createRooms(player);
+        init.printWelcome(player);
     }
 
     // This function is called when an instance of the Run class is created.

@@ -14,19 +14,20 @@ public class InitGame {
     private RandomEngine ran = new RandomEngine();
 
     public InitGame(Player p1, String country) {
-        createRooms(p1);
-        printWelcome(p1, country);
+        setupPlayer(p1, country);
     }
 
-    private void printWelcome(Player player, String country) {
-        System.out.println();
-        System.out.println("welcome to real life bitch");
-        System.out.println("real life sucks");
-
+    private void setupPlayer(Player player, String country) {
         setCountry(player, country);
         setGender(player);
         setEcon(player);
         setMoney(player);
+    }
+
+    public void printWelcome(Player player) {
+        System.out.println();
+        System.out.println("welcome to real life bitch");
+        System.out.println("real life sucks");
 
         System.out.println("You have been born as a " + player.getFamilyEconomy().toString().toLowerCase() + " " +
                 player.getGender().toString().toLowerCase() + " living in " + player.getCountry().toString().toLowerCase());
@@ -40,7 +41,7 @@ public class InitGame {
         System.out.println(player.getCurrentRoom().getLongDescription());
     }
 
-    private void createRooms(Player player) {
+    public Room createRooms(Player player) {
         Room home, work, shop, school, hospital, outside;
 
         outside = new Room("outside", "outside", false);
@@ -64,9 +65,9 @@ public class InitGame {
 
         Book b1 = new Book("Algorithms",10,100);
         Book b2 = new Book("Math",20,200);
-        Book b3 = new Book("sql",30,300);
-        Protectors mask = new Protectors("mask", 50, 2, "sickness");
-        Protectors helmet = new Protectors("helmet", 50, 2, "dmg");
+        Book b3 = new Book("SQL",30,300);
+        Protectors mask = new Protectors("Mask", 50, 2, "sickness");
+        Protectors helmet = new Protectors("Helmet", 50, 2, "dmg");
 
         shop.setItem(b1);
         shop.setItem(b2);
@@ -75,6 +76,8 @@ public class InitGame {
         shop.setItem(helmet);
 
         player.setCurrentRoom(home);
+
+        return shop;
     }
 
     public boolean childDeath(Player p1){
