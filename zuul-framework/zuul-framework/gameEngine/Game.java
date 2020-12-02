@@ -3,14 +3,9 @@ package gameEngine;
 import commands.Command;
 import commands.CommandWord;
 import commands.Parser;
-import gameplay.Room;
-import gameplay.Sickness;
-import gameplay.Turns;
-import gameplay.WorkDMG;
+import gameplay.*;
 import item.*;
 import player.Player;
-
-import javax.sound.midi.Soundbank;
 
 public class Game {
     protected final String SHOP_NAME = "shop";
@@ -133,8 +128,7 @@ public class Game {
                 player.getFamilyEconomy().getMoneyMulti() / econStage;
         player.incMoney(i);
         System.out.println("You made " + i);
-        randomSickEvent(player.getSickChance() * 2);
-        randomDmgEvent(player.getDmgChance() * 2);
+        randomEvent(2);
         turns.decTurns(5);
         checkTurns();
     }
@@ -305,10 +299,19 @@ public class Game {
             player.setCurrentRoom(nextRoom);
             System.out.println(player.getCurrentRoom().getLongDescription());
             turns.decTurns();
-            randomSickEvent(player.getSickChance());
-            randomDmgEvent(player.getDmgChance());
+            randomEvent(1);
         }
     }
+
+    private void randomEvent(int multi){
+        RandomEngine r = new RandomEngine();
+        int i = r.getRandom(0,1);
+        switch (i){
+            case 0 -> randomSickEvent(player.getSickChance() * multi);
+            case 1 -> randomDmgEvent(player.getDmgChance() * multi);
+        }
+    }
+
     private void randomSickEvent(int probability){
         Sickness s = new Sickness(probability, player);
         if(s.name != null) {
