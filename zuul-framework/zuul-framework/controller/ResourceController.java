@@ -10,6 +10,7 @@ public class ResourceController {
     private static Scene homeScene;
     private static Scene outsideScene;
     private static Scene startmenuScene;
+    private static Scene hospitalScene;
 
     public static Scene getHomeScene() {
         return homeScene;
@@ -21,6 +22,10 @@ public class ResourceController {
 
     public static Scene getStartmenuScene() {
         return startmenuScene;
+    }
+
+    public static Scene getHospitalScene() {
+        return hospitalScene;
     }
 
     public static void loadMenu() throws Exception{
@@ -42,8 +47,14 @@ public class ResourceController {
 
         String fxmlFileOutside = ("/fxml/outside.fxml");
         FXMLLoader outsideRoot = new FXMLLoader(ResourceController.class.getResource(fxmlFileOutside));
-        OutsideController outsidecontroller = new OutsideController();
-        outsideRoot.setController(outsidecontroller);
+        OutsideController outsideController = new OutsideController();
+        outsideRoot.setController(outsideController);
         outsideScene = new Scene(outsideRoot.load(), 1280 , 720);
+
+        String fxmlFileHospital = ("/fxml/hospital.fxml");
+        FXMLLoader hospitalRoot = new FXMLLoader(ResourceController.class.getResource(fxmlFileHospital));
+        HospitalController hospitalController = new HospitalController();
+        hospitalRoot.setController(hospitalController);
+        hospitalScene = new Scene(hospitalRoot.load(), 1280 , 720);
     }
 }
