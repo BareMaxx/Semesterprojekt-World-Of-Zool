@@ -8,8 +8,8 @@ public enum Gender {
     private double avgAgeMulti;
 
     Gender(int moneyMulti, double avgAgeMulti){
-        this.moneyMulti=moneyMulti;
-        this.avgAgeMulti=avgAgeMulti;
+        this.moneyMulti = moneyMulti;
+        this.avgAgeMulti = avgAgeMulti;
     }
     public int getMoneyMulti(){
         return moneyMulti;
