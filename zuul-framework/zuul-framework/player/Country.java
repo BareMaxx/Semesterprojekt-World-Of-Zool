@@ -1,9 +1,9 @@
 package player;
 
 public enum Country {
-    VAKANNDA(53,50, 62, 61,34,5, 6),
-    WASHINGGEORGE(15,250,74, 29,52,19, 4),
-    DANHEIM(5,500,80, 20,70,10, 2);
+    VAKANNDA(53,50, 1.00, 61,34,5, 6),
+    WASHINGGEORGE(15,250,1.33, 29,52,19, 4),
+    DANHEIM(5,500,1.35, 20,70,10, 2);
 
     private int birthMortal;
     private int money;
