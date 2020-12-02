@@ -64,6 +64,7 @@ public class GenericController {
             case "startmenu" -> Run.getPrimaryStage().setScene(ResourceController.getStartmenuScene());
             case "hospital" -> Run.getPrimaryStage().setScene(ResourceController.getHospitalScene());
             case "school" -> Run.getPrimaryStage().setScene(ResourceController.getSchoolScene());
+            case "work" -> Run.getPrimaryStage().setScene(ResourceController.getWorkScene());
         }
     }
 

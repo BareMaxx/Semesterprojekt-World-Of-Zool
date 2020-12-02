@@ -12,6 +12,7 @@ public class ResourceController {
     private static Scene startmenuScene;
     private static Scene hospitalScene;
     private static Scene schoolScene;
+    private static Scene workScene;
 
     public static Scene getHomeScene() {
         return homeScene;
@@ -31,6 +32,10 @@ public class ResourceController {
 
     public static Scene getSchoolScene() {
         return schoolScene;
+    }
+
+    public static Scene getWorkScene() {
+        return workScene;
     }
 
     public static void loadMenu() throws Exception{
@@ -67,5 +72,11 @@ public class ResourceController {
         SchoolController schoolController = new SchoolController();
         schoolRoot.setController(schoolController);
         schoolScene = new Scene(schoolRoot.load(), 1280 , 720);
+
+        String fxmlFileWork = ("/fxml/work.fxml");
+        FXMLLoader workRoot = new FXMLLoader(ResourceController.class.getResource(fxmlFileWork));
+        WorkController workController = new WorkController();
+        workRoot.setController(workController);
+        workScene = new Scene(workRoot.load(), 1280 , 720);
     }
 }
