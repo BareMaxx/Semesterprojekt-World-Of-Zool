@@ -2,8 +2,13 @@ package controller;
 
 import gameEngine.Run;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import player.Country;
 
 public class HomeController extends GenericController{
@@ -15,6 +20,20 @@ public class HomeController extends GenericController{
 
     @FXML
     private ImageView bedImage;
+
+    // popup window
+
+    @FXML
+    private AnchorPane popupPane;
+
+    @FXML
+    private Text headerText;
+
+    @FXML
+    private Text dialogText;
+
+    @FXML
+    private Button okButton;
 
 
     public HomeController() throws  Exception{
@@ -53,5 +72,19 @@ public class HomeController extends GenericController{
         this.doorImage.setImage(doorImage);
         this.bedImage.setImage(bedImage);
 
+    }
+
+    @FXML
+    void displayPopup(MouseEvent event) {
+
+        headerText.setText("Sleep");
+        dialogText.setText("You sleep");
+
+        popupPane.setVisible(true);
+    }
+
+    @FXML
+    void hidePopup(MouseEvent event) {
+        popupPane.setVisible(false);
     }
 }
