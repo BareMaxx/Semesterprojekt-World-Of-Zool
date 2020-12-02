@@ -150,12 +150,7 @@ public class Game {
                 System.out.println("You are now an adult");
             }
             case "adult" -> {
-                player.setStage("old");
-                System.out.println("You are now old");
-            }
-            case "old" -> {
                 player.setAlive(false);
-                System.out.println("You are dead");
             }
         }
     }
