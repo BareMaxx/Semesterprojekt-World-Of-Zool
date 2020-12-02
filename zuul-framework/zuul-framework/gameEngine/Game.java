@@ -345,7 +345,7 @@ public class Game {
             if (player.getStage().equals("child") && turns.getTurns() <= 0) {
                 player.setStage("adult");
             } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
-                player.setStage("old");
+                player.setAlive(false);
             }
         }
     }
