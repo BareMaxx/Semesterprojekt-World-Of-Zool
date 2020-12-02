@@ -59,26 +59,11 @@ public class GenericController {
         Run.getRInstance().processCommand("go " + room);
 
         switch (room){
-            case "home" ->{
-                Run.getPrimaryStage().setScene(ResourceController.getHomeScene());
-                return;
-            }
-            case "outside" ->{
-                Run.getPrimaryStage().setScene(ResourceController.getOutsideScene());
-                return;
-            }
-            case "startmenu" ->{
-                Run.getPrimaryStage().setScene(ResourceController.getStartmenuScene());
-                return;
-            }
-            case "hospital" ->{
-                Run.getPrimaryStage().setScene(ResourceController.getHospitalScene());
-                return;
-            }
-            case "school" ->{
-                Run.getPrimaryStage().setScene(ResourceController.getSchoolScene());
-                return;
-            }
+            case "home" -> Run.getPrimaryStage().setScene(ResourceController.getHomeScene());
+            case "outside" -> Run.getPrimaryStage().setScene(ResourceController.getOutsideScene());
+            case "startmenu" -> Run.getPrimaryStage().setScene(ResourceController.getStartmenuScene());
+            case "hospital" -> Run.getPrimaryStage().setScene(ResourceController.getHospitalScene());
+            case "school" -> Run.getPrimaryStage().setScene(ResourceController.getSchoolScene());
         }
     }
 
