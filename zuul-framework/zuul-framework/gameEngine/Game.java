@@ -26,7 +26,7 @@ public class Game {
         this.turns = new Turns(turns);
     }
 
-    // Will be overriden by Child, Adult and Old
+    // Will be overriden by Child, Adult
     public void play() {}
 
     // Processes commands. Derived classes have their own special overrides
