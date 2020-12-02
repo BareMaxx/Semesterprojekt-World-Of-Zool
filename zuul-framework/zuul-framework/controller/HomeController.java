@@ -21,21 +21,6 @@ public class HomeController extends GenericController{
     @FXML
     private ImageView bedImage;
 
-    // popup window
-
-    @FXML
-    private AnchorPane popupPane;
-
-    @FXML
-    private Text headerText;
-
-    @FXML
-    private Text dialogText;
-
-    @FXML
-    private Button okButton;
-
-
     public HomeController() throws  Exception{
         super();
     }
@@ -76,15 +61,6 @@ public class HomeController extends GenericController{
 
     @FXML
     void displayPopup(MouseEvent event) {
-
-        headerText.setText("Sleep");
-        dialogText.setText("You sleep");
-
-        popupPane.setVisible(true);
-    }
-
-    @FXML
-    void hidePopup(MouseEvent event) {
-        popupPane.setVisible(false);
+        displayPopup("Sleep","You sleep");
     }
 }

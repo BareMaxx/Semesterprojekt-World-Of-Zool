@@ -24,7 +24,7 @@
             <Image url="@../png/dkbed.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="popupPane" layoutX="230.0" layoutY="244.0" prefHeight="210.0" prefWidth="788.0">
+      <AnchorPane fx:id="popupPane" layoutX="230.0" layoutY="244.0" prefHeight="210.0" prefWidth="788.0" visible="false">
          <children>
             <ImageView fitHeight="295.0" fitWidth="820.0" layoutX="-384.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
