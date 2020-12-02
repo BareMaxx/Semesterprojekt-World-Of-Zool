@@ -7,7 +7,7 @@ import player.Player;
 
 public class Adult extends Game {
     public Adult(Player p1, Parser parser) {
-        super(p1, parser, 100);
+        super(p1, parser, 200);
     }
 
     public void play() {

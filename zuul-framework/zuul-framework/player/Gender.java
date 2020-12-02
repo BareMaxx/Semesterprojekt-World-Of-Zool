@@ -1,20 +1,20 @@
 package player;
 
 public enum Gender {
-    MALE(10,7),
-    FEMALE(7,10);
+    MALE(10,1),
+    FEMALE(7,1.05);
 
     private int moneyMulti;
-    private int avgAgeMulti;
+    private double avgAgeMulti;
 
-    Gender(int moneyMulti, int avgAgeMulti){
-        this.moneyMulti=moneyMulti;
-        this.avgAgeMulti=avgAgeMulti;
+    Gender(int moneyMulti, double avgAgeMulti){
+        this.moneyMulti = moneyMulti;
+        this.avgAgeMulti = avgAgeMulti;
     }
     public int getMoneyMulti(){
         return moneyMulti;
     }
-    public int getAvgAgeMulti(){
+    public double getAvgAgeMulti(){
         return avgAgeMulti;
     }
 }

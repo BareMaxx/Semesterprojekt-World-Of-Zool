@@ -24,6 +24,7 @@ public class Player {
     private WorkDMG dmg = null;
     private int sickChance = 0;
     private int dmgChance = 0;
+    private int avgAge;
 
     public Country getCountry() {
         return country;
@@ -101,11 +102,18 @@ public class Player {
     public int getAge() {
         return age;
     }
-    /*public void incAge(int i){
-        age = age + i;
-    }*/
     public void incAge(int i) {
         age = age + i;
+        if (age >= avgAge) {
+            setAlive(false);
+        }
+    }
+
+    public int getAvgAge() {
+        return avgAge;
+    }
+    public void setAvgAge(int avgAge) {
+        this.avgAge = avgAge;
     }
 
     public int getScore() {
