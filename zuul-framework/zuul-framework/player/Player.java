@@ -104,6 +104,9 @@ public class Player {
     }
     public void incAge(int i) {
         age = age + i;
+        if (age >= avgAge) {
+            setAlive(false);
+        }
     }
 
     public int getAvgAge() {

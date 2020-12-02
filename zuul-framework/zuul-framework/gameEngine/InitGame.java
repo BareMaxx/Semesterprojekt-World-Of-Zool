@@ -28,6 +28,7 @@ public class InitGame {
         setGender(p1);
         setEcon(p1);
         setMoney(p1);
+        setAvgAge(p1);
         createRooms(p1);
         System.out.println("You have been born as a " + p1.getFamilyEconomy().toString().toLowerCase() + " " +
                 p1.getGender().toString().toLowerCase() + " living in " + p1.getCountry().toString().toLowerCase());
@@ -124,5 +125,10 @@ public class InitGame {
 
     public void setMoney(Player p1) {
         p1.incMoney(p1.getCountry().getMoney() * p1.getGender().getMoneyMulti() * p1.getFamilyEconomy().getMoneyMulti());
+    }
+
+    public void setAvgAge(Player player) {
+        //58 is the standard age, which is the lowest age possible, which is the male average age in Vakannda (Uganda)
+        player.setAvgAge((int)(58 * player.getCountry().getAvgAgeMultiplier() * player.getGender().getAvgAgeMulti()));
     }
 }
