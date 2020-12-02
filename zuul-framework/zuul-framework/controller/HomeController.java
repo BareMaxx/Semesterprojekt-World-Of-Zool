@@ -52,7 +52,7 @@ public class HomeController extends GenericController{
     }
 
     @FXML
-    void displayPopup(MouseEvent event) {
+    void displaySleepPopup(MouseEvent event) {
         displayPopup("Sleep","You sleep");
     }
 }

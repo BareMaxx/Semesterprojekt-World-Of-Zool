@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import gameEngine.Run;
@@ -27,6 +28,9 @@ public class GenericController {
 
     @FXML
     private Button okButton;
+
+    @FXML
+    private Rectangle tintLayer;
 
     @FXML
     void darkenText(MouseEvent event) {
@@ -76,11 +80,13 @@ public class GenericController {
         headerText.setText(header);
         dialogText.setText(dialog);
 
+        tintLayer.setVisible(true);
         popupPane.setVisible(true);
     }
 
     @FXML
     void hidePopup(MouseEvent event) {
         popupPane.setVisible(false);
+        tintLayer.setVisible(false);
     }
 }
