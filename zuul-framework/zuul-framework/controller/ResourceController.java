@@ -11,6 +11,9 @@ public class ResourceController {
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 720;
 
+    public static final int OVERLAYWIDTH = 1280;
+    public static final int OVERLAYHEIGHT = 128;
+
     private static SceneData homeData;
     private static SceneData outsideData;
     private static SceneData shopData;
@@ -18,10 +21,10 @@ public class ResourceController {
     private static SceneData hospitalData;
     private static SceneData schoolData;
     private static SceneData workData;
-    private static SubSceneData inventoryData;
+    private static SubSceneData overlayData;
 
     public static SceneData getHomeData() {
-        return homeData;r
+        return homeData;
     }
 
     public static SceneData getShopData() {
@@ -48,8 +51,8 @@ public class ResourceController {
         return workData;
     }
 
-    public static SubSceneData getInventoryData() {
-        return inventoryData;
+    public static SubSceneData getOverlayData() {
+        return overlayData;
     }
 
     private static SceneData loadScene(String fileName) throws Exception {
@@ -60,7 +63,7 @@ public class ResourceController {
         return data;
     }
 
-    private static SubSceneData loadSubScene(String fileName, int width, int height) throws Exception {
+    private static SubSceneData loadSubScene(String fileName) throws Exception {
         FXMLLoader loader = new FXMLLoader(ResourceController.class.getResource(fileName));
         SubSceneData data = new SubSceneData();
         data.scene = new SubScene(loader.load(), OVERLAYWIDTH, OVERLAYHEIGHT);
@@ -84,6 +87,6 @@ public class ResourceController {
         workData = loadScene("/fxml/work.fxml");
         shopData = loadScene("/fxml/shop.fxml");
 
-        inventoryData = loadSubScene("/fxml/overlay.fxml");
+        overlayData = loadSubScene("/fxml/overlay.fxml");
     }
 }

@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import player.Country;
 
-public class OverlayController {
+public class OverlayController extends GenericController {
     @FXML
     private HBox inventory;
 

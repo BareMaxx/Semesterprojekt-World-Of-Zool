@@ -2,7 +2,7 @@ package gameEngine;
 
 import commands.Command;
 import commands.Parser;
-import controller.InventoryController;
+import controller.OverlayController;
 import controller.ResourceController;
 import controller.ShopController;
 import gameplay.Room;
@@ -52,7 +52,7 @@ public class Run extends Application {
             case "adult" -> a.processCommand(command);
         }
 
-        ((InventoryController)ResourceController.getInventoryData().controller).updateInventory();
+        ((OverlayController)ResourceController.getOverlayData().controller).updateInventory();
         ((ShopController)ResourceController.getShopData().controller).updateStock();
     }
 
