@@ -2,18 +2,16 @@ package controller;
 
 import gameEngine.Run;
 import item.Item;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-import player.Country;
 
 public class OverlayController extends GenericController {
     @FXML
-    private HBox inventory;
+    private ListView inventory;
 
     @FXML
     private AnchorPane anchorPane;
@@ -27,7 +25,8 @@ public class OverlayController extends GenericController {
     }
 
     public void updateInventory() {
-        inventory.getChildren().clear();
+        ObservableList items = inventory.getItems();
+        items.clear();
 
         for (Item item : Run.getRInstance().getPlayer().getInventory()) {
             Text text = new Text(item.getName());
@@ -35,7 +34,7 @@ public class OverlayController extends GenericController {
                 String itemName = ((Text)event.getSource()).getText();
                 Run.getRInstance().processCommand("use " + itemName);
             });
-            inventory.getChildren().add(text);
+            items.add(text);
         }
     }
 }

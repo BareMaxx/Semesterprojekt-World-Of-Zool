@@ -28,7 +28,7 @@ public class GenericController {
     }
 
     @FXML
-    void goOutside(MouseEvent event) throws Exception{
+    void goOutside(MouseEvent event) throws Exception {
         changeScene("outside");
     }
 
