@@ -13,24 +13,7 @@ import gameEngine.Run;
 
 public class GenericController {
     @FXML
-    private ImageView backgroundImage;
-
-    // popup window
-
-    @FXML
-    private AnchorPane popupPane;
-
-    @FXML
-    private Text headerText;
-
-    @FXML
-    private Text dialogText;
-
-    @FXML
-    private Button okButton;
-
-    @FXML
-    private Rectangle tintLayer;
+    protected ImageView backgroundImage;
 
     @FXML
     void darkenText(MouseEvent event) {
@@ -69,20 +52,5 @@ public class GenericController {
 
         // Reparent inventory to whichever scene is on top
         ((AnchorPane)Run.getPrimaryStage().getScene().getRoot()).getChildren().add(ResourceController.getOverlayScene());
-    }
-
-    @FXML
-    void displayPopup(String header, String dialog) {
-        headerText.setText(header);
-        dialogText.setText(dialog);
-
-        tintLayer.setVisible(true);
-        popupPane.setVisible(true);
-    }
-
-    @FXML
-    void hidePopup(MouseEvent event) {
-        popupPane.setVisible(false);
-        tintLayer.setVisible(false);
     }
 }
