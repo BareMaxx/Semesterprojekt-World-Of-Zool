@@ -17,6 +17,7 @@ public class ResourceController {
     private static Scene schoolScene;
     private static Scene workScene;
     private static SubScene inventoryScene;
+    private static InventoryController inventoryController;
 
     public static Scene getHomeScene() {
         return homeScene;
@@ -50,6 +51,8 @@ public class ResourceController {
         return inventoryScene;
     }
 
+    public static InventoryController getInventoryController() { return inventoryController; }
+
     private static Scene loadRoom(String fileName) throws Exception {
         FXMLLoader loader = new FXMLLoader(ResourceController.class.getResource(fileName));
         return new Scene(loader.load(), WIDTH , HEIGHT);
@@ -73,5 +76,6 @@ public class ResourceController {
 
         FXMLLoader loader = new FXMLLoader(ResourceController.class.getResource("/fxml/inventory.fxml"));
         inventoryScene = new SubScene(loader.load(), 1280, 128);
+        inventoryController = loader.getController();
     }
 }

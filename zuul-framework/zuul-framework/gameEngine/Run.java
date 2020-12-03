@@ -52,6 +52,8 @@ public class Run extends Application {
             case "adult" -> a.processCommand(command);
             case "old" -> o.processCommand(command);
         }
+
+        ResourceController.getInventoryController().updateInventory();
     }
 
     public void initGame(String country) {
