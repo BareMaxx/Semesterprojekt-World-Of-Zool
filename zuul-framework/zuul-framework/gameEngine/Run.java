@@ -15,7 +15,7 @@ public class Run {
         while (p1.getAlive()) {
             switch (p1.getStage()) {
                 case "child" -> c.play();
-                case "adult" -> {p1.moveFamilyEconomy(); a.play();}
+                case "adult" -> {a.play();}
             }
         }
         System.out.println("Thank you for playing.  Good bye.");

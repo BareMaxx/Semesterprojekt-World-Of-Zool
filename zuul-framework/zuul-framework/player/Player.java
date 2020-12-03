@@ -135,6 +135,9 @@ public class Player {
     }
     public void setStage(String s){
         stage = s;
+        if(s.equals("adult")) {
+            moveFamilyEconomy();
+        }
     }
 
     public boolean getAlive() {

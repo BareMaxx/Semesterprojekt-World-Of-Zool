@@ -21,7 +21,7 @@ public class Game {
         this.turns = new Turns(turns);
     }
 
-    // Will be overriden by Child, Adult and Old
+    // Will be overriden by Child, Adult
     public void play() {}
 
     // Processes commands. Derived classes have their own special overrides
@@ -144,12 +144,7 @@ public class Game {
                 System.out.println("You are now an adult");
             }
             case "adult" -> {
-                player.setStage("old");
-                System.out.println("You are now old");
-            }
-            case "old" -> {
                 player.setAlive(false);
-                System.out.println("You are dead");
             }
         }
     }
@@ -353,7 +348,7 @@ public class Game {
             if (player.getStage().equals("child") && turns.getTurns() <= 0) {
                 player.setStage("adult");
             } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
-                player.setStage("old");
+                player.setAlive(false);
             }
         }
     }
