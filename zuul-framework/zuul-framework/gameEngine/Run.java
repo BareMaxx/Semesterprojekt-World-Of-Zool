@@ -10,11 +10,17 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import player.Player;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+
 public class Run extends Application {
     private Parser parser;
     private Player player;
     private Child c;
     private Adult a;
+    private ByteArrayOutputStream stream;
 
     private static Room shopRoom;
     private static Run rInstance;
@@ -26,6 +32,10 @@ public class Run extends Application {
         player = new Player();
         c = new Child(player);
         a = new Adult(player);
+
+        stream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(stream);
+        System.setOut(printStream);
     }
 
     public static Stage getPrimaryStage() {
@@ -51,6 +61,9 @@ public class Run extends Application {
             case "child" -> c.processCommand(command);
             case "adult" -> a.processCommand(command);
         }
+
+        String console = new String(stream.toByteArray());
+        ((OverlayController)ResourceController.getOverlayData().controller).updateEventLog(console);
 
         ((OverlayController)ResourceController.getOverlayData().controller).updateInventory();
         ((ShopController)ResourceController.getShopData().controller).updateStock();

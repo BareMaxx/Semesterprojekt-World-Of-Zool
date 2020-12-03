@@ -3,6 +3,7 @@ package controller;
 import gameEngine.Run;
 import item.Item;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -16,6 +17,14 @@ public class OverlayController extends GenericController {
 
     @FXML
     private AnchorPane anchorPane;
+
+    @FXML
+    private TextArea event;
+
+    public void updateEventLog(String console) {
+        event.setText(console);
+        event.positionCaret(console.length());
+    }
 
     public void updateInventory() {
         inventory.getChildren().clear();
