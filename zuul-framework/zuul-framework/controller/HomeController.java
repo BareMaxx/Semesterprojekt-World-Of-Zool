@@ -12,8 +12,6 @@ import javafx.scene.text.Text;
 import player.Country;
 
 public class HomeController extends GenericController{
-    @FXML
-    private ImageView backgroundImage;
 
     @FXML
     private ImageView doorImage;
@@ -49,10 +47,5 @@ public class HomeController extends GenericController{
                 bedImage.setImage(new Image("/png/usaBed.png"));
             }
         }
-    }
-
-    @FXML
-    void displaySleepPopup(MouseEvent event) {
-        displayPopup("Sleep","You sleep");
     }
 }

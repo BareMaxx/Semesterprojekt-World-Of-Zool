@@ -21,7 +21,7 @@ public class ResourceController {
     private static SubSceneData inventoryData;
 
     public static SceneData getHomeData() {
-        return homeData;
+        return homeData;r
     }
 
     public static SceneData getShopData() {
@@ -63,7 +63,7 @@ public class ResourceController {
     private static SubSceneData loadSubScene(String fileName, int width, int height) throws Exception {
         FXMLLoader loader = new FXMLLoader(ResourceController.class.getResource(fileName));
         SubSceneData data = new SubSceneData();
-        data.scene = new SubScene(loader.load(), width, height);
+        data.scene = new SubScene(loader.load(), OVERLAYWIDTH, OVERLAYHEIGHT);
         data.controller = loader.getController();
         return data;
     }
@@ -84,6 +84,6 @@ public class ResourceController {
         workData = loadScene("/fxml/work.fxml");
         shopData = loadScene("/fxml/shop.fxml");
 
-        inventoryData = loadSubScene("/fxml/inventory.fxml", 1280, 128);
+        inventoryData = loadSubScene("/fxml/overlay.fxml");
     }
 }
