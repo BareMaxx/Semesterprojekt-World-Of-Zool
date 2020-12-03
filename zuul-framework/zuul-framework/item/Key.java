@@ -6,7 +6,7 @@ import player.Player;
 public class Key extends Item {
     private final String KEYTYPE;   // keyType is effectively a room name
 
-    public Key(int price, String keyType, String name) {
+    public Key(String keyType, String name) {
         super();
         //this.name = "Key to " + keyType;
         this.name = name;
