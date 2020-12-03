@@ -68,7 +68,7 @@ public class GenericController {
         }
 
         // Reparent inventory to whichever scene is on top
-        ((AnchorPane)Run.getPrimaryStage().getScene().getRoot()).getChildren().add(ResourceController.getInventoryScene());
+        ((AnchorPane)Run.getPrimaryStage().getScene().getRoot()).getChildren().add(ResourceController.getOverlayScene());
     }
 
     @FXML

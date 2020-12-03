@@ -9,6 +9,9 @@ public class ResourceController {
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 720;
 
+    public static final int OVERLAYWIDTH = 1280;
+    public static final int OVERLAYHEIGHT = 128;
+
     private static Scene homeScene;
     private static Scene outsideScene;
     private static Scene shopScene;
@@ -16,8 +19,9 @@ public class ResourceController {
     private static Scene hospitalScene;
     private static Scene schoolScene;
     private static Scene workScene;
-    private static SubScene inventoryScene;
-    private static InventoryController inventoryController;
+
+    private static SubScene overlayScene;
+    private static OverlayController overlayController;
 
     public static Scene getHomeScene() {
         return homeScene;
@@ -47,19 +51,31 @@ public class ResourceController {
         return workScene;
     }
 
-    public static SubScene getInventoryScene() {
-        return inventoryScene;
+    public static SubScene getOverlayScene() {
+        return overlayScene;
     }
 
-    public static InventoryController getInventoryController() { return inventoryController; }
+    public static OverlayController getInventoryController() { return overlayController; }
 
-    private static Scene loadRoom(String fileName) throws Exception {
+    private static Scene loadScene(String fileName) throws Exception {
         FXMLLoader loader = new FXMLLoader(ResourceController.class.getResource(fileName));
         return new Scene(loader.load(), WIDTH , HEIGHT);
     }
 
+    private static SubScene loadSubScene(String fileName) throws Exception {
+        FXMLLoader loader = new FXMLLoader(ResourceController.class.getResource(fileName));
+
+        SubScene subScene = new SubScene(loader.load(), OVERLAYWIDTH , OVERLAYHEIGHT);
+
+        // This line of code explicitly works because the function is called only once
+        // If the function is called with other SubScenes than overlay, it will produce an error
+        overlayController = loader.getController();
+
+        return subScene;
+    }
+
     public static void loadMenu() throws Exception {
-        startmenuScene = loadRoom("/fxml/startmenu.fxml");
+        startmenuScene = loadScene("/fxml/startmenu.fxml");
 
         // set initial scene to menu scene
         Run.getPrimaryStage().setScene(getStartmenuScene());
@@ -67,15 +83,12 @@ public class ResourceController {
     }
 
     public static void loadRooms() throws Exception {
-        homeScene = loadRoom("/fxml/home.fxml");
-        outsideScene = loadRoom("/fxml/outside.fxml");
-        hospitalScene = loadRoom("/fxml/hospital.fxml");
-        schoolScene = loadRoom("/fxml/school.fxml");
-        workScene = loadRoom("/fxml/work.fxml");
-        shopScene = loadRoom("/fxml/shop.fxml");
-
-        FXMLLoader loader = new FXMLLoader(ResourceController.class.getResource("/fxml/inventory.fxml"));
-        inventoryScene = new SubScene(loader.load(), 1280, 128);
-        inventoryController = loader.getController();
+        homeScene = loadScene("/fxml/home.fxml");
+        outsideScene = loadScene("/fxml/outside.fxml");
+        hospitalScene = loadScene("/fxml/hospital.fxml");
+        schoolScene = loadScene("/fxml/school.fxml");
+        workScene = loadScene("/fxml/work.fxml");
+        shopScene = loadScene("/fxml/shop.fxml");
+        overlayScene = loadSubScene("/fxml/overlay.fxml");
     }
 }
