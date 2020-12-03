@@ -2,29 +2,36 @@ package controller;
 
 import gameEngine.Run;
 import gameplay.Room;
+import item.Item;
 import item.PurchasableItem;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class ShopController extends GenericController {
     @FXML
-    private HBox shop;
+    private VBox shop;
 
     @FXML
-    void initialize() {
+    void buy(MouseEvent event) {
+        try {
+            Run.getRInstance().processCommand("buy " + ((Text)event.getSource()).getText());
+            shop.getChildren().remove(event.getSource());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateStock() {
         Room shopRoom = Run.getShopRoom();
+        shop.getChildren().clear();
 
         for (PurchasableItem i : shopRoom.getItems()) {
-            Button btn = new Button(i.getName());
-            btn.setOnAction(event -> {
-                try {
-                    Run.getRInstance().processCommand("buy " + ((Button) event.getSource()).getText());
-                    shop.getChildren().remove(event.getSource());
-                } catch (Exception e) {
-                    System.out.println(e.toString());
-                }
-            });
+            Text btn = new Text(i.getName() + " - $" + i.getPrice());
+            btn.setOnMouseClicked(this::buy);
+            btn.setOnMouseEntered(this::highlightText);
+            btn.setOnMouseExited(this::darkenText);
             shop.getChildren().add(btn);
         }
     }

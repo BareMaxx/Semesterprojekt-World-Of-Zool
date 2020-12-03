@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
-public class InventoryController {
+public class InventoryController extends GenericController {
     @FXML
     private HBox inventory;
 

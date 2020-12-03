@@ -1,6 +1,8 @@
 package controller;
 
 import gameEngine.Run;
+import gameEngine.SceneData;
+import gameEngine.SubSceneData;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
@@ -9,73 +11,79 @@ public class ResourceController {
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 720;
 
-    private static Scene homeScene;
-    private static Scene outsideScene;
-    private static Scene shopScene;
-    private static Scene startmenuScene;
-    private static Scene hospitalScene;
-    private static Scene schoolScene;
-    private static Scene workScene;
-    private static SubScene inventoryScene;
-    private static InventoryController inventoryController;
+    private static SceneData homeData;
+    private static SceneData outsideData;
+    private static SceneData shopData;
+    private static SceneData startmenuData;
+    private static SceneData hospitalData;
+    private static SceneData schoolData;
+    private static SceneData workData;
+    private static SubSceneData inventoryData;
 
-    public static Scene getHomeScene() {
-        return homeScene;
+    public static SceneData getHomeData() {
+        return homeData;
     }
 
-    public static Scene getShopScene() {
-        return shopScene;
+    public static SceneData getShopData() {
+        return shopData;
     }
 
-    public static Scene getOutsideScene() {
-        return outsideScene;
+    public static SceneData getOutsideData() {
+        return outsideData;
     }
 
-    public static Scene getStartmenuScene() {
-        return startmenuScene;
+    public static SceneData getStartmenuData() {
+        return startmenuData;
     }
 
-    public static Scene getHospitalScene() {
-        return hospitalScene;
+    public static SceneData getHospitalData() {
+        return hospitalData;
     }
 
-    public static Scene getSchoolScene() {
-        return schoolScene;
+    public static SceneData getSchoolData() {
+        return schoolData;
     }
 
-    public static Scene getWorkScene() {
-        return workScene;
+    public static SceneData getWorkData() {
+        return workData;
     }
 
-    public static SubScene getInventoryScene() {
-        return inventoryScene;
+    public static SubSceneData getInventoryData() {
+        return inventoryData;
     }
 
-    public static InventoryController getInventoryController() { return inventoryController; }
-
-    private static Scene loadRoom(String fileName) throws Exception {
+    private static SceneData loadScene(String fileName) throws Exception {
         FXMLLoader loader = new FXMLLoader(ResourceController.class.getResource(fileName));
-        return new Scene(loader.load(), WIDTH , HEIGHT);
+        SceneData data = new SceneData();
+        data.scene = new Scene(loader.load(), WIDTH, HEIGHT);
+        data.controller = loader.getController();
+        return data;
+    }
+
+    private static SubSceneData loadSubScene(String fileName, int width, int height) throws Exception {
+        FXMLLoader loader = new FXMLLoader(ResourceController.class.getResource(fileName));
+        SubSceneData data = new SubSceneData();
+        data.scene = new SubScene(loader.load(), width, height);
+        data.controller = loader.getController();
+        return data;
     }
 
     public static void loadMenu() throws Exception {
-        startmenuScene = loadRoom("/fxml/startmenu.fxml");
+        startmenuData = loadScene("/fxml/startmenu.fxml");
 
         // set initial scene to menu scene
-        Run.getPrimaryStage().setScene(getStartmenuScene());
+        Run.getPrimaryStage().setScene(getStartmenuData().scene);
         Run.getPrimaryStage().show();
     }
 
     public static void loadRooms() throws Exception {
-        homeScene = loadRoom("/fxml/home.fxml");
-        outsideScene = loadRoom("/fxml/outside.fxml");
-        hospitalScene = loadRoom("/fxml/hospital.fxml");
-        schoolScene = loadRoom("/fxml/school.fxml");
-        workScene = loadRoom("/fxml/work.fxml");
-        shopScene = loadRoom("/fxml/shop.fxml");
+        homeData = loadScene("/fxml/home.fxml");
+        outsideData = loadScene("/fxml/outside.fxml");
+        hospitalData = loadScene("/fxml/hospital.fxml");
+        schoolData = loadScene("/fxml/school.fxml");
+        workData = loadScene("/fxml/work.fxml");
+        shopData = loadScene("/fxml/shop.fxml");
 
-        FXMLLoader loader = new FXMLLoader(ResourceController.class.getResource("/fxml/inventory.fxml"));
-        inventoryScene = new SubScene(loader.load(), 1280, 128);
-        inventoryController = loader.getController();
+        inventoryData = loadSubScene("/fxml/inventory.fxml", 1280, 128);
     }
 }

@@ -2,7 +2,9 @@ package gameEngine;
 
 import commands.Command;
 import commands.Parser;
+import controller.InventoryController;
 import controller.ResourceController;
+import controller.ShopController;
 import gameplay.Room;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -50,7 +52,8 @@ public class Run extends Application {
             case "adult" -> a.processCommand(command);
         }
 
-        ResourceController.getInventoryController().updateInventory();
+        ((InventoryController)ResourceController.getInventoryData().controller).updateInventory();
+        ((ShopController)ResourceController.getShopData().controller).updateStock();
     }
 
     public void initGame(String country) {
@@ -71,7 +74,7 @@ public class Run extends Application {
 
         // set initial scene to menu scene
         primaryStage.setTitle("ZUUUUL");
-        primaryStage.setScene(ResourceController.getStartmenuScene());
+        primaryStage.setScene(ResourceController.getStartmenuData().scene);
         primaryStage.show();
     }
 
