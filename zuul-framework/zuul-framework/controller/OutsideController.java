@@ -28,4 +28,8 @@ public class OutsideController extends GenericController {
     void goHospital(MouseEvent event) throws Exception {
         changeScene("hospital");
     }
+
+    @FXML
+    @Override
+    void goOutside(MouseEvent event) throws Exception{}
 }

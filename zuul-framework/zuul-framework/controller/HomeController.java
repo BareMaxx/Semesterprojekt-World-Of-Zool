@@ -2,8 +2,13 @@ package controller;
 
 import gameEngine.Run;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import player.Country;
 
 public class HomeController extends GenericController{
@@ -16,7 +21,6 @@ public class HomeController extends GenericController{
     @FXML
     private ImageView bedImage;
 
-
     public HomeController() throws  Exception{
         super();
     }
@@ -27,31 +31,28 @@ public class HomeController extends GenericController{
     public void initialize() {
 
         Country country = Run.getRInstance().getPlayer().getCountry();
-        Image backgroundImage = new Image("/png/dkHome.png");
-        Image doorImage = new Image("/png/dkDoor.png");
-        Image bedImage = new Image("/png/dkBed.png");
 
         switch (country){
             case DANHEIM -> {
-                backgroundImage = new Image("/png/dkHome.png");
-                doorImage = new Image("/png/dkDoor.png");
-                bedImage = new Image("/png/dkBed.png");
+                backgroundImage.setImage(new Image("/png/dkHome.png"));
+                doorImage.setImage(new Image("/png/dkDoor.png"));
+                bedImage.setImage(new Image("/png/dkBed.png"));
             }
             case VAKANNDA -> {
-                backgroundImage = new Image("/png/ugHome.png");
-                doorImage = new Image("/png/ugDoor.png");
-                bedImage = new Image("/png/ugBed.png");
+                backgroundImage.setImage(new Image("/png/ugHome.png"));
+                doorImage.setImage(new Image("/png/ugDoor.png"));
+                bedImage.setImage(new Image("/png/ugBed.png"));
             }
             case WASHINGGEORGE -> {
-                backgroundImage = new Image("/png/usaHome.png");
-                doorImage = new Image("/png/usaDoor.png");
-                bedImage = new Image("/png/usaBed.png");
+                backgroundImage.setImage(new Image("/png/usaHome.png"));
+                doorImage.setImage(new Image("/png/usaDoor.png"));
+                bedImage.setImage(new Image("/png/usaBed.png"));
             }
         }
+    }
 
-        this.backgroundImage.setImage(backgroundImage);
-        this.doorImage.setImage(doorImage);
-        this.bedImage.setImage(bedImage);
-
+    @FXML
+    void displaySleepPopup(MouseEvent event) {
+        displayPopup("Sleep","You sleep");
     }
 }
