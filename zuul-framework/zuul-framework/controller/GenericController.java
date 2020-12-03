@@ -53,11 +53,11 @@ public class GenericController {
     }
 
     @FXML
-    void changeScene(String room) throws Exception {
+    void changeScene(String room) {
         // application layer
         Run.getRInstance().processCommand("go " + room);
 
-        switch (room){
+        switch (room) {
             case "home" -> Run.getPrimaryStage().setScene(ResourceController.getHomeScene());
             case "outside" -> Run.getPrimaryStage().setScene(ResourceController.getOutsideScene());
             case "startmenu" -> Run.getPrimaryStage().setScene(ResourceController.getStartmenuScene());
@@ -66,11 +66,13 @@ public class GenericController {
             case "work" -> Run.getPrimaryStage().setScene(ResourceController.getWorkScene());
             case "shop" -> Run.getPrimaryStage().setScene(ResourceController.getShopScene());
         }
+
+        // Reparent inventory to whichever scene is on top
+        ((AnchorPane)Run.getPrimaryStage().getScene().getRoot()).getChildren().add(ResourceController.getInventoryScene());
     }
 
     @FXML
     void displayPopup(String header, String dialog) {
-
         headerText.setText(header);
         dialogText.setText(dialog);
 

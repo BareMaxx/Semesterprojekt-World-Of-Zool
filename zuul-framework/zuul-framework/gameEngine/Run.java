@@ -66,12 +66,13 @@ public class Run extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        this.primaryStage = primaryStage;
+        Run.primaryStage = primaryStage;
 
         // ResourceController is entirely static, therefore it is not instantiated
         ResourceController.loadMenu();
 
         // set initial scene to menu scene
+        primaryStage.setTitle("ZUUUUL");
         primaryStage.setScene(ResourceController.getStartmenuScene());
         primaryStage.show();
     }
