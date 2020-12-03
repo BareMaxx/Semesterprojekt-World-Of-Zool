@@ -116,16 +116,21 @@ public class Game {
         if (!inPlace("work")) {
             return;
         }
-        if (player.getSickness() != null) {
-            System.out.println("You can't work while sick");
-            return;
-        }
-        if (player.getDmg() != null) {
-            System.out.println("You can't work while injured");
-            return;
-        }
         int i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
                 player.getFamilyEconomy().getMoneyMulti() / econStage;
+
+        if (player.getSickness() != null) {
+            i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
+                    player.getFamilyEconomy().getMoneyMulti() / econStage;
+            i = i - 175 *  player.getFamilyEconomy().getMoneyMulti();
+            System.out.println("You can't work while sick");
+        } else if (player.getDmg() != null) {
+            i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
+                    player.getFamilyEconomy().getMoneyMulti() / econStage;
+            i = i - 125 *  player.getFamilyEconomy().getMoneyMulti();
+            System.out.println("You can't work while injured");
+        }
+
         player.incMoney(i);
         System.out.println("You made " + i);
         randomEvent(2);

@@ -35,11 +35,6 @@ public class Child extends Game {
         if(!inPlace("school"))
             return;
 
-        if(getPlayer().getSickness() != null){
-            System.out.println("You can't study while sick");
-            return;
-        }
-
         List<Item> inventory = super.getPlayer().getInventory();
         boolean hasBook = false;
         for (int i = 0; i < inventory.size(); i++) {
@@ -47,6 +42,10 @@ public class Child extends Game {
             if (item instanceof Book) {
                 hasBook = true;
                 int bookKnowledgePoints = ((Book)item).getKNOWLEDGEPOINTS();
+                if(getPlayer().getSickness() != null){
+                    bookKnowledgePoints = bookKnowledgePoints - 50;
+                    System.out.println("You can't study while sick");
+                }
                 super.getPlayer().incKnowledge(bookKnowledgePoints);
                 super.getPlayer().removeInventoryItem(item);
                 System.out.println("You read a book that gave you " + bookKnowledgePoints + " knowledge points");
