@@ -6,7 +6,6 @@ import gameplay.Room;
 import gameplay.Sickness;
 import gameplay.Turns;
 import gameplay.WorkDMG;
-import commands.Parser;
 import gameplay.*;
 import item.*;
 import player.Player;
@@ -74,7 +73,7 @@ public class Game {
 
     private void heal() {
         if (!inRoom(HOSPITAL_NAME))
-            return;ter
+            return;
         if (player.getSickness() != null) {
             if (player.getMoney() >= player.getSickness().getPrice()) {
                 player.decMoney(player.getSickness().getPrice());
@@ -131,7 +130,7 @@ public class Game {
     }
     
     private void sleep() {
-        if (!inPlace("home")) {
+        if (!inRoom(HOME_NAME)) {
             return;
         }
         turns.decTurns(turns.getTurns());
@@ -216,14 +215,15 @@ public class Game {
         if (player.getCurrentRoom().getName().equals(SHOP_NAME)) {
             player.getCurrentRoom().printStock();
         } else if (player.getCurrentRoom().getName().equals(HOSPITAL_NAME)) {
-            if (player.getSickness() != null)r
+            if (player.getSickness() != null) {
                 System.out.println("You have " + player.getSickness().getName() + ", it will cost you " +
                         player.getSickness().getPrice() + " to get healed. Type heal to get healed");
             } else if (player.getDmg() != null) {
                 System.out.println("It will cost you " + player.getDmg().getPrice() + " to get healed. " +
-                        "Type heal to get healed");
-            else
+                    "Type heal to get healed");
+            } else {
                 System.out.println("There is nothing to do here. You are healthy. Leave!");
+            }
         }
     }
 

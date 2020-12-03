@@ -64,7 +64,6 @@ public class Run extends Application {
     // See JavaFX documentation for further explanation...
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         Run.primaryStage = primaryStage;
 
         // ResourceController is entirely static, therefore it is not instantiated
