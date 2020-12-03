@@ -6,6 +6,8 @@ import gameplay.Room;
 import gameplay.Sickness;
 import gameplay.Turns;
 import gameplay.WorkDMG;
+import commands.Parser;
+import gameplay.*;
 import item.*;
 import player.Player;
 
@@ -34,7 +36,7 @@ public class Game {
             case QUIT -> quit(command);
             case AGE -> System.out.println("You are " + player.getAge() + " years old.");
             case INVENTORY -> player.inventoryPrinter();
-            case MONEY -> System.out.println("You have " + player.getMoney() + " gold");
+            case MONEY -> System.out.println("You have " + player.getMoney() + " gold  Economy: " + player.getFamilyEconomy().toString().toLowerCase());
             case USE -> {use(command); turns.decTurns();}
             case BUY -> {buy(command); turns.decTurns();}
             case LOOK -> look();
@@ -51,48 +53,49 @@ public class Game {
         endTurn();
     }
 
-    private void endTurn(){
-        if (player.getSickness() != null) {
+    private void endTurn() {
+        if (player.getSickness()!=null) {
             player.getSickness().decTurnLimit(1);
-            if (player.getSickness().getTurnLimit() == 0)
+            if (player.getSickness().getTurnLimit() == 0) {
                 player.setAlive(false);
+            }
         }
     }
 
     private void sick() {
-        if (player.getSickness() == null)
+        if (player.getSickness() == null) {
             System.out.println("You are healthy");
-        else
+        } else {
             System.out.println("You have been infected with " + player.getSickness().getName() + " you have " +
                     (player.getSickness().getTurnLimit() - 1) + " turns to get to the hospital and pay " +
                     player.getSickness().getPrice() + " gold to get healthy or you will die!");
+        }
     }
 
     private void heal() {
         if (!inRoom(HOSPITAL_NAME))
-            return;
+            return;ter
         if (player.getSickness() != null) {
             if (player.getMoney() >= player.getSickness().getPrice()) {
                 player.decMoney(player.getSickness().getPrice());
                 player.setSickness(null);
                 System.out.println("You have been healed");
                 player.getCurrentRoom().lock();
-            }
-            else
+            } else {
                 System.out.println("You don't have enough money to do that.");
-        }
-        else if (player.getDmg() != null) {
+            }
+        } else if (player.getDmg() != null) {
             if (player.getMoney() >= player.getDmg().getPrice()) {
                 player.decMoney(player.getDmg().getPrice());
                 player.setDmg(null);
                 System.out.println("You have been healed");
                 player.getCurrentRoom().lock();
-            }
-            else
+            } else {
                 System.out.println("You don't have enough money to do that.");
-        }
-        else
+            }
+        } else {
             System.out.println("There is nothing to do here. You are healthy. Leave!");
+        }
     }
 
     public boolean inRoom(String room) {
@@ -122,15 +125,15 @@ public class Game {
                 player.getFamilyEconomy().getMoneyMulti() / econStage;
         player.incMoney(i);
         System.out.println("You made " + i);
-        randomSickEvent(player.getSickChance()*2);
-        randomDmgEvent(player.getDmgChance()*2);
-        turns.decTurns(10);
+        randomEvent(2);
+        turns.decTurns(5);
         checkTurns();
     }
     
     private void sleep() {
-        if (!inRoom(HOME_NAME))
+        if (!inPlace("home")) {
             return;
+        }
         turns.decTurns(turns.getTurns());
         switch (player.getStage()) {
             case "child" -> {
@@ -138,29 +141,24 @@ public class Game {
                 System.out.println("You are now an adult");
             }
             case "adult" -> {
-                player.setStage("old");
-                System.out.println("You are now old");
-            }
-            case "old" -> {
                 player.setAlive(false);
-                System.out.println("You are dead");
             }
         }
     }
     
     private void sit() {
-        if (player.getCurrentRoom().isSitting())
+        if (player.getCurrentRoom().isSitting()) {
             System.out.println("You are already sitting");
-        else {
+        } else {
             player.getCurrentRoom().setSitting(true);
             System.out.println("You sat down");
         }
     }
 
     private void stand() {
-        if (!player.getCurrentRoom().isSitting())
+        if (!player.getCurrentRoom().isSitting()) {
             System.out.println("You are already standing");
-        else {
+        } else {
             player.getCurrentRoom().setSitting(false);
             System.out.println("You stood up");
         }
@@ -205,12 +203,11 @@ public class Game {
                     turns.decTurns();
 
                     System.out.println("You bought " + s);
-                    player.decMoney(i.getPrice());
-                    randomSickEvent(player.getSickChance()*2);
+                    randomSickEvent(player.getSickChance() * 2);
                 }
-            }
-            else
+            } else {
                 System.out.println("There is no " + s + " in the shop");
+            }
         }
     }
 
@@ -218,12 +215,11 @@ public class Game {
     private void look() {
         if (player.getCurrentRoom().getName().equals(SHOP_NAME)) {
             player.getCurrentRoom().printStock();
-        }
-        else if (player.getCurrentRoom().getName().equals(HOSPITAL_NAME)) {
-            if (player.getSickness() != null)
+        } else if (player.getCurrentRoom().getName().equals(HOSPITAL_NAME)) {
+            if (player.getSickness() != null)r
                 System.out.println("You have " + player.getSickness().getName() + ", it will cost you " +
-                    player.getSickness().getPrice() + " to get healed. Type heal to get healed");
-            else if (player.getDmg() != null)
+                        player.getSickness().getPrice() + " to get healed. Type heal to get healed");
+            } else if (player.getDmg() != null) {
                 System.out.println("It will cost you " + player.getDmg().getPrice() + " to get healed. " +
                         "Type heal to get healed");
             else
@@ -255,27 +251,36 @@ public class Game {
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
-        }
-        else if (nextRoom.isLocked()) {
-            System.out.println("This door is locked. Use the appropriate key to unlock");
-        }
-        else {
+        } else if (nextRoom.isLocked()) {
+            System.out.println("This door is locked.");
+        } else {
             player.setCurrentRoom(nextRoom);
             System.out.println(player.getCurrentRoom().getLongDescription());
             turns.decTurns();
-            randomSickEvent(player.getSickChance());
-            randomDmgEvent(player.getDmgChance());
+            randomEvent(1);
         }
     }
-    private void randomSickEvent(int probability) {
+
+    private void randomEvent(int multi){
+        RandomEngine r = new RandomEngine();
+        int i = r.getRandom(0,1);
+        switch (i){
+            case 0 -> randomSickEvent(player.getSickChance() * multi);
+            case 1 -> randomDmgEvent(player.getDmgChance() * multi);
+        }
+    }
+
+    private void randomSickEvent(int probability){
         Sickness s = new Sickness(probability, player);
-        if (s.name != null)
+        if(s.name != null) {
             player.setSickness(s);
+        }
     }
     private void randomDmgEvent(int probability) {
         WorkDMG dmg = new WorkDMG(probability, player);
-        if (dmg.name != null)
+        if (dmg.name != null) {
             player.setDmg(dmg);
+        }
     }
 
     private void quit(Command command) {
@@ -303,7 +308,7 @@ public class Game {
             if (player.getStage().equals("child") && turns.getTurns() <= 0) {
                 player.setStage("adult");
             } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
-                player.setStage("old");
+                player.setAlive(false);
             }
         }
     }

@@ -63,11 +63,11 @@ public class InitGame {
         hospital.setExit("outside", outside);
         school.setExit("outside", outside);
 
-        Book b1 = new Book("Algorithms",10,100);
-        Book b2 = new Book("Math",20,200);
-        Book b3 = new Book("SQL",30,300);
-        Protectors mask = new Protectors("Mask", 50, 2, "sickness");
-        Protectors helmet = new Protectors("Helmet", 50, 2, "dmg");
+        Book b1 = new Book("Algorithms", player.getCountry().getMoney() * 7, 150);
+        Book b2 = new Book("Math",player.getCountry().getMoney() * 15, 300);
+        Book b3 = new Book("sql",player.getCountry().getMoney() * 27, 600);
+        Protectors mask = new Protectors("mask", 50, 2, "sickness");
+        Protectors helmet = new Protectors("helmet", 50, 2, "dmg");
 
         shop.setItem(b1);
         shop.setItem(b2);
@@ -80,11 +80,11 @@ public class InitGame {
         return shop;
     }
 
-    public boolean childDeath(Player p1){
-        if (ran.getOutcome(p1.getCountry().getBirthMortal(), 1000)) {
+    public boolean childDeath(Player player){
+        if(ran.getOutcome(player.getCountry().getBirthMortal(), 1000)){
             System.out.println("Sadly the game is already over, you died at birth. Every year " +
-                    p1.getCountry().getBirthMortal() + " out of 1000 infants die at birth in " + p1.getCountry().toString().toLowerCase());
-            p1.setAlive(false);
+                    player.getCountry().getBirthMortal() + " out of 1000 infants die at birth in " + player.getCountry().toString().toLowerCase());
+            player.setAlive(false);
             return true;
         }
         return false;
@@ -97,6 +97,7 @@ public class InitGame {
             if (c.toString().equals(country))
                 b = true;
         }
+
         if (b) {
             player.setCountry(Country.valueOf(country));
             player.incSickChance(player.getCountry().getEventChance());
@@ -121,7 +122,12 @@ public class InitGame {
             p1.setFamilyEconomy(FamilyEconomy.RICH);
     }
 
-    public void setMoney(Player p1) {
-        p1.incMoney(p1.getCountry().getMoney() * p1.getGender().getMoneyMulti() * p1.getFamilyEconomy().getMoneyMulti());
+    public void setMoney(Player player) {
+        player.incMoney(player.getCountry().getMoney() * player.getGender().getMoneyMulti() * player.getFamilyEconomy().getMoneyMulti());
+    }
+
+    public void setAvgAge(Player player) {
+        //58 is the standard age, which is the lowest age possible, which is the male average age in Vakannda (Uganda)
+        player.setAvgAge((int)(58 * player.getCountry().getAvgAgeMultiplier() * player.getGender().getAvgAgeMulti()));
     }
 }

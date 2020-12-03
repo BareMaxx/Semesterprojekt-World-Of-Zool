@@ -24,6 +24,7 @@ public class Player {
     private WorkDMG dmg = null;
     private int sickChance = 0;
     private int dmgChance = 0;
+    private int avgAge;
 
     public Country getCountry() {
         return country;
@@ -44,6 +45,27 @@ public class Player {
     }
     public void setFamilyEconomy(FamilyEconomy f){
         familyEconomy = f;
+    }
+
+    public void moveFamilyEconomy() {
+        switch (this.familyEconomy) {
+            case POOR -> {
+                if (this.knowledge >= 350) {
+                    setFamilyEconomy(FamilyEconomy.MIDDLECLASS);
+                }
+            } case MIDDLECLASS -> {
+                if (this.knowledge >= 900) {
+                    setFamilyEconomy(FamilyEconomy.RICH);
+                } else {
+                    setFamilyEconomy(FamilyEconomy.POOR);
+                }
+            } case RICH -> {
+                if (this.knowledge < 1050) {
+                    setFamilyEconomy(FamilyEconomy.MIDDLECLASS);
+                }
+            }
+        }
+        System.out.println("You are now in the " + this.familyEconomy.toString().toLowerCase() + " class");
     }
 
     public void addInventoryItem(Item s){
@@ -82,6 +104,16 @@ public class Player {
     }
     public void incAge(int i) {
         age = age + i;
+        if (age >= avgAge) {
+            setAlive(false);
+        }
+    }
+
+    public int getAvgAge() {
+        return avgAge;
+    }
+    public void setAvgAge(int avgAge) {
+        this.avgAge = avgAge;
     }
 
     public int getScore() {
@@ -103,6 +135,9 @@ public class Player {
     }
     public void setStage(String s){
         stage = s;
+        if(s.equals("adult")) {
+            moveFamilyEconomy();
+        }
     }
 
     public boolean getAlive() {

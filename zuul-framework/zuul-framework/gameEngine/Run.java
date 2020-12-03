@@ -13,7 +13,6 @@ public class Run extends Application {
     private Player player;
     private Child c;
     private Adult a;
-    private Old o;
 
     private static Room shopRoom;
     private static Run rInstance;
@@ -25,7 +24,6 @@ public class Run extends Application {
         player = new Player();
         c = new Child(player);
         a = new Adult(player);
-        o = new Old(player);
     }
 
     public static Stage getPrimaryStage() {
@@ -50,7 +48,6 @@ public class Run extends Application {
         switch (player.getStage()) {
             case "child" -> c.processCommand(command);
             case "adult" -> a.processCommand(command);
-            case "old" -> o.processCommand(command);
         }
 
         ResourceController.getInventoryController().updateInventory();

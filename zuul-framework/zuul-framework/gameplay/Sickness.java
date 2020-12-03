@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Sickness extends Event {
-    private ArrayList<String> names = new ArrayList<>(Arrays.asList("tuberculosis", "cancer", "AIDS"));
-    private int turnLimit = randomEngine.getRandom(10,30);
+    private ArrayList<String> ugNames = new ArrayList<>(Arrays.asList("tuberculosis", "cancer", "AIDS"));
+    private ArrayList<String> dkNames = new ArrayList<>(Arrays.asList("a heart disease", "cancer", "AIDS", "depression and you want to commit suicide"));
+    private ArrayList<String> usNames = new ArrayList<>(Arrays.asList("a heart disease", "cancer", "AIDS", "diabetes"));
+    private int turnLimit = randomEngine.getRandom(10,15);
     private int price = 0;
 
     public Sickness(int probabilityOfSuccess, Player player) {
@@ -17,10 +19,11 @@ public class Sickness extends Event {
             return;
 
         if (runEvent()) {
-            this.name = names.get(randomEngine.getRandom(0, names.size() - 1));
+            //this.name = names.get(randomEngine.getRandom(0,names.size()-1));
+            setName();
             setPrice();
-            System.out.println("You have been infected with " + name + " you have " + turnLimit + " turns to get to the " +
-                    "hospital and pay " + price + " gold to get healthy or you will die!");
+            System.out.println("Oh no, you were unlucky and you now have " + name + ", you have " + turnLimit +
+                    " turns to get to the hospital and pay " + price + " gold to get healthy or you will die!");
             Key appointment = new Key("hospital", "appointment");
             player.addInventoryItem(appointment);
             System.out.println("You received an appointment to the hospital, use it to gain access.");
@@ -43,6 +46,13 @@ public class Sickness extends Event {
             case DANHEIM -> price = randomEngine.getRandom(0,1000);
             case VAKANNDA -> price = randomEngine.getRandom(200,3000);
             case WASHINGGEORGE -> price = randomEngine.getRandom(1000,30000);
+        }
+    }
+    private void setName(){
+        switch (player.getCountry()){
+            case DANHEIM -> this.name = dkNames.get(randomEngine.getRandom(0,dkNames.size()-1));
+            case VAKANNDA -> this.name = ugNames.get(randomEngine.getRandom(0,ugNames.size()-1));
+            case WASHINGGEORGE -> this.name = usNames.get(randomEngine.getRandom(0,usNames.size()-1));
         }
     }
 }
