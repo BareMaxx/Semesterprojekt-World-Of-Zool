@@ -2,6 +2,8 @@ package gameEngine;
 
 import commands.Command;
 import commands.CommandWord;
+import controller.OverlayController;
+import controller.ResourceController;
 import gameplay.Room;
 import gameplay.Sickness;
 import gameplay.Turns;
@@ -29,21 +31,12 @@ public class Game {
         CommandWord commandWord = command.getCommandWord();
 
         switch(commandWord) {
-            case HELP -> printHelp();
             case GO -> goRoom(command);
             case QUIT -> quit(command);
-            case AGE -> System.out.println("You are " + player.getAge() + " years old.");
-            case INVENTORY -> player.inventoryPrinter();
-            case MONEY -> System.out.println("You have " + player.getMoney() + " gold  Economy: " + player.getFamilyEconomy().toString().toLowerCase());
             case USE -> {use(command); turns.decTurns();}
             case BUY -> {buy(command); turns.decTurns();}
-            case LOOK -> look();
-            case TURNS -> System.out.println("You have " + turns.getTurns() + " turns left");
-            case SIT -> {sit(); turns.decTurns();}
-            case STAND -> {stand(); turns.decTurns();}
             case SLEEP -> sleep();
             case HEAL -> heal();
-            case SICK -> sick();
             case UNKNOWN -> System.out.println("I don't know what you mean...");
             default -> System.out.println("You can't do that at the current stage");
         }
@@ -57,16 +50,6 @@ public class Game {
             if (player.getSickness().getTurnLimit() == 0) {
                 player.setAlive(false);
             }
-        }
-    }
-
-    private void sick() {
-        if (player.getSickness() == null) {
-            System.out.println("You are healthy");
-        } else {
-            System.out.println("You have been infected with " + player.getSickness().getName() + " you have " +
-                    (player.getSickness().getTurnLimit() - 1) + " turns to get to the hospital and pay " +
-                    player.getSickness().getPrice() + " gold to get healthy or you will die!");
         }
     }
 
@@ -100,10 +83,6 @@ public class Game {
     public boolean inRoom(String room) {
         if (!player.getCurrentRoom().getName().equals(room)) {
             System.out.println("You have to be at " + room + " to do that");
-            return false;
-        }
-        if (!player.getCurrentRoom().isSitting()) {
-            System.out.println("You have to sit down");
             return false;
         }
         return true;
@@ -152,24 +131,6 @@ public class Game {
             }
         }
     }
-    
-    private void sit() {
-        if (player.getCurrentRoom().isSitting()) {
-            System.out.println("You are already sitting");
-        } else {
-            player.getCurrentRoom().setSitting(true);
-            System.out.println("You sat down");
-        }
-    }
-
-    private void stand() {
-        if (!player.getCurrentRoom().isSitting()) {
-            System.out.println("You are already standing");
-        } else {
-            player.getCurrentRoom().setSitting(false);
-            System.out.println("You stood up");
-        }
-    }
 
     private void use(Command command) {
         if (!command.hasSecondWord()) {
@@ -179,7 +140,7 @@ public class Game {
 
             for (Item i: player.getInventory()) {
                 if (i.getName().equals(item)) {
-                    i.use(player);
+                    i.use(player, turns);
                     return;
                 }
             }
@@ -211,6 +172,11 @@ public class Game {
 
                     System.out.println("You bought " + s);
                     randomSickEvent(player.getSickChance() * 2);
+
+                    // Update money textfield in overlay
+                    ((OverlayController) ResourceController.getOverlayData().controller).updateMoney();
+                } else {
+                    System.out.println("You don't have enough money for this!");
                 }
             } else {
                 System.out.println("There is no " + s + " in the shop");
@@ -218,36 +184,7 @@ public class Game {
         }
     }
 
-    // Look at shoplist or look at items in the current room
-    private void look() {
-        if (player.getCurrentRoom().getName().equals(SHOP_NAME)) {
-            player.getCurrentRoom().printStock();
-        } else if (player.getCurrentRoom().getName().equals(HOSPITAL_NAME)) {
-            if (player.getSickness() != null) {
-                System.out.println("You have " + player.getSickness().getName() + ", it will cost you " +
-                        player.getSickness().getPrice() + " to get healed. Type heal to get healed");
-            } else if (player.getDmg() != null) {
-                System.out.println("It will cost you " + player.getDmg().getPrice() + " to get healed. " +
-                    "Type heal to get healed");
-            } else {
-                System.out.println("There is nothing to do here. You are healthy. Leave!");
-            }
-        }
-    }
-
-    private void printHelp() {
-        System.out.println("Life is long and difficult");
-        System.out.println("Too bad");
-        System.out.println();
-        System.out.println("Here's some commands");
-    }
-
     private void goRoom(Command command) {
-        if (player.getCurrentRoom().isSitting()) {
-            System.out.println("You have to stand up first");
-            return;
-        }
-
         if (!command.hasSecondWord()) {
             System.out.println("Go where?");
             return;
@@ -309,17 +246,24 @@ public class Game {
             //60 turns => 21 years, when getting 1 year older every three turns
             int ageMultiplier = turns.getCounter() / 3;
             player.incAge(ageMultiplier);
+
             if (turns.getTurns() != 0) {
                 turns.setCounter();
             } else {
                 turns.setCounter(0);
             }
-        } else {
-            if (player.getStage().equals("child") && turns.getTurns() <= 0) {
-                player.setStage("adult");
-            } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
-                player.setAlive(false);
-            }
         }
+        if (player.getStage().equals("child") && turns.getTurns() <= 0) {
+                player.setStage("adult");
+
+                // Update stage textfield in overlay
+                ((OverlayController) ResourceController.getOverlayData().controller).increaseStage();
+
+        } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
+                player.setAlive(false);
+        }
+
+        // Update age textfield in overlay
+        ((OverlayController) ResourceController.getOverlayData().controller).updateAge();
     }
 }

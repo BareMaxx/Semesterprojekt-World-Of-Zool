@@ -1,5 +1,6 @@
 package item;
 
+import gameplay.Turns;
 import player.Player;
 
 public class Item {
@@ -18,5 +19,5 @@ public class Item {
         return name;
     }
 
-    public void use(Player player) { }
+    public void use(Player player, Turns turns) { }
 }

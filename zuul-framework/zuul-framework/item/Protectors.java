@@ -1,5 +1,6 @@
 package item;
 
+import gameplay.Turns;
 import player.Player;
 
 public class Protectors extends PurchasableItem {
@@ -22,7 +23,7 @@ public class Protectors extends PurchasableItem {
     }
 
     @Override
-    public void use(Player player) {
+    public void use(Player player, Turns turns) {
         switch (getUseCase()) {
             case "sickness" -> {
                 player.decSickChance(getModifier());

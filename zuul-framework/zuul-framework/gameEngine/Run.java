@@ -2,17 +2,24 @@ package gameEngine;
 
 import commands.Command;
 import commands.Parser;
+import controller.DeathController;
+import controller.OverlayController;
 import controller.ResourceController;
+import controller.ShopController;
 import gameplay.Room;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import player.Player;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class Run extends Application {
     private Parser parser;
     private Player player;
     private Child c;
     private Adult a;
+    private ByteArrayOutputStream stream;
 
     private static Room shopRoom;
     private static Run rInstance;
@@ -24,6 +31,10 @@ public class Run extends Application {
         player = new Player();
         c = new Child(player);
         a = new Adult(player);
+
+        stream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(stream);
+        System.setOut(printStream);
     }
 
     public static Stage getPrimaryStage() {
@@ -50,7 +61,21 @@ public class Run extends Application {
             case "adult" -> a.processCommand(command);
         }
 
-        ResourceController.getInventoryController().updateInventory();
+        // Update event log from console
+        String console = new String(stream.toByteArray());
+        ((OverlayController)ResourceController.getOverlayData().controller).updateEventLog(console);
+
+        // Update inventory
+        ((OverlayController)ResourceController.getOverlayData().controller).updateInventory();
+
+        // Update Shop stock
+        ((ShopController)ResourceController.getShopData().controller).updateStock();
+
+        // Update death screen
+        if (!player.getAlive()) {
+            getPrimaryStage().setScene(ResourceController.getDeathData().scene);
+            ((DeathController) ResourceController.getDeathData().controller).updateDeathScreen("Dead", "Not big\nsurprise");
+        }
     }
 
     public void initGame(String country) {
@@ -69,9 +94,9 @@ public class Run extends Application {
         // ResourceController is entirely static, therefore it is not instantiated
         ResourceController.loadMenu();
 
-        // set initial scene to menu scene
+        // Set initial scene to menu scene
         primaryStage.setTitle("ZUUUUL");
-        primaryStage.setScene(ResourceController.getStartmenuScene());
+        primaryStage.setScene(ResourceController.getStartmenuData().scene);
         primaryStage.show();
     }
 
