@@ -26,7 +26,6 @@ public class InitGame {
     }
 
     public void printWelcome(Player player) {
-        System.out.println();
         System.out.println("welcome to real life bitch");
         System.out.println("real life sucks");
 
@@ -37,7 +36,6 @@ public class InitGame {
             return;
 
         System.out.println("Your start with " + player.getMoney() + " gold.");
-        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(player.getCurrentRoom().getLongDescription());
     }

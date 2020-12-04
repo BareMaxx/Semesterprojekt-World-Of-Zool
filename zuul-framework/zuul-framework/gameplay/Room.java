@@ -8,7 +8,6 @@ import java.util.HashMap;
 
 
 public class Room {
-    private boolean sitting;
     private String name;
     private String description;
     private HashMap<String, Room> exits;
@@ -21,13 +20,6 @@ public class Room {
         this.locked = locked;
         exits = new HashMap<>();
         stock = new ArrayList<>();
-        this.sitting = false;
-    }
-
-    public void setSitting(boolean b){ sitting = b; }
-
-    public boolean isSitting() {
-        return sitting;
     }
 
     public void setItem(PurchasableItem i) {

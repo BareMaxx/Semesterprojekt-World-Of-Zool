@@ -1,11 +1,9 @@
 package commands;
 
 public enum CommandWord {
-    GO("go"), QUIT("quit"), HELP("help"), UNKNOWN("?"),
-    LOOK("look"), INVENTORY("inventory"), MONEY("money"),
-    SIT("sit"), WORK("work"), READ("read"), BUY("buy"),
-    USE("use"), AGE("age"), TURNS("turns"), STAND("stand"),
-    SLEEP("sleep"), HEAL("heal"), SICK("sick");
+    GO("go"), QUIT("quit"), UNKNOWN("?"),
+    WORK("work"), BUY("buy"), USE("use"),
+    SLEEP("sleep"), HEAL("heal");
 
     private String commandString;
     
