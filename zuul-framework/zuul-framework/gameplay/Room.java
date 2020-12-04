@@ -1,16 +1,13 @@
 package gameplay;
 
-import item.Item;
 import item.PurchasableItem;
 import item.Key;
-
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
 
 
-public class Room 
-{
+public class Room {
     private boolean sitting;
     private String name;
     private String description;
@@ -18,17 +15,16 @@ public class Room
     private ArrayList<PurchasableItem> stock;
     private boolean locked;
 
-    public Room(String name, String description, boolean locked)
-    {
+    public Room(String name, String description, boolean locked) {
         this.setName(name);
         this.description = description;
         this.locked = locked;
-        exits = new HashMap<String, Room>();
+        exits = new HashMap<>();
         stock = new ArrayList<>();
         this.sitting = false;
     }
 
-    public void setSitting(boolean b){sitting = b;}
+    public void setSitting(boolean b){ sitting = b; }
 
     public boolean isSitting() {
         return sitting;
@@ -50,6 +46,11 @@ public class Room
     public void removeItem(PurchasableItem i) {
         stock.remove(i);
     }
+
+    public ArrayList<PurchasableItem> getItems() {
+        return stock;
+    }
+
     public void printStock() {
         System.out.println("These objects are for sale:");
         if (stock.isEmpty()) {
@@ -60,12 +61,9 @@ public class Room
             }
         }
     }
+
     public void setExit(String direction, Room neighbor) {
         exits.put(direction, neighbor);
-    }
-
-    public String getShortDescription() {
-        return description;
     }
 
     public String getLongDescription() {
@@ -73,12 +71,12 @@ public class Room
     }
 
     private String getExitString() {
-        String returnString = "Exits:";
+        StringBuilder returnString = new StringBuilder("Exits:");
         Set<String> keys = exits.keySet();
         for (String exit : keys) {
-            returnString += " " + exit;
+            returnString.append(" ").append(exit);
         }
-        return returnString;
+        return returnString.toString();
     }
 
     public Room getExit(String direction) {
@@ -93,17 +91,18 @@ public class Room
         this.name = name;
     }
 
-    public boolean isLocked() {return this.locked;}
+    public boolean isLocked() { return this.locked; }
 
-    public void unlock(Key key)
-    {
+    public void unlock(Key key) {
         if (key.canUnlock(this.getName())) {
             this.locked = false;
             System.out.println("You have unlocked " + this.getName());
         }
-        else { System.out.println("You can't do that here."); }
+        else
+            System.out.println("You can't do that here.");
     }
-    public void lock(){
+
+    public void lock() {
         this.locked = true;
     }
 }

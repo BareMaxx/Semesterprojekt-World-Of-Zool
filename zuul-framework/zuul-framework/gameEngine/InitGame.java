@@ -1,7 +1,6 @@
 package gameEngine;
 
 import commands.CommandWord;
-import commands.Parser;
 import gameplay.RandomEngine;
 import item.Book;
 import item.Protectors;
@@ -12,41 +11,41 @@ import player.Player;
 import gameplay.Room;
 
 public class InitGame {
-    private Parser parser;
     private RandomEngine ran = new RandomEngine();
 
-    InitGame(Player player, Parser parser) {
-        this.parser = parser;
-        printWelcome(player);
+    public InitGame(Player p1, String country) {
+        setupPlayer(p1, country);
     }
 
-    private void printWelcome(Player player) {
-        System.out.println();
-        System.out.println("welcome to real life bitch");
-        System.out.println("real life sucks");
-        setCountry(player);
+    private void setupPlayer(Player player, String country) {
+        setCountry(player, country);
         setGender(player);
         setEcon(player);
         setMoney(player);
-        setAvgAge(player);
-        createRooms(player);
+    }
+
+    public void printWelcome(Player player) {
+        System.out.println();
+        System.out.println("welcome to real life bitch");
+        System.out.println("real life sucks");
+
         System.out.println("You have been born as a " + player.getFamilyEconomy().toString().toLowerCase() + " " +
                 player.getGender().toString().toLowerCase() + " living in " + player.getCountry().toString().toLowerCase());
         player.setStage("child");
         if (childDeath(player))
             return;
+
         System.out.println("Your start with " + player.getMoney() + " gold.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(player.getCurrentRoom().getLongDescription());
     }
 
-    private void createRooms(Player player) {
+    public Room createRooms(Player player) {
         Room home, work, shop, school, hospital, outside;
 
         outside = new Room("outside", "outside", false);
         home = new Room("home", "at home", false);
-        //work = new Room("work", "at work", true);
         work = new Room("work", "at work", false);
         shop = new Room("shop","in a shop", false);
         school = new Room("school", "at school", false);
@@ -77,6 +76,8 @@ public class InitGame {
         shop.setItem(helmet);
 
         player.setCurrentRoom(home);
+
+        return shop;
     }
 
     public boolean childDeath(Player player){
@@ -89,24 +90,22 @@ public class InitGame {
         return false;
     }
 
-    public void setCountry(Player player) {
-        System.out.println("Please select a country \n" +
-                "Vakannda | WashingGeorge | Danheim");
-
-        String s = parser.getWord().toUpperCase();
+    public void setCountry(Player player, String country) {
         boolean b = false;
+        country = country.toUpperCase();
         for (Country c : Country.values()) {
-            if (c.toString().equals(s))
+            if (c.toString().equals(country))
                 b = true;
         }
+
         if (b) {
-            player.setCountry(Country.valueOf(s));
+            player.setCountry(Country.valueOf(country));
             player.incSickChance(player.getCountry().getEventChance());
             player.incDmgChance(player.getCountry().getEventChance());
         }
         else {
             System.out.println("Input invalid\n");
-            setCountry(player);
+            //setCountry(p1, country); // Endless loop
         }
     }
 
@@ -115,9 +114,9 @@ public class InitGame {
     }
 
     public void setEcon(Player p1) {
-        if(ran.getOutcome(p1.getCountry().getPoor(), 100))
+        if (ran.getOutcome(p1.getCountry().getPoor(), 100))
             p1.setFamilyEconomy(FamilyEconomy.POOR);
-        else if(ran.getOutcome(p1.getCountry().getMiddleClass(), 100))
+        else if (ran.getOutcome(p1.getCountry().getMiddleClass(), 100))
             p1.setFamilyEconomy(FamilyEconomy.MIDDLECLASS);
         else
             p1.setFamilyEconomy(FamilyEconomy.RICH);

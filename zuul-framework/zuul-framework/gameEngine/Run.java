@@ -1,23 +1,81 @@
 package gameEngine;
 
+import commands.Command;
 import commands.Parser;
+import controller.ResourceController;
+import gameplay.Room;
+import javafx.application.Application;
+import javafx.stage.Stage;
 import player.Player;
 
-public class Run {
-    private Parser parser = new Parser();
-    Player p1 = new Player();
-    Child c = new Child(p1, parser);
-    Adult a = new Adult(p1, parser);
+public class Run extends Application {
+    private Parser parser;
+    private Player player;
+    private Child c;
+    private Adult a;
+
+    private static Room shopRoom;
+    private static Run rInstance;
+    private static Stage primaryStage;
 
     public Run() {
-        new InitGame(p1, parser);
+        rInstance = this;
+        parser = new Parser();
+        player = new Player();
+        c = new Child(player);
+        a = new Adult(player);
+    }
 
-        while (p1.getAlive()) {
-            switch (p1.getStage()) {
-                case "child" -> c.play();
-                case "adult" -> {a.play();}
-            }
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public static Run getRInstance() {
+        return rInstance;
+    }
+
+    public static Room getShopRoom() {
+        return shopRoom;
+    }
+
+    public void launchMenu() {
+        launch();
+    }
+
+    public void processCommand(String input) {
+        Command command = parser.getCommand(input);
+
+        switch (player.getStage()) {
+            case "child" -> c.processCommand(command);
+            case "adult" -> a.processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+
+        ResourceController.getInventoryController().updateInventory();
+    }
+
+    public void initGame(String country) {
+        InitGame init = new InitGame(player, country);
+        shopRoom = init.createRooms(player);
+        init.printWelcome(player);
+    }
+
+    // This function is called when an instance of the Run class is created.
+    // This is due to the fact that Run extends the JavaFX class Application.
+    // See JavaFX documentation for further explanation...
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Run.primaryStage = primaryStage;
+
+        // ResourceController is entirely static, therefore it is not instantiated
+        ResourceController.loadMenu();
+
+        // set initial scene to menu scene
+        primaryStage.setTitle("ZUUUUL");
+        primaryStage.setScene(ResourceController.getStartmenuScene());
+        primaryStage.show();
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

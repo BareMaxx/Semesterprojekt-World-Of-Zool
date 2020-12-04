@@ -2,44 +2,42 @@ package gameEngine;
 
 import commands.Command;
 import commands.CommandWord;
-import commands.Parser;
+import gameplay.Room;
+import gameplay.Sickness;
+import gameplay.Turns;
+import gameplay.WorkDMG;
 import gameplay.*;
 import item.*;
 import player.Player;
 
 public class Game {
     protected final String SHOP_NAME = "shop";
-    
-    protected Parser parser;
+    protected final String HOME_NAME = "home";
+    protected final String HOSPITAL_NAME = "hospital";
+    protected final String WORK_NAME = "work";
+
     private Player player;
     protected Turns turns;
 
     // Super constructor. Amount of turns decided by derived class
-    public Game(Player player, Parser parser, int turns) {
-        this.parser = new Parser();
+    public Game(Player player, int turns) {
         this.player = player;
         this.turns = new Turns(turns);
     }
-
-    // Will be overriden by Child, Adult
-    public void play() {}
-
     // Processes commands. Derived classes have their own special overrides
-    public boolean processCommand(Command command) {
-        boolean wantToQuit = false;
-
+    public void processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
 
         switch(commandWord) {
             case HELP -> printHelp();
             case GO -> goRoom(command);
-            case QUIT -> wantToQuit = quit(command);
+            case QUIT -> quit(command);
             case AGE -> System.out.println("You are " + player.getAge() + " years old.");
             case INVENTORY -> player.inventoryPrinter();
             case MONEY -> System.out.println("You have " + player.getMoney() + " gold  Economy: " + player.getFamilyEconomy().toString().toLowerCase());
             case USE -> {use(command); turns.decTurns();}
             case BUY -> {buy(command); turns.decTurns();}
-            case LOOK -> look(command);
+            case LOOK -> look();
             case TURNS -> System.out.println("You have " + turns.getTurns() + " turns left");
             case SIT -> {sit(); turns.decTurns();}
             case STAND -> {stand(); turns.decTurns();}
@@ -51,7 +49,6 @@ public class Game {
         }
         checkTurns();
         endTurn();
-        return wantToQuit;
     }
 
     private void endTurn() {
@@ -74,7 +71,7 @@ public class Game {
     }
 
     private void heal() {
-        if (!inPlace("hospital")) {
+        if (!inRoom(HOSPITAL_NAME)) {
             return;
         }
         if (player.getSickness() != null) {
@@ -100,7 +97,7 @@ public class Game {
         }
     }
 
-    public boolean inPlace(String room){
+    public boolean inRoom(String room) {
         if (!player.getCurrentRoom().getName().equals(room)) {
             System.out.println("You have to be at " + room + " to do that");
             return false;
@@ -113,7 +110,7 @@ public class Game {
     }
 
     public void work(int econStage) {
-        if (!inPlace("work")) {
+        if (!inRoom(WORK_NAME)) {
             return;
         }
         int i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
@@ -141,7 +138,7 @@ public class Game {
     }
     
     private void sleep() {
-        if (!inPlace("home")) {
+        if (!inRoom(HOME_NAME)) {
             return;
         }
         turns.decTurns(turns.getTurns());
@@ -182,40 +179,8 @@ public class Game {
 
             for (Item i: player.getInventory()) {
                 if (i.getName().equals(item)) {
-                    if  (i instanceof Book) {
-                        System.out.println("You can't use a book, read it instead.");
-                        return;
-                        //alternatively, using a book is the same as reading it
-                    } else if (i instanceof Key) {
-                        Room room = player.getCurrentRoom().getExit(((Key)i).getKEYTYPE());
-
-                        if (room == null) {
-                            System.out.println("You can't use that here.");
-                            return;
-                        } else if (room.isLocked()) {
-                            room.unlock((Key)i);
-                            player.removeInventoryItem(i);
-                            return;
-                        } else {
-                            System.out.println("This room is not locked. How did you get that key?");
-                            return;
-                        }
-                    } else if (i instanceof Protectors) {
-                        switch (((Protectors) i).getUseCase()) {
-                            case "sickness" -> {
-                                player.decSickChance(((Protectors) i).getModifier());
-                                player.removeInventoryItem(i);
-                                System.out.println("You are now less likely to get sick");
-                                return;
-                            }
-                            case "dmg" -> {
-                                player.decDmgChance(((Protectors) i).getModifier());
-                                player.removeInventoryItem(i);
-                                System.out.println("You are now less likely to get injured");
-                                return;
-                            }
-                        }
-                    }
+                    i.use(player);
+                    return;
                 }
             }
             System.out.println("You have no item of that name.");
@@ -254,16 +219,16 @@ public class Game {
     }
 
     // Look at shoplist or look at items in the current room
-    private void look(Command command) {
+    private void look() {
         if (player.getCurrentRoom().getName().equals(SHOP_NAME)) {
             player.getCurrentRoom().printStock();
-        } else if (player.getCurrentRoom().getName().equals("hospital")) {
+        } else if (player.getCurrentRoom().getName().equals(HOSPITAL_NAME)) {
             if (player.getSickness() != null) {
                 System.out.println("You have " + player.getSickness().getName() + ", it will cost you " +
                         player.getSickness().getPrice() + " to get healed. Type heal to get healed");
             } else if (player.getDmg() != null) {
                 System.out.println("It will cost you " + player.getDmg().getPrice() + " to get healed. " +
-                        "Type heal to get healed");
+                    "Type heal to get healed");
             } else {
                 System.out.println("There is nothing to do here. You are healthy. Leave!");
             }
@@ -275,7 +240,6 @@ public class Game {
         System.out.println("Too bad");
         System.out.println();
         System.out.println("Here's some commands");
-        parser.showCommands();
     }
 
     private void goRoom(Command command) {
@@ -320,20 +284,19 @@ public class Game {
             player.setSickness(s);
         }
     }
-    private void randomDmgEvent(int probability){
+    private void randomDmgEvent(int probability) {
         WorkDMG dmg = new WorkDMG(probability, player);
-        if(dmg.name != null) {
+        if (dmg.name != null) {
             player.setDmg(dmg);
         }
     }
 
-    private boolean quit(Command command) {
+    private void quit(Command command) {
         if (command.hasSecondWord()) {
             System.out.println("Quit what?");
-            return false;
-        } else {
+        }
+        else {
             player.setAlive(false);
-            return true;
         }
     }
 
@@ -346,7 +309,7 @@ public class Game {
             //60 turns => 21 years, when getting 1 year older every three turns
             int ageMultiplier = turns.getCounter() / 3;
             player.incAge(ageMultiplier);
-            if(turns.getTurns() != 0) {
+            if (turns.getTurns() != 0) {
                 turns.setCounter();
             } else {
                 turns.setCounter(0);

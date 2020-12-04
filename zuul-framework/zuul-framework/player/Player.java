@@ -78,7 +78,7 @@ public class Player {
     }
     public void inventoryPrinter(){
         System.out.println("In your inventory you find:");
-        if(inventory.isEmpty()) {
+        if (inventory.isEmpty()) {
             System.out.println("\tnothing");
         }
         else {
@@ -183,5 +183,4 @@ public class Player {
     public void decDmgChance(int i) {
         dmgChance = dmgChance - i;
     }
-
 }
