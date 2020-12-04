@@ -119,16 +119,18 @@ public class Game {
         int i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
                 player.getFamilyEconomy().getMoneyMulti() / econStage;
 
-        if (player.getSickness() != null) {
+        if (player.getSickness() != null && player.getDmg() != null) {
             i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
                     player.getFamilyEconomy().getMoneyMulti() / econStage;
-            i = i - 175 *  player.getFamilyEconomy().getMoneyMulti();
-            System.out.println("You can't work while sick");
+            i = i - 60 *  player.getFamilyEconomy().getMoneyMulti();
+        } else if (player.getSickness() != null) {
+            i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
+                    player.getFamilyEconomy().getMoneyMulti() / econStage;
+            i = i - 40 *  player.getFamilyEconomy().getMoneyMulti();
         } else if (player.getDmg() != null) {
             i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
                     player.getFamilyEconomy().getMoneyMulti() / econStage;
-            i = i - 125 *  player.getFamilyEconomy().getMoneyMulti();
-            System.out.println("You can't work while injured");
+            i = i - 20 *  player.getFamilyEconomy().getMoneyMulti();
         }
 
         player.incMoney(i);

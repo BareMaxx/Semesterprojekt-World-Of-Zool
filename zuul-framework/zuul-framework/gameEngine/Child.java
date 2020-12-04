@@ -44,7 +44,6 @@ public class Child extends Game {
                 int bookKnowledgePoints = ((Book)item).getKNOWLEDGEPOINTS();
                 if(getPlayer().getSickness() != null){
                     bookKnowledgePoints = bookKnowledgePoints - 50;
-                    System.out.println("You can't study while sick");
                 }
                 super.getPlayer().incKnowledge(bookKnowledgePoints);
                 super.getPlayer().removeInventoryItem(item);
