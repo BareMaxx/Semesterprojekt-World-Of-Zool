@@ -24,7 +24,6 @@ public class Game {
         this.player = player;
         this.turns = new Turns(turns);
     }
-
     // Processes commands. Derived classes have their own special overrides
     public void processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
@@ -72,8 +71,9 @@ public class Game {
     }
 
     private void heal() {
-        if (!inRoom(HOSPITAL_NAME))
+        if (!inRoom(HOSPITAL_NAME)) {
             return;
+        }
         if (player.getSickness() != null) {
             if (player.getMoney() >= player.getSickness().getPrice()) {
                 player.decMoney(player.getSickness().getPrice());
@@ -110,18 +110,26 @@ public class Game {
     }
 
     public void work(int econStage) {
-        if (!inRoom(WORK_NAME))
-            return;
-        if (player.getSickness() != null) {
-            System.out.println("You can't work while sick");
-            return;
-        }
-        if (player.getDmg() != null) {
-            System.out.println("You can't work while injured");
+        if (!inRoom(WORK_NAME)) {
             return;
         }
         int i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
                 player.getFamilyEconomy().getMoneyMulti() / econStage;
+
+        if (player.getSickness() != null && player.getDmg() != null) {
+            i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
+                    player.getFamilyEconomy().getMoneyMulti() / econStage;
+            i = i - 60 *  player.getFamilyEconomy().getMoneyMulti();
+        } else if (player.getSickness() != null) {
+            i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
+                    player.getFamilyEconomy().getMoneyMulti() / econStage;
+            i = i - 40 *  player.getFamilyEconomy().getMoneyMulti();
+        } else if (player.getDmg() != null) {
+            i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
+                    player.getFamilyEconomy().getMoneyMulti() / econStage;
+            i = i - 20 *  player.getFamilyEconomy().getMoneyMulti();
+        }
+
         player.incMoney(i);
         System.out.println("You made " + i);
         randomEvent(2);
@@ -284,10 +292,12 @@ public class Game {
     }
 
     private void quit(Command command) {
-        if (command.hasSecondWord())
+        if (command.hasSecondWord()) {
             System.out.println("Quit what?");
-        else
+        }
+        else {
             player.setAlive(false);
+        }
     }
 
     public Player getPlayer() {

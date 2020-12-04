@@ -14,7 +14,6 @@ public class Player {
     private ArrayList<Item> inventory = new ArrayList<>();
     private int money = 0;
     private int age = 1;
-    private String occupation;
     private String stage;
     private boolean alive = true;
     private int score = 0;
@@ -121,13 +120,6 @@ public class Player {
     }
     public void incScore(int i){
         score = score + i;
-    }
-
-    public String getOccupation(){
-        return occupation;
-    }
-    public void setOccupation(String s){
-        occupation = s;
     }
 
     public String getStage(){
