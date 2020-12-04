@@ -9,7 +9,6 @@ import gameEngine.Run;
 public class StartmenuController extends GenericController{
     @FXML
     void startGame(MouseEvent event) throws Exception{
-
         Text text = (Text)event.getTarget();
         String country = text.getText();
 
@@ -21,7 +20,6 @@ public class StartmenuController extends GenericController{
     @FXML
     @Override
     void darkenText(MouseEvent event) {
-
         Text text = (Text)event.getTarget();
         text.setFill(Color.BLACK);
     }
@@ -29,9 +27,7 @@ public class StartmenuController extends GenericController{
     @FXML
     @Override
     void highlightText(MouseEvent event) {
-
         Text text = (Text)event.getTarget();
         text.setFill(Color.YELLOW);
-
     }
 }

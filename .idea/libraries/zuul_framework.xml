@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="zuul-framework">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/zuul-framework.zip!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

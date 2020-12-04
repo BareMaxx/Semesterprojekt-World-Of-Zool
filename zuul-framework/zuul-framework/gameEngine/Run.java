@@ -94,7 +94,7 @@ public class Run extends Application {
         // ResourceController is entirely static, therefore it is not instantiated
         ResourceController.loadMenu();
 
-        // set initial scene to menu scene
+        // Set initial scene to menu scene
         primaryStage.setTitle("ZUUUUL");
         primaryStage.setScene(ResourceController.getStartmenuData().scene);
         primaryStage.show();

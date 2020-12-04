@@ -162,12 +162,12 @@ public class Game {
 
                     System.out.println("You bought " + s);
                     randomSickEvent(player.getSickChance() * 2);
+                } else {
+                    System.out.println("You don't have enough money for this!");
                 }
             } else {
                 System.out.println("There is no " + s + " in the shop");
             }
-        } else {
-            System.out.println("You don't have enough money for this!");
         }
     }
 
