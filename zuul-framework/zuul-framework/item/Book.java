@@ -22,6 +22,9 @@ public class Book extends PurchasableItem {
             return;
 
         int bookKnowledgePoints = getKnowledgePoints();
+        if (player.getSickness() != null) {
+            bookKnowledgePoints -= 50;
+        }
         player.incKnowledge(getKnowledgePoints());
         player.removeInventoryItem(this);
         System.out.println("You read a book that gave you " + bookKnowledgePoints + " knowledge points");
