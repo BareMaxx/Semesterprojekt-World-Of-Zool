@@ -1,5 +1,8 @@
 package gameplay;
 
+import controller.OverlayController;
+import controller.ResourceController;
+
 public class Turns {
     private int turns;
     private int counter = 0;
@@ -24,6 +27,9 @@ public class Turns {
     public void decTurns() {
         --this.turns;
         incCounter();
+
+        // Update turns in overlay
+        ((OverlayController) ResourceController.getOverlayData().controller).updateTurns(turns);
     }
 
     public int getCounter() {

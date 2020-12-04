@@ -310,16 +310,15 @@ public class Game {
             } else {
                 turns.setCounter(0);
             }
-        } else {
-            if (player.getStage().equals("child") && turns.getTurns() <= 0) {
+        }
+        if (player.getStage().equals("child") && turns.getTurns() <= 0) {
                 player.setStage("adult");
 
                 // Update stage textfield in overlay
                 ((OverlayController) ResourceController.getOverlayData().controller).increaseStage();
 
-            } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
+        } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
                 player.setAlive(false);
-            }
         }
 
         // Update age textfield in overlay

@@ -29,6 +29,9 @@ public class OverlayController extends GenericController {
     @FXML
     private ProgressBar turnsProgressbar;
 
+    @FXML
+    private Text turnsText;
+
     public void updateAge(){
 
         ageNumberText.setText(Integer.toString(Run.getRInstance().getPlayer().getAge()));
@@ -42,6 +45,20 @@ public class OverlayController extends GenericController {
     public void updateMoney(){
 
         moneyAmountText.setText(Integer.toString(Run.getRInstance().getPlayer().getMoney()));
+    }
+
+    public void updateTurns(int turns){
+
+        double progress;
+
+        if (Run.getRInstance().getPlayer().getStage() == "child"){
+            progress = (double)turns / 60;
+        } else {
+            progress = (double)turns / 200;
+        }
+
+        turnsText.setText(Integer.toString(turns));
+        turnsProgressbar.setProgress(progress);
     }
 
     public void updateEventLog(String console) {
