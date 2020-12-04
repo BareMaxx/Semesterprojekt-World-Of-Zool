@@ -2,13 +2,13 @@ package item;
 
 public class PurchasableItem extends Item {
 
-    private final int price;
+    private final int PRICE;
 
-    PurchasableItem(int price) {
-        this.price = price;
+    PurchasableItem(int PRICE) {
+        this.PRICE = PRICE;
     }
 
     public int getPrice() {
-        return price;
+        return PRICE;
     }
 }

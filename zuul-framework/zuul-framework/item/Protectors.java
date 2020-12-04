@@ -3,22 +3,22 @@ package item;
 import player.Player;
 
 public class Protectors extends PurchasableItem {
-    private final int modifier;
-    private final String useCase;
+    private final int MODIFIER;
+    private final String USECASE;
 
-    public Protectors(String name, int price, int modifier, String useCase) {
+    public Protectors(String name, int price, int MODIFIER, String USECASE) {
         super(price);
         this.name = name;
-        this.modifier = modifier;
-        this.useCase = useCase;
+        this.MODIFIER = MODIFIER;
+        this.USECASE = USECASE;
     }
 
     public int getModifier() {
-        return modifier;
+        return MODIFIER;
     }
 
     public String getUseCase() {
-        return useCase;
+        return USECASE;
     }
 
     @Override
