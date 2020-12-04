@@ -16,6 +16,9 @@ public class StartmenuController extends GenericController{
         Run.getRInstance().initGame(country);
         ResourceController.loadRooms();
         changeScene("home");
+
+        // Update money textfield in overlay
+        ((OverlayController) ResourceController.getOverlayData().controller).updateMoney();
     }
 
     @FXML

@@ -2,6 +2,8 @@ package gameEngine;
 
 import commands.Command;
 import commands.CommandWord;
+import controller.OverlayController;
+import controller.ResourceController;
 import gameplay.Room;
 import gameplay.Sickness;
 import gameplay.Turns;
@@ -203,6 +205,9 @@ public class Game {
 
                     System.out.println("You bought " + s);
                     randomSickEvent(player.getSickChance() * 2);
+
+                    // Update money textfield in overlay
+                    ((OverlayController) ResourceController.getOverlayData().controller).updateMoney();
                 }
             } else {
                 System.out.println("There is no " + s + " in the shop");
@@ -299,6 +304,7 @@ public class Game {
             //60 turns => 21 years, when getting 1 year older every three turns
             int ageMultiplier = turns.getCounter() / 3;
             player.incAge(ageMultiplier);
+
             if (turns.getTurns() != 0) {
                 turns.setCounter();
             } else {
@@ -307,9 +313,16 @@ public class Game {
         } else {
             if (player.getStage().equals("child") && turns.getTurns() <= 0) {
                 player.setStage("adult");
+
+                // Update stage textfield in overlay
+                ((OverlayController) ResourceController.getOverlayData().controller).increaseStage();
+
             } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
                 player.setAlive(false);
             }
         }
+
+        // Update age textfield in overlay
+        ((OverlayController) ResourceController.getOverlayData().controller).updateAge();
     }
 }
