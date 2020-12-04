@@ -5,6 +5,7 @@ import item.Item;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -14,10 +15,51 @@ public class OverlayController extends GenericController {
     private ListView inventory;
 
     @FXML
-    private AnchorPane anchorPane;
+    private TextArea event;
 
     @FXML
-    private TextArea event;
+    private Text moneyAmountText;
+
+    @FXML
+    private Text ageNumberText;
+
+    @FXML
+    private Text stageText;
+
+    @FXML
+    private ProgressBar turnsProgressbar;
+
+    @FXML
+    private Text turnsText;
+
+    public void updateAge(){
+
+        ageNumberText.setText(Integer.toString(Run.getRInstance().getPlayer().getAge()));
+    }
+
+    public void increaseStage(){
+
+        stageText.setText("Adult");
+    }
+
+    public void updateMoney(){
+
+        moneyAmountText.setText(Integer.toString(Run.getRInstance().getPlayer().getMoney()));
+    }
+
+    public void updateTurns(int turns){
+
+        double progress;
+
+        if (Run.getRInstance().getPlayer().getStage() == "child"){
+            progress = (double)turns / 60;
+        } else {
+            progress = (double)turns / 200;
+        }
+
+        turnsText.setText(Integer.toString(turns));
+        turnsProgressbar.setProgress(progress);
+    }
 
     public void updateEventLog(String console) {
         event.setText(console);
