@@ -2,6 +2,7 @@ package gameEngine;
 
 import commands.Command;
 import commands.Parser;
+import controller.DeathController;
 import controller.OverlayController;
 import controller.ResourceController;
 import controller.ShopController;
@@ -11,8 +12,6 @@ import javafx.stage.Stage;
 import player.Player;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintStream;
 
 public class Run extends Application {
@@ -62,11 +61,21 @@ public class Run extends Application {
             case "adult" -> a.processCommand(command);
         }
 
+        // Update event log from console
         String console = new String(stream.toByteArray());
         ((OverlayController)ResourceController.getOverlayData().controller).updateEventLog(console);
 
+        // Update inventory
         ((OverlayController)ResourceController.getOverlayData().controller).updateInventory();
+
+        // Update Shop stock
         ((ShopController)ResourceController.getShopData().controller).updateStock();
+
+        // Update death screen
+        if (!player.getAlive()) {
+            getPrimaryStage().setScene(ResourceController.getDeathData().scene);
+            ((DeathController) ResourceController.getDeathData().controller).updateDeathScreen("Dead", "Not big\nsurprise");
+        }
     }
 
     public void initGame(String country) {

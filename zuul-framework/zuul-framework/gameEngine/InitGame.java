@@ -22,6 +22,7 @@ public class InitGame {
         setGender(player);
         setEcon(player);
         setMoney(player);
+        setAvgAge(player);
     }
 
     public void printWelcome(Player player) {
@@ -105,7 +106,7 @@ public class InitGame {
         }
         else {
             System.out.println("Input invalid\n");
-            //setCountry(p1, country); // Endless loop
+            //setCountry(player, country); // Endless loop
         }
     }
 

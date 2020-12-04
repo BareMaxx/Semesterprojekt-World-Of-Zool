@@ -1,6 +1,7 @@
 package item;
 
 import gameplay.Room;
+import gameplay.Turns;
 import player.Player;
 
 public class Key extends Item {
@@ -20,7 +21,7 @@ public class Key extends Item {
     }
 
     @Override
-    public void use(Player player) {
+    public void use(Player player, Turns turns) {
         Room room = player.getCurrentRoom().getExit(getKEYTYPE());
 
         if (room == null) {

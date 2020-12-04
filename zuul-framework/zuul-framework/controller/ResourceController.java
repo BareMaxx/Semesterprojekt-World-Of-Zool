@@ -21,6 +21,7 @@ public class ResourceController {
     private static SceneData hospitalData;
     private static SceneData schoolData;
     private static SceneData workData;
+    private static SceneData deathData;
     private static SubSceneData overlayData;
 
     public static SceneData getHomeData() {
@@ -49,6 +50,10 @@ public class ResourceController {
 
     public static SceneData getWorkData() {
         return workData;
+    }
+
+    public static SceneData getDeathData() {
+        return deathData;
     }
 
     public static SubSceneData getOverlayData() {
@@ -86,6 +91,8 @@ public class ResourceController {
         schoolData = loadScene("/fxml/school.fxml");
         workData = loadScene("/fxml/work.fxml");
         shopData = loadScene("/fxml/shop.fxml");
+
+        deathData = loadScene("/fxml/death.fxml");
 
         overlayData = loadSubScene("/fxml/overlay.fxml");
     }

@@ -1,12 +1,12 @@
 package controller;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import gameEngine.Run;
@@ -37,17 +37,23 @@ public class GenericController {
         // application layer
         Run.getRInstance().processCommand("go " + room);
 
-        switch (room) {
-            case "home" -> Run.getPrimaryStage().setScene(ResourceController.getHomeData().scene);
-            case "outside" -> Run.getPrimaryStage().setScene(ResourceController.getOutsideData().scene);
-            case "startmenu" -> Run.getPrimaryStage().setScene(ResourceController.getStartmenuData().scene);
-            case "hospital" -> Run.getPrimaryStage().setScene(ResourceController.getHospitalData().scene);
-            case "school" -> Run.getPrimaryStage().setScene(ResourceController.getSchoolData().scene);
-            case "work" -> Run.getPrimaryStage().setScene(ResourceController.getWorkData().scene);
-            case "shop" -> Run.getPrimaryStage().setScene(ResourceController.getShopData().scene);
-        }
+        if (Run.getRInstance().getPlayer().getAlive()) {
+            String currentRoom = Run.getRInstance().getPlayer().getCurrentRoom().getName();
 
-        // Reparent inventory to whichever scene is on top
-        ((AnchorPane)Run.getPrimaryStage().getScene().getRoot()).getChildren().add(ResourceController.getOverlayData().scene);
+            switch (currentRoom) {
+                case "home" -> Run.getPrimaryStage().setScene(ResourceController.getHomeData().scene);
+                case "outside" -> Run.getPrimaryStage().setScene(ResourceController.getOutsideData().scene);
+                case "startmenu" -> Run.getPrimaryStage().setScene(ResourceController.getStartmenuData().scene);
+                case "hospital" -> Run.getPrimaryStage().setScene(ResourceController.getHospitalData().scene);
+                case "school" -> Run.getPrimaryStage().setScene(ResourceController.getSchoolData().scene);
+                case "work" -> Run.getPrimaryStage().setScene(ResourceController.getWorkData().scene);
+                case "shop" -> Run.getPrimaryStage().setScene(ResourceController.getShopData().scene);
+            }
+
+            // Reparent inventory to whichever scene is on top
+            ObservableList<Node> children = ((AnchorPane)Run.getPrimaryStage().getScene().getRoot()).getChildren();
+            if (!children.contains(ResourceController.getOverlayData().scene))
+                children.add(ResourceController.getOverlayData().scene);
+        }
     }
 }

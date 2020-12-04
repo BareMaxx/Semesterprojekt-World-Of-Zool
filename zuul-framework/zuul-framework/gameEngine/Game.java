@@ -33,15 +33,9 @@ public class Game {
             case HELP -> printHelp();
             case GO -> goRoom(command);
             case QUIT -> quit(command);
-            case AGE -> System.out.println("You are " + player.getAge() + " years old.");
             case INVENTORY -> player.inventoryPrinter();
-            case MONEY -> System.out.println("You have " + player.getMoney() + " gold  Economy: " + player.getFamilyEconomy().toString().toLowerCase());
             case USE -> {use(command); turns.decTurns();}
             case BUY -> {buy(command); turns.decTurns();}
-            case LOOK -> look();
-            case TURNS -> System.out.println("You have " + turns.getTurns() + " turns left");
-            case SIT -> {sit(); turns.decTurns();}
-            case STAND -> {stand(); turns.decTurns();}
             case SLEEP -> sleep();
             case HEAL -> heal();
             case SICK -> sick();
@@ -171,7 +165,7 @@ public class Game {
 
             for (Item i: player.getInventory()) {
                 if (i.getName().equals(item)) {
-                    i.use(player);
+                    i.use(player, turns);
                     return;
                 }
             }
@@ -206,23 +200,6 @@ public class Game {
                 }
             } else {
                 System.out.println("There is no " + s + " in the shop");
-            }
-        }
-    }
-
-    // Look at shoplist or look at items in the current room
-    private void look() {
-        if (player.getCurrentRoom().getName().equals(SHOP_NAME)) {
-            player.getCurrentRoom().printStock();
-        } else if (player.getCurrentRoom().getName().equals(HOSPITAL_NAME)) {
-            if (player.getSickness() != null) {
-                System.out.println("You have " + player.getSickness().getName() + ", it will cost you " +
-                        player.getSickness().getPrice() + " to get healed. Type heal to get healed");
-            } else if (player.getDmg() != null) {
-                System.out.println("It will cost you " + player.getDmg().getPrice() + " to get healed. " +
-                    "Type heal to get healed");
-            } else {
-                System.out.println("There is nothing to do here. You are healthy. Leave!");
             }
         }
     }
