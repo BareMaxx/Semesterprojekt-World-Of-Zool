@@ -80,6 +80,7 @@ public class ResourceController {
         startmenuData = loadScene("/fxml/startmenu.fxml");
 
         // set initial scene to menu scene
+        Run.getPrimaryStage().setTitle("ZUUUUL");
         Run.getPrimaryStage().setScene(getStartmenuData().scene);
         Run.getPrimaryStage().show();
     }
