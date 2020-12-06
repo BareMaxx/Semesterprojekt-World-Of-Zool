@@ -69,7 +69,9 @@ public class Run extends Application {
         ((OverlayController)ResourceController.getOverlayData().controller).updateInventory();
 
         // Update Shop stock
-        ((ShopController)ResourceController.getShopData().controller).updateStock();
+        if (player.getCurrentRoom().getName().equals("shop")) {
+            ((ShopController)ResourceController.getShopData().controller).updateStock();
+        }
 
         // Update death screen
         if (!player.getAlive()) {
