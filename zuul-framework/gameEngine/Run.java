@@ -62,7 +62,7 @@ public class Run extends Application {
         }
 
         // Update event log from console
-        String console = new String(stream.toByteArray());
+        String console = stream.toString();
         ((OverlayController)ResourceController.getOverlayData().controller).updateEventLog(console);
 
         // Update inventory
@@ -96,6 +96,11 @@ public class Run extends Application {
         // ResourceController is entirely static, therefore it is not instantiated
         // set initial scene to menu scene
         ResourceController.loadMenu();
+
+        // set initial scene to menu scene
+        primaryStage.setTitle("ZUUUUL");
+        primaryStage.setScene(ResourceController.getStartmenuData().scene);
+        primaryStage.show();
     }
 
     public Player getPlayer() {

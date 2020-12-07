@@ -34,6 +34,7 @@ public class GenericController {
 
     @FXML
     void changeScene(String room) {
+
         // application layer
         Run.getRInstance().processCommand("go " + room);
 
