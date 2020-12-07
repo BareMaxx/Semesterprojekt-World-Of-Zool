@@ -35,7 +35,7 @@ public class InitGame {
         if (childDeath(player))
             return;
 
-        System.out.println("Your start with " + player.getMoney() + " gold.");
+        System.out.println("You start with " + player.getMoney() + " gold.");
         System.out.println();
         System.out.println(player.getCurrentRoom().getLongDescription());
     }
