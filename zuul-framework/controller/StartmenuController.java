@@ -18,6 +18,14 @@ public class StartmenuController extends GenericController{
 
         // Update money textfield in overlay
         ((OverlayController) ResourceController.getOverlayData().controller).updateMoney();
+
+        // Update gender textfield in overlay
+        String gender = Run.getRInstance().getPlayer().getGender().toString();
+        ((OverlayController) ResourceController.getOverlayData().controller).setGenderText(gender);
+
+        // Update familyeconomy textfield in overlay
+        String familyEconomy = Run.getRInstance().getPlayer().getFamilyEconomy().toString();
+        ((OverlayController) ResourceController.getOverlayData().controller).setFamilyEconomyText(familyEconomy);
     }
 
     @FXML

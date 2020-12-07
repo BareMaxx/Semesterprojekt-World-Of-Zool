@@ -29,6 +29,7 @@ public class Game {
     // Processes commands. Derived classes have their own special overrides
     public void processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
+        endTurn();
 
         switch(commandWord) {
             case GO -> goRoom(command);
@@ -41,7 +42,6 @@ public class Game {
             default -> System.out.println("You can't do that at the current stage");
         }
         checkTurns();
-        endTurn();
     }
 
     private void endTurn() {
@@ -61,6 +61,7 @@ public class Game {
             if (player.getMoney() >= player.getSickness().getPrice()) {
                 player.decMoney(player.getSickness().getPrice());
                 player.setSickness(null);
+                ((OverlayController) ResourceController.getOverlayData().controller).hideSickTurns();
                 System.out.println("You have been healed");
                 player.getCurrentRoom().lock();
             } else {
