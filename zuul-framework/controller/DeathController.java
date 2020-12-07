@@ -19,13 +19,11 @@ public class DeathController extends GenericController {
         Player player = Run.getRInstance().getPlayer();
         String cause = player.getDeathCause();
 
-        String st = "You were born in " + player.getCountry().toString() + "\n" +
-                "as a " + player.getGender() + "\n" +
-                "and died at the age of " + player.getAge() + "\n" +
-                "as a " + player.getFamilyEconomy().toString() + " " + player.getStage() + "\n" +
-                "with " + player.getMoney() + " money\n" +
-                "";
-        String dc = "";
+        String st = "You were born in " + player.getCountry().toString() + " as a " + player.getGender().toString().toLowerCase() + "\n" +
+                "and died at the age of " + player.getAge() + " as a " + player.getFamilyEconomy().toString().toLowerCase() + " " +
+                player.getStage() + " with " + player.getMoney() + " money and " + player.getKnowledge() + " knowledge";
+
+        String dc = "The chance of dying of " + cause + " in " + player.getCountry().toString() + " is ";
 
         title.setText("You have died of " + cause);
         stats.setText(st);

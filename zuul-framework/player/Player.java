@@ -146,6 +146,7 @@ public class Player {
     public void incKnowledge(int i){
         knowledge = knowledge +i;
     }
+    public int getKnowledge() { return knowledge; }
 
     public Room getCurrentRoom() {
         return currentRoom;
