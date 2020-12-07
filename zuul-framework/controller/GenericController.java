@@ -34,6 +34,7 @@ public class GenericController {
 
     @FXML
     void changeScene(String room) {
+
         // application layer
         Run.getRInstance().processCommand("go " + room);
 
@@ -50,7 +51,7 @@ public class GenericController {
                 case "shop" -> Run.getPrimaryStage().setScene(ResourceController.getShopData().scene);
             }
 
-            // Reparent inventory to whichever scene is on top
+            // Re-assigned overlay to whichever scene is on top
             ObservableList<Node> children = ((AnchorPane)Run.getPrimaryStage().getScene().getRoot()).getChildren();
             if (!children.contains(ResourceController.getOverlayData().scene))
                 children.add(ResourceController.getOverlayData().scene);

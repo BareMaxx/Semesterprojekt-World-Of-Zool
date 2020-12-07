@@ -62,14 +62,16 @@ public class Run extends Application {
         }
 
         // Update event log from console
-        String console = new String(stream.toByteArray());
+        String console = stream.toString();
         ((OverlayController)ResourceController.getOverlayData().controller).updateEventLog(console);
 
         // Update inventory
         ((OverlayController)ResourceController.getOverlayData().controller).updateInventory();
 
         // Update Shop stock
-        ((ShopController)ResourceController.getShopData().controller).updateStock();
+        if (player.getCurrentRoom().getName().equals("shop")) {
+            ((ShopController)ResourceController.getShopData().controller).updateStock();
+        }
 
         // Update death screen
         if (!player.getAlive()) {
@@ -92,9 +94,10 @@ public class Run extends Application {
         Run.primaryStage = primaryStage;
 
         // ResourceController is entirely static, therefore it is not instantiated
+        // set initial scene to menu scene
         ResourceController.loadMenu();
 
-        // Set initial scene to menu scene
+        // set initial scene to menu scene
         primaryStage.setTitle("ZUUUUL");
         primaryStage.setScene(ResourceController.getStartmenuData().scene);
         primaryStage.show();

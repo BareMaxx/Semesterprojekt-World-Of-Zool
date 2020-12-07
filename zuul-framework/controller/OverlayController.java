@@ -58,7 +58,7 @@ public class OverlayController extends GenericController {
 
         double progress;
 
-        if (Run.getRInstance().getPlayer().getStage() == "child"){
+        if (Run.getRInstance().getPlayer().getStage().equals("child")){
             progress = (double)turns / 60;
         } else {
             progress = (double)turns / 200;

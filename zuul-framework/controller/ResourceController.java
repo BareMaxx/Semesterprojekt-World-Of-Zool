@@ -78,10 +78,6 @@ public class ResourceController {
 
     public static void loadMenu() throws Exception {
         startmenuData = loadScene("/fxml/startmenu.fxml");
-
-        // set initial scene to menu scene
-        Run.getPrimaryStage().setScene(getStartmenuData().scene);
-        Run.getPrimaryStage().show();
     }
 
     public static void loadRooms() throws Exception {
