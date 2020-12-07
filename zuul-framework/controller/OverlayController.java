@@ -68,6 +68,21 @@ public class OverlayController extends GenericController {
         turnsProgressbar.setProgress(progress);
     }
 
+    public void showSickTurns(int turnLimit) {
+        sickTurnsText.setVisible(true);
+        sickTurnsNumber.setVisible(true);
+        sickTurnsNumber.setText(Integer.toString(turnLimit));
+    }
+
+    public void hideSickTurns() {
+        sickTurnsText.setVisible(false);
+        sickTurnsNumber.setVisible(false);
+    }
+
+    public void updateSickTurns(int turns) {
+        sickTurnsNumber.setText(Integer.toString(turns));
+    }
+
     public void updateEventLog(String console) {
         event.setText(console);
         event.positionCaret(console.length());
