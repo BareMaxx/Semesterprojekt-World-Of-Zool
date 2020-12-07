@@ -125,7 +125,6 @@ public class Game {
             case "child" -> {
                 player.setStage("adult");
                 System.out.println("You are now an adult");
-                ((OverlayController) ResourceController.getOverlayData().controller).);
             }
             case "adult" -> {
                 player.setAlive(false);
