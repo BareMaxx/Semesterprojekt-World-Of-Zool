@@ -24,6 +24,7 @@ public class Player {
     private int sickChance = 0;
     private int dmgChance = 0;
     private int avgAge;
+    private String deathCause;
 
     public Country getCountry() {
         return country;
@@ -45,6 +46,8 @@ public class Player {
     public void setFamilyEconomy(FamilyEconomy f){
         familyEconomy = f;
     }
+
+    public String getDeathCause() { return deathCause; }
 
     public void moveFamilyEconomy() {
         switch (this.familyEconomy) {
@@ -104,7 +107,7 @@ public class Player {
     public void incAge(int i) {
         age = age + i;
         if (age >= avgAge) {
-            setAlive(false);
+            kill("old age");
         }
     }
 
@@ -135,8 +138,9 @@ public class Player {
     public boolean getAlive() {
         return alive;
     }
-    public void setAlive(boolean b) {
-        alive = b;
+    public void kill(String cause) {
+        alive = false;
+        deathCause = cause;
     }
 
     public void incKnowledge(int i){

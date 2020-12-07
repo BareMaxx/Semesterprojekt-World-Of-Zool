@@ -48,7 +48,7 @@ public class Game {
         if (player.getSickness()!=null) {
             player.getSickness().decTurnLimit(1);
             if (player.getSickness().getTurnLimit() == 0) {
-                player.setAlive(false);
+                player.kill(player.getSickness().getName());
             }
         }
     }
@@ -127,7 +127,7 @@ public class Game {
                 System.out.println("You are now an adult");
             }
             case "adult" -> {
-                player.setAlive(false);
+                player.kill("old age");
             }
         }
     }
@@ -233,7 +233,7 @@ public class Game {
             System.out.println("Quit what?");
         }
         else {
-            player.setAlive(false);
+            player.kill("ragequit");
         }
     }
 
@@ -254,13 +254,12 @@ public class Game {
             }
         }
         if (player.getStage().equals("child") && turns.getTurns() <= 0) {
-                player.setStage("adult");
+            player.setStage("adult");
 
-                // Update stage textfield in overlay
-                ((OverlayController) ResourceController.getOverlayData().controller).increaseStage();
-
+            // Update stage textfield in overlay
+            ((OverlayController) ResourceController.getOverlayData().controller).increaseStage();
         } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
-                player.setAlive(false);
+            player.kill("old age");
         }
 
         // Update age textfield in overlay

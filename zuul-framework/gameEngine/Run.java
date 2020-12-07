@@ -76,7 +76,7 @@ public class Run extends Application {
         // Update death screen
         if (!player.getAlive()) {
             getPrimaryStage().setScene(ResourceController.getDeathData().scene);
-            ((DeathController) ResourceController.getDeathData().controller).updateDeathScreen("Dead", "Not big\nsurprise");
+            ((DeathController) ResourceController.getDeathData().controller).updateDeathScreen();
         }
     }
 
