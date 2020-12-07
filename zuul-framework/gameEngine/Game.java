@@ -173,8 +173,6 @@ public class Game {
                     System.out.println("You bought " + s);
                     randomSickEvent(player.getSickChance() * 2);
 
-                    // Update money textfield in overlay
-                    ((OverlayController) ResourceController.getOverlayData().controller).updateMoney();
                 } else {
                     System.out.println("You don't have enough money for this!");
                 }

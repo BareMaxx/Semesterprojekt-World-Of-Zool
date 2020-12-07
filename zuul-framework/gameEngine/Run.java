@@ -78,6 +78,9 @@ public class Run extends Application {
             getPrimaryStage().setScene(ResourceController.getDeathData().scene);
             ((DeathController) ResourceController.getDeathData().controller).updateDeathScreen("Dead", "Not big\nsurprise");
         }
+
+        // Update money textfield in overlay
+        ((OverlayController) ResourceController.getOverlayData().controller).updateMoney();
     }
 
     public void initGame(String country) {
