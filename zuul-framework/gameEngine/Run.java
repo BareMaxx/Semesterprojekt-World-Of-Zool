@@ -81,6 +81,16 @@ public class Run extends Application {
 
         // Update money textfield in overlay
         ((OverlayController) ResourceController.getOverlayData().controller).updateMoney();
+
+        // Update turn textfield in overlay
+        if (player.getStage() == "child"){
+            ((OverlayController) ResourceController.getOverlayData().controller).updateTurns(c.turns.getTurns());
+        } else {
+            ((OverlayController) ResourceController.getOverlayData().controller).updateTurns(a.turns.getTurns());
+        }
+
+        // Update age textfield in overlay
+        ((OverlayController) ResourceController.getOverlayData().controller).updateAge();
     }
 
     public void initGame(String country) {

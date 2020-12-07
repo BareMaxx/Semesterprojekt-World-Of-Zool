@@ -125,6 +125,7 @@ public class Game {
             case "child" -> {
                 player.setStage("adult");
                 System.out.println("You are now an adult");
+                ((OverlayController) ResourceController.getOverlayData().controller).);
             }
             case "adult" -> {
                 player.setAlive(false);
@@ -264,9 +265,5 @@ public class Game {
                 player.setAlive(false);
             }
         }
-        // Update age textfield in overlay
-        ((OverlayController) ResourceController.getOverlayData().controller).updateAge();
-
-        ((OverlayController) ResourceController.getOverlayData().controller).updateTurns(turns.getTurns());
     }
 }
