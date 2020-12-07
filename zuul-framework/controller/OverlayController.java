@@ -27,11 +27,16 @@ public class OverlayController extends GenericController {
     private Text stageText;
 
     @FXML
+    private Text genderText;
+
+    @FXML
+    private Text familyEconomyText;
+
+    @FXML
     private Text sickTurnsText;
 
     @FXML
     private Text sickTurnsNumber;
-
 
     @FXML
     private ProgressBar turnsProgressbar;
@@ -52,6 +57,14 @@ public class OverlayController extends GenericController {
     public void updateMoney(){
 
         moneyAmountText.setText(Integer.toString(Run.getRInstance().getPlayer().getMoney()));
+    }
+
+    public void setGenderText(String gender){
+        genderText.setText(gender);
+    }
+
+    public void setFamilyEconomyText(String familyEconomy) {
+        familyEconomyText.setText(familyEconomy);
     }
 
     public void updateTurns(int turns){
