@@ -131,6 +131,9 @@ public class Game {
                 player.setAlive(false);
             }
         }
+
+        // Update stage textfield in overlay
+        ((OverlayController) ResourceController.getOverlayData().controller).increaseStage();
     }
 
     private void use(Command command) {
@@ -174,8 +177,6 @@ public class Game {
                     System.out.println("You bought " + s);
                     randomSickEvent(player.getSickChance() * 2);
 
-                    // Update money textfield in overlay
-                    ((OverlayController) ResourceController.getOverlayData().controller).updateMoney();
                 } else {
                     System.out.println("You don't have enough money for this!");
                 }
@@ -243,28 +244,68 @@ public class Game {
     }
 
     public void checkTurns() {
+
+        /*
+            Note:
+
+            counter -   increaes whenever turns is used
+                        (increases according to the amount of turns used)
+
+            turns -     number of turns until adult stage or death
+                        (number of turns is decreased with a arbitrary number when doing any action)
+         */
+
+
+        // When counter is a multiple of 3 or more
         if (turns.getCounter() / 3 > 0) {
-            //60 turns => 21 years, when getting 1 year older every three turns
+
+            /*
+                The player ages with 1 year per multiple of three of counter.
+                When the player makes a move, the counter is increased with the number of turns used
+
+                This means that:
+                60 turns => 21 years, when getting 1 year older every three turns
+                (when starting with the age of 1)
+             */
+
+            // ageMultiplier is 1 per multiple of three
             int ageMultiplier = turns.getCounter() / 3;
+            // increase age with agemultiplier
             player.incAge(ageMultiplier);
 
-            if (turns.getTurns() != 0) {
-                turns.setCounter();
-            } else {
-                turns.setCounter(0);
-            }
+            // Counter is reset when the player's age is increased
+            turns.setCounter(0);
         }
-        if (player.getStage().equals("child") && turns.getTurns() <= 0) {
+
+        // If player has 0 turns left
+        if (turns.getTurns() <= 0){
+
+            // If player is a child
+            if (player.getStage().equals("child")){
+
+                // Then set stage to adult
                 player.setStage("adult");
 
-                // Update stage textfield in overlay
+                // And update stage textfield in overlay
                 ((OverlayController) ResourceController.getOverlayData().controller).increaseStage();
 
-        } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
-                player.setAlive(false);
-        }
+            // If the player is adult, commit self deletus
+            } else {
 
-        // Update age textfield in overlay
-        ((OverlayController) ResourceController.getOverlayData().controller).updateAge();
+                // But only if the adult player is older than 21
+                if (player.getAge() != 21){
+                    player.setAlive(false);
+                }
+
+                /*
+                    Note:
+                    When sleeping, the player moves from child to adult stage.
+                    This resets the counter and the number of truns. Therefore
+                    the program concludes the player is dead when sleeping in
+                    child stage. To fix this, I added an age check which prevents
+                    the player from dying when sleeping as a child.
+                 */
+            }
+        }
     }
 }
