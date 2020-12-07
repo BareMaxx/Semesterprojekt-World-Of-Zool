@@ -71,15 +71,25 @@
                      </font>
                   </Text>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="90.0" layoutX="5.0" layoutY="32.0" stroke="#a8a3a3" strokeType="INSIDE" width="228.0" />
-                  <ProgressBar fx:id="turnsProgressbar" layoutX="15.0" layoutY="77.0" prefHeight="32.0" prefWidth="209.0" progress="1.0" />
-                  <Text layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Turns until adult:">
+                  <ProgressBar fx:id="turnsProgressbar" layoutX="12.0" layoutY="38.0" prefHeight="26.0" prefWidth="209.0" progress="1.0" />
+                  <Text layoutX="12.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Turns until adult:">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="16.0" />
                      </font>
                   </Text>
-                  <Text fx:id="turnsText" layoutX="175.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="60" wrappingWidth="48.7353515625">
+                  <Text fx:id="turnsText" layoutX="184.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="60" wrappingWidth="48.7353515625">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="sickTurnsText" fill="RED" layoutX="12.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sick, turns until death: " visible="false">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="sickTurnsNumber" fill="RED" layoutX="184.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="60" visible="false" wrappingWidth="48.7353515625">
+                     <font>
+                        <Font size="16.0" />
                      </font>
                   </Text>
                </children>

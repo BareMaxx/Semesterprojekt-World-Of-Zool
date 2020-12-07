@@ -10,7 +10,7 @@ import player.Gender;
 import player.Player;
 import gameplay.Room;
 
-public class InitGame {
+public class    InitGame {
     private RandomEngine ran = new RandomEngine();
 
     public InitGame(Player p1, String country) {

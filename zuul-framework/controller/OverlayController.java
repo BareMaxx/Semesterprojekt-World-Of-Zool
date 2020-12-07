@@ -27,6 +27,13 @@ public class OverlayController extends GenericController {
     private Text stageText;
 
     @FXML
+    private Text sickTurnsText;
+
+    @FXML
+    private Text sickTurnsNumber;
+
+
+    @FXML
     private ProgressBar turnsProgressbar;
 
     @FXML
