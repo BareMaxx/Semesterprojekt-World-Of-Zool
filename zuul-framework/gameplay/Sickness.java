@@ -4,8 +4,10 @@ import controller.OverlayController;
 import controller.ResourceController;
 import item.Key;
 import player.Player;
+import player.Country;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Sickness extends Event {
     private ArrayList<String> ugNames = new ArrayList<>(Arrays.asList("tuberculosis", "cancer", "AIDS", "malaria"));
@@ -14,6 +16,25 @@ public class Sickness extends Event {
     private int turnLimit = randomEngine.getRandom(10,15);
     private int price = 0;
 
+    private HashMap<String, Integer> sickChanceUg = new HashMap<>() {{
+        put("tuberculosis", 333);
+        put("cancer", 333);
+        put("AIDS", 333);
+        put("malaria", 333);
+    }};
+    private HashMap<String, Integer> sickChanceDk = new HashMap<>() {{
+        put("a heart disease", 333);
+        put("cancer", 333);
+        put("AIDS", 1);
+        put("depression and you want to commit suicide", 250);
+    }};
+    private HashMap<String, Integer> sickChanceUs = new HashMap<>() {{
+        put("a heart disease", 333);
+        put("cancer", 333);
+        put("AIDS", 3);
+        put("diabetes", 333);
+    }};
+
     public Sickness(int probabilityOfSuccess, Player player) {
         super(probabilityOfSuccess, player);
 
@@ -21,7 +42,9 @@ public class Sickness extends Event {
             return;
 
         if (runEvent()) {
-            setName();
+            setName(player.getCountry());
+            if (!getChance(player.getCountry(), this.name)) {return;}
+
             setPrice();
             System.out.println("Oh no, you were unlucky and you now have " + name + ", you have " + turnLimit +
                     " turns to get to the hospital and pay " + price + " gold to get healthy or you will die!");
@@ -40,6 +63,15 @@ public class Sickness extends Event {
         ((OverlayController) ResourceController.getOverlayData().controller).updateSickTurns(turnLimit);
     }
 
+    private boolean getChance(Country country, String name) {
+        switch (country){
+            case VAKANNDA -> {return (randomEngine.getOutcome(sickChanceUg.get(name), 1000));}
+            case DANHEIM -> {return (randomEngine.getOutcome(sickChanceDk.get(name), 1000));}
+            case WASHINGGEORGE -> {return (randomEngine.getOutcome(sickChanceUs.get(name), 1000));}
+            default -> {return false;}
+        }
+    }
+
     public int getPrice() {
         return price;
     }
@@ -51,8 +83,8 @@ public class Sickness extends Event {
             case WASHINGGEORGE -> price = randomEngine.getRandom(1000,30000);
         }
     }
-    private void setName(){
-        switch (player.getCountry()){
+    private void setName(Country country){
+        switch (country){
             case DANHEIM -> this.name = dkNames.get(randomEngine.getRandom(0,dkNames.size()-1));
             case VAKANNDA -> this.name = ugNames.get(randomEngine.getRandom(0,ugNames.size()-1));
             case WASHINGGEORGE -> this.name = usNames.get(randomEngine.getRandom(0,usNames.size()-1));

@@ -48,7 +48,7 @@ public class Game {
         if (player.getSickness()!=null) {
             player.getSickness().decTurnLimit(1);
             if (player.getSickness().getTurnLimit() == 0) {
-                player.setAlive(false);
+                player.kill(player.getSickness().getName());
             }
         }
     }
@@ -128,7 +128,7 @@ public class Game {
                 System.out.println("You are now an adult");
             }
             case "adult" -> {
-                player.setAlive(false);
+                player.kill("old age");
             }
         }
 
@@ -219,13 +219,13 @@ public class Game {
 
     private void randomSickEvent(int probability){
         Sickness s = new Sickness(probability, player);
-        if(s.name != null) {
+        if(s.getName() != null) {
             player.setSickness(s);
         }
     }
     private void randomDmgEvent(int probability) {
         WorkDMG dmg = new WorkDMG(probability, player);
-        if (dmg.name != null) {
+        if (dmg.getName() != null) {
             player.setDmg(dmg);
         }
     }
@@ -235,7 +235,7 @@ public class Game {
             System.out.println("Quit what?");
         }
         else {
-            player.setAlive(false);
+            player.kill("old age");
         }
     }
 
@@ -294,7 +294,7 @@ public class Game {
 
                 // But only if the adult player is older than 21
                 if (player.getAge() != 21){
-                    player.setAlive(false);
+                    player.kill("old age");
                 }
 
                 /*
