@@ -3,7 +3,7 @@ package gameplay;
 import player.Player;
 
 public class Event {
-    public String name = null;
+    protected String name = null;
     private final int PROBABILITYOFSUCCESS;
     public RandomEngine randomEngine;
     public Player player;

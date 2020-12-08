@@ -211,13 +211,13 @@ public class Game {
 
     private void randomSickEvent(int probability){
         Sickness s = new Sickness(probability, player);
-        if(s.name != null) {
+        if(s.getName() != null) {
             player.setSickness(s);
         }
     }
     private void randomDmgEvent(int probability) {
         WorkDMG dmg = new WorkDMG(probability, player);
-        if (dmg.name != null) {
+        if (dmg.getName() != null) {
             player.setDmg(dmg);
         }
     }

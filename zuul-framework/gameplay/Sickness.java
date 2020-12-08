@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Sickness extends Event {
-    private ArrayList<String> ugNames = new ArrayList<>(Arrays.asList("tuberculosis", "cancer", "AIDS"));
+    private ArrayList<String> ugNames = new ArrayList<>(Arrays.asList("tuberculosis", "cancer", "AIDS", "malaria"));
     private ArrayList<String> dkNames = new ArrayList<>(Arrays.asList("a heart disease", "cancer", "AIDS", "depression and you want to commit suicide"));
     private ArrayList<String> usNames = new ArrayList<>(Arrays.asList("a heart disease", "cancer", "AIDS", "diabetes"));
     private int turnLimit = randomEngine.getRandom(10,15);
@@ -19,7 +19,6 @@ public class Sickness extends Event {
             return;
 
         if (runEvent()) {
-            //this.name = names.get(randomEngine.getRandom(0,names.size()-1));
             setName();
             setPrice();
             System.out.println("Oh no, you were unlucky and you now have " + name + ", you have " + turnLimit +
