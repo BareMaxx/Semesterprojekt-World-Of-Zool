@@ -37,22 +37,27 @@ public class Run extends Application {
         System.setOut(printStream);
     }
 
+    // Get the primary "Stage"
     public static Stage getPrimaryStage() {
         return primaryStage;
     }
 
+    // Get the current instance of Run
     public static Run getRInstance() {
         return rInstance;
     }
 
+    // Get a reference to the shop room
     public static Room getShopRoom() {
         return shopRoom;
     }
 
+    // Create all the JavaFX stuff, like the window
     public void launchMenu() {
         launch();
     }
 
+    // Parse the given string as a command and update the game logic
     public void processCommand(String input) {
         Command command = parser.getCommand(input);
 
@@ -93,6 +98,7 @@ public class Run extends Application {
         ((OverlayController) ResourceController.getOverlayData().controller).updateAge();
     }
 
+    // Initialize the map
     public void initGame(String country) {
         InitGame init = new InitGame(player, country);
         shopRoom = init.createRooms(player);
@@ -116,6 +122,7 @@ public class Run extends Application {
         primaryStage.show();
     }
 
+    // Get a reference to the player
     public Player getPlayer() {
         return player;
     }

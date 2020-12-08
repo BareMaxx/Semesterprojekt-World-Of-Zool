@@ -56,17 +56,17 @@ public class Game {
         if (!inRoom(HOSPITAL_NAME)) {
             return;
         }
-        if (player.getSickness() != null) {
+        if (player.getSickness() != null) { // Check for sickness
             if (player.getMoney() >= player.getSickness().getPrice()) {
                 player.decMoney(player.getSickness().getPrice());
                 player.setSickness(null);
-                ((OverlayController) ResourceController.getOverlayData().controller).hideSickTurns();
+                ((OverlayController) ResourceController.getOverlayData().controller).hideSickTurns(); // Update GUI
                 System.out.println("You have been healed");
                 player.getCurrentRoom().lock();
             } else {
                 System.out.println("You don't have enough money to do that.");
             }
-        } else if (player.getDmg() != null) {
+        } else if (player.getDmg() != null) { // Check for injuries
             if (player.getMoney() >= player.getDmg().getPrice()) {
                 player.decMoney(player.getDmg().getPrice());
                 player.setDmg(null);
@@ -80,6 +80,7 @@ public class Game {
         }
     }
 
+    // Check if player is in the given room
     public boolean inRoom(String room) {
         if (!player.getCurrentRoom().getName().equals(room)) {
             System.out.println("You have to be at " + room + " to do that");
@@ -88,6 +89,7 @@ public class Game {
         return true;
     }
 
+    // Earn money according to econStage, gender and sickness/injuries
     public void work(int econStage) {
         if (!inRoom(WORK_NAME)) {
             return;
@@ -109,7 +111,8 @@ public class Game {
         turns.decTurns(6);
         checkTurns();
     }
-    
+
+    // Sleep and advance to the next stage
     private void sleep() {
         if (!inRoom(HOME_NAME)) {
             return;
@@ -132,6 +135,7 @@ public class Game {
         ((OverlayController) ResourceController.getOverlayData().controller).updateTurnsUntilChangeText();
     }
 
+    // Use the given item
     private void use(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Use what?");
@@ -152,7 +156,7 @@ public class Game {
         }
     }
 
-    // Buy an item if you're in the "Shop" room
+    // Buy the given item if you're in the "Shop" room
     private void buy(Command command) {
         if (player.getCurrentRoom().getName().equals(SHOP_NAME)) {
             if (!command.hasSecondWord()) {
@@ -182,6 +186,7 @@ public class Game {
         }
     }
 
+    // Go to the given room
     private void goRoom(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Go where?");
@@ -204,6 +209,7 @@ public class Game {
         }
     }
 
+    // Trigger a random event
     private void randomEvent(int multi) {
         RandomEngine r = new RandomEngine();
         int i = r.getRandom(0,1);
@@ -213,12 +219,15 @@ public class Game {
         }
     }
 
+    // Random sickness
     private void randomSickEvent(int probability) {
         Sickness s = new Sickness(probability, player);
         if (s.getName() != null) {
             player.setSickness(s);
         }
     }
+
+    // Random injury
     private void randomDmgEvent(int probability) {
         WorkDMG dmg = new WorkDMG(probability, player);
         if (dmg.getName() != null) {
@@ -239,6 +248,7 @@ public class Game {
         return player;
     }
 
+    // I have no clue
     public void checkTurns() {
 
         /*
