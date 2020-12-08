@@ -4,20 +4,18 @@ import gameplay.Turns;
 import player.Player;
 
 public class Item {
-
-    public int ID;
-    private static int IDCounter;
     protected String name;
 
-    Item()
-    {
-        this.ID = IDCounter++;
+    // Initialize the Item with an name
+    public Item() {
         this.name = "Item";
     }
 
+    // Return the name of the Item
     public String getName() {
         return name;
     }
 
+    // Use the Item
     public void use(Player player, Turns turns) { }
 }

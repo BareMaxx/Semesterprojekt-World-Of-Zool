@@ -15,26 +15,29 @@ public class GenericController {
     @FXML
     protected ImageView backgroundImage;
 
+    // Darken highlighted text
     @FXML
     void darkenText(MouseEvent event) {
         Text text = (Text)event.getTarget();
         text.setStroke(Color.WHITE);
     }
 
+    // Highælight text
     @FXML
     void highlightText(MouseEvent event) {
         Text text = (Text)event.getTarget();
         text.setStroke(Color.YELLOW);
     }
 
+    // Change the scene to outside
     @FXML
     void goOutside(MouseEvent event) throws Exception {
         changeScene("outside");
     }
 
+    // Change the current scene to the specified one
     @FXML
     void changeScene(String room) {
-
         // application layer
         Run.getRInstance().processCommand("go " + room);
 
