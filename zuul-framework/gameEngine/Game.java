@@ -29,12 +29,11 @@ public class Game {
     // Processes commands. Derived classes have their own special overrides
     public void processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
-        endTurn();
 
         switch(commandWord) {
             case GO -> goRoom(command);
             case QUIT -> quit(command);
-            case USE -> {use(command); turns.decTurns();}
+            case USE -> {use(command); turns.decTurns(); decrementSickTurns(1);}
             case BUY -> {buy(command);}
             case SLEEP -> sleep();
             case HEAL -> heal();
@@ -44,10 +43,10 @@ public class Game {
         checkTurns();
     }
 
-    private void endTurn() {
+    private void decrementSickTurns(int amount) {
         if (player.getSickness()!=null) {
-            player.getSickness().decTurnLimit(1);
-            if (player.getSickness().getTurnLimit() == 0) {
+            player.getSickness().decTurnLimit(amount);
+            if (player.getSickness().getTurnLimit() <= 0) {
                 player.setAlive(false);
             }
         }
@@ -108,6 +107,7 @@ public class Game {
         System.out.println("You made " + i);
         randomEvent(2);
         turns.decTurns(6);
+        decrementSickTurns(6);
         checkTurns();
     }
     
@@ -116,6 +116,7 @@ public class Game {
             return;
         }
         turns.decTurns(turns.getTurns());
+        decrementSickTurns(turns.getTurns());
         switch (player.getStage()) {
             case "child" -> {
                 player.setStage("adult");
@@ -170,6 +171,7 @@ public class Game {
                     player.getCurrentRoom().removeItem(i);
                     player.decMoney(i.getPrice());
                     turns.decTurns();
+                    decrementSickTurns(1);
 
                     System.out.println("You bought " + s);
                     randomSickEvent(player.getSickChance() * 2);
@@ -201,6 +203,7 @@ public class Game {
             player.setCurrentRoom(nextRoom);
             System.out.println(player.getCurrentRoom().getLongDescription());
             turns.decTurns();
+            decrementSickTurns(1);
             randomEvent(1);
         }
     }
