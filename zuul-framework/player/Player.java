@@ -16,7 +16,6 @@ public class Player {
     private int age = 1;
     private String stage;
     private boolean alive = true;
-    private int score = 0;
     private int knowledge = 0;
     private Room currentRoom;
     private Sickness sickness = null;
@@ -76,17 +75,6 @@ public class Player {
     public ArrayList<Item> getInventory() {
         return inventory;
     }
-    public void inventoryPrinter(){
-        System.out.println("In your inventory you find:");
-        if (inventory.isEmpty()) {
-            System.out.println("\tnothing");
-        }
-        else {
-            for (Item i : inventory) {
-                System.out.println("\t" + i.getName());
-            }
-        }
-    }
 
     public int getMoney(){
         return money;
@@ -113,13 +101,6 @@ public class Player {
     }
     public void setAvgAge(int avgAge) {
         this.avgAge = avgAge;
-    }
-
-    public int getScore() {
-        return score;
-    }
-    public void incScore(int i){
-        score = score + i;
     }
 
     public String getStage(){
