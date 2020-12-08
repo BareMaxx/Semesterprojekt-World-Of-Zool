@@ -79,12 +79,15 @@ public class Room {
         return name;
     }
 
+    // Set the name of this room
     public void setName(String name) {
         this.name = name;
     }
 
+    // Return whether this room is locked
     public boolean isLocked() { return this.locked; }
 
+    // Unlock the room if the key matches
     public void unlock(Key key) {
         if (key.canUnlock(this.getName())) {
             this.locked = false;
@@ -94,6 +97,7 @@ public class Room {
             System.out.println("You can't do that here.");
     }
 
+    // Lock the room again
     public void lock() {
         this.locked = true;
     }

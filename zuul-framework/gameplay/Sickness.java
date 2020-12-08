@@ -14,6 +14,7 @@ public class Sickness extends Event {
     private int turnLimit = randomEngine.getRandom(10,15);
     private int price = 0;
 
+    // Initialize the sickness with a name and a healing price
     public Sickness(int probabilityOfSuccess, Player player) {
         super(probabilityOfSuccess, player);
 
@@ -28,29 +29,38 @@ public class Sickness extends Event {
             Key appointment = new Key("hospital", "appointment");
             player.addInventoryItem(appointment);
             System.out.println("You received an appointment to the hospital, use it to gain access.");
+
+            // Show and update the GUI
             ((OverlayController) ResourceController.getOverlayData().controller).showSickTurns(turnLimit);
         }
     }
 
+    // Return the amount of turns before death
     public int getTurnLimit() {
         return turnLimit;
     }
+
+    // Decrease the turn and update GUI
     public void decTurnLimit(int i){
         turnLimit = turnLimit - i;
         ((OverlayController) ResourceController.getOverlayData().controller).updateSickTurns(turnLimit);
     }
 
+    // Get the healing price
     public int getPrice() {
         return price;
     }
 
-    private void setPrice(){
+    // Set the healing price based on country
+    private void setPrice() {
         switch (player.getCountry()) {
             case DANHEIM -> price = randomEngine.getRandom(0,1000);
             case VAKANNDA -> price = randomEngine.getRandom(200,3000);
             case WASHINGGEORGE -> price = randomEngine.getRandom(1000,30000);
         }
     }
+
+    // Set the name based on country
     private void setName(){
         switch (player.getCountry()){
             case DANHEIM -> this.name = dkNames.get(randomEngine.getRandom(0,dkNames.size()-1));
