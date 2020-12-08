@@ -23,6 +23,11 @@ public class HomeController extends GenericController{
         super();
     }
 
+    @FXML
+    void sleep(MouseEvent event) {
+        Run.getRInstance().processCommand("sleep");
+    }
+
     // Initialize is called in RessourceController::loadRooms when creating an instance of HomeController.
     // It is called automatically by JavaFX.
     @FXML

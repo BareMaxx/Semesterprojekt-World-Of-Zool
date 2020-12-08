@@ -9,7 +9,7 @@ import player.Gender;
 import player.Player;
 import gameplay.Room;
 
-public class InitGame {
+public class    InitGame {
     private RandomEngine ran = new RandomEngine();
 
     public InitGame(Player p1, String country) {
@@ -34,7 +34,7 @@ public class InitGame {
         if (childDeath(player))
             return;
 
-        System.out.println("Your start with " + player.getMoney() + " gold.");
+        System.out.println("You start with " + player.getMoney() + " gold.");
         System.out.println();
         System.out.println(player.getCurrentRoom().getLongDescription());
     }

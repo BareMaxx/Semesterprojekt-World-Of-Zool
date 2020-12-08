@@ -1,5 +1,7 @@
 package gameplay;
 
+import controller.OverlayController;
+import controller.ResourceController;
 import item.Key;
 import player.Player;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class Sickness extends Event {
             Key appointment = new Key("hospital", "appointment");
             player.addInventoryItem(appointment);
             System.out.println("You received an appointment to the hospital, use it to gain access.");
+            ((OverlayController) ResourceController.getOverlayData().controller).showSickTurns(turnLimit);
         }
     }
 
@@ -34,6 +37,7 @@ public class Sickness extends Event {
     }
     public void decTurnLimit(int i){
         turnLimit = turnLimit - i;
+        ((OverlayController) ResourceController.getOverlayData().controller).updateSickTurns(turnLimit);
     }
 
     public int getPrice() {

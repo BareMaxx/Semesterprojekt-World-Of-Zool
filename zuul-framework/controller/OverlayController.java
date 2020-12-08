@@ -27,6 +27,18 @@ public class OverlayController extends GenericController {
     private Text stageText;
 
     @FXML
+    private Text genderText;
+
+    @FXML
+    private Text familyEconomyText;
+
+    @FXML
+    private Text sickTurnsText;
+
+    @FXML
+    private Text sickTurnsNumber;
+
+    @FXML
     private ProgressBar turnsProgressbar;
 
     @FXML
@@ -47,6 +59,14 @@ public class OverlayController extends GenericController {
         moneyAmountText.setText(Integer.toString(Run.getRInstance().getPlayer().getMoney()));
     }
 
+    public void setGenderText(String gender){
+        genderText.setText(gender);
+    }
+
+    public void setFamilyEconomyText(String familyEconomy) {
+        familyEconomyText.setText(familyEconomy);
+    }
+
     public void updateTurns(int turns){
 
         double progress;
@@ -54,11 +74,26 @@ public class OverlayController extends GenericController {
         if (Run.getRInstance().getPlayer().getStage().equals("child")){
             progress = (double)turns / 60;
         } else {
-            progress = (double)turns / 200;
+            progress = (double)turns / 100;
         }
 
         turnsText.setText(Integer.toString(turns));
         turnsProgressbar.setProgress(progress);
+    }
+
+    public void showSickTurns(int turnLimit) {
+        sickTurnsText.setVisible(true);
+        sickTurnsNumber.setVisible(true);
+        sickTurnsNumber.setText(Integer.toString(turnLimit));
+    }
+
+    public void hideSickTurns() {
+        sickTurnsText.setVisible(false);
+        sickTurnsNumber.setVisible(false);
+    }
+
+    public void updateSickTurns(int turns) {
+        sickTurnsNumber.setText(Integer.toString(turns));
     }
 
     public void updateEventLog(String console) {
