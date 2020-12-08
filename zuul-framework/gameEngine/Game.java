@@ -43,7 +43,7 @@ public class Game {
         checkTurns();
     }
 
-    private void decrementSickTurns(int amount) {
+    public void decrementSickTurns(int amount) {
         if (player.getSickness() != null) {
             player.getSickness().decTurnLimit(amount);
             if (player.getSickness().getTurnLimit() <= 0) {
@@ -204,18 +204,18 @@ public class Game {
         }
     }
 
-    private void randomEvent(int multi){
+    private void randomEvent(int multi) {
         RandomEngine r = new RandomEngine();
         int i = r.getRandom(0,1);
-        switch (i){
+        switch(i) {
             case 0 -> randomSickEvent(player.getSickChance() * multi);
             case 1 -> randomDmgEvent(player.getDmgChance() * multi);
         }
     }
 
-    private void randomSickEvent(int probability){
+    private void randomSickEvent(int probability) {
         Sickness s = new Sickness(probability, player);
-        if(s.getName() != null) {
+        if (s.getName() != null) {
             player.setSickness(s);
         }
     }
