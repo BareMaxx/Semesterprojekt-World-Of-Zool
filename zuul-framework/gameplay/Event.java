@@ -14,11 +14,7 @@ public class Event {
         this.player = player;
     }
 
-    public boolean runEvent() {
-        if (randomEngine.getOutcome(PROBABILITYOFSUCCESS, 100))
-            return true;
-        return false;
-    }
+    public boolean runEvent() {return (randomEngine.getOutcome(PROBABILITYOFSUCCESS, 100));}
 
     public String getName() {
         return name;

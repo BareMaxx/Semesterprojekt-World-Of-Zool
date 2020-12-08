@@ -32,7 +32,7 @@ public class Sickness extends Event {
         put("a heart disease", 333);
         put("cancer", 333);
         put("AIDS", 3);
-        put("diabetes", 333);
+        put("diabetes", 200);
     }};
 
     public Sickness(int probabilityOfSuccess, Player player) {
@@ -65,9 +65,30 @@ public class Sickness extends Event {
 
     private boolean getChance(Country country, String name) {
         switch (country){
-            case VAKANNDA -> {return (randomEngine.getOutcome(sickChanceUg.get(name), 1000));}
-            case DANHEIM -> {return (randomEngine.getOutcome(sickChanceDk.get(name), 1000));}
-            case WASHINGGEORGE -> {return (randomEngine.getOutcome(sickChanceUs.get(name), 1000));}
+            case VAKANNDA -> {
+                if (randomEngine.getOutcome(sickChanceUg.get(name), 1000)) {
+                    return true;
+                } else {
+                    setName(country);
+                    return getChance(country, this.name);
+                }
+            }
+            case DANHEIM -> {
+                if (randomEngine.getOutcome(sickChanceDk.get(name), 1000)) {
+                    return true;
+                } else {
+                    setName(country);
+                    return getChance(country, this.name);
+                }
+            }
+            case WASHINGGEORGE -> {
+                if (randomEngine.getOutcome(sickChanceUs.get(name), 1000)){
+                    return true;
+                } else {
+                    setName(country);
+                    return getChance(country, this.name);
+                }
+            }
             default -> {return false;}
         }
     }
