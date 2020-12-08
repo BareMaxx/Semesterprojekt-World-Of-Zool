@@ -32,6 +32,7 @@ public enum Country {
     private int eventChance;
     private HashMap<String, String> stats;
 
+    // Initialize country with all it's attributes
     Country(int birthMortal, int money, double avgAgeMultiplier, int poor, int middleClass, int rich, int eventChance, HashMap<String, String> stats) {
         this.birthMortal = birthMortal;
         this.money = money;
@@ -65,6 +66,7 @@ public enum Country {
         return eventChance;
     }
 
+    // Get the statistics
     public String getStats(String cause) {
         return stats.get(cause);
     }
