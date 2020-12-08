@@ -36,6 +36,9 @@ public class OverlayController extends GenericController {
     private Text sickTurnsText;
 
     @FXML
+    private Text turnsUntilChangeText;
+
+    @FXML
     private Text sickTurnsNumber;
 
     @FXML
@@ -94,6 +97,11 @@ public class OverlayController extends GenericController {
 
     public void updateSickTurns(int turns) {
         sickTurnsNumber.setText(Integer.toString(turns));
+    }
+
+    public void updateTurnsUntilChangeText(){
+
+        turnsUntilChangeText.setText("Turns left:");
     }
 
     public void updateEventLog(String console) {

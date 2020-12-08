@@ -134,6 +134,9 @@ public class Game {
 
         // Update stage textfield in overlay
         ((OverlayController) ResourceController.getOverlayData().controller).increaseStage();
+
+        // Update turns until.. textfield in overlay
+        ((OverlayController) ResourceController.getOverlayData().controller).updateTurnsUntilChangeText();
     }
 
     private void use(Command command) {
@@ -286,14 +289,16 @@ public class Game {
                 // Then set stage to adult
                 player.setStage("adult");
 
-                // And update stage textfield in overlay
+                // Update stage textfield in overlay
                 ((OverlayController) ResourceController.getOverlayData().controller).increaseStage();
+                // Update turns until.. textfield in overlay
+                ((OverlayController) ResourceController.getOverlayData().controller).updateTurnsUntilChangeText();
 
             // If the player is adult, commit self deletus
             } else {
 
                 // But only if the adult player is older than 21
-                if (player.getAge() != 21){
+                if (player.getAge() > 21){
                     player.setAlive(false);
                 }
 
