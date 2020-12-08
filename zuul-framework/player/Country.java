@@ -4,10 +4,17 @@ import java.util.HashMap;
 
 public enum Country {
     VAKANNDA(53,50, 1.00, 61,34,5, 6, new HashMap<>() {{
-        put("old age", "yoink");
-        put("cancer", "yoink");
-        put("AIDS", "yoink");
-        put("malaria", "yoink");
+        put("old age", "Only 5% of the population in Africa get above the age of 60," +
+                " even though there are 1.2 billion people living on the continent." +
+                " In comparison around 20% of the population in Denmark is above the age of 60.");
+        put("cancer", "Over one-third of all cervical cancer deaths globally occur in sub-Saharan Africa," +
+                " though the region represents only 14% of the world female population.");
+        put("AIDS", "In 2019 around 690 000 people died from AIDS-related illnesses. " +
+                "Even though Africa is only home to 15% of the worlds population, they account for more than 66% of the global infection burden.");
+        put("malaria", "The WHO African Region carries a disproportionately high share of the global malaria burden." +
+                " In 2019, the region was home to 94% of malaria cases and deaths.");
+        put("tuberculosis", "Even though Africa is home to only 11% of the worlds population," +
+                " it carries 29% of the global burden of tuberculosis and 34% of the related deaths.");
     }}),
     WASHINGGEORGE(15,250,1.33, 29,52,19, 4, new HashMap<>() {{
         put("old age", "yoink");
