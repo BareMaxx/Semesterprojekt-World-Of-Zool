@@ -24,17 +24,16 @@ public class Game {
     // Super constructor. Amount of turns decided by derived class
     public Game(Player player, int turns) {
         this.player = player;
-        this.turns = new Turns(turns);
+        this.turns = new Turns(turns, this);
     }
     // Processes commands. Derived classes have their own special overrides
     public void processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
-        endTurn();
 
         switch(commandWord) {
             case GO -> goRoom(command);
             case QUIT -> quit(command);
-            case USE -> {use(command); turns.decTurns();}
+            case USE -> {use(command); turns.decTurns(1);}
             case BUY -> {buy(command);}
             case SLEEP -> sleep();
             case HEAL -> heal();
@@ -44,10 +43,10 @@ public class Game {
         checkTurns();
     }
 
-    private void endTurn() {
+    public void decrementSickTurns(int amount) {
         if (player.getSickness()!=null) {
-            player.getSickness().decTurnLimit(1);
-            if (player.getSickness().getTurnLimit() == 0) {
+            player.getSickness().decTurnLimit(amount);
+            if (player.getSickness().getTurnLimit() <= 0) {
                 player.setAlive(false);
             }
         }
@@ -97,16 +96,10 @@ public class Game {
                 player.getFamilyEconomy().getMoneyMulti() / econStage;
 
         if (player.getSickness() != null && player.getDmg() != null) {
-            i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
-                    player.getFamilyEconomy().getMoneyMulti() / econStage;
             i = i - 60 *  player.getFamilyEconomy().getMoneyMulti();
         } else if (player.getSickness() != null) {
-            i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
-                    player.getFamilyEconomy().getMoneyMulti() / econStage;
             i = i - 40 *  player.getFamilyEconomy().getMoneyMulti();
         } else if (player.getDmg() != null) {
-            i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
-                    player.getFamilyEconomy().getMoneyMulti() / econStage;
             i = i - 20 *  player.getFamilyEconomy().getMoneyMulti();
         }
 
@@ -134,6 +127,9 @@ public class Game {
 
         // Update stage textfield in overlay
         ((OverlayController) ResourceController.getOverlayData().controller).increaseStage();
+
+        // Update turns until.. textfield in overlay
+        ((OverlayController) ResourceController.getOverlayData().controller).updateTurnsUntilChangeText();
     }
 
     private void use(Command command) {
@@ -172,7 +168,7 @@ public class Game {
                     player.addInventoryItem(i);
                     player.getCurrentRoom().removeItem(i);
                     player.decMoney(i.getPrice());
-                    turns.decTurns();
+                    turns.decTurns(1);
 
                     System.out.println("You bought " + s);
                     randomSickEvent(player.getSickChance() * 2);
@@ -203,7 +199,7 @@ public class Game {
         } else {
             player.setCurrentRoom(nextRoom);
             System.out.println(player.getCurrentRoom().getLongDescription());
-            turns.decTurns();
+            turns.decTurns(1);
             randomEvent(1);
         }
     }
@@ -286,8 +282,10 @@ public class Game {
                 // Then set stage to adult
                 player.setStage("adult");
 
-                // And update stage textfield in overlay
+                // Update stage textfield in overlay
                 ((OverlayController) ResourceController.getOverlayData().controller).increaseStage();
+                // Update turns until.. textfield in overlay
+                ((OverlayController) ResourceController.getOverlayData().controller).updateTurnsUntilChangeText();
 
             // If the player is adult, commit self deletus
             } else {

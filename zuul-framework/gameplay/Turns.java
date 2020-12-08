@@ -2,13 +2,16 @@ package gameplay;
 
 import controller.OverlayController;
 import controller.ResourceController;
+import gameEngine.Game;
 
 public class Turns {
     private int turns;
     private int counter = 0;
+    private Game game;
 
-    public Turns(int turns) {
+    public Turns(int turns, Game game) {
         this.turns = turns;
+        this.game = game;
     }
 
     public int getTurns() {
@@ -22,11 +25,9 @@ public class Turns {
     public void decTurns(int turns) {
         this.turns -= turns;
         incCounter(turns);
-    }
-
-    public void decTurns() {
-        --this.turns;
-        incCounter();
+        if(game.getPlayer().getSickness() != null){
+            game.decrementSickTurns(turns);
+        }
 
         // Update turns in overlay
         ((OverlayController) ResourceController.getOverlayData().controller).updateTurns(turns);
