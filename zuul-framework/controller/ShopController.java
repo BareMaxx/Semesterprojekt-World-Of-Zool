@@ -2,7 +2,6 @@ package controller;
 
 import gameEngine.Run;
 import gameplay.Room;
-import item.Item;
 import item.PurchasableItem;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;

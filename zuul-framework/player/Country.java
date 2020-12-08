@@ -25,7 +25,7 @@ public enum Country {
     private int eventChance;
     private HashMap<String, String> stats;
 
-    Country (int birthMortal, int money, double avgAgeMultiplier, int poor, int middleClass, int rich, int eventChance, HashMap<String, String> stats) {
+    Country(int birthMortal, int money, double avgAgeMultiplier, int poor, int middleClass, int rich, int eventChance, HashMap<String, String> stats) {
         this.birthMortal = birthMortal;
         this.money = money;
         this.avgAgeMultiplier = avgAgeMultiplier;
