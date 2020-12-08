@@ -1,9 +1,40 @@
 package controller;
 
+import gameEngine.Run;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import player.Country;
 
 public class OutsideController extends GenericController {
+
+    @FXML
+    private ImageView roadSignImage;
+
+    // Initialize is called in RessourceController::loadRooms when creating an instance of HomeController.
+    // It is called automatically by JavaFX.
+    @FXML
+    public void initialize() {
+
+        Country country = Run.getRInstance().getPlayer().getCountry();
+
+        switch (country){
+            case DANHEIM -> {
+                backgroundImage.setImage(new Image("/png/dkOutside.jpg"));
+                roadSignImage.setImage(new Image("/png/dkSign.png"));
+            }
+            case VAKANNDA -> {
+                backgroundImage.setImage(new Image("/png/ugOutside.jpg"));
+                roadSignImage.setImage(new Image("/png/ugSign.png"));
+            }
+            case WASHINGGEORGE -> {
+                backgroundImage.setImage(new Image("/png/usaOutside.jpg"));
+                roadSignImage.setImage(new Image("/png/usaSign.png"));
+            }
+        }
+    }
+
     @FXML
     void goHome(MouseEvent event) throws Exception{
         changeScene("home");

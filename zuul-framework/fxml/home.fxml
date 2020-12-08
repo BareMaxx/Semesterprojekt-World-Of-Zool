@@ -16,7 +16,7 @@
             <Image url="@../png/dkDoor.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="bedImage" fitHeight="250.0" layoutX="524.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="bedImage" fitHeight="250.0" layoutX="524.0" layoutY="360.0" onMouseClicked="#sleep" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/dkbed.png" />
          </image>

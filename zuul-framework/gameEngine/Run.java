@@ -62,7 +62,7 @@ public class Run extends Application {
         }
 
         // Update event log from console
-        String console = new String(stream.toByteArray());
+        String console = stream.toString();
         ((OverlayController)ResourceController.getOverlayData().controller).updateEventLog(console);
 
         // Update inventory
@@ -78,6 +78,19 @@ public class Run extends Application {
             getPrimaryStage().setScene(ResourceController.getDeathData().scene);
             ((DeathController) ResourceController.getDeathData().controller).updateDeathScreen();
         }
+
+        // Update money textfield in overlay
+        ((OverlayController) ResourceController.getOverlayData().controller).updateMoney();
+
+        // Update turn textfield in overlay
+        if (player.getStage() == "child"){
+            ((OverlayController) ResourceController.getOverlayData().controller).updateTurns(c.turns.getTurns());
+        } else {
+            ((OverlayController) ResourceController.getOverlayData().controller).updateTurns(a.turns.getTurns());
+        }
+
+        // Update age textfield in overlay
+        ((OverlayController) ResourceController.getOverlayData().controller).updateAge();
     }
 
     public void initGame(String country) {
@@ -96,6 +109,11 @@ public class Run extends Application {
         // ResourceController is entirely static, therefore it is not instantiated
         // set initial scene to menu scene
         ResourceController.loadMenu();
+
+        // set initial scene to menu scene
+        primaryStage.setTitle("ZUUUUL");
+        primaryStage.setScene(ResourceController.getStartmenuData().scene);
+        primaryStage.show();
     }
 
     public Player getPlayer() {

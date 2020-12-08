@@ -33,22 +33,21 @@ public class Game {
         switch(commandWord) {
             case GO -> goRoom(command);
             case QUIT -> quit(command);
-            case USE -> {use(command); turns.decTurns();}
-            case BUY -> {buy(command); turns.decTurns();}
+            case USE -> {use(command); turns.decTurns(); decrementSickTurns(1);}
+            case BUY -> {buy(command);}
             case SLEEP -> sleep();
             case HEAL -> heal();
             case UNKNOWN -> System.out.println("I don't know what you mean...");
             default -> System.out.println("You can't do that at the current stage");
         }
         checkTurns();
-        endTurn();
     }
 
-    private void endTurn() {
-        if (player.getSickness()!=null) {
-            player.getSickness().decTurnLimit(1);
-            if (player.getSickness().getTurnLimit() == 0) {
-                player.kill(player.getSickness().getName());
+    private void decrementSickTurns(int amount) {
+        if (player.getSickness() != null) {
+            player.getSickness().decTurnLimit(amount);
+            if (player.getSickness().getTurnLimit() <= 0) {
+                player.setAlive(false);
             }
         }
     }
@@ -61,6 +60,7 @@ public class Game {
             if (player.getMoney() >= player.getSickness().getPrice()) {
                 player.decMoney(player.getSickness().getPrice());
                 player.setSickness(null);
+                ((OverlayController) ResourceController.getOverlayData().controller).hideSickTurns();
                 System.out.println("You have been healed");
                 player.getCurrentRoom().lock();
             } else {
@@ -106,7 +106,8 @@ public class Game {
         player.incMoney(i);
         System.out.println("You made " + i);
         randomEvent(2);
-        turns.decTurns(5);
+        turns.decTurns(6);
+        decrementSickTurns(6);
         checkTurns();
     }
     
@@ -115,6 +116,7 @@ public class Game {
             return;
         }
         turns.decTurns(turns.getTurns());
+        decrementSickTurns(turns.getTurns());
         switch (player.getStage()) {
             case "child" -> {
                 player.setStage("adult");
@@ -124,6 +126,12 @@ public class Game {
                 player.kill("old age");
             }
         }
+
+        // Update stage textfield in overlay
+        ((OverlayController) ResourceController.getOverlayData().controller).increaseStage();
+
+        // Update turns until.. textfield in overlay
+        ((OverlayController) ResourceController.getOverlayData().controller).updateTurnsUntilChangeText();
     }
 
     private void use(Command command) {
@@ -163,12 +171,11 @@ public class Game {
                     player.getCurrentRoom().removeItem(i);
                     player.decMoney(i.getPrice());
                     turns.decTurns();
+                    decrementSickTurns(1);
 
                     System.out.println("You bought " + s);
                     randomSickEvent(player.getSickChance() * 2);
 
-                    // Update money textfield in overlay
-                    ((OverlayController) ResourceController.getOverlayData().controller).updateMoney();
                 } else {
                     System.out.println("You don't have enough money for this!");
                 }
@@ -196,6 +203,7 @@ public class Game {
             player.setCurrentRoom(nextRoom);
             System.out.println(player.getCurrentRoom().getLongDescription());
             turns.decTurns();
+            decrementSickTurns(1);
             randomEvent(1);
         }
     }
@@ -236,27 +244,70 @@ public class Game {
     }
 
     public void checkTurns() {
+
+        /*
+            Note:
+
+            counter -   increaes whenever turns is used
+                        (increases according to the amount of turns used)
+
+            turns -     number of turns until adult stage or death
+                        (number of turns is decreased with a arbitrary number when doing any action)
+         */
+
+
+        // When counter is a multiple of 3 or more
         if (turns.getCounter() / 3 > 0) {
-            //60 turns => 21 years, when getting 1 year older every three turns
+
+            /*
+                The player ages with 1 year per multiple of three of counter.
+                When the player makes a move, the counter is increased with the number of turns used
+
+                This means that:
+                60 turns => 21 years, when getting 1 year older every three turns
+                (when starting with the age of 1)
+             */
+
+            // ageMultiplier is 1 per multiple of three
             int ageMultiplier = turns.getCounter() / 3;
+            // increase age with agemultiplier
             player.incAge(ageMultiplier);
 
-            if (turns.getTurns() != 0) {
-                turns.setCounter();
+            // Counter is reset when the player's age is increased
+            turns.setCounter(0);
+        }
+
+        // If player has 0 turns left
+        if (turns.getTurns() <= 0){
+
+            // If player is a child
+            if (player.getStage().equals("child")){
+
+                // Then set stage to adult
+                player.setStage("adult");
+
+                // Update stage textfield in overlay
+                ((OverlayController) ResourceController.getOverlayData().controller).increaseStage();
+                // Update turns until.. textfield in overlay
+                ((OverlayController) ResourceController.getOverlayData().controller).updateTurnsUntilChangeText();
+
+            // If the player is adult, commit self deletus
             } else {
-                turns.setCounter(0);
+
+                // But only if the adult player is older than 21
+                if (player.getAge() > 21){
+                    player.setAlive(false);
+                }
+
+                /*
+                    Note:
+                    When sleeping, the player moves from child to adult stage.
+                    This resets the counter and the number of truns. Therefore
+                    the program concludes the player is dead when sleeping in
+                    child stage. To fix this, I added an age check which prevents
+                    the player from dying when sleeping as a child.
+                 */
             }
         }
-        if (player.getStage().equals("child") && turns.getTurns() <= 0) {
-            player.setStage("adult");
-
-            // Update stage textfield in overlay
-            ((OverlayController) ResourceController.getOverlayData().controller).increaseStage();
-        } else if (player.getStage().equals("adult") && turns.getTurns() <= 0) {
-            player.kill("old age");
-        }
-
-        // Update age textfield in overlay
-        ((OverlayController) ResourceController.getOverlayData().controller).updateAge();
     }
 }

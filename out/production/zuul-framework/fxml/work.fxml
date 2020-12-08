@@ -16,5 +16,10 @@
             <Image url="@../png/dkDoor.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="408.0" fitWidth="483.0" layoutX="442.0" layoutY="360.0" onMouseClicked="#work" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/workbench.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
