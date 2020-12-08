@@ -16,7 +16,6 @@ public class OutsideController extends GenericController {
     // It is called automatically by JavaFX.
     @FXML
     public void initialize() {
-
         Country country = Run.getRInstance().getPlayer().getCountry();
 
         switch (country){
@@ -36,7 +35,7 @@ public class OutsideController extends GenericController {
     }
 
     @FXML
-    void goHome(MouseEvent event) throws Exception{
+    void goHome(MouseEvent event) throws Exception {
         changeScene("home");
     }
 
@@ -62,5 +61,5 @@ public class OutsideController extends GenericController {
 
     @FXML
     @Override
-    void goOutside(MouseEvent event) throws Exception{}
+    void goOutside(MouseEvent event) throws Exception {}
 }

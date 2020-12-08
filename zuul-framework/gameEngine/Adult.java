@@ -2,7 +2,6 @@ package gameEngine;
 
 import commands.Command;
 import commands.CommandWord;
-import commands.Parser;
 import player.Player;
 
 public class Adult extends Game {

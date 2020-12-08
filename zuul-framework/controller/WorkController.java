@@ -8,7 +8,6 @@ import javafx.scene.input.MouseEvent;
 import player.Country;
 
 public class WorkController extends GenericController {
-
     @FXML
     private ImageView doorImage;
 
@@ -19,7 +18,6 @@ public class WorkController extends GenericController {
     // It is called automatically by JavaFX.
     @FXML
     public void initialize() {
-
         Country country = Run.getRInstance().getPlayer().getCountry();
 
         switch (country){
@@ -43,9 +41,9 @@ public class WorkController extends GenericController {
         }
     }
 
+    // Call the work command
     @FXML
     void work(MouseEvent event) {
         Run.getRInstance().processCommand("work");
     }
-
 }
