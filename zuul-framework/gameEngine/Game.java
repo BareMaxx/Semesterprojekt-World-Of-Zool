@@ -293,7 +293,7 @@ public class Game {
             } else {
 
                 // But only if the adult player is older than 21
-                if (player.getAge() != 21){
+                if (player.getAge() > 21){
                     player.setAlive(false);
                 }
 
