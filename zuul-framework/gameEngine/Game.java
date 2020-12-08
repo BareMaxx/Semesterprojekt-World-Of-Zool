@@ -47,7 +47,7 @@ public class Game {
         if (player.getSickness() != null) {
             player.getSickness().decTurnLimit(amount);
             if (player.getSickness().getTurnLimit() <= 0) {
-                player.setAlive(false);
+                player.kill(player.getSickness().getName());
             }
         }
     }
@@ -296,7 +296,7 @@ public class Game {
 
                 // But only if the adult player is older than 21
                 if (player.getAge() > 21){
-                    player.setAlive(false);
+                    player.kill("old age");
                 }
 
                 /*
