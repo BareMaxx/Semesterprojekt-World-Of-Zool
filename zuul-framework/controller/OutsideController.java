@@ -12,7 +12,7 @@ public class OutsideController extends GenericController {
     @FXML
     private ImageView roadSignImage;
 
-    // Initialize is called in RessourceController::loadRooms when creating an instance of HomeController.
+    // Initialize is called in RessourceController::loadRooms when creating an instance of OutsideController.
     // It is called automatically by JavaFX.
     @FXML
     public void initialize() {
