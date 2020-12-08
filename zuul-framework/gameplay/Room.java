@@ -14,6 +14,7 @@ public class Room {
     private ArrayList<PurchasableItem> stock;
     private boolean locked;
 
+    // Initialize the room with a name, a description and whether it's locked
     public Room(String name, String description, boolean locked) {
         this.setName(name);
         this.description = description;
@@ -22,10 +23,12 @@ public class Room {
         stock = new ArrayList<>();
     }
 
+    // Add a single item to the stock
     public void setItem(PurchasableItem i) {
         stock.add(i);
     }
 
+    // Return the first item with the given name or null if not found
     public PurchasableItem getItem(String name) {
         for (PurchasableItem i : stock) {
             if (name.equals(i.getName())) {
@@ -35,33 +38,28 @@ public class Room {
         System.out.println("Item not in shop");
         return null;
     }
+
+    // Remove the given item from the stock
     public void removeItem(PurchasableItem i) {
         stock.remove(i);
     }
 
+    // Return the shop's stock
     public ArrayList<PurchasableItem> getItems() {
         return stock;
     }
 
-    public void printStock() {
-        System.out.println("These objects are for sale:");
-        if (stock.isEmpty()) {
-            System.out.println("\tnothing");
-        } else {
-            for (PurchasableItem i : stock) {
-                System.out.println("\t" + i.getName() + "\t|\t" + i.getPrice() + " gold");
-            }
-        }
-    }
-
+    // Set an exit to the room
     public void setExit(String direction, Room neighbor) {
         exits.put(direction, neighbor);
     }
 
+    // Get the longer description of the room
     public String getLongDescription() {
         return "You are " + description + ".\n" + getExitString();
     }
 
+    // Return all the exits to the current room
     private String getExitString() {
         StringBuilder returnString = new StringBuilder("Exits:");
         Set<String> keys = exits.keySet();
@@ -71,10 +69,12 @@ public class Room {
         return returnString.toString();
     }
 
+    // Get the exit from a String
     public Room getExit(String direction) {
         return exits.get(direction);
     }
 
+    // Return the name of this room
     public String getName() {
         return name;
     }
