@@ -37,22 +37,27 @@ public class Run extends Application {
         System.setOut(printStream);
     }
 
+    // Get the primary "Stage"
     public static Stage getPrimaryStage() {
         return primaryStage;
     }
 
+    // Get the current instance of Run
     public static Run getRInstance() {
         return rInstance;
     }
 
+    // Get a reference to the shop room
     public static Room getShopRoom() {
         return shopRoom;
     }
 
+    // Create all the JavaFX stuff, like the window
     public void launchMenu() {
         launch();
     }
 
+    // Parse the given string as a command and update the game logic
     public void processCommand(String input) {
         Command command = parser.getCommand(input);
 
@@ -62,22 +67,38 @@ public class Run extends Application {
         }
 
         // Update event log from console
-        String console = new String(stream.toByteArray());
+        String console = stream.toString();
         ((OverlayController)ResourceController.getOverlayData().controller).updateEventLog(console);
 
         // Update inventory
         ((OverlayController)ResourceController.getOverlayData().controller).updateInventory();
 
         // Update Shop stock
-        ((ShopController)ResourceController.getShopData().controller).updateStock();
+        if (player.getCurrentRoom().getName().equals("shop")) {
+            ((ShopController)ResourceController.getShopData().controller).updateStock();
+        }
 
         // Update death screen
         if (!player.getAlive()) {
             getPrimaryStage().setScene(ResourceController.getDeathData().scene);
-            ((DeathController) ResourceController.getDeathData().controller).updateDeathScreen("Dead", "Not big\nsurprise");
+            ((DeathController) ResourceController.getDeathData().controller).updateDeathScreen();
         }
+
+        // Update money textfield in overlay
+        ((OverlayController) ResourceController.getOverlayData().controller).updateMoney();
+
+        // Update turn textfield in overlay
+        if (player.getStage().equals("child")) {
+            ((OverlayController) ResourceController.getOverlayData().controller).updateTurns(c.turns.getTurns());
+        } else {
+            ((OverlayController) ResourceController.getOverlayData().controller).updateTurns(a.turns.getTurns());
+        }
+
+        // Update age textfield in overlay
+        ((OverlayController) ResourceController.getOverlayData().controller).updateAge();
     }
 
+    // Initialize the map
     public void initGame(String country) {
         InitGame init = new InitGame(player, country);
         shopRoom = init.createRooms(player);
@@ -92,14 +113,16 @@ public class Run extends Application {
         Run.primaryStage = primaryStage;
 
         // ResourceController is entirely static, therefore it is not instantiated
+        // set initial scene to menu scene
         ResourceController.loadMenu();
 
-        // Set initial scene to menu scene
+        // set initial scene to menu scene
         primaryStage.setTitle("ZUUUUL");
         primaryStage.setScene(ResourceController.getStartmenuData().scene);
         primaryStage.show();
     }
 
+    // Get a reference to the player
     public Player getPlayer() {
         return player;
     }

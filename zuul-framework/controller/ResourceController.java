@@ -1,6 +1,5 @@
 package controller;
 
-import gameEngine.Run;
 import gameEngine.SceneData;
 import gameEngine.SubSceneData;
 import javafx.fxml.FXMLLoader;
@@ -60,6 +59,7 @@ public class ResourceController {
         return overlayData;
     }
 
+    // Load the Scene and Controller from the given path
     private static SceneData loadScene(String fileName) throws Exception {
         FXMLLoader loader = new FXMLLoader(ResourceController.class.getResource(fileName));
         SceneData data = new SceneData();
@@ -68,6 +68,7 @@ public class ResourceController {
         return data;
     }
 
+    // Load the SubScene and Controller from the given path
     private static SubSceneData loadSubScene(String fileName) throws Exception {
         FXMLLoader loader = new FXMLLoader(ResourceController.class.getResource(fileName));
         SubSceneData data = new SubSceneData();
@@ -76,14 +77,12 @@ public class ResourceController {
         return data;
     }
 
+    // Load the menu Scene and StartmenuController
     public static void loadMenu() throws Exception {
         startmenuData = loadScene("/fxml/startmenu.fxml");
-
-        // set initial scene to menu scene
-        Run.getPrimaryStage().setScene(getStartmenuData().scene);
-        Run.getPrimaryStage().show();
     }
 
+    // Load all the rooms after the game has been initialized
     public static void loadRooms() throws Exception {
         homeData = loadScene("/fxml/home.fxml");
         outsideData = loadScene("/fxml/outside.fxml");

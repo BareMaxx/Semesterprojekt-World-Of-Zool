@@ -23,26 +23,31 @@ public class Command {
     private CommandWord commandWord;
     private String secondWord;
 
+    // Initialize the class with a primary and a secondary word
     public Command(CommandWord commandWord, String secondWord) {
         this.commandWord = commandWord;
         this.secondWord = secondWord;
     }
 
+    // Get the primary word
     public CommandWord getCommandWord()
     {
         return commandWord;
     }
 
+    // Get the secondary word
     public String getSecondWord()
     {
         return secondWord;
     }
 
+    // Return whether the command is unknown
     public boolean isUnknown()
     {
         return (commandWord == CommandWord.UNKNOWN);
     }
 
+    // Whether the command has a second word
     public boolean hasSecondWord()
     {
         return (secondWord != null);

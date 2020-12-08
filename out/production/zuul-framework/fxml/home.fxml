@@ -11,12 +11,12 @@
             <Image url="@../png/dkHome.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="doorImage" fitHeight="642.0" fitWidth="250.0" layoutX="176.0" layoutY="88.0" onMouseClicked="#goOutside" pickOnBounds="true" preserveRatio="true" rotate="-5.9">
+      <ImageView fx:id="doorImage" fitHeight="494.0" fitWidth="197.0" layoutX="182.0" layoutY="150.0" onMouseClicked="#goOutside" pickOnBounds="true" preserveRatio="true" rotate="-5.9">
          <image>
             <Image url="@../png/dkDoor.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="bedImage" fitHeight="250.0" layoutX="524.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="bedImage" fitHeight="250.0" layoutX="524.0" layoutY="360.0" onMouseClicked="#sleep" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/dkbed.png" />
          </image>

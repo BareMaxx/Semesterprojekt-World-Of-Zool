@@ -7,10 +7,12 @@ public enum Gender {
     private int moneyMulti;
     private double avgAgeMulti;
 
+    // Initialize gender with average age and money-multiplier
     Gender(int moneyMulti, double avgAgeMulti){
         this.moneyMulti = moneyMulti;
         this.avgAgeMulti = avgAgeMulti;
     }
+
     public int getMoneyMulti(){
         return moneyMulti;
     }

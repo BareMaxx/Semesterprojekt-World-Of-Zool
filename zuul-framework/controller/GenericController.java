@@ -15,23 +15,27 @@ public class GenericController {
     @FXML
     protected ImageView backgroundImage;
 
+    // Darken highlighted text
     @FXML
     void darkenText(MouseEvent event) {
         Text text = (Text)event.getTarget();
         text.setStroke(Color.WHITE);
     }
 
+    // Highælight text
     @FXML
     void highlightText(MouseEvent event) {
         Text text = (Text)event.getTarget();
         text.setStroke(Color.YELLOW);
     }
 
+    // Change the scene to outside
     @FXML
     void goOutside(MouseEvent event) throws Exception {
         changeScene("outside");
     }
 
+    // Change the current scene to the specified one
     @FXML
     void changeScene(String room) {
         // application layer
@@ -50,7 +54,7 @@ public class GenericController {
                 case "shop" -> Run.getPrimaryStage().setScene(ResourceController.getShopData().scene);
             }
 
-            // Reparent inventory to whichever scene is on top
+            // Re-assigned overlay to whichever scene is on top
             ObservableList<Node> children = ((AnchorPane)Run.getPrimaryStage().getScene().getRoot()).getChildren();
             if (!children.contains(ResourceController.getOverlayData().scene))
                 children.add(ResourceController.getOverlayData().scene);
