@@ -83,7 +83,7 @@ public class Run extends Application {
         ((OverlayController) ResourceController.getOverlayData().controller).updateMoney();
 
         // Update turn textfield in overlay
-        if (player.getStage() == "child"){
+        if (player.getStage().equals("child")) {
             ((OverlayController) ResourceController.getOverlayData().controller).updateTurns(c.turns.getTurns());
         } else {
             ((OverlayController) ResourceController.getOverlayData().controller).updateTurns(a.turns.getTurns());
