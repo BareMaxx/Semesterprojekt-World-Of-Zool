@@ -4,16 +4,16 @@ import gameplay.Turns;
 import player.Player;
 
 public class Book extends PurchasableItem {
-    private final int knowledgePoints;
+    private final int KNOWLEDGEPOINTS;
 
-    public Book(String name, int price, int knowledgePoints) {
+    public Book(String name, int price, int KNOWLEDGEPOINTS) {
         super(price);
         this.name = name;
-        this.knowledgePoints = knowledgePoints;
+        this.KNOWLEDGEPOINTS = KNOWLEDGEPOINTS;
     }
 
     public int getKnowledgePoints() {
-        return knowledgePoints;
+        return KNOWLEDGEPOINTS;
     }
 
     @Override
