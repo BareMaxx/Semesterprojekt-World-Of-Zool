@@ -48,17 +48,6 @@ public class Turns {
     }
     private void incCounter(int i) {this.counter += i;}
 
-    // Unused
-    public void setCounter() {
-        int j = 3 * (this.counter / 3);
-        if (j > 0) {
-            this.counter = this.counter - j;
-        } else {
-            this.counter = 0;
-        }
-
-    }
-
     // Set the counter
     public void setCounter(int count) {
         this.counter = count;
