@@ -35,7 +35,7 @@ public class Game {
             case GO -> goRoom(command);
             case QUIT -> quit(command);
             case USE -> {use(command); turns.decTurns();}
-            case BUY -> {buy(command); turns.decTurns();}
+            case BUY -> {buy(command);}
             case SLEEP -> sleep();
             case HEAL -> heal();
             case UNKNOWN -> System.out.println("I don't know what you mean...");
@@ -113,7 +113,7 @@ public class Game {
         player.incMoney(i);
         System.out.println("You made " + i);
         randomEvent(2);
-        turns.decTurns(5);
+        turns.decTurns(6);
         checkTurns();
     }
     
