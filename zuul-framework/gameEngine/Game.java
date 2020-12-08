@@ -24,7 +24,7 @@ public class Game {
     // Super constructor. Amount of turns decided by derived class
     public Game(Player player, int turns) {
         this.player = player;
-        this.turns = new Turns(turns);
+        this.turns = new Turns(turns, this);
     }
     // Processes commands. Derived classes have their own special overrides
     public void processCommand(Command command) {
@@ -33,7 +33,7 @@ public class Game {
         switch(commandWord) {
             case GO -> goRoom(command);
             case QUIT -> quit(command);
-            case USE -> {use(command); turns.decTurns(); decrementSickTurns(1);}
+            case USE -> {use(command); turns.decTurns(1);}
             case BUY -> {buy(command);}
             case SLEEP -> sleep();
             case HEAL -> heal();
@@ -43,7 +43,7 @@ public class Game {
         checkTurns();
     }
 
-    private void decrementSickTurns(int amount) {
+    public void decrementSickTurns(int amount) {
         if (player.getSickness()!=null) {
             player.getSickness().decTurnLimit(amount);
             if (player.getSickness().getTurnLimit() <= 0) {
@@ -107,7 +107,6 @@ public class Game {
         System.out.println("You made " + i);
         randomEvent(2);
         turns.decTurns(6);
-        decrementSickTurns(6);
         checkTurns();
     }
     
@@ -116,7 +115,6 @@ public class Game {
             return;
         }
         turns.decTurns(turns.getTurns());
-        decrementSickTurns(turns.getTurns());
         switch (player.getStage()) {
             case "child" -> {
                 player.setStage("adult");
@@ -170,8 +168,7 @@ public class Game {
                     player.addInventoryItem(i);
                     player.getCurrentRoom().removeItem(i);
                     player.decMoney(i.getPrice());
-                    turns.decTurns();
-                    decrementSickTurns(1);
+                    turns.decTurns(1);
 
                     System.out.println("You bought " + s);
                     randomSickEvent(player.getSickChance() * 2);
@@ -202,8 +199,7 @@ public class Game {
         } else {
             player.setCurrentRoom(nextRoom);
             System.out.println(player.getCurrentRoom().getLongDescription());
-            turns.decTurns();
-            decrementSickTurns(1);
+            turns.decTurns(1);
             randomEvent(1);
         }
     }
