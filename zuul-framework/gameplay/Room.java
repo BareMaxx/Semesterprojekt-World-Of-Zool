@@ -43,17 +43,6 @@ public class Room {
         return stock;
     }
 
-    public void printStock() {
-        System.out.println("These objects are for sale:");
-        if (stock.isEmpty()) {
-            System.out.println("\tnothing");
-        } else {
-            for (PurchasableItem i : stock) {
-                System.out.println("\t" + i.getName() + "\t|\t" + i.getPrice() + " gold");
-            }
-        }
-    }
-
     public void setExit(String direction, Room neighbor) {
         exits.put(direction, neighbor);
     }
