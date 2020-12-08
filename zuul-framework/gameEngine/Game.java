@@ -97,16 +97,10 @@ public class Game {
                 player.getFamilyEconomy().getMoneyMulti() / econStage;
 
         if (player.getSickness() != null && player.getDmg() != null) {
-            i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
-                    player.getFamilyEconomy().getMoneyMulti() / econStage;
             i = i - 60 *  player.getFamilyEconomy().getMoneyMulti();
         } else if (player.getSickness() != null) {
-            i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
-                    player.getFamilyEconomy().getMoneyMulti() / econStage;
             i = i - 40 *  player.getFamilyEconomy().getMoneyMulti();
         } else if (player.getDmg() != null) {
-            i = player.getCountry().getMoney() * player.getGender().getMoneyMulti() *
-                    player.getFamilyEconomy().getMoneyMulti() / econStage;
             i = i - 20 *  player.getFamilyEconomy().getMoneyMulti();
         }
 
