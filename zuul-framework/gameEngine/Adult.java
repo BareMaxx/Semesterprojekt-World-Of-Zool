@@ -7,7 +7,7 @@ import player.Player;
 public class Adult extends Game {
     // Make adult stage have 100 turns
     public Adult(Player player) {
-        super(player, 100);
+        super(player, 200);
     }
 
     // Override work so that econStage is better for adults

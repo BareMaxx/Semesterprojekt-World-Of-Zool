@@ -102,6 +102,9 @@ public class Player {
             kill("old age");
         }
     }
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public int getAvgAge() {
         return avgAge;
