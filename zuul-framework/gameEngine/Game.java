@@ -26,6 +26,7 @@ public class Game {
         this.player = player;
         this.turns = new Turns(turns, this);
     }
+
     // Processes commands. Derived classes have their own special overrides
     public void processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
@@ -43,6 +44,7 @@ public class Game {
         checkTurns();
     }
 
+    // Decrement the amount of turns before death by sickness
     public void decrementSickTurns(int amount) {
         if (player.getSickness() != null) {
             player.getSickness().decTurnLimit(amount);
@@ -52,6 +54,7 @@ public class Game {
         }
     }
 
+    // Heal any sickness or injury, when in the hospital
     private void heal() {
         if (!inRoom(HOSPITAL_NAME)) {
             return;

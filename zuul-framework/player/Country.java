@@ -2,6 +2,8 @@ package player;
 
 import java.util.HashMap;
 
+// Enumeration of all th possible countries you can choose to be born in along with
+// the odds of dying at birth, being born poor, etc.
 public enum Country {
     VAKANNDA(53,50, 1.00, 61,34,5, 6, new HashMap<>() {{
         put("old age", " Only 5% of the population in Africa get above the age of 60," +

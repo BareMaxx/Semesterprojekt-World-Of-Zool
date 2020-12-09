@@ -29,6 +29,7 @@ public class Key extends Item {
     public void use(Player player, Turns turns) {
         Room room = player.getCurrentRoom().getExit(getKEYTYPE());
 
+        // Uses the key if it matches a locked adjacent room
         if (room == null) {
             System.out.println();
             System.out.println("You can't use that here.");

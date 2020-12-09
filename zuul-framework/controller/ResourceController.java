@@ -23,6 +23,8 @@ public class ResourceController {
     private static SceneData deathData;
     private static SubSceneData overlayData;
 
+
+    // Getters for every Scene and SubScene
     public static SceneData getHomeData() {
         return homeData;
     }

@@ -13,6 +13,7 @@ public class WorkDMG extends Event {
         if (player.getDmg() != null)
             return;
 
+        // Essentially does the same as the corresponding method in the sickness class, although without the name.
         if (runEvent()) {
             this.name = "broken leg"; // this is not used, it is only here because we check if (name == null) to see if successful
             setPrice();
