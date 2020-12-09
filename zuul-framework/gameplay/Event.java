@@ -16,11 +16,7 @@ public class Event {
     }
 
     // Determine whether the event should happen or not
-    public boolean runEvent() {
-        if (randomEngine.getOutcome(PROBABILITYOFSUCCESS, 100))
-            return true;
-        return false;
-    }
+    public boolean runEvent() {return (randomEngine.getOutcome(PROBABILITYOFSUCCESS, 100));}
 
     // Return the name of the event
     public String getName() {
