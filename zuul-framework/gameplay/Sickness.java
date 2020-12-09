@@ -31,14 +31,14 @@ public class Sickness extends Event {
         put("malaria", 333);
     }};
     private HashMap<String, Integer> sickChanceDk = new HashMap<>() {{
-        put("a heart disease", 333);
-        put("cancer", 333);
+        put("a heart disease", 150);
+        put("cancer", 250);
         put("AIDS", 1);
-        put("depression and you want to commit suicide", 250);
+        put("depression and you want to commit suicide", 100);
     }};
     private HashMap<String, Integer> sickChanceUs = new HashMap<>() {{
-        put("a heart disease", 333);
-        put("cancer", 333);
+        put("a heart disease", 250);
+        put("cancer", 10);
         put("AIDS", 3);
         put("diabetes", 200);
     }};
