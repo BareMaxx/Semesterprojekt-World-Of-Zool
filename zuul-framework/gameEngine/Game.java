@@ -26,6 +26,7 @@ public class Game {
         this.player = player;
         this.turns = new Turns(turns, this);
     }
+
     // Processes commands. Derived classes have their own special overrides
     public void processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
@@ -43,6 +44,7 @@ public class Game {
         checkTurns();
     }
 
+    // Decrement the amount of turns before death by sickness
     public void decrementSickTurns(int amount) {
         if (player.getSickness() != null) {
             player.getSickness().decTurnLimit(amount);
@@ -52,6 +54,7 @@ public class Game {
         }
     }
 
+    // Heal any sickness or injury, when in the hospital
     private void heal() {
         if (!inRoom(HOSPITAL_NAME)) {
             return;
@@ -138,6 +141,7 @@ public class Game {
     // Use the given item
     private void use(Command command) {
         if (!command.hasSecondWord()) {
+            System.out.println();
             System.out.println("Use what?");
         } else {
             String item = command.getSecondWord();
@@ -148,10 +152,12 @@ public class Game {
                     return;
                 }
             }
+            System.out.println();
             System.out.println("You have no item of that name.");
         }
 
         if (player.getInventory().isEmpty()) {
+            System.out.println();
             System.out.println("You have no items to use.");
         }
     }
@@ -160,6 +166,7 @@ public class Game {
     private void buy(Command command) {
         if (player.getCurrentRoom().getName().equals(SHOP_NAME)) {
             if (!command.hasSecondWord()) {
+                System.out.println();
                 System.out.println("Buy what?");
                 return;
             }
@@ -174,13 +181,16 @@ public class Game {
                     player.decMoney(i.getPrice());
                     turns.decTurns(1);
 
+                    System.out.println();
                     System.out.println("You bought " + s);
                     randomSickEvent(player.getSickChance() * 2);
 
                 } else {
+                    System.out.println();
                     System.out.println("You don't have enough money for this!");
                 }
             } else {
+                System.out.println();
                 System.out.println("There is no " + s + " in the shop");
             }
         }
@@ -189,6 +199,7 @@ public class Game {
     // Go to the given room
     private void goRoom(Command command) {
         if (!command.hasSecondWord()) {
+            System.out.println();
             System.out.println("Go where?");
             return;
         }
@@ -198,11 +209,13 @@ public class Game {
         Room nextRoom = player.getCurrentRoom().getExit(direction);
 
         if (nextRoom == null) {
-            System.out.println("There is no door!");
+            //System.out.println("There is no door!");
         } else if (nextRoom.isLocked()) {
+            System.out.println();
             System.out.println("This door is locked.");
         } else {
             player.setCurrentRoom(nextRoom);
+            System.out.println();
             System.out.println(player.getCurrentRoom().getLongDescription());
             turns.decTurns(1);
             randomEvent(1);
@@ -237,6 +250,7 @@ public class Game {
 
     private void quit(Command command) {
         if (command.hasSecondWord()) {
+            System.out.println();
             System.out.println("Quit what?");
         }
         else {

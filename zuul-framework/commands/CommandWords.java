@@ -1,7 +1,8 @@
 package commands;
 import java.util.HashMap;
 
-
+// This class takes a string and converts it into a CommandWord if possible. Otherwise it returns the
+// UNKNOWN CommandWord.
 public class CommandWords {
     private HashMap<String, CommandWord> validCommands;
 
@@ -15,7 +16,7 @@ public class CommandWords {
         }
     }
 
-    // Get the CommandWord given a String
+    // Return the CommandWord given a String
     public CommandWord getCommandWord(String commandWord) {
         CommandWord command = validCommands.get(commandWord);
         if (command != null) {

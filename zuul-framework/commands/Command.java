@@ -19,6 +19,7 @@
 
 package commands;
 
+// This class contains one CommandWord and one string from the Parser for simplicity
 public class Command {
     private CommandWord commandWord;
     private String secondWord;

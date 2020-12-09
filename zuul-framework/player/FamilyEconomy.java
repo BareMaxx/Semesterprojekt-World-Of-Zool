@@ -1,5 +1,7 @@
 package player;
 
+// Enumeration of the different economic statuses the player can have,
+// along with a corresponding starting money multiplier.
 public enum FamilyEconomy {
     RICH(10),
     MIDDLECLASS(7),

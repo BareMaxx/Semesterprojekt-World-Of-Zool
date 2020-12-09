@@ -1,6 +1,7 @@
 package gameplay;
 import java.util.Random;
 
+// Class that spits out random numbers etc.
 public class RandomEngine {
      private Random randomEngine;
 

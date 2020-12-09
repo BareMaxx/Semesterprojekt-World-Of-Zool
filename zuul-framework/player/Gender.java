@@ -1,5 +1,6 @@
 package player;
 
+// Enumeration that applies the differences of the genders you can be in the game.
 public enum Gender {
     MALE(10,1),
     FEMALE(7,1.05);

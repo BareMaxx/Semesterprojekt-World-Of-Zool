@@ -2,6 +2,8 @@ package commands;
 
 import java.util.Scanner;
 
+// This class takes a given String and converts it to a CommandWord and a
+// string by using the CommandWords class.
 public class Parser  {
     private CommandWords commands;
 
