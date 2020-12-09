@@ -16,12 +16,14 @@ public class Sickness extends Event {
     private int turnLimit = randomEngine.getRandom(10,15);
     private int price = 0;
 
-    // the number value in the hashmap is the chance of getting the illness out of 1000. When a Sickness Event
-    // is called, the Sickness() Constructor will choose a random name fom the list of available sicknesses,
-    // and it will then call the getChance() method, which will check whether or not the illness will happen.
-    // Since the chance of getting ill is already the desired chance, the getChance() method will call itself
-    // with a new, random name until the player gets sick. The chances are approximations of real data from the
-    // reference areas, but have been slightly exaggerated for the purpose of the game.
+    /*
+    the number value in the hashmap is the chance of getting the illness out of 1000. When a Sickness Event
+    is called, the Sickness() Constructor will choose a random name fom the list of available sicknesses,
+    and it will then call the getChance() method, which will check whether or not the illness will happen.
+    Since the chance of getting ill is already the desired chance, the getChance() method will call itself
+    with a new, random name until the player gets sick. The chances are approximations of real data from the
+    reference areas, but have been slightly exaggerated for the purpose of the game.
+    */
     private HashMap<String, Integer> sickChanceUg = new HashMap<>() {{
         put("tuberculosis", 333);
         put("cancer", 333);
