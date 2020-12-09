@@ -54,6 +54,7 @@ public class OverlayController extends GenericController {
     // Update stage text-field
     public void increaseStage() {
         stageText.setText("Adult");
+        setFamilyEconomyText(Run.getRInstance().getPlayer().getFamilyEconomy().toString());
     }
 
     // Update money text-field
