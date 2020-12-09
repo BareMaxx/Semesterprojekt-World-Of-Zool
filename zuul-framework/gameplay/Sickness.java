@@ -24,6 +24,7 @@ public class Sickness extends Event {
         if (runEvent()) {
             setName();
             setPrice();
+            System.out.println();
             System.out.println("Oh no, you were unlucky and you now have " + name + ", you have " + turnLimit +
                     " turns to get to the hospital and pay " + price + " gold to get healthy or you will die!");
             Key appointment = new Key("hospital", "appointment");

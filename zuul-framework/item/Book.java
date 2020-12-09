@@ -33,6 +33,7 @@ public class Book extends PurchasableItem {
         }
         player.incKnowledge(getKnowledgePoints());
         player.removeInventoryItem(this);
+        System.out.println();
         System.out.println("You read a book that gave you " + bookKnowledgePoints + " knowledge points");
         turns.decTurns(bookKnowledgePoints / 50);
     }

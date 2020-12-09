@@ -33,11 +33,13 @@ public class Protectors extends PurchasableItem {
             case "sickness" -> {
                 player.decSickChance(getModifier());
                 player.removeInventoryItem(this);
+                System.out.println();
                 System.out.println("You are now less likely to get sick");
             }
             case "dmg" -> {
                 player.decDmgChance(getModifier());
                 player.removeInventoryItem(this);
+                System.out.println();
                 System.out.println("You are now less likely to get injured");
             }
         }

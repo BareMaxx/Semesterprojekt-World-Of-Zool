@@ -30,11 +30,13 @@ public class Key extends Item {
         Room room = player.getCurrentRoom().getExit(getKEYTYPE());
 
         if (room == null) {
+            System.out.println();
             System.out.println("You can't use that here.");
         } else if (room.isLocked()) {
             room.unlock(this);
             player.removeInventoryItem(this);
         } else {
+            System.out.println();
             System.out.println("This room is not locked. How did you get that key?");
         }
     }
