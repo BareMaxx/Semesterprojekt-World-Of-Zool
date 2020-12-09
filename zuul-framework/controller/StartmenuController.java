@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -43,5 +44,11 @@ public class StartmenuController extends GenericController {
     void highlightText(MouseEvent event) {
         Text text = (Text)event.getTarget();
         text.setFill(Color.YELLOW);
+    }
+
+    @FXML
+    void playGame(MouseEvent event) throws Exception {
+        ResourceController.loadMenu();
+        Run.getPrimaryStage().setScene(ResourceController.getStartmenuData().scene);
     }
 }
