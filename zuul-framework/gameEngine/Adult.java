@@ -7,7 +7,7 @@ import player.Player;
 
 public class Adult extends Game {
     public Adult(Player player) {
-        super(player, 100);
+        super(player, 200);
     }
 
     public void processCommand(Command command) {
