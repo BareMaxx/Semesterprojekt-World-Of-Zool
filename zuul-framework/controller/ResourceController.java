@@ -21,6 +21,7 @@ public class ResourceController {
     private static SceneData schoolData;
     private static SceneData workData;
     private static SceneData deathData;
+    private static SceneData guideData;
     private static SubSceneData overlayData;
 
 
@@ -29,6 +30,7 @@ public class ResourceController {
         return homeData;
     }
 
+    public static SceneData getGuideData() {return guideData;}
     public static SceneData getShopData() {
         return shopData;
     }
@@ -79,6 +81,9 @@ public class ResourceController {
         return data;
     }
 
+    public static void loadGuide() throws Exception {
+        guideData = loadScene("/fxml/guide.fxml");
+    }
     // Load the menu Scene and StartmenuController
     public static void loadMenu() throws Exception {
         startmenuData = loadScene("/fxml/startmenu.fxml");
