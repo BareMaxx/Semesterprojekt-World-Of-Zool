@@ -42,8 +42,8 @@ public enum Country {
                 " Due to unhealthy living, around 37-39% of the population will have diagnosed cancer in their lifetime");
         put("AIDS","Around 0.3% of the population in America has AIDS, and around 1% of this 0.3% die of AIDS every year");
         put("diabetes","Around 10% of Americans have diabetes. Diabetes is a major cause of blindness, kidney failure," +
-                " heart attacks, stroke, and lower limb amputation. Limited access to healthcare, affordable healthy food" +
-                " diabetes is the seventh leading cause of death in the US");
+                " heart attacks, stroke, and lower limb amputation. Limited access to healthcare and affordable healthy food" +
+                " makes diabetes the seventh leading cause of death in the US");
     }}),
     DANHEIM(5,500,1.35, 20,70,10, 2, new HashMap<>() {{
         put("old age", "In 2020 around 4.5% of the population in Denmark made it to the ripe old age of 80." +
