@@ -137,5 +137,6 @@ public class InitGame {
     public void setAvgAge(Player player) {
         //58 is the standard age, which is the lowest age possible, which is the male average age in Vakannda (Uganda)
         player.setAvgAge((int)(58 * player.getCountry().getAvgAgeMultiplier() * player.getGender().getAvgAgeMulti()));
+
     }
 }
