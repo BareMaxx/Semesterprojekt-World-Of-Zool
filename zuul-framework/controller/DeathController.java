@@ -22,7 +22,8 @@ public class DeathController extends GenericController {
         String cause = player.getDeathCause();
         Country country = player.getCountry();
 
-        String st = "You were born in " + country.toString() + " as a " + player.getGender().toString().toLowerCase() + "\n" +
+        String st = "You were born in " + country.toString() + " as a " + player.getInitialEconomy().toString().toLowerCase() + " " +
+                player.getGender().toString().toLowerCase() + "\n" +
                 "and died at the age of " + player.getAge() + " as a " + player.getFamilyEconomy().toString().toLowerCase() + " " +
                 player.getStage() + " with " + player.getMoney() + " money and " + player.getKnowledge() + " knowledge";
 

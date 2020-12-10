@@ -126,6 +126,8 @@ public class InitGame {
             p1.setFamilyEconomy(FamilyEconomy.MIDDLECLASS);
         else
             p1.setFamilyEconomy(FamilyEconomy.RICH);
+
+        p1.setInitialEconomy(p1.getFamilyEconomy());
     }
 
     // Randomize the player's starting money
