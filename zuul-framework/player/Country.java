@@ -30,6 +30,10 @@ public enum Country {
                 " it carries 29% of the global burden of tuberculosis and 34% of the related deaths." +
                 " Tuberculosis was considered eradicated from Denmark in the 1980's, though due to migration, " +
                 " there is a small margin of people with tuberculosis in Denmark around 290 cases. ");
+        put("birthMortal", "\"You died within the first months of your life. " +
+                "Because of lack of access to amenities, like clean water and healthcare, " +
+                "Sub-Saharan Africa accounts for 38% of global neonatal death, " +
+                "and the amount of deaths per 1000 is around ten times higher than in Denmark\"");
     }}),
     WASHINGGEORGE(15,250,1.33, 29,52,19, 4, new HashMap<>() {{
         put("old age", "In 2020 Around 1.8% of the population in America made it to the age of 80, that's roughly" +
@@ -44,6 +48,8 @@ public enum Country {
         put("diabetes","Around 10% of Americans have diabetes, diabetes is a major cause of blindness, kidney failure, " +
                 " heart attacks, stroke, and lower limb ambutiation. Limited access to healthcare, affordable healthy food" +
                 "diabetes is the seventh leading cause of death in the US");
+        put("birthMortal","You died within the first months of your life. This can happen due to a lack of amenities" +
+                "like access to good sanitation and healthcare. The child mortality rate in America is twice as high as in Denmark");
     }}),
     DANHEIM(5,500,1.35, 20,70,10, 2, new HashMap<>() {{
         put("old age", "In 2020 around 4.5% of the population in Denmark made it to the ripe old age of 80+ " +
@@ -56,6 +62,8 @@ public enum Country {
                 "develop cancer before they turn 75, and around a third of that third survive. ");
         put("depression and you want to commit suicide", "Suicide constitutes 1.1% of yearly deaths or approximately" +
                 " two suicides pr day");
+        put("birthMortal"," You have died within the first months of your life. Even with access to healthcare, and " +
+                "similar amenities. There is still a chance that you don't make it.");
     }});
 
     private int birthMortal;
