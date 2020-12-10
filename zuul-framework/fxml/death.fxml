@@ -18,12 +18,12 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <Text fx:id="stats" fill="WHITE" layoutX="245.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text&#10;There&#10;And here&#10;" textAlignment="CENTER" wrappingWidth="790.13671875">
+      <Text fx:id="stats" fill="WHITE" layoutX="201.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text&#10;There" textAlignment="CENTER" wrappingWidth="878.13671875">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="deathCause" fill="WHITE" layoutX="245.0" layoutY="533.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text&#10;There&#10;And here&#10;" textAlignment="CENTER" wrappingWidth="790.13671875">
+      <Text fx:id="deathCause" fill="WHITE" layoutX="201.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text&#10;There&#10;And here&#10;" textAlignment="CENTER" wrappingWidth="878.13671875">
          <font>
             <Font size="24.0" />
          </font>

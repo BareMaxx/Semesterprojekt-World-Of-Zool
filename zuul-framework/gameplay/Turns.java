@@ -2,6 +2,7 @@ package gameplay;
 
 import controller.OverlayController;
 import controller.ResourceController;
+import gameEngine.Child;
 import gameEngine.Game;
 
 public class Turns {
@@ -34,7 +35,11 @@ public class Turns {
         }
 
         // Update turns in overlay
-        ((OverlayController) ResourceController.getOverlayData().controller).updateTurns(turns);
+        int maxTurns = 60;
+        if (game.getPlayer().getStage().equals("adult"))
+            maxTurns = game.getPlayer().getAvgAge() * 3 - 60;
+
+        ((OverlayController) ResourceController.getOverlayData().controller).updateTurns(turns, maxTurns);
     }
 
     // Get counter?
