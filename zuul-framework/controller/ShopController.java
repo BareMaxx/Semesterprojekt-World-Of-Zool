@@ -12,16 +12,13 @@ public class ShopController extends GenericController {
     @FXML
     private VBox shop;
 
+    // Call the buy command
     @FXML
     void buy(MouseEvent event) {
-        try {
-            Run.getRInstance().processCommand("buy " + ((Text)event.getSource()).getText());
-            shop.getChildren().remove(event.getSource());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Run.getRInstance().processCommand("buy " + ((Text) event.getSource()).getText());
     }
 
+    // Update the visual stock in the shop
     public void updateStock() {
         Room shopRoom = Run.getShopRoom();
         shop.getChildren().clear();

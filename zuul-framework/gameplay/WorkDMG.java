@@ -6,6 +6,7 @@ import player.Player;
 public class WorkDMG extends Event {
     private int price = 0;
 
+    // Initialize injury with a probability of success and a price
     public WorkDMG(int probabilityOfSuccess, Player player) {
         super(probabilityOfSuccess, player);
 
@@ -23,11 +24,12 @@ public class WorkDMG extends Event {
         }
     }
 
-
+    // Return the price to be healed
     public int getPrice() {
         return price;
     }
 
+    // Set the price based on country
     private void setPrice() {
         switch (player.getCountry()) {
             case DANHEIM -> price = randomEngine.getRandom(0,1000);

@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 public class OverlayController extends GenericController {
@@ -47,31 +46,34 @@ public class OverlayController extends GenericController {
     @FXML
     private Text turnsText;
 
-    public void updateAge(){
-
+    // Update age text-field
+    public void updateAge() {
         ageNumberText.setText(Integer.toString(Run.getRInstance().getPlayer().getAge()));
     }
 
-    public void increaseStage(){
-
+    // Update stage text-field
+    public void increaseStage() {
         stageText.setText("Adult");
+        setFamilyEconomyText(Run.getRInstance().getPlayer().getFamilyEconomy().toString());
     }
 
-    public void updateMoney(){
-
+    // Update money text-field
+    public void updateMoney() {
         moneyAmountText.setText(Integer.toString(Run.getRInstance().getPlayer().getMoney()));
     }
 
-    public void setGenderText(String gender){
+    // Update gender text-field
+    public void setGenderText(String gender) {
         genderText.setText(gender);
     }
 
+    // Update economy text-field
     public void setFamilyEconomyText(String familyEconomy) {
         familyEconomyText.setText(familyEconomy);
     }
 
+    // Update turns text-field and progress bar
     public void updateTurns(int turns){
-
         double progress;
 
         if (Run.getRInstance().getPlayer().getStage().equals("child")){
@@ -84,31 +86,36 @@ public class OverlayController extends GenericController {
         turnsProgressbar.setProgress(progress);
     }
 
+    // Show sickness text-field
     public void showSickTurns(int turnLimit) {
         sickTurnsText.setVisible(true);
         sickTurnsNumber.setVisible(true);
         sickTurnsNumber.setText(Integer.toString(turnLimit));
     }
 
+    // Hide sickness text-field
     public void hideSickTurns() {
         sickTurnsText.setVisible(false);
         sickTurnsNumber.setVisible(false);
     }
 
+    // Update sickness text-field
     public void updateSickTurns(int turns) {
         sickTurnsNumber.setText(Integer.toString(turns));
     }
 
-    public void updateTurnsUntilChangeText(){
-
+    // Update "turns until" text-field
+    public void updateTurnsUntilChangeText() {
         turnsUntilChangeText.setText("Turns left:");
     }
 
+    // Update event-log text-field
     public void updateEventLog(String console) {
         event.setText(console);
         event.positionCaret(console.length());
     }
 
+    // Update inventory
     public void updateInventory() {
         ObservableList items = inventory.getItems();
         items.clear();

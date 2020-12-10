@@ -9,13 +9,15 @@ import player.Gender;
 import player.Player;
 import gameplay.Room;
 
-public class    InitGame {
+public class InitGame {
     private RandomEngine ran = new RandomEngine();
 
+    // Call the setupPlayer method
     public InitGame(Player p1, String country) {
         setupPlayer(p1, country);
     }
 
+    // Initialize the player with all the necessary attributes
     private void setupPlayer(Player player, String country) {
         setCountry(player, country);
         setGender(player);
@@ -24,6 +26,7 @@ public class    InitGame {
         setAvgAge(player);
     }
 
+    // Print a welcome message in the event-log
     public void printWelcome(Player player) {
         System.out.println("welcome to real life bitch");
         System.out.println("real life sucks");
@@ -39,6 +42,7 @@ public class    InitGame {
         System.out.println(player.getCurrentRoom().getLongDescription());
     }
 
+    // Initialize the map and return the Shop-room for later references
     public Room createRooms(Player player) {
         Room home, work, shop, school, hospital, outside;
 
@@ -78,6 +82,7 @@ public class    InitGame {
         return shop;
     }
 
+    // Decide whether you die at birth, based on your country
     public boolean childDeath(Player player){
         if(ran.getOutcome(player.getCountry().getBirthMortal(), 1000)){
             System.out.println("Sadly the game is already over, you died at birth. Every year " +
@@ -88,6 +93,7 @@ public class    InitGame {
         return false;
     }
 
+    // Set the current country
     public void setCountry(Player player, String country) {
         boolean b = false;
         country = country.toUpperCase();
@@ -107,10 +113,12 @@ public class    InitGame {
         }
     }
 
+    // Randomize the gender
     public void setGender(Player player) {
         player.setGender(Gender.values()[ran.getRandom(0, 1)]);
     }
 
+    // Randomize the player's economic status
     public void setEcon(Player p1) {
         if (ran.getOutcome(p1.getCountry().getPoor(), 100))
             p1.setFamilyEconomy(FamilyEconomy.POOR);
@@ -120,12 +128,15 @@ public class    InitGame {
             p1.setFamilyEconomy(FamilyEconomy.RICH);
     }
 
+    // Randomize the player's starting money
     public void setMoney(Player player) {
         player.incMoney(player.getCountry().getMoney() * player.getGender().getMoneyMulti() * player.getFamilyEconomy().getMoneyMulti());
     }
 
+    // Set the average age of the player based on country and gender
     public void setAvgAge(Player player) {
         //58 is the standard age, which is the lowest age possible, which is the male average age in Vakannda (Uganda)
         player.setAvgAge((int)(58 * player.getCountry().getAvgAgeMultiplier() * player.getGender().getAvgAgeMulti()));
+
     }
 }

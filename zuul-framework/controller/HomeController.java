@@ -2,13 +2,9 @@ package controller;
 
 import gameEngine.Run;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import player.Country;
 
 public class HomeController extends GenericController{
@@ -19,10 +15,7 @@ public class HomeController extends GenericController{
     @FXML
     private ImageView bedImage;
 
-    public HomeController() throws  Exception{
-        super();
-    }
-
+    // Call the sleep command
     @FXML
     void sleep(MouseEvent event) {
         Run.getRInstance().processCommand("sleep");
@@ -32,7 +25,6 @@ public class HomeController extends GenericController{
     // It is called automatically by JavaFX.
     @FXML
     public void initialize() {
-
         Country country = Run.getRInstance().getPlayer().getCountry();
 
         switch (country){

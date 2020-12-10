@@ -7,9 +7,12 @@ public enum FamilyEconomy {
 
     private int moneyMulti;
 
+    // Initialize money-multiplier
     FamilyEconomy(int moneyMulti){
-        this.moneyMulti=moneyMulti;
+        this.moneyMulti = moneyMulti;
     }
+
+    // Return the multiplier for money
     public int getMoneyMulti(){
         return moneyMulti;
     }
