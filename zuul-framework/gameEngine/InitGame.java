@@ -87,7 +87,7 @@ public class InitGame {
         if(ran.getOutcome(player.getCountry().getBirthMortal(), 1000)){
             System.out.println("Sadly the game is already over, you died at birth. Every year " +
                     player.getCountry().getBirthMortal() + " out of 1000 infants die at birth in " + player.getCountry().toString().toLowerCase());
-            player.kill("childmortality");
+            player.kill("infant mortality");
             return true;
         }
         return false;
