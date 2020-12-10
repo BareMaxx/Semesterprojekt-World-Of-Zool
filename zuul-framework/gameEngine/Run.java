@@ -66,12 +66,29 @@ public class Run extends Application {
             case "adult" -> a.processCommand(command);
         }
 
+        OverlayController overlayController = ((OverlayController)ResourceController.getOverlayData().controller);
+
         // Update event log from console
         String console = stream.toString();
-        ((OverlayController)ResourceController.getOverlayData().controller).updateEventLog(console);
+        overlayController.updateEventLog(console);
 
         // Update inventory
-        ((OverlayController)ResourceController.getOverlayData().controller).updateInventory();
+        overlayController.updateInventory();
+
+        // Update money textfield in overlay
+        overlayController.updateMoney();
+
+        // Update turn textfield in overlay
+        if (player.getStage().equals("child")) {
+            int maxTurns = 60;
+            overlayController.updateTurns(c.turns.getTurns(), maxTurns);
+        } else {
+            int maxTurns = getPlayer().getAvgAge() * 3 - 60;
+            overlayController.updateTurns(a.turns.getTurns(), maxTurns);
+        }
+
+        // Update age textfield in overlay
+        overlayController.updateAge();
 
         // Update Shop stock
         if (player.getCurrentRoom().getName().equals("shop")) {
@@ -80,22 +97,10 @@ public class Run extends Application {
 
         // Update death screen
         if (!player.getAlive()) {
-            getPrimaryStage().setScene(ResourceController.getDeathData().scene);
-            ((DeathController) ResourceController.getDeathData().controller).updateDeathScreen();
+            SceneData deathData = ResourceController.getDeathData();
+            getPrimaryStage().setScene(deathData.scene);
+            ((DeathController) deathData.controller).updateDeathScreen();
         }
-
-        // Update money textfield in overlay
-        ((OverlayController) ResourceController.getOverlayData().controller).updateMoney();
-
-        // Update turn textfield in overlay
-        if (player.getStage().equals("child")) {
-            ((OverlayController) ResourceController.getOverlayData().controller).updateTurns(c.turns.getTurns());
-        } else {
-            ((OverlayController) ResourceController.getOverlayData().controller).updateTurns(a.turns.getTurns());
-        }
-
-        // Update age textfield in overlay
-        ((OverlayController) ResourceController.getOverlayData().controller).updateAge();
     }
 
     // Initialize the map

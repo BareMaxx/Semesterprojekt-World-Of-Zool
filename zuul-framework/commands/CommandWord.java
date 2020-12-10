@@ -1,6 +1,6 @@
 package commands;
 
-// Enum-classes for all commands
+// Enums for all usable commands
 public enum CommandWord {
     GO("go"), QUIT("quit"), UNKNOWN("?"),
     WORK("work"), BUY("buy"), USE("use"),

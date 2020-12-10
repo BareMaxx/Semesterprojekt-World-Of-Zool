@@ -46,6 +46,7 @@ public class InitGame {
     public Room createRooms(Player player) {
         Room home, work, shop, school, hospital, outside;
 
+        // Setup rooms
         outside = new Room("outside", "outside", false);
         home = new Room("home", "at home", false);
         work = new Room("work", "at work", false);
@@ -53,6 +54,7 @@ public class InitGame {
         school = new Room("school", "at school", false);
         hospital = new Room("hospital","in a hospital", true);
 
+        // Setup exits
         outside.setExit("home", home);
         outside.setExit("work", work);
         outside.setExit("shop", shop);
@@ -65,12 +67,14 @@ public class InitGame {
         hospital.setExit("outside", outside);
         school.setExit("outside", outside);
 
+        // Setup items
         Book b1 = new Book("Algorithms", player.getCountry().getMoney() * 7, 150);
         Book b2 = new Book("Math",player.getCountry().getMoney() * 15, 300);
         Book b3 = new Book("sql",player.getCountry().getMoney() * 27, 600);
         Protectors mask = new Protectors("mask", 50, 2, "sickness");
         Protectors helmet = new Protectors("helmet", 50, 2, "dmg");
 
+        // Add items to shop stock
         shop.setItem(b1);
         shop.setItem(b2);
         shop.setItem(b3);

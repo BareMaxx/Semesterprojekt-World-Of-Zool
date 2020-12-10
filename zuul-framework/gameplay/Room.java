@@ -56,7 +56,7 @@ public class Room {
 
     // Get the longer description of the room
     public String getLongDescription() {
-        return "You are " + description + ".\n" + getExitString();
+        return "You are " + description;
     }
 
     // Return all the exits to the current room
@@ -91,10 +91,13 @@ public class Room {
     public void unlock(Key key) {
         if (key.canUnlock(this.getName())) {
             this.locked = false;
+            System.out.println();
             System.out.println("You have unlocked " + this.getName());
         }
-        else
+        else {
+            System.out.println();
             System.out.println("You can't do that here.");
+        }
     }
 
     // Lock the room again

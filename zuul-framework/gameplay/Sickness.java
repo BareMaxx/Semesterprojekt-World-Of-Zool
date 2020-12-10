@@ -49,11 +49,14 @@ public class Sickness extends Event {
         if (player.getSickness() != null)
             return;
 
+        // If the event runs, it gives the player an illness with a random name, a random price to heal
+        // based on country, and a random amount of turns till the player dies.
         if (runEvent()) {
             setName(player.getCountry());
             if (!getChance(player.getCountry(), this.name)) {return;}
 
             setPrice();
+            System.out.println();
             System.out.println("Oh no, you were unlucky and you now have " + name + ", you have " + turnLimit +
                     " turns to get to the hospital and pay " + price + " gold to get healthy or you will die!");
             Key appointment = new Key("hospital", "appointment");
@@ -63,6 +66,7 @@ public class Sickness extends Event {
         }
     }
 
+    // Gets amount of turns till you die
     public int getTurnLimit() {
         return turnLimit;
     }
@@ -71,6 +75,7 @@ public class Sickness extends Event {
         ((OverlayController) ResourceController.getOverlayData().controller).updateSickTurns(turnLimit);
     }
 
+    // Randomize the name based on the HashMap
     private boolean getChance(Country country, String name) {
         switch (country){
             case VAKANNDA -> {
@@ -105,6 +110,7 @@ public class Sickness extends Event {
         return price;
     }
 
+    // Sets the price of getting healed
     private void setPrice(){
         switch (player.getCountry()) {
             case DANHEIM -> price = randomEngine.getRandom(0,1000);
@@ -112,6 +118,8 @@ public class Sickness extends Event {
             case WASHINGGEORGE -> price = randomEngine.getRandom(1000,30000);
         }
     }
+
+    // Sets the name of the sickness
     private void setName(Country country){
         switch (country){
             case DANHEIM -> this.name = dkNames.get(randomEngine.getRandom(0,dkNames.size()-1));

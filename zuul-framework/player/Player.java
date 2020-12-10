@@ -7,6 +7,7 @@ import gameplay.Room;
 
 import java.util.ArrayList;
 
+// The player class contains all the variables
 public class Player {
     private Country country;
     private Gender gender;
