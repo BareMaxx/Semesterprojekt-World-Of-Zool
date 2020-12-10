@@ -305,6 +305,7 @@ public class Game {
 
                 // Then set stage to adult
                 player.setStage("adult");
+                player.setAge(21);
 
                 // Update stage textfield in overlay
                 ((OverlayController) ResourceController.getOverlayData().controller).increaseStage();
