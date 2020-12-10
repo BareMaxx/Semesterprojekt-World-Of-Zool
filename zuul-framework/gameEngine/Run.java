@@ -80,9 +80,11 @@ public class Run extends Application {
 
         // Update turn textfield in overlay
         if (player.getStage().equals("child")) {
-            overlayController.updateTurns(c.turns.getTurns());
+            int maxTurns = 60;
+            overlayController.updateTurns(c.turns.getTurns(), maxTurns);
         } else {
-            overlayController.updateTurns(a.turns.getTurns());
+            int maxTurns = getPlayer().getAvgAge() * 3 - 60;
+            overlayController.updateTurns(a.turns.getTurns(), maxTurns);
         }
 
         // Update age textfield in overlay

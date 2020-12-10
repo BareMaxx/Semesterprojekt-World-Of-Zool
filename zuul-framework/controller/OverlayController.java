@@ -73,13 +73,18 @@ public class OverlayController extends GenericController {
     }
 
     // Update turns text-field and progress bar
-    public void updateTurns(int turns){
+    public void updateTurns(int turns, int maxTurns) {
         double progress;
+        int diff;
 
-        if (Run.getRInstance().getPlayer().getStage().equals("child")){
-            progress = (double)turns / 60;
+        if (Run.getRInstance().getPlayer().getStage().equals("child")) {
+            diff = 60 - maxTurns;
+            turns -= diff;
+            progress = (double)turns / maxTurns;
         } else {
-            progress = (double)turns / 100;
+            diff = 200 - maxTurns;
+            turns -= diff;
+            progress = (double)turns / maxTurns;
         }
 
         turnsText.setText(Integer.toString(turns));
