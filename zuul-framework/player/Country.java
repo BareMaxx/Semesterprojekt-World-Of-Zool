@@ -51,7 +51,7 @@ public enum Country {
                 " heart attacks, stroke, and lower limb ambutiation. Limited access to healthcare, affordable healthy food" +
                 "diabetes is the seventh leading cause of death in the US");
         put("infant mortality","You died within the first months of your life. This can happen due to a lack of amenities" +
-                "like access to good sanitation and healthcare. The child mortality rate in America is twice as high as in Denmark");
+                " like access to good sanitation and healthcare. The child mortality rate in America is twice as high as in Denmark");
     }}),
     DANHEIM(5,500,1.35, 20,70,10, 2, new HashMap<>() {{
         put("old age", "In 2020 around 4.5% of the population in Denmark made it to the ripe old age of 80+ " +

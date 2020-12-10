@@ -25,6 +25,9 @@ public class Player {
     private int dmgChance = 0;
     private int avgAge;
     private String deathCause;
+    private FamilyEconomy initialEconomy;
+
+
 
     public Country getCountry() {
         return country;
@@ -47,7 +50,16 @@ public class Player {
         familyEconomy = f;
     }
 
+    public void setInitialEconomy(FamilyEconomy f){
+        initialEconomy = f;
+    }
+    public FamilyEconomy getInitialEconomy(){
+      return initialEconomy;
+    }
+
     public String getDeathCause() { return deathCause; }
+
+
 
     // Switch between different economy classes based on knowledgePoints
     public void moveFamilyEconomy() {
