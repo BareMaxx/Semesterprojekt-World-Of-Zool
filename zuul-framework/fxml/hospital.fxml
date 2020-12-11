@@ -16,7 +16,7 @@
             <Image url="@../png/dkusaHospitalDoor.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="370.0" fitWidth="694.0" layoutX="278.0" layoutY="348.0" onMouseClicked="#heal" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="bedImage" fitHeight="370.0" fitWidth="694.0" layoutX="278.0" layoutY="348.0" onMouseClicked="#heal" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/dkusaHospitalBed.png" />
          </image>

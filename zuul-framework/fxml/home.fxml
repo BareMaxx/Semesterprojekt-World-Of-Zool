@@ -8,17 +8,17 @@
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../png/dkHomeBG.png" />
+            <Image url="@../png/ugHomeBG.png" />
          </image>
       </ImageView>
       <ImageView fx:id="doorImage" fitHeight="599.0" fitWidth="243.0" layoutX="982.0" layoutY="21.0" onMouseClicked="#goOutside" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../png/dkusaHomeDoor.png" />
+            <Image url="@../png/ugHomeDoor.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="bedImage" fitHeight="337.0" fitWidth="527.0" layoutX="318.0" layoutY="335.0" onMouseClicked="#sleep" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="bedImage" fitHeight="334.0" fitWidth="485.0" layoutX="337.0" layoutY="337.0" onMouseClicked="#sleep" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../png/dkHomeBed.png" />
+            <Image url="@../png/ugHomeBed.png" />
          </image>
       </ImageView>
    </children>

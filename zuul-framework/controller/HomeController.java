@@ -29,19 +29,19 @@ public class HomeController extends GenericController{
 
         switch (country){
             case DANHEIM -> {
-                backgroundImage.setImage(new Image("/png/dkHome.png"));
-                doorImage.setImage(new Image("/png/dkDoor.png"));
-                bedImage.setImage(new Image("/png/dkBed.png"));
+                backgroundImage.setImage(new Image("/png/dkHomeBG.png"));
+                doorImage.setImage(new Image("/png/dkusaHomeDoor.png"));
+                bedImage.setImage(new Image("/png/dkHomeBed.png"));
             }
             case VAKANNDA -> {
-                backgroundImage.setImage(new Image("/png/ugHome.png"));
-                doorImage.setImage(new Image("/png/ugDoor.png"));
-                bedImage.setImage(new Image("/png/ugBed.png"));
+                backgroundImage.setImage(new Image("/png/ugHomeBG.png"));
+                doorImage.setImage(new Image("/png/ugHomeDoor.png"));
+                bedImage.setImage(new Image("/png/ugHomeBed.png"));
             }
             case WASHINGGEORGE -> {
-                backgroundImage.setImage(new Image("/png/usaHome.png"));
-                doorImage.setImage(new Image("/png/usaDoor.png"));
-                bedImage.setImage(new Image("/png/usaBed.png"));
+                backgroundImage.setImage(new Image("/png/usaHomeBG.png"));
+                doorImage.setImage(new Image("/png/dkusaHomeDoor.png"));
+                bedImage.setImage(new Image("/png/usaHomeBed.png"));
             }
         }
     }

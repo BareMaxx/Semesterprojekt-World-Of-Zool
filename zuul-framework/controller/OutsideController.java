@@ -20,16 +20,13 @@ public class OutsideController extends GenericController {
 
         switch (country){
             case DANHEIM -> {
-                backgroundImage.setImage(new Image("/png/dkOutside.jpg"));
-                roadSignImage.setImage(new Image("/png/dkSign.png"));
+                backgroundImage.setImage(new Image("/png/dkOutside.png"));
             }
             case VAKANNDA -> {
-                backgroundImage.setImage(new Image("/png/ugOutside.jpg"));
-                roadSignImage.setImage(new Image("/png/ugSign.png"));
+                backgroundImage.setImage(new Image("/png/ugOutside.png"));
             }
             case WASHINGGEORGE -> {
-                backgroundImage.setImage(new Image("/png/usaOutside.jpg"));
-                roadSignImage.setImage(new Image("/png/usaSign.png"));
+                backgroundImage.setImage(new Image("/png/usaOutside.png"));
             }
         }
     }
