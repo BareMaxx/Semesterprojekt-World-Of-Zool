@@ -1,6 +1,7 @@
 package controller;
 
 import gameEngine.Run;
+import item.Book;
 import item.Item;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -126,11 +127,18 @@ public class OverlayController extends GenericController {
         items.clear();
 
         for (Item item : Run.getRInstance().getPlayer().getInventory()) {
+
             Text text = new Text(item.getName());
-            text.setOnMouseClicked(event -> {
-                String itemName = ((Text)event.getSource()).getText();
-                Run.getRInstance().processCommand("use " + itemName);
-            });
+
+            // Books are read when clicking the book in the school scene
+            // thus, the books in the inventory is skipped
+            if ((item instanceof Book) == false){
+                text.setOnMouseClicked(event -> {
+                    String itemName = ((Text)event.getSource()).getText();
+                    Run.getRInstance().processCommand("use " + itemName);
+                });
+            }
+
             items.add(text);
         }
     }

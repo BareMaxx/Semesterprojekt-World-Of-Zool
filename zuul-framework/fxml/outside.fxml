@@ -10,12 +10,7 @@
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../png/denmarkOutside.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="roadSignImage" fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../png/dkSign.png" />
+            <Image url="@../png/dkOutside.png" />
          </image>
       </ImageView>
       <Text fx:id="homeText" fill="WHITE" layoutX="464.0" layoutY="229.0" onMouseClicked="#goHome" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="Home" textAlignment="CENTER" wrappingWidth="339.68634033203125">
@@ -23,22 +18,22 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <Text fx:id="schooltext" fill="WHITE" layoutX="508.0" layoutY="334.0" onMouseClicked="#goSchool" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="School" textAlignment="CENTER" wrappingWidth="339.68634033203125">
+      <Text fx:id="schooltext" fill="WHITE" layoutX="508.0" layoutY="340.0" onMouseClicked="#goSchool" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="School" textAlignment="CENTER" wrappingWidth="339.68634033203125">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
-      <Text fx:id="workText" fill="WHITE" layoutX="420.0" layoutY="442.0" onMouseClicked="#goWork" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="Work" textAlignment="CENTER" wrappingWidth="339.68634033203125">
+      <Text fx:id="workText" fill="WHITE" layoutX="420.0" layoutY="445.0" onMouseClicked="#goWork" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="Work" textAlignment="CENTER" wrappingWidth="339.68634033203125">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
-      <Text fx:id="shopText" fill="WHITE" layoutX="393.0" layoutY="551.0" onMouseClicked="#goShop" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="Shop" textAlignment="CENTER" wrappingWidth="339.68634033203125">
+      <Text fx:id="shopText" fill="WHITE" layoutX="390.0" layoutY="550.0" onMouseClicked="#goShop" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="Shop" textAlignment="CENTER" wrappingWidth="339.68634033203125">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
-      <Text fx:id="hospitalText" fill="WHITE" layoutX="452.0" layoutY="655.0" onMouseClicked="#goHospital" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="Hospital" textAlignment="CENTER" wrappingWidth="339.68634033203125">
+      <Text fx:id="hospitalText" fill="WHITE" layoutX="454.0" layoutY="653.0" onMouseClicked="#goHospital" onMouseEntered="#highlightText" onMouseExited="#darkenText" stroke="WHITE" strokeWidth="2.0" text="Hospital" textAlignment="CENTER" wrappingWidth="339.68634033203125">
          <font>
             <Font size="36.0" />
          </font>

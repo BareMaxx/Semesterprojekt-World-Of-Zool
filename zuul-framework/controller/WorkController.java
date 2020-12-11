@@ -14,7 +14,7 @@ public class WorkController extends GenericController {
     @FXML
     private ImageView workstationImage;
 
-    // Initialize is called in RessourceController::loadRooms when creating an instance of OutsideController.
+    // Initialize is called in RessourceController::loadRooms when creating an instance of WorkController.
     // It is called automatically by JavaFX.
     @FXML
     public void initialize() {
@@ -27,11 +27,9 @@ public class WorkController extends GenericController {
                 workstationImage.setImage(new Image("/png/workPlacePC.png"));
             }
             case VAKANNDA -> {
-                /*
-                backgroundImage.setImage(new Image("/png/ugWorkBF.jpg"));
-                doorImage.setImage(new Image("/png/ugSign.png"));
-                workstationImage.setImage(new Image("/png/ugSign.png"));
-                */
+                backgroundImage.setImage(new Image("/png/ugWorkBG.png"));
+                doorImage.setImage(new Image("/png/ugWorkDoor.png"));
+                workstationImage.setImage(new Image("/png/ugWorkPlace.png"));
             }
             case WASHINGGEORGE -> {
                 backgroundImage.setImage(new Image("/png/usaWorkBG.png"));

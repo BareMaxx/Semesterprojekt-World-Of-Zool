@@ -57,6 +57,15 @@ public class Run extends Application {
         launch();
     }
 
+    public void updateEventlog(){
+
+        OverlayController overlayController = ((OverlayController)ResourceController.getOverlayData().controller);
+
+        // Update event log from console
+        String console = stream.toString();
+        overlayController.updateEventLog(console);
+    }
+
     // Parse the given string as a command and update the game logic
     public void processCommand(String input) {
         Command command = parser.getCommand(input);
@@ -68,9 +77,7 @@ public class Run extends Application {
 
         OverlayController overlayController = ((OverlayController)ResourceController.getOverlayData().controller);
 
-        // Update event log from console
-        String console = stream.toString();
-        overlayController.updateEventLog(console);
+        updateEventlog();
 
         // Update inventory
         overlayController.updateInventory();
