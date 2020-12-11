@@ -5,7 +5,7 @@ import javafx.scene.input.MouseEvent;
 
 public class SchoolController extends GenericController {
     @FXML
-    void read(MouseEvent event) {
+    void readBook(MouseEvent event) {
 
     }
 }
