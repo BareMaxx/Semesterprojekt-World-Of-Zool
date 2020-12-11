@@ -97,11 +97,6 @@ public class Run extends Application {
         // Update age textfield in overlay
         overlayController.updateAge();
 
-        // Update Shop stock
-        if (player.getCurrentRoom().getName().equals("shop")) {
-            ((ShopController)ResourceController.getShopData().controller).updateStock();
-        }
-
         // Update death screen
         if (!player.getAlive()) {
             SceneData deathData = ResourceController.getDeathData();

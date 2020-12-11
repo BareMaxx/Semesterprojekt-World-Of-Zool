@@ -1,27 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ShopController">
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../png/dkHome.png" />
+            <Image url="@../png/dkusaShopBG.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="doorImage" fitHeight="642.0" fitWidth="250.0" layoutX="83.0" layoutY="157.0" onMouseClicked="#goOutside" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="doorImage" fitHeight="294.0" fitWidth="164.0" layoutX="893.0" layoutY="68.0" onMouseClicked="#goOutside" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../png/dkDoor.png" />
+            <Image url="@../png/dkusaShopDoor.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="400.0" fitWidth="400.0" layoutX="450.0" layoutY="120.0" pickOnBounds="true">
+      <ImageView fx:id="Algorithms" fitHeight="90.0" fitWidth="136.0" layoutX="272.0" layoutY="281.0" onMouseClicked="#buy" onMouseEntered="#showPrice" onMouseExited="#hidePrice" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../png/ugandaOutside.jpg" />
+            <Image url="@../png/shopBook1.png" />
          </image>
       </ImageView>
-      <VBox fx:id="shop" layoutX="450.0" layoutY="120.0" prefHeight="400.0" prefWidth="400.0" />
+      <ImageView fx:id="Sql" fitHeight="90.0" fitWidth="136.0" layoutX="229.0" layoutY="546.0" onMouseClicked="#buy" onMouseEntered="#showPrice" onMouseExited="#hidePrice" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/shopBook3.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Math" fitHeight="90.0" fitWidth="136.0" layoutX="266.0" layoutY="412.0" onMouseClicked="#buy" onMouseEntered="#showPrice" onMouseExited="#hidePrice" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/shopBook2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Helmet" fitHeight="121.0" fitWidth="157.0" layoutX="1022.0" layoutY="388.0" onMouseClicked="#buy" onMouseEntered="#showPrice" onMouseExited="#hidePrice" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/shopHelmet.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Mask" fitHeight="72.0" fitWidth="136.0" layoutX="873.0" layoutY="596.0" onMouseClicked="#buy" onMouseEntered="#showPrice" onMouseExited="#hidePrice" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/shopMask.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="AlgorithmsTextfield" alignment="CENTER" editable="false" focusTraversable="false" layoutX="263.0" layoutY="250.0" visible="false" />
+      <TextField fx:id="MathTextfield" alignment="CENTER" editable="false" focusTraversable="false" layoutX="256.0" layoutY="381.0" visible="false" />
+      <TextField fx:id="SqlTextfield" alignment="CENTER" editable="false" focusTraversable="false" layoutX="224.0" layoutY="517.0" visible="false" />
+      <TextField fx:id="maskTextfield" alignment="CENTER" editable="false" focusTraversable="false" layoutX="868.0" layoutY="560.0" visible="false" />
+      <TextField fx:id="helmetTextfield" alignment="CENTER" editable="false" focusTraversable="false" layoutX="1030.0" layoutY="350.0" visible="false" />
    </children>
 </AnchorPane>

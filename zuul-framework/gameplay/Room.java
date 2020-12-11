@@ -35,7 +35,6 @@ public class Room {
                 return i;
             }
         }
-        System.out.println("Item not in shop");
         return null;
     }
 

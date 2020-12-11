@@ -16,7 +16,7 @@
             <Image url="@../png/ugHomeDoor.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="bedImage" fitHeight="334.0" fitWidth="485.0" layoutX="337.0" layoutY="337.0" onMouseClicked="#sleep" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="bedImage" fitHeight="334.0" fitWidth="485.0" layoutX="339.0" layoutY="335.0" onMouseClicked="#sleep" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/ugHomeBed.png" />
          </image>
