@@ -8,12 +8,17 @@
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../png/school.png" />
+            <Image url="@../png/ugSchoolBG.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="doorImage" fitHeight="642.0" fitWidth="250.0" layoutX="176.0" layoutY="88.0" onMouseClicked="#goOutside" pickOnBounds="true" preserveRatio="true" rotate="-5.9">
+      <ImageView fx:id="doorImage" fitHeight="509.0" fitWidth="116.0" layoutX="1048.0" layoutY="39.0" onMouseClicked="#goOutside" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../png/dkDoor.png" />
+            <Image url="@../png/ugSchoolDoor.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="bookImage" fitHeight="34.0" fitWidth="116.0" layoutX="768.0" layoutY="406.0" onMouseClicked="#readBook" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/schoolBook.png" />
          </image>
       </ImageView>
    </children>
