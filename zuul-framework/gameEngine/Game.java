@@ -67,7 +67,7 @@ public class Game {
                 System.out.println("You have been healed");
                 player.getCurrentRoom().lock();
             } else {
-                System.out.println("You don't have enough money to do that.");
+                System.out.println("You don't have enough gold to do that.");
             }
         } else if (player.getDmg() != null) { // Check for injuries
             if (player.getMoney() >= player.getDmg().getPrice()) {
@@ -76,7 +76,7 @@ public class Game {
                 System.out.println("You have been healed");
                 player.getCurrentRoom().lock();
             } else {
-                System.out.println("You don't have enough money to do that.");
+                System.out.println("You don't have enough gold to do that.");
             }
         } else {
             System.out.println("There is nothing to do here. You are healthy. Leave!");
@@ -182,7 +182,7 @@ public class Game {
 
                 } else {
                     System.out.println();
-                    System.out.println("You don't have enough money for this!");
+                    System.out.println("You don't have enough gold for this!");
                 }
             }
         }
