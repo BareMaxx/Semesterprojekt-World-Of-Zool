@@ -28,8 +28,8 @@ public class InitGame {
 
     // Print a welcome message in the event-log
     public void printWelcome(Player player) {
-        System.out.println("welcome to real life bitch");
-        System.out.println("real life sucks");
+        System.out.println("Welcome to real life");
+        System.out.println("Real life sucks");
 
         System.out.println("You have been born as a " + player.getFamilyEconomy().toString().toLowerCase() + " " +
                 player.getGender().toString().toLowerCase() + " living in " + player.getCountry().toString().toLowerCase());
@@ -71,8 +71,8 @@ public class InitGame {
         Book b1 = new Book("Algorithms", player.getCountry().getMoney() * 7, 150);
         Book b2 = new Book("Math",player.getCountry().getMoney() * 15, 300);
         Book b3 = new Book("Sql",player.getCountry().getMoney() * 27, 600);
-        Protectors mask = new Protectors("Mask", 50, 2, "sickness");
-        Protectors helmet = new Protectors("Helmet", 50, 2, "dmg");
+        Protectors mask = new Protectors("Mask", player.getCountry().getMoney() * 12, 2, "sickness");
+        Protectors helmet = new Protectors("Helmet", player.getCountry().getMoney() * 12, 2, "dmg");
 
         // Add items to shop stock
         shop.setItem(b1);
