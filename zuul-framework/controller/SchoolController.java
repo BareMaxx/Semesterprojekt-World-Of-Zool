@@ -1,11 +1,15 @@
 package controller;
 
 import gameEngine.Run;
+import item.Book;
+import item.Item;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import player.Country;
+
+import java.util.ArrayList;
 
 public class SchoolController extends GenericController {
 
@@ -14,7 +18,6 @@ public class SchoolController extends GenericController {
 
     @FXML
     private ImageView bookImage;
-
 
     // Initialize is called in RessourceController::loadRooms when creating an instance of SchoolController.
     // It is called automatically by JavaFX.
@@ -44,5 +47,22 @@ public class SchoolController extends GenericController {
     @FXML
     void readBook(MouseEvent event) {
 
+        ArrayList<Item> playerInevntory = Run.getRInstance().getPlayer().getInventory();
+
+        for (Item item: playerInevntory){
+            if (item instanceof Book){
+                Run.getRInstance().processCommand("use " + item.getName());
+
+                Run.getRInstance().getPlayer().getInventory().remove(item);
+                ((OverlayController) ResourceController.getOverlayData().controller).updateInventory();
+
+                // This function returns when a book is read
+                // (only one book is read when the book image is clicked)
+                return;
+            }
+        }
+
+        System.out.println("\nYou need to buy a book in the shop");
+        Run.getRInstance().updateEventlog();
     }
 }
