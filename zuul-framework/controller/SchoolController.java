@@ -46,23 +46,25 @@ public class SchoolController extends GenericController {
 
     @FXML
     void readBook(MouseEvent event) {
+        if (Run.getRInstance().getPlayer().getStage().equals("child")) {
+            ArrayList<Item> playerInevntory = Run.getRInstance().getPlayer().getInventory();
 
-        ArrayList<Item> playerInevntory = Run.getRInstance().getPlayer().getInventory();
+            for (Item item: playerInevntory){
+                if (item instanceof Book){
+                    Run.getRInstance().processCommand("use " + item.getName());
 
-        for (Item item: playerInevntory){
-            if (item instanceof Book){
-                Run.getRInstance().processCommand("use " + item.getName());
+                    Run.getRInstance().getPlayer().getInventory().remove(item);
+                    ((OverlayController) ResourceController.getOverlayData().controller).updateInventory();
 
-                Run.getRInstance().getPlayer().getInventory().remove(item);
-                ((OverlayController) ResourceController.getOverlayData().controller).updateInventory();
-
-                // This function returns when a book is read
-                // (only one book is read when the book image is clicked)
-                return;
+                    // This function returns when a book is read
+                    // (only one book is read when the book image is clicked)
+                    return;
+                }
             }
+            System.out.println("\nYou need to buy a book in the shop");
+        } else {
+            System.out.println("\nYou can only read while being a child");
         }
-
-        System.out.println("\nYou need to buy a book in the shop");
         Run.getRInstance().updateEventlog();
     }
 }
