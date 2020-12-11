@@ -165,11 +165,6 @@ public class Game {
     // Buy the given item if you're in the "Shop" room
     private void buy(Command command) {
         if (player.getCurrentRoom().getName().equals(SHOP_NAME)) {
-            if (!command.hasSecondWord()) {
-                System.out.println();
-                System.out.println("Buy what?");
-                return;
-            }
 
             String s = command.getSecondWord();
 
@@ -189,9 +184,6 @@ public class Game {
                     System.out.println();
                     System.out.println("You don't have enough money for this!");
                 }
-            } else {
-                System.out.println();
-                System.out.println("There is no " + s + " in the shop");
             }
         }
     }

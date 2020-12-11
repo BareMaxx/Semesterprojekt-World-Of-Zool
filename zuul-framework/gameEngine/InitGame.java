@@ -70,9 +70,9 @@ public class InitGame {
         // Setup items
         Book b1 = new Book("Algorithms", player.getCountry().getMoney() * 7, 150);
         Book b2 = new Book("Math",player.getCountry().getMoney() * 15, 300);
-        Book b3 = new Book("sql",player.getCountry().getMoney() * 27, 600);
-        Protectors mask = new Protectors("mask", 50, 2, "sickness");
-        Protectors helmet = new Protectors("helmet", 50, 2, "dmg");
+        Book b3 = new Book("Sql",player.getCountry().getMoney() * 27, 600);
+        Protectors mask = new Protectors("Mask", 50, 2, "sickness");
+        Protectors helmet = new Protectors("Helmet", 50, 2, "dmg");
 
         // Add items to shop stock
         shop.setItem(b1);
