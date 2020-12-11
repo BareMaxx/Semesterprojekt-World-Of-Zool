@@ -110,8 +110,8 @@ public class Game {
 
         player.incMoney(i);
         System.out.println("You made " + i);
-        randomEvent(2);
         turns.decTurns(6);
+        randomEvent(2);
         checkTurns();
     }
 
